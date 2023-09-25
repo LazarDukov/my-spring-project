@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+
+</head>
+<body class="register">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+
+    <div class="registerbox">
+        <h1>My Profile</h1>
+        <form>
+            <p>Username:</p>
+            <input type="text" name="username" th:value="${}" readonly>
+
+            <p>First name:</p>
+            <input type="text" name="firstname" value="firstname" readonly>
+
+            <p>Last name:</p>
+            <input type="text" name="lastname" value="lastname" readonly>
+
+            <p>Age:</p>
+            <input type="number" name="age" value="age" readonly>
+
+            <p>Country:</p>
+            <input type="text" name="country" value="country" readonly>
+
+            <!-- Add more input fields for other user settings if needed -->
+
+            <a href="/edit-profile">Edit Profile</a><br>
+        </form>
+    </div>
+</header>
+</body>
+</html>

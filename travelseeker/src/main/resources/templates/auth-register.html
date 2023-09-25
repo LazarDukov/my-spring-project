@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+
+</head>
+<body class="register">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+
+    <div class="registerbox">
+        <h1>Register here</h1>
+        <form th:method="post"
+              th:action="@{/users/register}"
+              th:object="${registerDTO}">>
+            <p>Username</p>
+            <input  th:field="*{username}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="text" name="username" placeholder="Enter username">
+
+            <p>Password</p>
+            <input th:field="*{password}"
+                   th:errorclass="'is-invalid alert-danger'" type="password" name="password" placeholder="Enter password">
+
+            <p>Confirm password</p>
+            <input th:field="*{confirmPassword}"
+                   th:errorclass="'is-invalid alert-danger'" type="password" name="confirmPassword" placeholder="Enter confirm password">
+
+            <p>First name</p>
+            <input th:field="*{firstName}"
+                   th:errorclass="'is-invalid alert-danger'" type="text" name="firstName" placeholder="Enter first name">
+
+            <p>Last name</p>
+            <input
+                    th:field="*{lastName}"
+                    th:errorclass="'is-invalid alert-danger'" type="text" name="lastName" placeholder="Enter last name">
+
+            <p>Age</p>
+            <input
+                    th:field="*{age}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="number" name="age" placeholder="Enter age">
+
+            <p>Country</p>
+            <input th:field="*{country}"
+            th:errorclass="'is-invalid alert-danger'" type="text" name="country" placeholder="Enter country">
+
+            <p>Email</p>
+            <input th:field="*{email}"
+                   th:errorclass="'is-invalid alert-danger'" type="text" name="email" placeholder="Enter email">
+
+            <input type="submit" name="" value="Register">
+            <a href="#">You already have an account?</a><br>
+        </form>
+    </div>
+</header>
+</body>
+</html>
