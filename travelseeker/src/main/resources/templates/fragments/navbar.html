@@ -16,11 +16,13 @@
 <header>
     <div th:fragment="navbar">
         <nav class="navbar navbar-expand-lg bg-dark fixed-top">
-            <label class="logo">If you love travelling...That's your place!</label>
+          <!--  <label class="logo">If you love travelling...That's your place!</label> -->
             <ul class="buttons1">
                 <li><a class="active" sec:authorize="isAuthenticated()" th:href="@{/home}">Home</a></li>
-                <li><a class="active" th:href="@{/}">Book now</a></li>
-                <li><a class="active" th:href="@{/}">Hotels</a></li>
+                <li><a class="active" sec:authorize="isAuthenticated()" th:href="@{/book-now}">Book now</a></li>
+                <li><a class="active" th:href="@{/offers/airplane-tickets}">Airplane tickets</a></li>
+                <li><a class="active" th:href="@{/offers/cars}">Cars</a></li>
+                <li><a class="active" th:href="@{/offers/hotels}">Hotels</a></li>
                 <li><a class="active" th:href="@{/about-us}">About us</a></li>
                 <li><a class="active" th:href="@{/contacts}">Contacts</a></li>
                 <li><a class="active" th:href="@{/}">Feedback</a></li>
