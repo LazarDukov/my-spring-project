@@ -16,21 +16,26 @@
 
     <div class="registerbox">
         <h1>My Profile</h1>
-        <form>
+        <form th:object="${user}">
             <p>Username:</p>
-            <input type="text" name="username" th:value="${}" readonly>
+            <h1 type="text" th:text="*{username}" name="username" readonly></h1>
 
             <p>First name:</p>
-            <input type="text" name="firstname" value="firstname" readonly>
+            <h1 type="text" th:text="*{firstName}" name="firstname" value="firstname" readonly></h1>
 
             <p>Last name:</p>
-            <input type="text" name="lastname" value="lastname" readonly>
+            <h1 type="text" th:text="*{lastName}" name="lastname" value="lastname" readonly></h1>
+            <p>Email:</p>
+            <h1 type="text" th:text="*{email}" name="email" value="email" readonly></h1>
 
             <p>Age:</p>
-            <input type="number" name="age" value="age" readonly>
+            <h1 type="number" th:text="*{age}" name="age" value="age" readonly></h1>
 
             <p>Country:</p>
-            <input type="text" name="country" value="country" readonly>
+            <h1 type="text" th:text="*{country}" name="country" value="country" readonly></h1>
+
+            <p>Role:</p>
+            <h1 type="text" th:text="*{role}" name="role" value="role" readonly></h1>
 
             <!-- Add more input fields for other user settings if needed -->
 

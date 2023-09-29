@@ -2,6 +2,7 @@ package com.example.travelseeker.config;
 
 import com.example.travelseeker.repository.UserRepository;
 import com.example.travelseeker.service.ApplicationUserDetailsService;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,5 +69,9 @@ public class SecurityConfiguration {
         );
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }
