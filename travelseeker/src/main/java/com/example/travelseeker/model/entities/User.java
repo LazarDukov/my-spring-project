@@ -41,7 +41,7 @@ public class User extends BaseEntity {
     public User() {
     }
 
-   public User(String username, String firstName, String lastName, String email,
+    public User(String username, String firstName, String lastName, String email,
                 String country, int age, String password) {
 
         setUsername(username);
@@ -144,5 +144,9 @@ public class User extends BaseEntity {
     public User setBoughtOffers(List<BoughtOffers> boughtOffers) {
         this.boughtOffers = boughtOffers;
         return this;
+    }
+
+    public String getRoleAsString() {
+        return roles.stream().findAny().map(UserRole::getRole).toString();
     }
 }

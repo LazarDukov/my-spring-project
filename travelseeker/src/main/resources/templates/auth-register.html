@@ -55,6 +55,13 @@
             <input th:field="*{email}"
                    th:errorclass="'is-invalid alert-danger'" type="text" name="email" placeholder="Enter email">
 
+            <label for="role">What will you do in our site?</label>
+            <select  name="role" id="role">
+                <option value="ADMIN">MODERATE</option>
+                <option value="SELLER">SELL</option>
+                <option value="CLIENT">BUY</option>
+            </select>
+
             <input type="submit" name="" value="Register">
             <a href="#">You already have an account?</a><br>
         </form>

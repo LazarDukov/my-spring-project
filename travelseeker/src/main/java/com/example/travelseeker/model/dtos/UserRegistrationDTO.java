@@ -1,5 +1,8 @@
 package com.example.travelseeker.model.dtos;
 
+import com.example.travelseeker.model.enums.UserRoleEnum;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,6 +31,19 @@ public class UserRegistrationDTO {
     private int age;
     @NotNull
     private String country;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private String role;
+
+    public UserRoleEnum getRole() {
+        return UserRoleEnum.valueOf(role);
+    }
+
+    public UserRegistrationDTO setRole(String role) {
+        this.role = role;
+        return this;
+    }
 
     public String getUsername() {
         return username;

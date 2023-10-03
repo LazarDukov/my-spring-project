@@ -19,4 +19,5 @@ public class OfferController {
     public String getHotels() {
         return "hotels";
     }
+
 }
