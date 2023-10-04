@@ -19,8 +19,8 @@
             <!--  <label class="logo">If you love travelling...That's your place!</label> -->
             <ul class="buttons1">
                 <li><a class="active" sec:authorize="isAuthenticated()" th:href="@{/home}">Home</a></li>
-                <li><a class="active"  sec:authorize="hasRole('CLIENT')" th:href="@{/book-now}">Book now</a></li>
-                <li><a class="active" sec:authorize="hasRole('SELLER')" th:href="@{/add-offer}">Add offer</a></li>
+                <li><a class="active"  sec:authorize="hasRole('CLIENT')" th:href="@{/offers/book-now}">Book now</a></li>
+                <li><a class="active" sec:authorize="hasRole('SELLER')" th:href="@{/offers/add-offer}">Add offer</a></li>
                 <li><a class="active" th:href="@{/offers/airplane-tickets}">Airplane tickets</a></li>
                 <li><a class="active" th:href="@{/offers/cars}">Cars</a></li>
                 <li><a class="active" th:href="@{/offers/hotels}">Hotels</a></li>

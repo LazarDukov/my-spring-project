@@ -10,10 +10,14 @@
 </head>
 <body class="register">
 <header>
-  <div th:replace="~{fragments/navbar :: navbar}">
-    Navbar
-  </div>
-
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+    <ul class="buttons1">
+        <li><a th:href="@{/offers/airplane-tickets}" class="button-33" role="button">Airplane tickets</a></li>
+        <li><a th:href="@{/offers/hotels}" class="button-33" role="button">Hotels</a></li>
+        <li><a th:href="@{/offers/cars}" class="button-33" role="button">Rent a car</a></li>
+    </ul>
 </header>
 </body>
 </html>
