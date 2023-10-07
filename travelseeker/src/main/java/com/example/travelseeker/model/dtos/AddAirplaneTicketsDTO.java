@@ -3,30 +3,31 @@ package com.example.travelseeker.model.dtos;
 
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class AddAirplaneTicketsDTO {
-
+@NotNull
     private String companyName;
 
-
+    @NotNull
     private String date;
 
-
+    @NotNull
     private String fromAirport;
 
-
+    @NotNull
     private String toAirport;
 
-
+    @NotNull
     private String flyNumber;
 
-
+    @NotNull
     private BigDecimal price;
 
-
+    @NotNull
     private BigDecimal moreLuggagePrice;
 
     public AddAirplaneTicketsDTO() {

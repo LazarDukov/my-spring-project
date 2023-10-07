@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<head th:replace="~{fragments/navbar::head}"></head>
 
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+
+</head>
+<body class="register">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+
+    <div class="registerbox">
+        <h1>Register here</h1>
+        <form th:method="post"
+              th:action="@{/offers/add-cars}"
+              th:object="${addCarsDTO}">
+            <p>Make</p>
+            <input th:field="*{make}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   type="text" name="make" placeholder="Enter make">
+
+            <p>Model</p>
+            <input th:field="*{model}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   type="text" name="model" placeholder="Enter model">
+
+            <label for="bodyType">What type of car do you prefer?</label>
+            <select  name="bodyType" id="bodyType">
+                <option value="COMPACT">COMPACT</option>
+                <option value="COUPE">COUPE</option>
+                <option value="CABRIO">CABRIO</option>
+                <option value="SEDAN">SEDAN</option>
+                <option value="HATCHBACK">HATCHBACK</option>
+                <option value="SUV">SUV</option>
+                <option value="VAN">VAN</option>
+            </select>
+
+            <label for="fuelType">What type of fuel do you prefer?</label>
+            <select  name="fuelType" id="fuelType">
+                <option value="PETROL">PETROL</option>
+                <option value="DIESEL">DIESEL</option>
+                <option value="GASOLINE">GASOLINE</option>
+                <option value="ELECTRIC">ELECTRIC</option>
+                <option value="HYBRID">HYBRID</option>
+            </select>
+
+            <p>Price</p>
+            <input
+                    th:field="*{price}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="number" name="price" placeholder="Enter price">
+            <p>Insurance</p>
+            <input
+                    th:field="*{insurance}"
+                    th:errorclass="'is-invalid alert-danger'"
+                    type="number" name="insurance" placeholder="Enter insurance">
+
+
+            <input type="submit" name="" value="Add car">
+        </form>
+    </div>
+</header>
 </body>
 </html>
