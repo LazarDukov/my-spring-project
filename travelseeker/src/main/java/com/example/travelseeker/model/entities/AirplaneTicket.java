@@ -2,8 +2,10 @@ package com.example.travelseeker.model.entities;
 
 import jakarta.persistence.*;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "airplane_tickets")
@@ -12,7 +14,8 @@ public class AirplaneTicket extends BaseEntity {
     private String companyName;
 
     @Column
-    private LocalDateTime date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @Column
     private String fromAirport;
@@ -36,19 +39,15 @@ public class AirplaneTicket extends BaseEntity {
     public AirplaneTicket() {
     }
 
-    public AirplaneTicket(String companyName,
-                          LocalDateTime date,
-                          String fromAirport,
-                          String toAirport,
-                          String flightNumber,
-                          BigDecimal price,
-                          BigDecimal moreLuggagePrice,
-                          BoughtOffers cart) {
+    public AirplaneTicket(String companyName, Date date,
+                          String fromAirport, String toAirport,
+                          String flyNumber, BigDecimal price,
+                          BigDecimal moreLuggagePrice, BoughtOffers cart) {
         this.companyName = companyName;
         this.date = date;
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
-        this.flyNumber = flightNumber;
+        this.flyNumber = flyNumber;
         this.price = price;
         this.moreLuggagePrice = moreLuggagePrice;
         this.cart = cart;
@@ -63,11 +62,11 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public AirplaneTicket setDate(LocalDateTime date) {
+    public AirplaneTicket setDate(Date date) {
         this.date = date;
         return this;
     }

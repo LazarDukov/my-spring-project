@@ -18,7 +18,7 @@
         <h1>Register here</h1>
         <form th:method="post"
               th:action="@{/users/register}"
-              th:object="${registerDTO}">>
+              th:object="${registerDTO}">
             <p>Username</p>
             <input  th:field="*{username}"
                     th:errorclass="'is-invalid alert-danger'"
