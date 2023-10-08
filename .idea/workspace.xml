@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a57b360b-d559-4190-a773-53471641bd92" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/travelseeker/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/TravelseekerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/TravelseekerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/config/ApplicationBeanConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/config/ApplicationBeanConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/AddAirplaneTicketsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/AddAirplaneTicketsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/LoginDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/UserRegistrationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/UserRegistrationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/view/UserProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/dtos/view/UserProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/AirplaneTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/AirplaneTicket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/BoughtOffers.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/BoughtOffers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/CarRent.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/CarRent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/entities/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CarBodyTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CarBodyTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CarFuelTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CarFuelTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CategoryEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/CategoryEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/HotelRoomEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/HotelRoomEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/UserRoleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/model/enums/UserRoleEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/AirplaneTicketsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/AirplaneTicketsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/BoughtOffersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/BoughtOffersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CarRentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CarRentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/HotelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/HotelRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/UserRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/repository/UserRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/AirplaneTicketsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/AirplaneTicketsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/ApplicationUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/ApplicationUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/InitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/InitService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/UserRegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/UserRegistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/ExceptionHandlerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/ExceptionHandlerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/OfferController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/OfferController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/java/com/example/travelseeker/web/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/reset-css.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/reset-css.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/about-us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-airplane-tickets.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-airplane-tickets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-cars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-hotels.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-hotels.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/add-offer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/airplane-tickets.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/airplane-tickets.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/auth-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/auth-login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/auth-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/auth-register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/book-now.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/book-now.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/cars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/contacts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/fragments/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/fragments/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/fragments/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/fragments/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/hotels.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/hotels.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/my-orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/my-orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/my-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/my-profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/successfully-added.html" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/main/resources/templates/successfully-added.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travelseeker/src/test/java/com/example/travelseeker/TravelseekerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/travelseeker/src/test/java/com/example/travelseeker/TravelseekerApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WTJ1dDOzUbVDWPmdNRKniYMIZ5" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/SoftuniDatabaseExams/my-spring-project-main/my-spring-project/travelseeker&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a57b360b-d559-4190-a773-53471641bd92" name="Changes" comment="" />
+      <created>1696750424854</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696750424854</updated>
+      <workItem from="1696750426606" duration="26000" />
+      <workItem from="1696750519263" duration="232000" />
+      <workItem from="1696751062843" duration="26000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
