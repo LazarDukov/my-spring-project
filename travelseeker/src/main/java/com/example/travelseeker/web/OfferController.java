@@ -12,6 +12,7 @@ import com.example.travelseeker.service.HotelService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -61,13 +62,32 @@ public class OfferController {
         return new AddCarsDTO();
     }
 
+    @ModelAttribute
+    public AddAirplaneTicketsDTO allAirplaneTickets() {
+        return new AddAirplaneTicketsDTO();
+    }
+
+
     @GetMapping("/add-offer")
     public String addOffer() {
         return "add-offer";
     }
 
     @GetMapping("/airplane-tickets")
-    public String getAirplaneTicket() {
+    public String getAirplaneTicket(Model model) {
+
+        // @GetMapping("/home")
+        //    public String home(Model model) {
+        //        if (!this.authService.isUserLogged()) {
+        //            return "redirect:/";
+        //        }
+        //        model.addAttribute("allProducts", this.homeService.getAllProducts());
+        //        model.addAttribute("totalPrice", this.productService.getTotalPrice());
+        //        return "home";
+        //
+        //    }
+        model.addAttribute("allAirplaneTickets", this.airplaneTicketsService.getAllAirplaneTickets());
+
         return "airplane-tickets";
     }
 
@@ -134,4 +154,6 @@ public class OfferController {
         carRentService.addNewCar(addCarsDTO);
         return "successfully-added";
     }
+
+
 }
