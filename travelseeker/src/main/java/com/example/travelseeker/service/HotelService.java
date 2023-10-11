@@ -6,6 +6,9 @@ import com.example.travelseeker.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class HotelService {
     private final HotelRepository hotelRepository;
@@ -29,6 +32,12 @@ public class HotelService {
                 .setAllInclusive(addHotelsDTO.getAllInclusive());
 
         hotelRepository.save(newHotel);
+
+    }
+
+    public List<Hotel> getAllHotels() {
+        List<Hotel> allHotels = new ArrayList<>(hotelRepository.findAll());
+        return allHotels;
 
     }
 }

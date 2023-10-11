@@ -67,37 +67,40 @@ public class OfferController {
         return new AddAirplaneTicketsDTO();
     }
 
+    @ModelAttribute
+    public AddCarsDTO allCars() {
+        return new AddCarsDTO();
+    }
+
+    @ModelAttribute
+    public AddHotelsDTO allHotels() {
+        return new AddHotelsDTO();
+    }
+
 
     @GetMapping("/add-offer")
     public String addOffer() {
         return "add-offer";
     }
 
+    // TODO: should add another columns in the html page view
     @GetMapping("/airplane-tickets")
-    public String getAirplaneTicket(Model model) {
+    public String getAirplaneTickets(Model model) {
 
-        // @GetMapping("/home")
-        //    public String home(Model model) {
-        //        if (!this.authService.isUserLogged()) {
-        //            return "redirect:/";
-        //        }
-        //        model.addAttribute("allProducts", this.homeService.getAllProducts());
-        //        model.addAttribute("totalPrice", this.productService.getTotalPrice());
-        //        return "home";
-        //
-        //    }
         model.addAttribute("allAirplaneTickets", this.airplaneTicketsService.getAllAirplaneTickets());
 
         return "airplane-tickets";
     }
 
     @GetMapping("/cars")
-    public String getCars() {
+    public String getCars(Model model) {
+        model.addAttribute("allCars", this.carRentService.getAllCars());
         return "cars";
     }
 
     @GetMapping("/hotels")
-    public String getHotels() {
+    public String getHotels(Model model) {
+        model.addAttribute("allHotels", this.hotelService.getAllHotels());
         return "hotels";
     }
 

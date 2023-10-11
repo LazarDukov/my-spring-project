@@ -6,6 +6,9 @@ import com.example.travelseeker.repository.CarRentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CarRentService {
 
@@ -23,5 +26,10 @@ public class CarRentService {
                 .setInsurance(addCarsDTO.getInsurance());
 
         carRentRepository.save(newCarRent);
+    }
+
+    public List<CarRent> getAllCars() {
+        List<CarRent> allCars = new ArrayList<>(carRentRepository.findAll());
+        return allCars;
     }
 }
