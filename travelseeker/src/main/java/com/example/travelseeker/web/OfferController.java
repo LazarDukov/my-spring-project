@@ -3,6 +3,7 @@ package com.example.travelseeker.web;
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.dtos.AddCarsDTO;
 import com.example.travelseeker.model.dtos.AddHotelsDTO;
+import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
 import com.example.travelseeker.repository.CarRentRepository;
 import com.example.travelseeker.repository.HotelRepository;
@@ -102,6 +103,13 @@ public class OfferController {
     public String getHotels(Model model) {
         model.addAttribute("allHotels", this.hotelService.getAllHotels());
         return "hotels";
+    }
+
+    @GetMapping("/read-airplane-ticket-offer")
+    public String getReadAirplaneTicketOffer(Model model, Long id) {
+        AirplaneTicket airplaneTicket = t
+        model.addAttribute("readAirplaneTicket", airplaneTicket);
+        return "read-airplane-ticket-offer";
     }
 
     @GetMapping("/add-cars")
