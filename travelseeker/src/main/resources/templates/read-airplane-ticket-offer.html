@@ -10,27 +10,27 @@
 </head>
 <body class="register">
 <header>
-  <div th:replace="~{fragments/navbar :: navbar}">
-    Navbar
-  </div>
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
 
-  <div class="registerbox">
-    <h1>My Profile</h1>
-    <form th:object="${readAirplaneTicket}">
-      <p>Username:</p>
-      <h1 type="text" th:text="*{companyName}" name="companyName" readonly></h1>
+    <div class="registerbox">
+        <h1>My Profile</h1>
+        <form <form th:object="${readAirplaneTicket}"
+                    th:action="@{'/offers/read-airplane-ticket-offer/' + ${id} + '/addToCart'}"
+                    th:method="get">>
+            <p>Username:</p>
+            <h1 type="text" th:text="*{companyName}" name="companyName" readonly></h1>
 
-      <p>Last name:</p>
-      <h1 type="text" th:text="*{fromAirport}" name="fromAirport" value="fromAirport" readonly></h1>
-      <p>Email:</p>
-      <h1 type="text" th:text="*{toAirport}" name="toAirport" value="toAirport" readonly></h1>
+            <p>Last name:</p>
+            <h1 type="text" th:text="*{fromAirport}" name="fromAirport" value="fromAirport" readonly></h1>
+            <p>Email:</p>
+            <h1 type="text" th:text="*{toAirport}" name="toAirport" value="toAirport" readonly></h1>
 
 
-      <!-- Add more input fields for other user settings if needed -->
-
-      <a href="/edit-profile">Buy</a><br>
-    </form>
-  </div>
+            <input type="submit" name="" value="Add to cart">
+        </form>
+    </div>
 </header>
 </body>
 </html>

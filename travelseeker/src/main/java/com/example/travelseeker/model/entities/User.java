@@ -32,8 +32,8 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRole> roles;
 
-    @OneToMany
-    private List<Cart> cart;
+    @OneToOne
+    private Cart cart;
 
     @OneToMany
     private List<BoughtOffers> boughtOffers;
@@ -42,7 +42,7 @@ public class User extends BaseEntity {
     }
 
     public User(String username, String firstName, String lastName, String email,
-                String country, int age, String password) {
+                String country, int age, String password, Cart cart) {
 
         setUsername(username);
         setFirstName(firstName);
@@ -51,7 +51,7 @@ public class User extends BaseEntity {
         setCountry(country);
         setAge(age);
         setPassword(password);
-        this.cart = new ArrayList<>();
+        setCart(cart);
         this.roles = new ArrayList<>();
         this.boughtOffers = new ArrayList<>();
     }
@@ -88,7 +88,7 @@ public class User extends BaseEntity {
         return roles;
     }
 
-    public List<Cart> getCart() {
+    public Cart getCart() {
         return cart;
     }
 
@@ -136,7 +136,7 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public User setCart(List<Cart> cart) {
+    public User setCart(Cart cart) {
         this.cart = cart;
         return this;
     }

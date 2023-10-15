@@ -1,16 +1,14 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.entities.User;
 import com.example.travelseeker.model.entities.UserRole;
-import com.example.travelseeker.model.enums.UserRoleEnum;
 import com.example.travelseeker.repository.UserRepository;
 import com.example.travelseeker.repository.UserRoleRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 import static com.example.travelseeker.model.enums.UserRoleEnum.*;
 
@@ -22,15 +20,18 @@ public class InitService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final CartService cartService;
+
 
     @Autowired
     public InitService(UserRepository userRepository,
                        UserRoleRepository userRoleRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder, CartService cartService) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
 
+        this.cartService = cartService;
     }
 
     @PostConstruct
@@ -66,7 +67,8 @@ public class InitService {
                 .setCountry("Bulgaria")
                 .setAge(40)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(ADMIN));
+                .setRoles(userRoleRepository.findUserRoleByRole(ADMIN))
+                .setCart(cartService.getNewCart());
 
 
         userRepository.saveAndFlush(userAdmin);
@@ -83,7 +85,8 @@ public class InitService {
                 .setCountry("Germany")
                 .setAge(30)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(CLIENT));
+                .setRoles(userRoleRepository.findUserRoleByRole(CLIENT))
+                .setCart(cartService.getNewCart());
 
 
         userRepository.saveAndFlush(userClient);
@@ -100,7 +103,8 @@ public class InitService {
                 .setCountry("Afganistan")
                 .setAge(60)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(SELLER));
+                .setRoles(userRoleRepository.findUserRoleByRole(SELLER))
+                .setCart(cartService.getNewCart());
 
 
         userRepository.saveAndFlush(userSeller);

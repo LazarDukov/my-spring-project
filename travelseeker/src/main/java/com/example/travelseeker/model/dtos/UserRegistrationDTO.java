@@ -1,5 +1,6 @@
 package com.example.travelseeker.model.dtos;
 
+import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.enums.UserRoleEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,6 +36,20 @@ public class UserRegistrationDTO {
     @Enumerated(EnumType.STRING)
     @NotNull
     private String role;
+
+    private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public UserRegistrationDTO setCart(Cart cart) {
+        this.cart = cart;
+        return this;
+    }
+
+    public UserRegistrationDTO() {
+    }
 
     public UserRoleEnum getRole() {
         return UserRoleEnum.valueOf(role);
