@@ -2,9 +2,9 @@ package com.example.travelseeker.repository;
 
 import com.example.travelseeker.model.entities.AirplaneTicket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
+@Repository
 public interface AirplaneTicketsRepository extends JpaRepository<AirplaneTicket, Long> {
-    Optional<AirplaneTicket> findAirplaneTicketById(Long id);
+    AirplaneTicket findAirplaneTicketById(Long id);
 }

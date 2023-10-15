@@ -4,9 +4,6 @@ import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.dtos.AddCarsDTO;
 import com.example.travelseeker.model.dtos.AddHotelsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.repository.AirplaneTicketsRepository;
-import com.example.travelseeker.repository.CarRentRepository;
-import com.example.travelseeker.repository.HotelRepository;
 import com.example.travelseeker.service.AirplaneTicketsService;
 import com.example.travelseeker.service.CarRentService;
 import com.example.travelseeker.service.HotelService;
@@ -15,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.ParseException;
@@ -27,24 +21,22 @@ import java.text.ParseException;
 @RequestMapping("/offers")
 public class OfferController {
 
-    private final AirplaneTicketsRepository airplaneTicketsRepository;
+
     private final AirplaneTicketsService airplaneTicketsService;
 
-    private final HotelRepository hotelRepository;
 
     private final HotelService hotelService;
 
-    private final CarRentRepository carRentRepository;
 
     private final CarRentService carRentService;
 
     @Autowired
-    public OfferController(AirplaneTicketsRepository airplaneTicketsRepository, AirplaneTicketsService airplaneTicketsService, HotelRepository hotelRepository, HotelService hotelService, CarRentRepository carRentRepository, CarRentService carRentService) {
-        this.airplaneTicketsRepository = airplaneTicketsRepository;
+    public OfferController(AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService) {
+
         this.airplaneTicketsService = airplaneTicketsService;
-        this.hotelRepository = hotelRepository;
+
         this.hotelService = hotelService;
-        this.carRentRepository = carRentRepository;
+
         this.carRentService = carRentService;
     }
 
@@ -105,10 +97,11 @@ public class OfferController {
         return "hotels";
     }
 
-    @GetMapping("/read-airplane-ticket-offer")
-    public String getReadAirplaneTicketOffer(Model model, Long id) {
-        AirplaneTicket airplaneTicket = t
+    @GetMapping("/read-airplane-ticket-offer/{id}")
+    public String getReadAirplaneTicketOffer(Model model, @PathVariable Long id) {
+        AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
         model.addAttribute("readAirplaneTicket", airplaneTicket);
+
         return "read-airplane-ticket-offer";
     }
 
