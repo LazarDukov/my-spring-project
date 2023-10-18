@@ -115,7 +115,7 @@ public class OfferController {
     }
 
     @GetMapping("/read-airplane-ticket-offer/{id}/addToCart")
-    public String buyReadAirplaneTicketOffer(@PathVariable Long id, Principal principal) {
+    public String buyReadAirplaneTicketOffer(@PathVariable Long id, Principal principal, Long cartId) {
         cartService.AddToCartAirplaneTicket(principal, id);
 
         return "successfully-added";

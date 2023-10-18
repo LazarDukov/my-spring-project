@@ -9,8 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity {
-    @OneToOne
-    private Category category;
 
     @Column
     private BigDecimal totalPrice;
@@ -33,8 +31,8 @@ public class Cart extends BaseEntity {
     public Cart() {
     }
 
-    public Cart(Category category, BigDecimal totalPrice, int count, User user) {
-        this.category = category;
+    public Cart( BigDecimal totalPrice, int count, User user) {
+
         this.totalPrice = totalPrice;
         this.count = count;
         this.user = user;
@@ -43,14 +41,7 @@ public class Cart extends BaseEntity {
         this.cars = new ArrayList<>();
     }
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public Cart setCategory(Category category) {
-        this.category = category;
-        return this;
-    }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;

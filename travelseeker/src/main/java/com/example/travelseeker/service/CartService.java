@@ -9,6 +9,7 @@ import com.example.travelseeker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class CartService {
 
     public Cart getNewCart() {
         Cart newCart = new Cart();
+        newCart.setCount(0);
+        newCart.setTotalPrice(new BigDecimal(0));
         cartRepository.saveAndFlush(newCart);
         return newCart;
     }
@@ -36,9 +39,17 @@ public class CartService {
     public void AddToCartAirplaneTicket(Principal principal, Long id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
+        Long cartId = user.getCart().getId();
+        Cart cart = user.getCart();
         AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
-        List<AirplaneTicket> cart = user.getCart().getAirplaneTickets();
-        cart.add(airplaneTicket);
+
+        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+        List<AirplaneTicket> cartList = user.getCart().getAirplaneTickets();
+        cartList.add(airplaneTicket);
+        cart.setUser(user);
+        cart.setCount(cart.getCount() + 1);
+        cart.setTotalPrice(cart.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
         userRepository.save(user);
+        cartRepository.save(cart);
     }
 }
