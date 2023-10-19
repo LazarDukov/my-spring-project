@@ -75,6 +75,10 @@
                    th:errorclass="'is-invalid alert-danger'"
                    type="number" name="allInclusive" placeholder="Enter price for all inclusive">
 
+            <p>Available</p>
+            <input th:field="*{available}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   type="number" name="available" placeholder="Enter available">
             <input type="submit" name="" value="Add airplane ticket">
         </form>
     </div>

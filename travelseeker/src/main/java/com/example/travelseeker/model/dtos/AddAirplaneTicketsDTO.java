@@ -1,15 +1,12 @@
 package com.example.travelseeker.model.dtos;
 
 
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class AddAirplaneTicketsDTO {
-@NotNull
+    @NotNull
     private String companyName;
 
     @NotNull
@@ -29,6 +26,18 @@ public class AddAirplaneTicketsDTO {
 
     @NotNull
     private BigDecimal moreLuggagePrice;
+
+    @NotNull
+    private int available;
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public AddAirplaneTicketsDTO setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
 
     public AddAirplaneTicketsDTO() {
     }

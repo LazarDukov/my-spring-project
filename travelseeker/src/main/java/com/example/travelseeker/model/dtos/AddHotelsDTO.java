@@ -40,6 +40,18 @@ public class AddHotelsDTO {
     @NotNull
     private BigDecimal allInclusive;
 
+    @NotNull
+    private int available;
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public AddHotelsDTO setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
+
     public AddHotelsDTO() {
     }
 

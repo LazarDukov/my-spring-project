@@ -45,8 +45,19 @@ public class Hotel extends BaseEntity {
     @Column
     private BigDecimal allInclusive;
 
-    @ManyToOne
+    @Column
+    private int available;
 
+    public int getAvailable() {
+        return available;
+    }
+
+    public Hotel setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
+
+    @ManyToOne
     private BoughtOffers cart;
 
     public Hotel() {

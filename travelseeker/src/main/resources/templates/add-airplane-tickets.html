@@ -58,6 +58,11 @@
                    type="number" name="moreLuggagePrice" placeholder="Enter price">
             <div th:if="${#fields.hasErrors('moreLuggagePrice')}" th:errors="*{moreLuggagePrice}"></div>
 
+            <p>More luggage price</p>
+            <input th:field="*{available}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   type="number" name="available" placeholder="Enter available">
+            <div th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></div>
             <input type="submit" name="" value="Add airplane ticket">
         </form>
     </div>

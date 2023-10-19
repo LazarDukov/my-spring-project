@@ -30,6 +30,18 @@ public class CarRent extends BaseEntity {
     @Column
     private BigDecimal insurance;
 
+    @Column
+    private int available;
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public CarRent setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
+
     @ManyToOne
     private BoughtOffers cart;
 

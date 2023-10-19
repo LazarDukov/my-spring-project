@@ -3,6 +3,7 @@ package com.example.travelseeker.model.dtos;
 import com.example.travelseeker.model.enums.CarBodyTypeEnum;
 import com.example.travelseeker.model.enums.CarFuelTypeEnum;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -24,6 +25,18 @@ public class AddCarsDTO {
 
 
     private BigDecimal insurance;
+
+    @NotNull
+    private int available;
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public AddCarsDTO setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
 
     public AddCarsDTO() {
     }

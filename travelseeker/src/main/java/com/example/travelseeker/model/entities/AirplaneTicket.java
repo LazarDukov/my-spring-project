@@ -2,9 +2,7 @@ package com.example.travelseeker.model.entities;
 
 import jakarta.persistence.*;
 
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -31,6 +29,18 @@ public class AirplaneTicket extends BaseEntity {
 
     @Column
     private BigDecimal moreLuggagePrice;
+
+    @Column
+    private int available;
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public AirplaneTicket setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")

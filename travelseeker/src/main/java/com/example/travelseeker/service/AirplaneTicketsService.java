@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AirplaneTicketsService {
@@ -39,7 +38,8 @@ public class AirplaneTicketsService {
                 .setToAirport(addAirplaneTicketsDTO.getToAirport())
                 .setFlyNumber(addAirplaneTicketsDTO.getFlyNumber())
                 .setPrice(addAirplaneTicketsDTO.getPrice())
-                .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice());
+                .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
+                .setAvailable(addAirplaneTicketsDTO.getAvailable());
 
         airplaneTicketsRepository.save(newAirplaneTicket);
     }
