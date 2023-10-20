@@ -49,35 +49,6 @@ public class OfferController {
         this.userService = userService;
     }
 
-    @ModelAttribute("addAirplaneTicketsDTO")
-    public AddAirplaneTicketsDTO addAirplaneTicketsDTO() {
-        return new AddAirplaneTicketsDTO();
-    }
-
-    @ModelAttribute("addHotelsDTO")
-    public AddHotelsDTO addHotelsDTO() {
-        return new AddHotelsDTO();
-    }
-
-    @ModelAttribute("addCarsDTO")
-    public AddCarsDTO addCarsDTO() {
-        return new AddCarsDTO();
-    }
-
-    @ModelAttribute
-    public AddAirplaneTicketsDTO allAirplaneTickets() {
-        return new AddAirplaneTicketsDTO();
-    }
-
-    @ModelAttribute
-    public AddCarsDTO allCars() {
-        return new AddCarsDTO();
-    }
-
-    @ModelAttribute
-    public AddHotelsDTO allHotels() {
-        return new AddHotelsDTO();
-    }
 
 
     @GetMapping("/add-offer")
@@ -85,95 +56,11 @@ public class OfferController {
         return "add-offer";
     }
 
-    // TODO: should add another columns in the html page view
-    @GetMapping("/airplane-tickets")
-    public String getAirplaneTickets(Model model) {
-
-        model.addAttribute("allAirplaneTickets", this.airplaneTicketsService.getAllAirplaneTickets());
-
-        return "airplane-tickets";
-    }
-
-    @GetMapping("/cars")
-    public String getCars(Model model) {
-        model.addAttribute("allCars", this.carRentService.getAllCars());
-        return "cars";
-    }
-
-    @GetMapping("/hotels")
-    public String getHotels(Model model) {
-        model.addAttribute("allHotels", this.hotelService.getAllHotels());
-        return "hotels";
-    }
-
-    @GetMapping("/read-airplane-ticket-offer/{id}")
-    public String getReadAirplaneTicketOffer(Model model, @PathVariable Long id) {
-        AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
-        model.addAttribute("readAirplaneTicket", airplaneTicket);
-
-        return "read-airplane-ticket-offer";
-    }
-
-    @GetMapping("/read-airplane-ticket-offer/{id}/addToCart")
-    public String buyReadAirplaneTicketOffer(@PathVariable Long id, Principal principal, Long cartId) {
-        cartService.AddToCartAirplaneTicket(principal, id);
-
-        return "successfully-added";
-    }
-
-    @GetMapping("/add-cars")
-    public String getAddCars() {
-        return "add-cars";
-    }
-
-    @GetMapping("/add-hotels")
-    public String getAddHotels() {
-        return "add-hotels";
-    }
-
-    @GetMapping("/add-airplane-tickets")
-    public String getAddAirplaneTickets() {
-        return "add-airplane-tickets";
-    }
 
 
-    // TODO: should redirect to right page after successful adding airplane ticket, reformat DATE and adding some restrictions
-
-    @PostMapping("/add-airplane-tickets")
-    public String addAirplaneTickets(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addAirplaneTicketsDTO", addAirplaneTicketsDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addAirplaneTicketsDTO", bindingResult);
-            return "redirect:/offers/home";
-        }
-        airplaneTicketsService.addNewAirplaneTicket(addAirplaneTicketsDTO);
-        return "successfully-added";
-    }
-
-    // TODO: should redirect to right page after successful adding hotel and create restrictions in DTO
-
-    @PostMapping("/add-hotels")
-    public String addHotels(@Valid AddHotelsDTO addHotelsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addHotelsDTO", addHotelsDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addHotelsDTO", bindingResult);
-            return "redirect:/offers/home";
-        }
-        hotelService.addNewHotel(addHotelsDTO);
-        return "successfully-added";
-    }
 
     // TODO: should redirect to right page after successful adding car and create restrictions in DTO
-    @PostMapping("/add-cars")
-    public String addCars(@Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addCarsDTO", addCarsDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
-            return "redirect:/offers/home";
-        }
-        carRentService.addNewCar(addCarsDTO);
-        return "successfully-added";
-    }
+
 
 
 }
