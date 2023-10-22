@@ -33,6 +33,18 @@ public class AirplaneTicket extends BaseEntity {
     @Column
     private int available;
 
+    @ManyToOne
+    private User seller;
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public AirplaneTicket setSeller(User seller) {
+        this.seller = seller;
+        return this;
+    }
+
     public int getAvailable() {
         return available;
     }

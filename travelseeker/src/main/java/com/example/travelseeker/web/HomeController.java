@@ -15,6 +15,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/book-now")
+    public String getBookNow() {
+        return "book-now";
+    }
+
     @GetMapping("/about-us")
     public String getAboutUs() {
         return "about-us";

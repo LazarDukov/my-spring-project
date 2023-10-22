@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
 import java.math.BigDecimal;
 
 @Entity
@@ -48,6 +47,20 @@ public class Hotel extends BaseEntity {
     @Column
     private int available;
 
+    @ManyToOne
+    private BoughtOffers cart;
+    @ManyToOne
+    private User seller;
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public Hotel setSeller(User seller) {
+        this.seller = seller;
+        return this;
+    }
+
     public int getAvailable() {
         return available;
     }
@@ -57,8 +70,6 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
-    @ManyToOne
-    private BoughtOffers cart;
 
     public Hotel() {
     }

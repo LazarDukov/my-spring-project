@@ -33,6 +33,21 @@ public class CarRent extends BaseEntity {
     @Column
     private int available;
 
+    @ManyToOne
+    private User seller;
+
+    @ManyToOne
+    private BoughtOffers cart;
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public CarRent setSeller(User seller) {
+        this.seller = seller;
+        return this;
+    }
+
     public int getAvailable() {
         return available;
     }
@@ -42,8 +57,6 @@ public class CarRent extends BaseEntity {
         return this;
     }
 
-    @ManyToOne
-    private BoughtOffers cart;
 
     public CarRent() {
     }

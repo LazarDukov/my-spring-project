@@ -1,7 +1,6 @@
 package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.AddCarsDTO;
-import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.service.*;
 import jakarta.validation.Valid;
@@ -44,6 +43,7 @@ public class CarRentalController {
 
         this.userService = userService;
     }
+
     //TODO: Should check about the work of these two model attributes. One of them can be skipped.
     @ModelAttribute("addCarsDTO")
     public AddCarsDTO addCarsDTO() {
@@ -74,20 +74,22 @@ public class CarRentalController {
 
         return "read-car-offer";
     }
+
     @GetMapping("/read-car-offer/{id}/addToCart")
     public String buyReadCarOffer(@PathVariable Long id, Principal principal, Long cartId) {
         cartService.AddToCartCar(principal, id);
 
         return "successfully-added";
     }
+
     @PostMapping("/add-cars")
-    public String addCars(@Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addCars(@Valid AddCarsDTO addCarsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addCarsDTO", addCarsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
             return "redirect:/offers/home";
         }
-        carRentService.addNewCar(addCarsDTO);
+        carRentService.addNewCar(addCarsDTO, principal);
         return "successfully-added";
     }
 

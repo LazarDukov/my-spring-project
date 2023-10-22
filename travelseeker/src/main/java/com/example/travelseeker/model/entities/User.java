@@ -38,6 +38,10 @@ public class User extends BaseEntity {
     @OneToMany
     private List<BoughtOffers> boughtOffers;
 
+    @OneToMany
+    private List<SealedOffers> sealedOffers;
+
+
     public User() {
     }
 
@@ -54,6 +58,7 @@ public class User extends BaseEntity {
         setCart(cart);
         this.roles = new ArrayList<>();
         this.boughtOffers = new ArrayList<>();
+        this.sealedOffers = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -148,5 +153,14 @@ public class User extends BaseEntity {
 
     public String getRoleAsString() {
         return roles.stream().findAny().map(UserRole::getRole).toString();
+    }
+
+    public List<SealedOffers> getSealedOffers() {
+        return sealedOffers;
+    }
+
+    public User setSealedOffers(List<SealedOffers> sealedOffers) {
+        this.sealedOffers = sealedOffers;
+        return this;
     }
 }

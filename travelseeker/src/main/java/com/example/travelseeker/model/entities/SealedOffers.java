@@ -7,10 +7,9 @@ import jakarta.persistence.Table;
 
 import java.util.List;
 
-
 @Entity
-@Table(name = "bought_offers")
-public class BoughtOffers extends BaseEntity {
+@Table(name = "sealed_offers")
+public class SealedOffers extends BaseEntity {
     @ManyToOne
     private User user;
 
@@ -23,14 +22,14 @@ public class BoughtOffers extends BaseEntity {
     @OneToMany
     private List<AirplaneTicket> airplaneTickets;
 
-    public BoughtOffers() {
+    public SealedOffers() {
     }
 
     public User getUser() {
         return user;
     }
 
-    public BoughtOffers setUser(User user) {
+    public SealedOffers setUser(User user) {
         this.user = user;
         return this;
     }
@@ -39,7 +38,7 @@ public class BoughtOffers extends BaseEntity {
         return hotels;
     }
 
-    public BoughtOffers setHotels(List<Hotel> hotels) {
+    public SealedOffers setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
         return this;
     }
@@ -48,7 +47,7 @@ public class BoughtOffers extends BaseEntity {
         return cars;
     }
 
-    public BoughtOffers setCars(List<CarRent> cars) {
+    public SealedOffers setCars(List<CarRent> cars) {
         this.cars = cars;
         return this;
     }
@@ -57,7 +56,7 @@ public class BoughtOffers extends BaseEntity {
         return airplaneTickets;
     }
 
-    public BoughtOffers setAirplaneTickets(List<AirplaneTicket> airplaneTickets) {
+    public SealedOffers setAirplaneTickets(List<AirplaneTicket> airplaneTickets) {
         this.airplaneTickets = airplaneTickets;
         return this;
     }
