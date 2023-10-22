@@ -1,13 +1,7 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Cart;
-import com.example.travelseeker.model.entities.Hotel;
-import com.example.travelseeker.model.entities.User;
-import com.example.travelseeker.repository.AirplaneTicketsRepository;
-import com.example.travelseeker.repository.CartRepository;
-import com.example.travelseeker.repository.HotelRepository;
-import com.example.travelseeker.repository.UserRepository;
+import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +18,16 @@ public class CartService {
 
     private final HotelRepository hotelRepository;
 
+    private final CarRentRepository carRentRepository;
+
     @Autowired
 
-    public CartService(CartRepository cartRepository, UserRepository userRepository, AirplaneTicketsRepository airplaneTicketsRepository, HotelRepository hotelRepository) {
+    public CartService(CartRepository cartRepository, UserRepository userRepository, AirplaneTicketsRepository airplaneTicketsRepository, HotelRepository hotelRepository, CarRentRepository carRentRepository) {
         this.cartRepository = cartRepository;
         this.userRepository = userRepository;
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.hotelRepository = hotelRepository;
+        this.carRentRepository = carRentRepository;
     }
 
     public Cart getNewCart() {
@@ -41,6 +38,7 @@ public class CartService {
         return newCart;
     }
 
+    // TODO: for all these methods should implement counter -- when one of the offers is bought
     public void AddToCartAirplaneTicket(Principal principal, Long id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
@@ -51,6 +49,7 @@ public class CartService {
         //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<AirplaneTicket> cartList = user.getCart().getAirplaneTickets();
         cartList.add(airplaneTicket);
+        airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
         cart.setUser(user);
         cart.setCount(cart.getCount() + 1);
         cart.setTotalPrice(cart.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
@@ -67,9 +66,28 @@ public class CartService {
         //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<Hotel> cartList = user.getCart().getHotels();
         cartList.add(hotel);
+        hotel.setAvailable(hotel.getAvailable() - 1);
         cart.setUser(user);
         cart.setCount(cart.getCount() + 1);
         cart.setTotalPrice(cart.getTotalPrice().add(hotel.getPricePerNight()).add(hotel.getPriceBreakfast()).add(hotel.getPriceDinner()).add(hotel.getAllInclusive()));
+        userRepository.save(user);
+        cartRepository.save(cart);
+    }
+
+    public void AddToCartCar(Principal principal, Long id) {
+        //TODO: should add functionality about the sum of the price and category shows in cart
+        User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
+        Cart cart = user.getCart();
+        CarRent car = carRentRepository.findCarRentById(id);
+
+        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+
+        List<CarRent> cartList = user.getCart().getCars();
+        cartList.add(car);
+        car.setAvailable(car.getAvailable() - 1);
+        cart.setUser(user);
+        cart.setCount(cart.getCount() + 1);
+        cart.setTotalPrice(cart.getTotalPrice().add(car.getPrice().add(car.getInsurance())));
         userRepository.save(user);
         cartRepository.save(cart);
     }

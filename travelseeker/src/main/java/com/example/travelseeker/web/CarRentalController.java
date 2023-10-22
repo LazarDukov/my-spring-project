@@ -1,17 +1,18 @@
 package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.AddCarsDTO;
+import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/offers")
@@ -66,6 +67,19 @@ public class CarRentalController {
         return "cars";
     }
 
+    @GetMapping("/read-car-offer/{id}")
+    public String getReadCarOffer(Model model, @PathVariable Long id) {
+        CarRent car = carRentService.getCarRentById(id);
+        model.addAttribute("readCar", car);
+
+        return "read-car-offer";
+    }
+    @GetMapping("/read-car-offer/{id}/addToCart")
+    public String buyReadCarOffer(@PathVariable Long id, Principal principal, Long cartId) {
+        cartService.AddToCartCar(principal, id);
+
+        return "successfully-added";
+    }
     @PostMapping("/add-cars")
     public String addCars(@Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

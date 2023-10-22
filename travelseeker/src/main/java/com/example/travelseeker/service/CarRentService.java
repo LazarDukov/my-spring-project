@@ -19,11 +19,17 @@ public class CarRentService {
         this.carRentRepository = carRentRepository;
     }
 
+    public CarRent getCarRentById(Long id) {
+        return carRentRepository.findCarRentById(id);
+
+    }
+
     public void addNewCar(AddCarsDTO addCarsDTO) {
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
                 .setModel(addCarsDTO.getModel()).setBodyType(addCarsDTO.getBodyType())
                 .setFuelType(addCarsDTO.getFuelType()).setPrice(addCarsDTO.getPrice())
-                .setInsurance(addCarsDTO.getInsurance());
+                .setInsurance(addCarsDTO.getInsurance())
+                .setAvailable(addCarsDTO.getAvailable());
 
         carRentRepository.save(newCarRent);
     }
