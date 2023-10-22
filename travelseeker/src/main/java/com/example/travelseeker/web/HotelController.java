@@ -1,17 +1,18 @@
 package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.AddHotelsDTO;
+import com.example.travelseeker.model.entities.Hotel;
 import com.example.travelseeker.service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/offers")
 public class HotelController {
@@ -68,6 +69,14 @@ public class HotelController {
         return "add-hotels";
     }
 
+    @GetMapping("/read-hotel-offer/{id}")
+    public String getReadAirplaneTicketOffer(Model model, @PathVariable Long id) {
+        Hotel hotel = hotelService.getHotelById(id);
+        model.addAttribute("readHotel", hotel);
+
+        return "read-hotel-offer";
+    }
+
     // TODO: should redirect to right page after successful adding hotel and create restrictions in DTO
 
     @PostMapping("/add-hotels")
@@ -78,6 +87,13 @@ public class HotelController {
             return "redirect:/offers/home";
         }
         hotelService.addNewHotel(addHotelsDTO);
+        return "successfully-added";
+    }
+
+    @GetMapping("/read-hotel-offer/{id}/addToCart")
+    public String buyReadHotelOffer(@PathVariable Long id, Principal principal) {
+        cartService.AddToCartHotel(principal, id);
+
         return "successfully-added";
     }
 

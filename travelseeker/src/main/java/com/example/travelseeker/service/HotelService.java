@@ -35,6 +35,11 @@ public class HotelService {
 
     }
 
+    public Hotel getHotelById(Long id) {
+        return hotelRepository.findHotelById(id);
+
+    }
+
     public List<Hotel> getAllHotels() {
         List<Hotel> allHotels = new ArrayList<>(hotelRepository.findAll());
         return allHotels;
