@@ -3,6 +3,9 @@ package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.view.UserProfileView;
 import com.example.travelseeker.model.entities.User;
+import com.example.travelseeker.service.AirplaneTicketsService;
+import com.example.travelseeker.service.CarRentService;
+import com.example.travelseeker.service.HotelService;
 import com.example.travelseeker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +20,16 @@ public class ProfileController {
 
     private final UserService userService;
 
+    private final AirplaneTicketsService airplaneTicketsService;
+    private final CarRentService carRentService;
+    private final HotelService hotelService;
+
     @Autowired
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, AirplaneTicketsService airplaneTicketsService, CarRentService carRentService, HotelService hotelService) {
         this.userService = userService;
+        this.airplaneTicketsService = airplaneTicketsService;
+        this.carRentService = carRentService;
+        this.hotelService = hotelService;
     }
 
     @GetMapping("/users/my-profile")
@@ -29,4 +39,17 @@ public class ProfileController {
         model.addAttribute("user", userProfileView);
         return "my-profile";
     }
+
+
+    @GetMapping("/users/my-orders")
+    public String getMyOrders(Model model, Principal principal) {
+        User user = userService.getUserByName(principal.getName());
+        model.addAttribute("myAirplaneTicketsOrder", this.airplaneTicketsService.getAirplaneTicketBySellerId(user.getId()));
+        //TODO: should implement the next two rows in the services and point them all by thymeleaf.
+        model.addAttribute("myAirplaneTicketsOrder", this.airplaneTicketsService.getAirplaneTicketBySellerId(user.getId()));
+        model.addAttribute("myAirplaneTicketsOrder", this.airplaneTicketsService.getAirplaneTicketBySellerId(user.getId()));
+
+        return "my-orders";
+    }
+
 }

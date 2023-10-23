@@ -30,15 +30,7 @@ public class HomeController {
         return "contacts";
     }
 
-    @GetMapping("/my-profile")
-    public String getMyProfile() {
-        return "my-profile";
-    }
 
-    @GetMapping("/my-orders")
-    public String getMyOrders() {
-        return "my-orders";
-    }
 
 
 }

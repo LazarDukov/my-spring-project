@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AirplaneTicketsRepository extends JpaRepository<AirplaneTicket, Long> {
     AirplaneTicket findAirplaneTicketById(Long id);
+
+    AirplaneTicket findAirplaneTicketBySellerId(Long id);
 }

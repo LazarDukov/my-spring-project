@@ -39,7 +39,7 @@
                 <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/users/my-profile}">My
                     profile</a>
                 </li>
-                <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/my-orders}">My orders</a></li>
+                <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/users/my-orders}">My orders</a></li>
                 <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/users/logout}" th:href="@{/}">
                     <input type="submit" name="" value="Logout">
                 </form>
