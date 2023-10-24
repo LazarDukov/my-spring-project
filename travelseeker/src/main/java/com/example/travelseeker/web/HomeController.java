@@ -15,7 +15,7 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/book-now")
+    @GetMapping("/offers/book-now")
     public String getBookNow() {
         return "book-now";
     }

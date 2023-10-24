@@ -30,6 +30,10 @@ public class CarRentService {
 
     }
 
+    public CarRent getAllCarRentBySellerId(Long id) {
+        return carRentRepository.getAllBySellerId(id);
+    }
+
     public void addNewCar(AddCarsDTO addCarsDTO, Principal principal) {
         Optional<User> user = userRepository.findUserByUsername(principal.getName());
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
@@ -46,4 +50,6 @@ public class CarRentService {
         List<CarRent> allCars = new ArrayList<>(carRentRepository.findAll());
         return allCars;
     }
+
+
 }

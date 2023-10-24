@@ -33,8 +33,8 @@ public class AirplaneTicketsService {
 
     }
 
-    public AirplaneTicket getAirplaneTicketBySellerId(Long id) {
-        return airplaneTicketsRepository.findAirplaneTicketBySellerId(id);
+    public AirplaneTicket getAllBySellerId(Long id) {
+        return airplaneTicketsRepository.getAllBySellerId(id);
     }
 
     public void addNewAirplaneTicket(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal) throws ParseException {

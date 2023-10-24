@@ -21,6 +21,9 @@ public class MyOrdersView {
     private String country;
     private String city;
 
+    public MyOrdersView() {
+    }
+
     public MyOrdersView(String companyName, String fromAirport, String toAirport, String flyNumber, String make, String model, CarFuelTypeEnum fuelType, String name, String country, String city) {
         this.companyName = companyName;
         this.fromAirport = fromAirport;

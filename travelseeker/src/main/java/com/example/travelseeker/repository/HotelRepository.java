@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Hotel findHotelById(Long id);
 
-    Hotel findHotelBySellerId(Long id);
+    Hotel getAllBySellerId(Long id);
 }
