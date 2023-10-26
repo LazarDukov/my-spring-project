@@ -3,7 +3,9 @@ package com.example.travelseeker.model.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "airplane_tickets")
@@ -33,15 +35,15 @@ public class AirplaneTicket extends BaseEntity {
     @Column
     private int available;
 
-    @ManyToOne
-    private User seller;
+    @ManyToMany
+    private List<User> sellers;
 
-    public User getSeller() {
-        return seller;
+    public List<User> getSellers() {
+        return sellers;
     }
 
-    public AirplaneTicket setSeller(User seller) {
-        this.seller = seller;
+    public AirplaneTicket setSellers(List<User> sellers) {
+        this.sellers = sellers;
         return this;
     }
 
@@ -73,6 +75,7 @@ public class AirplaneTicket extends BaseEntity {
         this.price = price;
         this.moreLuggagePrice = moreLuggagePrice;
         this.cart = cart;
+        this.sellers = new ArrayList<>();
     }
 
     public String getCompanyName() {

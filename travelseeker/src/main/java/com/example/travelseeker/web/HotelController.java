@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/offers")
@@ -70,7 +71,7 @@ public class HotelController {
     }
 
     @GetMapping("/read-hotel-offer/{id}")
-    public String getReadAirplaneTicketOffer(Model model, @PathVariable Long id) {
+    public String getReadAirplaneTicketOffer(Model model, @PathVariable UUID id) {
         Hotel hotel = hotelService.getHotelById(id);
         model.addAttribute("readHotel", hotel);
 
@@ -91,7 +92,7 @@ public class HotelController {
     }
 
     @GetMapping("/read-hotel-offer/{id}/addToCart")
-    public String buyReadHotelOffer(@PathVariable Long id, Principal principal) {
+    public String buyReadHotelOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartHotel(principal, id);
 
         return "successfully-added";

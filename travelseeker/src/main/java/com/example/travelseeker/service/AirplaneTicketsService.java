@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AirplaneTicketsService {
@@ -28,13 +25,13 @@ public class AirplaneTicketsService {
         this.userRepository = userRepository;
     }
 
-    public AirplaneTicket getAirplaneTicketById(Long id) {
+    public AirplaneTicket getAirplaneTicketById(UUID id) {
         return airplaneTicketsRepository.findAirplaneTicketById(id);
 
     }
 
-    public AirplaneTicket getAllBySellerId(Long id) {
-        return airplaneTicketsRepository.getAllBySellerId(id);
+    public List<User> getAllSellers(UUID id) {
+        return airplaneTicketsRepository.findUsersByTicketId(id);
     }
 
     public void addNewAirplaneTicket(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal) throws ParseException {
@@ -49,8 +46,7 @@ public class AirplaneTicketsService {
                 .setFlyNumber(addAirplaneTicketsDTO.getFlyNumber())
                 .setPrice(addAirplaneTicketsDTO.getPrice())
                 .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
-                .setAvailable(addAirplaneTicketsDTO.getAvailable())
-                .setSeller(user.get());
+                .setAvailable(addAirplaneTicketsDTO.getAvailable());
 
         airplaneTicketsRepository.save(newAirplaneTicket);
     }

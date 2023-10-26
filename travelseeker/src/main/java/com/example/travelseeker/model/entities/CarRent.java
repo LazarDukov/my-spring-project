@@ -2,12 +2,11 @@ package com.example.travelseeker.model.entities;
 
 import com.example.travelseeker.model.enums.CarBodyTypeEnum;
 import com.example.travelseeker.model.enums.CarFuelTypeEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "car_rents")
@@ -33,20 +32,21 @@ public class CarRent extends BaseEntity {
     @Column
     private int available;
 
-    @ManyToOne
-    private User seller;
+    @ManyToMany
+    private List<User> sellers;
+
+    public List<User> getSellers() {
+        return sellers;
+    }
+
+    public CarRent setSellers(List<User> sellers) {
+        this.sellers = sellers;
+        return this;
+    }
 
     @ManyToOne
     private BoughtOffers cart;
 
-    public User getSeller() {
-        return seller;
-    }
-
-    public CarRent setSeller(User seller) {
-        this.seller = seller;
-        return this;
-    }
 
     public int getAvailable() {
         return available;
@@ -75,6 +75,7 @@ public class CarRent extends BaseEntity {
         this.price = price;
         this.insurance = insurance;
         this.cart = cart;
+        this.sellers = new ArrayList<>();
     }
 
     public String getMake() {

@@ -3,8 +3,10 @@ package com.example.travelseeker.repository;
 import com.example.travelseeker.model.entities.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HotelRepository extends JpaRepository<Hotel, Long> {
-    Hotel findHotelById(Long id);
+import java.util.UUID;
 
-    Hotel getAllBySellerId(Long id);
+public interface HotelRepository extends JpaRepository<Hotel, UUID> {
+    Hotel findHotelById(UUID id);
+
+//    Hotel getAllBySellerId(Long id);
 }

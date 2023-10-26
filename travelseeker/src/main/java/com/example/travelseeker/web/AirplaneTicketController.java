@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.text.ParseException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/offers")
@@ -72,7 +73,7 @@ public class AirplaneTicketController {
     }
 
     @GetMapping("/read-airplane-ticket-offer/{id}")
-    public String getReadAirplaneTicketOffer(Model model, @PathVariable Long id) {
+    public String getReadAirplaneTicketOffer(Model model, @PathVariable UUID id) {
         AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
         model.addAttribute("readAirplaneTicket", airplaneTicket);
 
@@ -80,7 +81,7 @@ public class AirplaneTicketController {
     }
 
     @GetMapping("/read-airplane-ticket-offer/{id}/addToCart")
-    public String buyReadAirplaneTicketOffer(@PathVariable Long id, Principal principal, Long cartId) {
+    public String buyReadAirplaneTicketOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartAirplaneTicket(principal, id);
 
         return "successfully-added";

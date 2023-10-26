@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/offers")
@@ -68,7 +69,7 @@ public class CarRentalController {
     }
 
     @GetMapping("/read-car-offer/{id}")
-    public String getReadCarOffer(Model model, @PathVariable Long id) {
+    public String getReadCarOffer(Model model, @PathVariable UUID id) {
         CarRent car = carRentService.getCarRentById(id);
         model.addAttribute("readCar", car);
 
@@ -76,7 +77,7 @@ public class CarRentalController {
     }
 
     @GetMapping("/read-car-offer/{id}/addToCart")
-    public String buyReadCarOffer(@PathVariable Long id, Principal principal, Long cartId) {
+    public String buyReadCarOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartCar(principal, id);
 
         return "successfully-added";

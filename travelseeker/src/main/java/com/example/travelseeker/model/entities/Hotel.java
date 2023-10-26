@@ -1,12 +1,11 @@
 package com.example.travelseeker.model.entities;
 
 import com.example.travelseeker.model.enums.HotelRoomEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "hotels")
@@ -49,17 +48,19 @@ public class Hotel extends BaseEntity {
 
     @ManyToOne
     private BoughtOffers cart;
-    @ManyToOne
-    private User seller;
 
-    public User getSeller() {
-        return seller;
+    public List<User> getSellers() {
+        return sellers;
     }
 
-    public Hotel setSeller(User seller) {
-        this.seller = seller;
+    public Hotel setSellers(List<User> sellers) {
+        this.sellers = sellers;
         return this;
     }
+
+    @ManyToMany
+    private List<User> sellers;
+
 
     public int getAvailable() {
         return available;
@@ -95,6 +96,7 @@ public class Hotel extends BaseEntity {
         this.priceDinner = priceDinner;
         this.allInclusive = allInclusive;
         this.cart = cart;
+        this.sellers = new ArrayList<>();
     }
 
     public String getName() {

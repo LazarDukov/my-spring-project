@@ -12,6 +12,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CarRentService {
@@ -25,14 +26,14 @@ public class CarRentService {
         this.userRepository = userRepository;
     }
 
-    public CarRent getCarRentById(Long id) {
+    public CarRent getCarRentById(UUID id) {
         return carRentRepository.findCarRentById(id);
 
     }
 
-    public CarRent getAllCarRentBySellerId(Long id) {
-        return carRentRepository.getAllBySellerId(id);
-    }
+ //   public CarRent getAllCarRentBySellerId(Long id) {
+ //       return carRentRepository.getAllBySellerId(id);
+  //  }
 
     public void addNewCar(AddCarsDTO addCarsDTO, Principal principal) {
         Optional<User> user = userRepository.findUserByUsername(principal.getName());
@@ -40,8 +41,7 @@ public class CarRentService {
                 .setModel(addCarsDTO.getModel()).setBodyType(addCarsDTO.getBodyType())
                 .setFuelType(addCarsDTO.getFuelType()).setPrice(addCarsDTO.getPrice())
                 .setInsurance(addCarsDTO.getInsurance())
-                .setAvailable(addCarsDTO.getAvailable())
-                .setSeller(user.get());
+                .setAvailable(addCarsDTO.getAvailable());
 
         carRentRepository.save(newCarRent);
     }

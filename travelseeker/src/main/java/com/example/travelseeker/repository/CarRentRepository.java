@@ -3,8 +3,10 @@ package com.example.travelseeker.repository;
 import com.example.travelseeker.model.entities.CarRent;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CarRentRepository extends JpaRepository<CarRent, Long> {
-    CarRent findCarRentById(Long id);
+import java.util.UUID;
 
-    CarRent getAllBySellerId(Long id);
+public interface CarRentRepository extends JpaRepository<CarRent, UUID> {
+    CarRent findCarRentById(UUID id);
+
+    //CarRent getAllBySellerId(Long id);
 }

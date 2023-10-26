@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CartService {
@@ -39,7 +40,7 @@ public class CartService {
     }
 
     // TODO: for all these methods should implement counter -- when one of the offers is bought
-    public void AddToCartAirplaneTicket(Principal principal, Long id) {
+    public void AddToCartAirplaneTicket(Principal principal, UUID id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
 
@@ -57,7 +58,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    public void AddToCartHotel(Principal principal, Long id) {
+    public void AddToCartHotel(Principal principal, UUID id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
         Cart cart = user.getCart();
@@ -74,7 +75,7 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    public void AddToCartCar(Principal principal, Long id) {
+    public void AddToCartCar(Principal principal, UUID id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
         Cart cart = user.getCart();

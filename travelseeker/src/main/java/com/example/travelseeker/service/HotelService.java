@@ -12,6 +12,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class HotelService {
@@ -36,20 +37,20 @@ public class HotelService {
                 .setRoomType(addHotelsDTO.getRoomType())
                 .setPriceBreakfast(addHotelsDTO.getPriceBreakfast())
                 .setPriceDinner(addHotelsDTO.getPriceDinner())
-                .setAllInclusive(addHotelsDTO.getAllInclusive()).setSeller(user.get());
+                .setAllInclusive(addHotelsDTO.getAllInclusive());
 
         hotelRepository.save(newHotel);
 
     }
 
-    public Hotel getHotelById(Long id) {
+    public Hotel getHotelById(UUID id) {
         return hotelRepository.findHotelById(id);
 
     }
 
-    public Hotel getAllHotelBySellerId(Long id) {
-        return hotelRepository.getAllBySellerId(id);
-    }
+ //   public Hotel getAllHotelBySellerId(Long id) {
+ //       return hotelRepository.getAllBySellerId(id);
+  //  }
 
     public List<Hotel> getAllHotels() {
         List<Hotel> allHotels = new ArrayList<>(hotelRepository.findAll());

@@ -19,19 +19,19 @@ public class Cart extends BaseEntity {
     @OneToOne
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Hotel> hotels;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<CarRent> cars;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<AirplaneTicket> airplaneTickets;
 
     public Cart() {
     }
 
-    public Cart( BigDecimal totalPrice, int count, User user) {
+    public Cart(BigDecimal totalPrice, int count, User user) {
 
         this.totalPrice = totalPrice;
         this.count = count;
@@ -40,7 +40,6 @@ public class Cart extends BaseEntity {
         this.hotels = new ArrayList<>();
         this.cars = new ArrayList<>();
     }
-
 
 
     public BigDecimal getTotalPrice() {
