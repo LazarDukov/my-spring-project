@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}">
+
+
+
+
+</head>
+<body class="login">
+<header>
+    <div th:insert="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+
+    <div class="loginbox">
+        <h1>Type your username and password here</h1>
+        <form th:method="post"
+              th:action="@{/users/login}">
+            <p>Username</p>
+            <input id="username"
+                   name="username"
+
+                    th:value="${username}"
+                   type="text"
+                   min="2"
+                   max="50"
+                   placeholder="Enter username">
+
+            <p>Password</p>
+            <input
+                    id="password"
+                    name="password"
+
+
+                    type="password"
+                    min="2"
+                    max="20" placeholder="Enter password">
+
+
+            <p class="errors alert alert-danger" th:if="${bad_credentials}">Invalid username or password.</p>
+            <input type="submit" name="" value="Login">
+
+
+            <a href="#">Lost your password?</a><br>
+            <a href="#">Don't have an account?</a><br>
+        </form>
+    </div>
+</header>
+</body>
+</html>
