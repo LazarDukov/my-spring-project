@@ -50,7 +50,7 @@ public class ProfileController {
     }
 
 
-    @GetMapping("/users/my-orders")
+    @GetMapping("/users/my-cart")
     public String getMyOrders(Model model, Principal principal) {
         User user = userService.getUserByName(principal.getName());
         List<AirplaneTicket> airplaneTicketsOfUser = new ArrayList<>(user.getCart().getAirplaneTickets());
@@ -61,7 +61,7 @@ public class ProfileController {
         model.addAttribute("myCarOrders", carRentsOfUser);
         model.addAttribute("myHotelOrders", hotelsOfUser);
 
-        return "my-orders";
+        return "my-cart";
     }
 
 }
