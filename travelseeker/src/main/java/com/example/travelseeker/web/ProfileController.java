@@ -51,7 +51,7 @@ public class ProfileController {
 
 
     @GetMapping("/users/my-cart")
-    public String getMyOrders(Model model, Principal principal) {
+    public String getMyCart(Model model, Principal principal) {
         User user = userService.getUserByName(principal.getName());
         List<AirplaneTicket> airplaneTicketsOfUser = new ArrayList<>(user.getCart().getAirplaneTickets());
         List<CarRent> carRentsOfUser = new ArrayList<>(user.getCart().getCars());
@@ -62,6 +62,20 @@ public class ProfileController {
         model.addAttribute("myHotelOrders", hotelsOfUser);
 
         return "my-cart";
+    }
+
+    @GetMapping("/users/my-orders")
+    public String getMyOrders(Model model, Principal principal) {
+        User user = userService.getUserByName(principal.getName());
+        List<AirplaneTicket> airplaneTicketsOfUser = new ArrayList<>(user.getCart().getAirplaneTickets());
+        List<CarRent> carRentsOfUser = new ArrayList<>(user.getCart().getCars());
+        List<Hotel> hotelsOfUser = new ArrayList<>(user.getCart().getHotels());
+        model.addAttribute("myAirplaneTicketOrders", airplaneTicketsOfUser);
+        //TODO: should implement the next two rows in the services and point them all by thymeleaf.
+        model.addAttribute("myCarOrders", carRentsOfUser);
+        model.addAttribute("myHotelOrders", hotelsOfUser);
+
+        return "my-orders";
     }
 
 }
