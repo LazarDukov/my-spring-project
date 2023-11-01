@@ -77,7 +77,7 @@ public class CarRentalController {
     }
 
     @GetMapping("/read-car-offer/{id}/addToCart")
-    public String buyReadCarOffer(@PathVariable UUID id, Principal principal) {
+    public String addToCartCarOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartCar(principal, id);
 
         return "successfully-added";

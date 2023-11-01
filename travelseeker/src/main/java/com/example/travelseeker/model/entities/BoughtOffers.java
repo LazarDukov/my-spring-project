@@ -1,29 +1,35 @@
 package com.example.travelseeker.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Table(name = "bought_offers")
 public class BoughtOffers extends BaseEntity {
-    @ManyToOne
+    @OneToOne
     private User user;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Hotel> hotels;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<CarRent> cars;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<AirplaneTicket> airplaneTickets;
 
     public BoughtOffers() {
+
+    }
+
+    public BoughtOffers(User user) {
+        this.user = user;
+        this.hotels = new ArrayList<>();
+        this.cars = new ArrayList<>();
+        this.airplaneTickets = new ArrayList<>();
     }
 
     public User getUser() {

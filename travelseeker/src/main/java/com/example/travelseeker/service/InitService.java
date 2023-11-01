@@ -1,6 +1,5 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.entities.User;
 import com.example.travelseeker.model.entities.UserRole;
 import com.example.travelseeker.repository.UserRepository;
@@ -21,17 +20,19 @@ public class InitService {
     private final PasswordEncoder passwordEncoder;
 
     private final CartService cartService;
+    private final BoughtOffersService boughtOffersService;
 
 
     @Autowired
     public InitService(UserRepository userRepository,
                        UserRoleRepository userRoleRepository,
-                       PasswordEncoder passwordEncoder, CartService cartService) {
+                       PasswordEncoder passwordEncoder, CartService cartService, BoughtOffersService boughtOffersService) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
 
         this.cartService = cartService;
+        this.boughtOffersService = boughtOffersService;
     }
 
     @PostConstruct
@@ -68,7 +69,8 @@ public class InitService {
                 .setAge(40)
                 .setPassword(passwordEncoder.encode("lazar123"))
                 .setRoles(userRoleRepository.findUserRoleByRole(ADMIN))
-                .setCart(cartService.getNewCart());
+                .setCart(cartService.getNewCart())
+                .setBoughtOffers(boughtOffersService.getNewBoughtOffers());
 
 
         userRepository.saveAndFlush(userAdmin);
@@ -86,7 +88,8 @@ public class InitService {
                 .setAge(30)
                 .setPassword(passwordEncoder.encode("lazar123"))
                 .setRoles(userRoleRepository.findUserRoleByRole(CLIENT))
-                .setCart(cartService.getNewCart());
+                .setCart(cartService.getNewCart())
+                .setBoughtOffers(boughtOffersService.getNewBoughtOffers());
 
 
         userRepository.saveAndFlush(userClient);
@@ -104,7 +107,8 @@ public class InitService {
                 .setAge(60)
                 .setPassword(passwordEncoder.encode("lazar123"))
                 .setRoles(userRoleRepository.findUserRoleByRole(SELLER))
-                .setCart(cartService.getNewCart());
+                .setCart(cartService.getNewCart())
+                .setBoughtOffers(boughtOffersService.getNewBoughtOffers());
 
 
         userRepository.saveAndFlush(userSeller);

@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 public class UserRegistrationService {
     private final PasswordEncoder passwordEncoder;
@@ -21,12 +19,16 @@ public class UserRegistrationService {
 
     private final CartService cartService;
 
+
+    private final BoughtOffersService boughtOffersService;
+
     @Autowired
-    public UserRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository, CartService cartService) {
+    public UserRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, UserRoleRepository userRoleRepository, CartService cartService, BoughtOffersService boughtOffersService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.cartService = cartService;
+        this.boughtOffersService = boughtOffersService;
     }
 
     @Transactional
@@ -41,7 +43,7 @@ public class UserRegistrationService {
                 .setEmail(userRegistrationDTO.getEmail())
                 .setRoles(userRoleRepository.findUserRoleByRole(userRegistrationDTO.getRole()))
                 .setCart(cartService.getNewCart())
-                .setBoughtOffers(new ArrayList<>());
+                .setBoughtOffers(boughtOffersService.getNewBoughtOffers());
 
 
         userRepository.save(newUser);

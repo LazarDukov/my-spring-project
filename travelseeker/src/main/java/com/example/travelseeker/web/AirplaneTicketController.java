@@ -81,7 +81,7 @@ public class AirplaneTicketController {
     }
 
     @GetMapping("/read-airplane-ticket-offer/{id}/addToCart")
-    public String buyReadAirplaneTicketOffer(@PathVariable UUID id, Principal principal) {
+    public String addToCartAirplaneTicketOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartAirplaneTicket(principal, id);
 
         return "successfully-added";

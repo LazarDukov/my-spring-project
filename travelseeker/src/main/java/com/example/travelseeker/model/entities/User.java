@@ -35,8 +35,8 @@ public class User extends BaseEntity {
     @OneToOne
     private Cart cart;
 
-    @OneToMany
-    private List<BoughtOffers> boughtOffers;
+    @OneToOne
+    private BoughtOffers boughtOffers;
 
     @OneToMany
     private List<SealedOffers> sealedOffers;
@@ -46,7 +46,7 @@ public class User extends BaseEntity {
     }
 
     public User(String username, String firstName, String lastName, String email,
-                String country, int age, String password, Cart cart) {
+                String country, int age, String password, Cart cart, BoughtOffers boughtOffers) {
 
         setUsername(username);
         setFirstName(firstName);
@@ -57,7 +57,7 @@ public class User extends BaseEntity {
         setPassword(password);
         setCart(cart);
         this.roles = new ArrayList<>();
-        this.boughtOffers = new ArrayList<>();
+        setBoughtOffers(boughtOffers);
         this.sealedOffers = new ArrayList<>();
     }
 
@@ -97,8 +97,13 @@ public class User extends BaseEntity {
         return cart;
     }
 
-    public List<BoughtOffers> getBoughtOffers() {
+    public BoughtOffers getBoughtOffers() {
         return boughtOffers;
+    }
+
+    public User setBoughtOffers(BoughtOffers boughtOffers) {
+        this.boughtOffers = boughtOffers;
+        return this;
     }
 
     public User setUsername(String username) {
@@ -146,10 +151,6 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public User setBoughtOffers(List<BoughtOffers> boughtOffers) {
-        this.boughtOffers = boughtOffers;
-        return this;
-    }
 
     public String getRoleAsString() {
         return roles.stream().findAny().map(UserRole::getRole).toString();

@@ -92,11 +92,12 @@ public class HotelController {
     }
 
     @GetMapping("/read-hotel-offer/{id}/addToCart")
-    public String buyReadHotelOffer(@PathVariable UUID id, Principal principal) {
+    public String addToCartHotelOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartHotel(principal, id);
 
         return "successfully-added";
     }
+
 
 
 }

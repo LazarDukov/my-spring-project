@@ -55,4 +55,7 @@ public class AirplaneTicketsService {
         List<AirplaneTicket> allAirplaneTickets = new ArrayList<>(airplaneTicketsRepository.findAll());
         return allAirplaneTickets;
     }
+
+    public void buyFromCart() {
+    }
 }
