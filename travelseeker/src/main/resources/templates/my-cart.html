@@ -16,8 +16,7 @@
     <div class="container bg-blur rounded mt-5 mb-4">
         <h1>All tickets to buy</h1>
         <div class="row mt-3 mb-3"
-             th:action="@{/my-cart/read-airplane-ticket-offer/{id}/buy-offers}"
-             th:method="GET"
+             th:method="get"
         >
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Airplane ticket offers:</h3>

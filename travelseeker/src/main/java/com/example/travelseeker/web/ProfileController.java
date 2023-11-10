@@ -64,7 +64,7 @@ public class ProfileController {
         return "my-cart";
     }
 
-    @GetMapping("/my-orders")
+    @GetMapping("/my-orders/{id}")
     public String getMyOrders(Model model, Principal principal) {
         User user = userService.getUserByName(principal.getName());
         List<AirplaneTicket> airplaneTicketsBought = new ArrayList<>(user.getBoughtOffers().getAirplaneTickets());
