@@ -52,6 +52,7 @@ public class CartService {
         cartList.add(airplaneTicket);
         airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
         cart.setUser(user);
+        user.setCart(cart);
         cart.setCount(cart.getCount() + 1);
         cart.setTotalPrice(cart.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
         userRepository.save(user);

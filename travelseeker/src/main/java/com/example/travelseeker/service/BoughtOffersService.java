@@ -1,16 +1,18 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.BoughtOffers;
-import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.entities.User;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
 import com.example.travelseeker.repository.BoughtOffersRepository;
+import com.example.travelseeker.repository.CartRepository;
 import com.example.travelseeker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BoughtOffersService {
@@ -19,13 +21,16 @@ public class BoughtOffersService {
     private final CartService cartService;
     private final UserRepository userRepository;
 
+    private final CartRepository cartRepository;
+
     private final BoughtOffersRepository boughtOffersRepository;
 
     @Autowired
-    public BoughtOffersService(AirplaneTicketsRepository airplaneTicketsRepository, CartService cartService, UserRepository userRepository, BoughtOffersRepository boughtOffersRepository) {
+    public BoughtOffersService(AirplaneTicketsRepository airplaneTicketsRepository, CartService cartService, UserRepository userRepository, CartRepository cartRepository, BoughtOffersRepository boughtOffersRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.cartService = cartService;
         this.userRepository = userRepository;
+        this.cartRepository = cartRepository;
         this.boughtOffersRepository = boughtOffersRepository;
     }
 
@@ -35,13 +40,16 @@ public class BoughtOffersService {
         return newBoughtOffers;
     }
 
-    public void buyFromCart(Principal principal) {
+    public void buyFromCart(UUID id, Principal principal) {
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-        BoughtOffers boughtOffers = user.getBoughtOffers().setAirplaneTickets(user.getCart().getAirplaneTickets());
-        user.setCart(new Cart());
-        user.setBoughtOffers(boughtOffers);
-        boughtOffersRepository.save(boughtOffers);
+        AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
+        BoughtOffers boughtOffers = user.getBoughtOffers();
+        List<AirplaneTicket> boughtAirplaneTicketsOffersOfUser = user.getBoughtOffers().getAirplaneTickets();
+        boughtAirplaneTicketsOffersOfUser.add(airplaneTicketToBuy);
+        user.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
+        boughtOffers.setUser(user);
         userRepository.save(user);
+        boughtOffersRepository.save(boughtOffers);
 
 
     }

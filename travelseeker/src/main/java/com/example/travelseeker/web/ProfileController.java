@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -64,7 +67,7 @@ public class ProfileController {
         return "my-cart";
     }
 
-    @GetMapping("/my-orders/{id}")
+    @GetMapping("/my-orders")
     public String getMyOrders(Model model, Principal principal) {
         User user = userService.getUserByName(principal.getName());
         List<AirplaneTicket> airplaneTicketsBought = new ArrayList<>(user.getBoughtOffers().getAirplaneTickets());
@@ -78,9 +81,21 @@ public class ProfileController {
         return "my-orders";
     }
 
-    @GetMapping("/my-cart/read-airplane-ticket-offer/{id}/buy-offers")
-    public String buyAllAirplaneTicketFromCart(Principal principal) {
-        boughtOffersService.buyFromCart(principal);
+    @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
+    public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
+        boughtOffersService.buyFromCart(id, principal);
+        return "successfully-added";
+    }
+
+    @PostMapping("/my-cart/buy-hotel-offer/{id}")
+    public String buyHotelFromCart(@PathVariable UUID id, Principal principal) {
+        boughtOffersService.buyFromCart(id, principal);
+        return "successfully-added";
+    }
+
+    @PostMapping("/my-cart/buy-car-offer/{id}")
+    public String buyCarFromCart(@PathVariable UUID id, Principal principal) {
+        boughtOffersService.buyFromCart(id, principal);
         return "successfully-added";
     }
 
