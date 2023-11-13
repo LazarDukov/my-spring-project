@@ -18,12 +18,12 @@ import java.util.UUID;
 public class CarRentService {
 
     private final CarRentRepository carRentRepository;
-    private final UserRepository userRepository;
+
 
     @Autowired
     public CarRentService(CarRentRepository carRentRepository, UserRepository userRepository) {
         this.carRentRepository = carRentRepository;
-        this.userRepository = userRepository;
+
     }
 
     public CarRent getCarRentById(UUID id) {
@@ -31,12 +31,9 @@ public class CarRentService {
 
     }
 
- //   public CarRent getAllCarRentBySellerId(Long id) {
- //       return carRentRepository.getAllBySellerId(id);
-  //  }
 
-    public void addNewCar(AddCarsDTO addCarsDTO, Principal principal) {
-        Optional<User> user = userRepository.findUserByUsername(principal.getName());
+    public void addNewCar(AddCarsDTO addCarsDTO) {
+
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
                 .setModel(addCarsDTO.getModel()).setBodyType(addCarsDTO.getBodyType())
                 .setFuelType(addCarsDTO.getFuelType()).setPrice(addCarsDTO.getPrice())

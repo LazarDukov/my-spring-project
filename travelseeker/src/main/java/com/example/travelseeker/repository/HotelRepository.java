@@ -8,5 +8,5 @@ import java.util.UUID;
 public interface HotelRepository extends JpaRepository<Hotel, UUID> {
     Hotel findHotelById(UUID id);
 
-//    Hotel getAllBySellerId(Long id);
+
 }

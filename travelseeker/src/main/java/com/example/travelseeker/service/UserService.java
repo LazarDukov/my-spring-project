@@ -10,25 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
+
 
     @Autowired
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
+
     }
 
     public User getUserByName(String username) {
         return userRepository.findUserByUsername(username).orElse(null);
     }
 
-    public UserProfileView getUserProfileViewByName(String username) {
-        return mapToUserProfileView(getUserByName(username));
-    }
 
-    private UserProfileView mapToUserProfileView(User userByName) {
-        return this.modelMapper.map(userByName, UserProfileView.class);
-    }
+
 
 
 }

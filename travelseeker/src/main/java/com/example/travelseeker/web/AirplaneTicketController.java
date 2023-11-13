@@ -64,13 +64,13 @@ public class AirplaneTicketController {
 
     // TODO: should redirect to right page after successful adding airplane ticket, reformat DATE and adding some restrictions
     @PostMapping("/add-airplane-tickets")
-    public String addAirplaneTickets(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
+    public String addAirplaneTickets(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO,  BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addAirplaneTicketsDTO", addAirplaneTicketsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addAirplaneTicketsDTO", bindingResult);
             return "redirect:/offers/home";
         }
-        airplaneTicketsService.addNewAirplaneTicket(addAirplaneTicketsDTO, principal);
+        airplaneTicketsService.addNewAirplaneTicket(addAirplaneTicketsDTO);
         return "successfully-added";
     }
 }

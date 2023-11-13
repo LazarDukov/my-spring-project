@@ -69,7 +69,7 @@ public class CarRentalController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
             return "redirect:/offers/home";
         }
-        carRentService.addNewCar(addCarsDTO, principal);
+        carRentService.addNewCar(addCarsDTO);
         return "successfully-added";
     }
 

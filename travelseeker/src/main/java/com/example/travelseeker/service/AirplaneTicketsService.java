@@ -17,12 +17,12 @@ import java.util.*;
 @Service
 public class AirplaneTicketsService {
     private final AirplaneTicketsRepository airplaneTicketsRepository;
-    private final UserRepository userRepository;
+
 
     @Autowired
-    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, UserRepository userRepository) {
+    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
-        this.userRepository = userRepository;
+
     }
 
     public AirplaneTicket getAirplaneTicketById(UUID id) {
@@ -30,14 +30,12 @@ public class AirplaneTicketsService {
 
     }
 
-    public List<User> getAllSellers(UUID id) {
-        return airplaneTicketsRepository.findUsersByTicketId(id);
-    }
 
-    public void addNewAirplaneTicket(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal) throws ParseException {
+
+    public void addNewAirplaneTicket(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = dateFormat.parse(addAirplaneTicketsDTO.getDate());
-        Optional<User> user = userRepository.findUserByUsername(principal.getName());
+
         AirplaneTicket newAirplaneTicket = new AirplaneTicket()
                 .setCompanyName(addAirplaneTicketsDTO.getCompanyName())
                 .setDate(date)
@@ -56,6 +54,5 @@ public class AirplaneTicketsService {
         return allAirplaneTickets;
     }
 
-    public void buyFromCart() {
-    }
+
 }

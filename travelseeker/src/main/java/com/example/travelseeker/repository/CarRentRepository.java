@@ -8,5 +8,4 @@ import java.util.UUID;
 public interface CarRentRepository extends JpaRepository<CarRent, UUID> {
     CarRent findCarRentById(UUID id);
 
-    //CarRent getAllBySellerId(Long id);
 }

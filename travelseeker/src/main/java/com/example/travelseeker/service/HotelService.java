@@ -25,8 +25,8 @@ public class HotelService {
         this.userRepository = userRepository;
     }
 
-    public void addNewHotel(AddHotelsDTO addHotelsDTO, Principal principal) {
-        Optional<User> user = userRepository.findUserByUsername(principal.getName());
+    public void addNewHotel(AddHotelsDTO addHotelsDTO) {
+
         Hotel newHotel = new Hotel().setName(addHotelsDTO.getName())
                 .setCountry(addHotelsDTO.getCountry())
                 .setCity(addHotelsDTO.getCity())
@@ -48,9 +48,6 @@ public class HotelService {
 
     }
 
- //   public Hotel getAllHotelBySellerId(Long id) {
- //       return hotelRepository.getAllBySellerId(id);
-  //  }
 
     public List<Hotel> getAllHotels() {
         List<Hotel> allHotels = new ArrayList<>(hotelRepository.findAll());

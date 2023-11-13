@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface AirplaneTicketsRepository extends JpaRepository<AirplaneTicket, UUID> {
     AirplaneTicket findAirplaneTicketById(UUID id);
 
-    @Query("SELECT DISTINCT user FROM AirplaneTicket ticket JOIN ticket.sellers user WHERE ticket.id = :ticketId")
-    List<User> findUsersByTicketId(@Param("ticketId") UUID ticketId);
+//    @Query("SELECT DISTINCT user FROM AirplaneTicket ticket JOIN ticket.sellers user WHERE ticket.id = :ticketId")
+//    List<User> findUsersByTicketId(@Param("ticketId") UUID ticketId);
 }

@@ -62,13 +62,13 @@ public class HotelController {
     // TODO: should redirect to right page after successful adding hotel and create restrictions in DTO
 
     @PostMapping("/add-hotels")
-    public String addHotels(@Valid AddHotelsDTO addHotelsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addHotels(@Valid AddHotelsDTO addHotelsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addHotelsDTO", addHotelsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addHotelsDTO", bindingResult);
             return "redirect:/offers/home";
         }
-        hotelService.addNewHotel(addHotelsDTO, principal);
+        hotelService.addNewHotel(addHotelsDTO);
         return "successfully-added";
     }
 
