@@ -6,7 +6,8 @@ import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.model.entities.Hotel;
 import com.example.travelseeker.model.entities.User;
-import com.example.travelseeker.service.*;
+import com.example.travelseeker.service.BoughtOffersService;
+import com.example.travelseeker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,23 +24,18 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/users")
-public class ProfileController {
+public class UserController {
 
 
     private final UserService userService;
 
-    private final AirplaneTicketsService airplaneTicketsService;
-    private final CarRentService carRentService;
-    private final HotelService hotelService;
 
     private final BoughtOffersService boughtOffersService;
 
     @Autowired
-    public ProfileController(UserService userService, AirplaneTicketsService airplaneTicketsService, CarRentService carRentService, HotelService hotelService, BoughtOffersService boughtOffersService) {
+    public UserController(UserService userService, BoughtOffersService boughtOffersService) {
         this.userService = userService;
-        this.airplaneTicketsService = airplaneTicketsService;
-        this.carRentService = carRentService;
-        this.hotelService = hotelService;
+
         this.boughtOffersService = boughtOffersService;
     }
 

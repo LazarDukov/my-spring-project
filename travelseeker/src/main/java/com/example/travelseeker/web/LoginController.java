@@ -12,15 +12,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
+@RequestMapping("/users")
 public class LoginController {
 
-    @GetMapping("/users/login")
+    @GetMapping("/login")
     public String getLogin() {
         return "auth-login";
     }
 
 
-    @PostMapping("/users/login-error")
+    @PostMapping("/login-error")
     public String onFailedLogin(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
                                RedirectAttributes redirectAttributes) {

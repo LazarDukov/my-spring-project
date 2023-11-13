@@ -17,32 +17,17 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/offers")
 public class HotelController {
-    private final AirplaneTicketsService airplaneTicketsService;
 
 
     private final HotelService hotelService;
 
 
-    private final CarRentService carRentService;
-
-
-    private final CartService cartService;
-
-    private final UserService userService;
-
     @Autowired
-    public HotelController(AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService, CartService cartService, UserService userService) {
+    public HotelController(HotelService hotelService) {
 
-        this.airplaneTicketsService = airplaneTicketsService;
 
         this.hotelService = hotelService;
 
-        this.carRentService = carRentService;
-
-
-        this.cartService = cartService;
-
-        this.userService = userService;
     }
 
 //TODO: Should check about the work of these two model attributes. One of them can be skipped.
@@ -53,10 +38,6 @@ public class HotelController {
     }
 
 
-    @ModelAttribute
-    public AddHotelsDTO allHotels() {
-        return new AddHotelsDTO();
-    }
 
     @GetMapping("/hotels")
     public String getHotels(Model model) {
@@ -90,14 +71,6 @@ public class HotelController {
         hotelService.addNewHotel(addHotelsDTO, principal);
         return "successfully-added";
     }
-
-    @GetMapping("/read-hotel-offer/{id}/addToCart")
-    public String addToCartHotelOffer(@PathVariable UUID id, Principal principal) {
-        cartService.AddToCartHotel(principal, id);
-
-        return "successfully-added";
-    }
-
 
 
 }

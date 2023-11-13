@@ -2,7 +2,9 @@ package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.service.*;
+import com.example.travelseeker.service.AirplaneTicketsService;
+import com.example.travelseeker.service.CartService;
+import com.example.travelseeker.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,29 +24,12 @@ public class AirplaneTicketController {
     private final AirplaneTicketsService airplaneTicketsService;
 
 
-    private final HotelService hotelService;
-
-
-    private final CarRentService carRentService;
-
-
-    private final CartService cartService;
-
-    private final UserService userService;
-
     @Autowired
-    public AirplaneTicketController(AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService, CartService cartService, UserService userService) {
+    public AirplaneTicketController(AirplaneTicketsService airplaneTicketsService, CartService cartService, UserService userService) {
 
         this.airplaneTicketsService = airplaneTicketsService;
 
-        this.hotelService = hotelService;
 
-        this.carRentService = carRentService;
-
-
-        this.cartService = cartService;
-
-        this.userService = userService;
     }
 
     //TODO: Should check about the work of these two model attributes. One of them can be skipped.
@@ -53,10 +38,6 @@ public class AirplaneTicketController {
         return new AddAirplaneTicketsDTO();
     }
 
-    @ModelAttribute
-    public AddAirplaneTicketsDTO allAirplaneTickets() {
-        return new AddAirplaneTicketsDTO();
-    }
 
     // TODO: should add another columns in the html page view
     @GetMapping("/airplane-tickets")
@@ -80,12 +61,6 @@ public class AirplaneTicketController {
         return "read-airplane-ticket-offer";
     }
 
-    @GetMapping("/read-airplane-ticket-offer/{id}/addToCart")
-    public String addToCartAirplaneTicketOffer(@PathVariable UUID id, Principal principal) {
-        cartService.AddToCartAirplaneTicket(principal, id);
-
-        return "successfully-added";
-    }
 
     // TODO: should redirect to right page after successful adding airplane ticket, reformat DATE and adding some restrictions
     @PostMapping("/add-airplane-tickets")

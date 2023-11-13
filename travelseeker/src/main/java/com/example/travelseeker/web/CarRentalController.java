@@ -17,32 +17,20 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/offers")
 public class CarRentalController {
-    private final AirplaneTicketsService airplaneTicketsService;
-
-
-    private final HotelService hotelService;
 
 
     private final CarRentService carRentService;
 
 
-    private final CartService cartService;
 
-    private final UserService userService;
 
     @Autowired
-    public CarRentalController(AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService, CartService cartService, UserService userService) {
+    public CarRentalController(CarRentService carRentService) {
 
-        this.airplaneTicketsService = airplaneTicketsService;
 
-        this.hotelService = hotelService;
 
         this.carRentService = carRentService;
 
-
-        this.cartService = cartService;
-
-        this.userService = userService;
     }
 
     //TODO: Should check about the work of these two model attributes. One of them can be skipped.
@@ -51,10 +39,6 @@ public class CarRentalController {
         return new AddCarsDTO();
     }
 
-    @ModelAttribute
-    public AddCarsDTO allCars() {
-        return new AddCarsDTO();
-    }
 
     // TODO: should add another columns in the html page view
     @GetMapping("/add-cars")
@@ -76,12 +60,7 @@ public class CarRentalController {
         return "read-car-offer";
     }
 
-    @GetMapping("/read-car-offer/{id}/addToCart")
-    public String addToCartCarOffer(@PathVariable UUID id, Principal principal) {
-        cartService.AddToCartCar(principal, id);
 
-        return "successfully-added";
-    }
 
     @PostMapping("/add-cars")
     public String addCars(@Valid AddCarsDTO addCarsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
