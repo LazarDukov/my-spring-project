@@ -48,7 +48,49 @@ public class UserRegistrationDTO {
         return this;
     }
 
+
     public UserRegistrationDTO() {
+        this.firstName = "Anonymous";
+        this.lastName = "Anonymous";
+        this.age = 0;
+        this.country = "Missing";
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public UserRegistrationDTO setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public UserRegistrationDTO setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public UserRegistrationDTO setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public UserRegistrationDTO setCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public String getCountry() {
+        return country;
     }
 
     public UserRoleEnum getRole() {
@@ -87,41 +129,6 @@ public class UserRegistrationDTO {
         return this;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public UserRegistrationDTO setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public UserRegistrationDTO setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public UserRegistrationDTO setAge(int age) {
-        this.age = age;
-        return this;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public UserRegistrationDTO setCountry(String country) {
-        this.country = country;
-        return this;
-    }
 
     public String getEmail() {
         return email;

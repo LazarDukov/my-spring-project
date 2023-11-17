@@ -1,6 +1,8 @@
 package com.example.travelseeker.web;
 
 
+import com.example.travelseeker.model.dtos.EditProfileDTO;
+import com.example.travelseeker.model.dtos.UserRegistrationDTO;
 import com.example.travelseeker.model.dtos.view.UserProfileView;
 import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.CarRent;
@@ -8,13 +10,13 @@ import com.example.travelseeker.model.entities.Hotel;
 import com.example.travelseeker.model.entities.User;
 import com.example.travelseeker.service.BoughtOffersService;
 import com.example.travelseeker.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -39,6 +41,10 @@ public class UserController {
         this.boughtOffersService = boughtOffersService;
     }
 
+    @ModelAttribute("editProfileDTO")
+    public EditProfileDTO editProfileDTO() {
+        return new EditProfileDTO();
+    }
 
     @GetMapping("/my-profile")
     private String getMyProfile(Model model, Principal principal) {
@@ -46,6 +52,23 @@ public class UserController {
         UserProfileView userProfileView = new UserProfileView(user.getUsername(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getAge(), user.getRoleAsString(), user.getCountry());
         model.addAttribute("user", userProfileView);
         return "my-profile";
+    }
+
+    @GetMapping("/edit-profile")
+    private String getEditProfile(Model model, Principal principal) {
+        User user = userService.getUserByName(principal.getName());
+        UserProfileView userProfileView = new UserProfileView(user.getUsername(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getAge(), user.getRoleAsString(), user.getCountry());
+        model.addAttribute("user", userProfileView);
+        return "edit-profile";
+    }
+
+    // TODO: should repair showing of role not to be optional and given as a string
+    @PostMapping("/edit-profile")
+    public String updateUserProfile(EditProfileDTO editProfileDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        userService.editProfile(editProfileDTO, principal);
+
+
+        return "redirect:/users/my-profile";
     }
 
 
