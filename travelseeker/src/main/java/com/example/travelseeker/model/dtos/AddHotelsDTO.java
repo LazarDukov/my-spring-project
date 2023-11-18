@@ -1,8 +1,10 @@
 package com.example.travelseeker.model.dtos;
 
 import com.example.travelseeker.model.enums.HotelRoomEnum;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
@@ -20,9 +22,12 @@ public class AddHotelsDTO {
     private String address;
 
     @NotNull
+    @Min(1)
+    @Max(5)
     private int stars;
 
     @NotNull
+    @Size(min = 30)
     private String description;
 
     @NotNull
@@ -31,16 +36,17 @@ public class AddHotelsDTO {
     @NotNull
     private HotelRoomEnum roomType;
 
-    @NotNull
+
     private BigDecimal priceBreakfast;
 
-    @NotNull
+
     private BigDecimal priceDinner;
 
-    @NotNull
+
     private BigDecimal allInclusive;
 
     @NotNull
+    @Min(1)
     private int available;
 
     public int getAvailable() {

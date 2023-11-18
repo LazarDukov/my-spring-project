@@ -1,6 +1,7 @@
 package com.example.travelseeker.model.dtos;
 
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -19,15 +20,17 @@ public class AddAirplaneTicketsDTO {
     private String toAirport;
 
     @NotNull
+
     private String flyNumber;
 
     @NotNull
     private BigDecimal price;
 
-    @NotNull
+
     private BigDecimal moreLuggagePrice;
 
     @NotNull
+    @Min(1)
     private int available;
 
     public int getAvailable() {

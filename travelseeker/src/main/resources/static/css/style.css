@@ -216,9 +216,9 @@ h2 {
 
 .button-33 {
     border-radius: 100px;
-    /*padding: 100px 120px;*/
+    padding: 30px;
     border: 0;
-    /*user-select: none;*/
+    user-select: none;
     /*-webkit-user-select: none;*/
 
     background-color: #c2dcfb;
@@ -226,12 +226,18 @@ h2 {
     cursor: pointer;
     width: 400px;
     height: 200px;
+    margin: 60px 20px 0 0;
+    /*background-size: 400px 200px;*/
     display: flex;
+    flex-display: row;
     align-items: center;
     justify-content: center;
-    transition: all 250ms;
-    touch-action: manipulation;
-    flex-direction: column;
+    /*transition: all 250ms;*/
+    /*touch-action: manipulation;*/
+    /*flex-direction: column;*/
+
+    /*white-space: nowrap;*/
+    text-decoration-line: none;
 
     color: white;
     font-size: 40px;

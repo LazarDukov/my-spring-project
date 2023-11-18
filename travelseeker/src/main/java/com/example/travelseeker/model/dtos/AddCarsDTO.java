@@ -2,31 +2,32 @@ package com.example.travelseeker.model.dtos;
 
 import com.example.travelseeker.model.enums.CarBodyTypeEnum;
 import com.example.travelseeker.model.enums.CarFuelTypeEnum;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class AddCarsDTO {
-
+    @NotNull
     private String make;
 
-
+    @NotNull
     private String model;
 
-
+    @NotNull
     private CarBodyTypeEnum bodyType;
 
-
+    @NotNull
     private CarFuelTypeEnum fuelType;
 
-
+    @NotNull
     private BigDecimal price;
 
 
     private BigDecimal insurance;
 
     @NotNull
+    @Min(1)
     private int available;
 
     public int getAvailable() {
