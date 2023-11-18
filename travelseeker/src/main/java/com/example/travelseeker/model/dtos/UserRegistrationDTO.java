@@ -4,37 +4,38 @@ import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.enums.UserRoleEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 
 public class UserRegistrationDTO {
 
     @Size(min = 4, max = 30)
-    @NotNull
+    @NotBlank
     private String username;
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 30)
     private String password;
     @NotNull
     @Size(min = 4, max = 30)
     private String confirmPassword;
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 30)
     private String firstName;
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 30)
     private String lastName;
     @Email
-    @NotNull
+    @NotBlank
     private String email;
+
+    @Positive
     private int age;
+    @NotBlank
     @NotNull
     private String country;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
+    @NotBlank
     private String role;
 
     private Cart cart;
