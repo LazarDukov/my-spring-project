@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+
+</head>
+<body class="register">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}">
+        Navbar
+    </div>
+
+    <div class="registerbox">
+        <h1>Edit profile</h1>
+        <form th:method="post"
+              th:action="@{/users/edit-profile}"
+              th:object="${user}">
+            <p>Username</p>
+            <input th:field="*{username}"
+                   type="text" name="username">
+
+
+            <p>First name</p>
+            <input th:field="*{firstName}"
+                   type="text" name="firstName"
+            >
+
+            <p>Last name</p>
+            <input
+                    th:field="*{lastName}"
+                    type="text" name="lastName">
+
+            <p>Age</p>
+            <input
+                    th:field="*{age}"
+                    type="number" name="age">
+
+            <p>Country</p>
+            <input th:field="*{country}"
+                   type="text" name="country">
+
+            <p>Email</p>
+            <input th:field="*{email}"
+                   type="text" name="email">
+            <p>What will you do in our site?</p><br>
+            <input th:field="*{role}" name="role" type="text" th:readonly="${true}" readonly>
+
+            <br><input type="submit" name="" value="Register">
+            <a href="#">You already have an account?</a><br>
+        </form>
+    </div>
+</header>
+</body>
+</html>
