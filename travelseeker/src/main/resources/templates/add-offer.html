@@ -8,41 +8,6 @@
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" href="/css/style.css"/>
 
-<style>
-    .button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
-    }
-    .button-333 {
-        background-color: #c2dcfb;
-        border-radius: 100px;
-        border: 0;
-        box-shadow: rgba(220, 235, 239, 0.15) 0 -25px 18px -14px inset, rgba(220, 235, 239, 0.15) 0 1px 2px, rgba(220, 235, 239, 0.15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(220, 235, 239, 0.15) 0 8px 16px, rgba(220, 235, 239, 0.15) 0 16px 32px;
-        cursor: pointer;
-        width: 400px;
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 250ms;
-        touch-action: manipulation;
-        padding: 30px 20px;
-        margin: 20px 10px;
-        flex-direction: column;
-
-        /* text */
-        color: white;
-        font-size: 40px;
-        font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
-        flex-grow: 1;
-        text-align: center;
-        font-weight: bold;
-        text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-    }
-</style>
-
 </head>
 <body class="register">
 <header>
@@ -50,9 +15,9 @@
         Navbar
     </div>
     <div class="button-container">
-        <a class="button-33" style = background-image:url("/images/plane.png") th:href="@{/offers/add-airplane-tickets}" >Airplane tickets</a>
-        <a class="button-33" style = background-image:url("/images/hotel.png") th:href="@{/offers/add-hotels}">Hotels</a>
-        <a class="button-33" style = background-image:url("/images/car.png") th:href="@{/offers/add-cars}">Rent a car</a>
+        <a class="button-add-offer" style = background-image:url("/images/plane.png") th:href="@{/offers/add-airplane-tickets}" >Airplane tickets</a>
+        <a class="button-add-offer" style = background-image:url("/images/hotel.png") th:href="@{/offers/add-hotels}">Hotels</a>
+        <a class="button-add-offer" style = background-image:url("/images/car.png") th:href="@{/offers/add-cars}">Rent a car</a>
     </div>
 </header>
 </body>
