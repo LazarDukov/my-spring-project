@@ -2,16 +2,18 @@ package com.example.travelseeker.model.entities;
 
 import com.example.travelseeker.model.enums.CarBodyTypeEnum;
 import com.example.travelseeker.model.enums.CarFuelTypeEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "car_rents")
 public class CarRent extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String make;
 
@@ -30,26 +32,20 @@ public class CarRent extends BaseEntity {
     @Column
     private BigDecimal insurance;
 
-    @ManyToOne
-    private BoughtOffers cart;
+    @Column
+    private int available;
+
 
     public CarRent() {
     }
 
-    public CarRent(String make,
-                   String model,
-                   CarBodyTypeEnum bodyType,
-                   CarFuelTypeEnum fuelType,
-                   BigDecimal price,
-                   BigDecimal insurance,
-                   BoughtOffers cart) {
-        this.make = make;
-        this.model = model;
-        this.bodyType = bodyType;
-        this.fuelType = fuelType;
-        this.price = price;
-        this.insurance = insurance;
-        this.cart = cart;
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public CarRent setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getMake() {
@@ -106,12 +102,14 @@ public class CarRent extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
+    public int getAvailable() {
+        return available;
     }
 
-    public CarRent setCart(BoughtOffers cart) {
-        this.cart = cart;
+    public CarRent setAvailable(int available) {
+        this.available = available;
         return this;
     }
+
+
 }

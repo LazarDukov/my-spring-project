@@ -9,88 +9,86 @@ import java.util.List;
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity {
-    @OneToOne
-    private Category category;
 
-    @Column(nullable = false)
+    @Column
     private BigDecimal totalPrice;
 
     @Column
     private int count;
 
-    @ManyToOne
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Hotel> hotels;
-
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<CarRent> cars;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<AirplaneTicket> airplaneTickets;
 
     public Cart() {
-    }
-
-    public Cart(Category category,
-                BigDecimal totalPrice,
-                int count,
-                User user) {
-        this.category = category;
-        this.totalPrice = totalPrice;
-        this.count = count;
-        this.user = user;
+        this.setBuyer(buyer);
+        this.totalPrice = BigDecimal.ZERO;
+        this.count = 0;
         this.hotels = new ArrayList<>();
         this.cars = new ArrayList<>();
         this.airplaneTickets = new ArrayList<>();
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
+    public Cart setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+        return this;
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public Cart setCount(int count) {
         this.count = count;
+        return this;
     }
 
-    public User getUser() {
-        return user;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Cart setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+        return this;
     }
 
     public List<Hotel> getHotels() {
         return hotels;
     }
 
+    public Cart setHotels(List<Hotel> hotels) {
+        this.hotels = hotels;
+        return this;
+    }
 
     public List<CarRent> getCars() {
         return cars;
     }
 
+    public Cart setCars(List<CarRent> cars) {
+        this.cars = cars;
+        return this;
+    }
 
     public List<AirplaneTicket> getAirplaneTickets() {
         return airplaneTickets;
     }
 
-
+    public Cart setAirplaneTickets(List<AirplaneTicket> airplaneTickets) {
+        this.airplaneTickets = airplaneTickets;
+        return this;
+    }
 }

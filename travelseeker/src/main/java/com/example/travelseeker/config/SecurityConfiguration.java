@@ -1,6 +1,7 @@
 package com.example.travelseeker.config;
 
-import com.example.travelseeker.repository.UserRepository;
+import com.example.travelseeker.repository.BuyerRepository;
+import com.example.travelseeker.repository.SellerRepository;
 import com.example.travelseeker.service.ApplicationUserDetailsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -57,8 +58,8 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new ApplicationUserDetailsService(userRepository);
+    public UserDetailsService userDetailsService(SellerRepository sellerRepository, BuyerRepository buyerRepository) {
+        return new ApplicationUserDetailsService(sellerRepository, buyerRepository);
     }
 
     @Bean

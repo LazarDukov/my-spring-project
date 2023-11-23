@@ -2,14 +2,16 @@ package com.example.travelseeker.model.entities;
 
 import jakarta.persistence.*;
 
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "airplane_tickets")
 public class AirplaneTicket extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String companyName;
 
@@ -32,25 +34,28 @@ public class AirplaneTicket extends BaseEntity {
     @Column
     private BigDecimal moreLuggagePrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private BoughtOffers cart;
+    @Column
+    private int available;
 
     public AirplaneTicket() {
     }
 
-    public AirplaneTicket(String companyName, Date date,
-                          String fromAirport, String toAirport,
-                          String flyNumber, BigDecimal price,
-                          BigDecimal moreLuggagePrice, BoughtOffers cart) {
-        this.companyName = companyName;
-        this.date = date;
-        this.fromAirport = fromAirport;
-        this.toAirport = toAirport;
-        this.flyNumber = flyNumber;
-        this.price = price;
-        this.moreLuggagePrice = moreLuggagePrice;
-        this.cart = cart;
+    public int getAvailable() {
+        return available;
+    }
+
+    public AirplaneTicket setAvailable(int available) {
+        this.available = available;
+        return this;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public AirplaneTicket setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getCompanyName() {
@@ -116,12 +121,5 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
-    }
 
-    public AirplaneTicket setCart(BoughtOffers cart) {
-        this.cart = cart;
-        return this;
-    }
 }

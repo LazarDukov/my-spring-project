@@ -19,15 +19,24 @@
         <form th:method="post"
               th:action="@{/offers/add-airplane-tickets}"
               th:object="${addAirplaneTicketsDTO}">
+
+
             <p>Company name</p>
             <input th:field="*{companyName}"
                    th:errorclass="'is-invalid alert-danger'"
-            type="text" name="companyName" placeholder="Enter company name">
-            <div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></div>
+                   id="companyName"
+                   type="text"
+                   name="companyName"
+                   placeholder="Enter company name">
+            <small class="invalid-feedback bg-danger text-danger">
+                Company name should not be empty and size should be between 2 and 50 symbols!
+            </small>
+
+
             <p>Date and hour</p>
             <input th:field="*{date}"
                    th:errorclass="'is-invalid alert-danger'"
-                  type="text" name="date" placeholder="yyyy-MM-dd">
+                   type="text" name="date" placeholder="yyyy-MM-dd">
             <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
             <p>From airport</p>
             <input th:field="*{fromAirport}"
@@ -58,6 +67,11 @@
                    type="number" name="moreLuggagePrice" placeholder="Enter price">
             <div th:if="${#fields.hasErrors('moreLuggagePrice')}" th:errors="*{moreLuggagePrice}"></div>
 
+            <p>More luggage price</p>
+            <input th:field="*{available}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   type="number" name="available" placeholder="Enter available">
+            <div th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></div>
             <input type="submit" name="" value="Add airplane ticket">
         </form>
     </div>

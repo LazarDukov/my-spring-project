@@ -1,17 +1,18 @@
 package com.example.travelseeker.model.entities;
 
 import com.example.travelseeker.model.enums.HotelRoomEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "hotels")
 public class Hotel extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String name;
 
@@ -45,34 +46,20 @@ public class Hotel extends BaseEntity {
     @Column
     private BigDecimal allInclusive;
 
-    @ManyToOne
+    @Column
+    private int available;
 
-    private BoughtOffers cart;
 
     public Hotel() {
     }
 
-    public Hotel(String name, String country,
-                 String city, String address,
-                 int stars, String description,
-                 BigDecimal pricePerNight,
-                 HotelRoomEnum roomType,
-                 BigDecimal priceBreakfast,
-                 BigDecimal priceDinner,
-                 BigDecimal allInclusive,
-                 BoughtOffers cart) {
-        this.name = name;
-        this.country = country;
-        this.city = city;
-        this.address = address;
-        this.stars = stars;
-        this.description = description;
-        this.pricePerNight = pricePerNight;
-        this.roomType = roomType;
-        this.priceBreakfast = priceBreakfast;
-        this.priceDinner = priceDinner;
-        this.allInclusive = allInclusive;
-        this.cart = cart;
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public Hotel setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getName() {
@@ -174,12 +161,14 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
+    public int getAvailable() {
+        return available;
     }
 
-    public Hotel setCart(BoughtOffers cart) {
-        this.cart = cart;
+    public Hotel setAvailable(int available) {
+        this.available = available;
         return this;
     }
+
+
 }

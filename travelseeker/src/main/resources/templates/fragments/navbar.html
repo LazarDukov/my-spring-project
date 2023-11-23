@@ -19,7 +19,7 @@
             <!--  <label class="logo">If you love travelling...That's your place!</label> -->
             <ul class="buttons1">
                 <li><a class="active" sec:authorize="isAuthenticated()" th:href="@{/home}">Home</a></li>
-                <li><a class="active"  sec:authorize="hasRole('CLIENT')" th:href="@{/offers/book-now}">Book now</a></li>
+                <li><a class="active"  sec:authorize="hasRole('BUYER')" th:href="@{/offers/book-now}">Book now</a></li>
                 <li><a class="active" sec:authorize="hasRole('SELLER')" th:href="@{/offers/add-offer}">Add offer</a></li>
                 <li><a class="active" th:href="@{/offers/airplane-tickets}">Airplane tickets</a></li>
                 <li><a class="active" th:href="@{/offers/cars}">Cars</a></li>
@@ -39,7 +39,10 @@
                 <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/users/my-profile}">My
                     profile</a>
                 </li>
-                <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/my-orders}">My orders</a></li>
+                <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/users/my-cart}">My
+                    cart</a>
+                </li>
+                <li><a class="auth-active" sec:authorize="isAuthenticated()" th:href="@{/users/my-orders}">My orders</a></li>
                 <form sec:authorize="isAuthenticated()" th:method="post" th:action="@{/users/logout}" th:href="@{/}">
                     <input type="submit" name="" value="Logout">
                 </form>
