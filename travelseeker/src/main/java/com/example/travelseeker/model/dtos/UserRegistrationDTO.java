@@ -1,16 +1,22 @@
 package com.example.travelseeker.model.dtos;
 
 import com.example.travelseeker.model.entities.Cart;
+import com.example.travelseeker.model.entities.UserRole;
 import com.example.travelseeker.model.enums.UserRoleEnum;
+//import com.example.travelseeker.util.validation.UsernameValidatorInterface;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 public class UserRegistrationDTO {
 
     @Size(min = 4, max = 30)
     @NotBlank
+    //@UsernameValidatorInterface(message = "User with this username already exists!")
     private String username;
     @NotBlank
     @Size(min = 4, max = 30)
@@ -28,26 +34,15 @@ public class UserRegistrationDTO {
     @NotBlank
     private String email;
 
-    @Positive
     private int age;
     @NotBlank
-    @NotNull
+    @Size(min = 4, max = 30)
     private String country;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
     private String role;
 
-    private Cart cart;
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public UserRegistrationDTO setCart(Cart cart) {
-        this.cart = cart;
-        return this;
-    }
 
 
     public UserRegistrationDTO() {
@@ -94,8 +89,8 @@ public class UserRegistrationDTO {
         return country;
     }
 
-    public UserRoleEnum getRole() {
-        return UserRoleEnum.valueOf(role);
+    public String getRole() {
+        return role;
     }
 
     public UserRegistrationDTO setRole(String role) {

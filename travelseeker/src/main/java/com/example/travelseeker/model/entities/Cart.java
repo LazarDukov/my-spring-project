@@ -17,28 +17,24 @@ public class Cart extends BaseEntity {
     private int count;
 
     @OneToOne
-    private User user;
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Hotel> hotels;
-
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<CarRent> cars;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<AirplaneTicket> airplaneTickets;
 
     public Cart() {
-    }
-
-    public Cart(BigDecimal totalPrice, int count, User user) {
-
-        this.totalPrice = totalPrice;
-        this.count = count;
-        this.user = user;
-        this.airplaneTickets = new ArrayList<>();
+        this.setBuyer(buyer);
+        this.totalPrice = BigDecimal.ZERO;
+        this.count = 0;
         this.hotels = new ArrayList<>();
         this.cars = new ArrayList<>();
+        this.airplaneTickets = new ArrayList<>();
     }
 
 
@@ -60,12 +56,12 @@ public class Cart extends BaseEntity {
         return this;
     }
 
-    public User getUser() {
-        return user;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public Cart setUser(User user) {
-        this.user = user;
+    public Cart setBuyer(Buyer buyer) {
+        this.buyer = buyer;
         return this;
     }
 

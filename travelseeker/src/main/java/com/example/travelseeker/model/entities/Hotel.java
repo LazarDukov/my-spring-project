@@ -10,6 +10,9 @@ import java.util.List;
 @Entity
 @Table(name = "hotels")
 public class Hotel extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String name;
 
@@ -46,57 +49,17 @@ public class Hotel extends BaseEntity {
     @Column
     private int available;
 
-    @ManyToOne
-    private BoughtOffers cart;
-
-    public List<User> getSellers() {
-        return sellers;
-    }
-
-    public Hotel setSellers(List<User> sellers) {
-        this.sellers = sellers;
-        return this;
-    }
-
-    @ManyToMany
-    private List<User> sellers;
-
-
-    public int getAvailable() {
-        return available;
-    }
-
-    public Hotel setAvailable(int available) {
-        this.available = available;
-        return this;
-    }
-
 
     public Hotel() {
     }
 
-    public Hotel(String name, String country,
-                 String city, String address,
-                 int stars, String description,
-                 BigDecimal pricePerNight,
-                 HotelRoomEnum roomType,
-                 BigDecimal priceBreakfast,
-                 BigDecimal priceDinner,
-                 BigDecimal allInclusive,
-                 BoughtOffers cart) {
-        this.name = name;
-        this.country = country;
-        this.city = city;
-        this.address = address;
-        this.stars = stars;
-        this.description = description;
-        this.pricePerNight = pricePerNight;
-        this.roomType = roomType;
-        this.priceBreakfast = priceBreakfast;
-        this.priceDinner = priceDinner;
-        this.allInclusive = allInclusive;
-        this.cart = cart;
-        this.sellers = new ArrayList<>();
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public Hotel setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getName() {
@@ -198,12 +161,14 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
+    public int getAvailable() {
+        return available;
     }
 
-    public Hotel setCart(BoughtOffers cart) {
-        this.cart = cart;
+    public Hotel setAvailable(int available) {
+        this.available = available;
         return this;
     }
+
+
 }
