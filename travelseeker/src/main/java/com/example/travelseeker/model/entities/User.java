@@ -2,13 +2,13 @@ package com.example.travelseeker.model.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
-
-@Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+@MappedSuperclass
+public abstract class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @Column
     private String username;
 
@@ -24,86 +24,27 @@ public class User extends BaseEntity {
     private String country;
 
     @Column
-    private int age;
+    private int age = 0;
 
     @Column
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRole> roles;
-
-    @OneToOne
-    private Cart cart;
-
-    @OneToOne
-    private BoughtOffers boughtOffers;
-
-    @OneToMany
-    private List<SealedOffers> sealedOffers;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private UserRole role;
 
 
-    public User() {
+    public UUID getId() {
+        return id;
     }
 
-    public User(String username, String firstName, String lastName, String email,
-                String country, int age, String password, Cart cart, BoughtOffers boughtOffers) {
-
-        setUsername(username);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setEmail(email);
-        setCountry(country);
-        setAge(age);
-        setPassword(password);
-        setCart(cart);
-        this.roles = new ArrayList<>();
-        setBoughtOffers(boughtOffers);
-        this.sealedOffers = new ArrayList<>();
+    public User setId(UUID id) {
+        this.id = id;
+        return this;
     }
 
     public String getUsername() {
         return username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public List<UserRole> getRoles() {
-        return roles;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public BoughtOffers getBoughtOffers() {
-        return boughtOffers;
-    }
-
-    public User setBoughtOffers(BoughtOffers boughtOffers) {
-        this.boughtOffers = boughtOffers;
-        return this;
     }
 
     public User setUsername(String username) {
@@ -111,9 +52,17 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public User setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public User setLastName(String lastName) {
@@ -121,9 +70,17 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public User setEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    public String getCountry() {
+        return country;
     }
 
     public User setCountry(String country) {
@@ -131,9 +88,17 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public User setAge(int age) {
         this.age = age;
         return this;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public User setPassword(String password) {
@@ -141,27 +106,14 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public User setRoles(List<UserRole> roles) {
-        this.roles = roles;
+    public UserRole getRole() {
+        return role;
+    }
+
+    public User setRole(UserRole role) {
+        this.role = this.role;
         return this;
     }
 
-    public User setCart(Cart cart) {
-        this.cart = cart;
-        return this;
-    }
 
-
-    public String getRoleAsString() {
-        return roles.stream().findAny().map(UserRole::getRole).toString();
-    }
-
-    public List<SealedOffers> getSealedOffers() {
-        return sealedOffers;
-    }
-
-    public User setSealedOffers(List<SealedOffers> sealedOffers) {
-        this.sealedOffers = sealedOffers;
-        return this;
-    }
 }
