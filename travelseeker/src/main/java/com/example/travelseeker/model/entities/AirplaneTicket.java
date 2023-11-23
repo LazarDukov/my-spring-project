@@ -3,13 +3,15 @@ package com.example.travelseeker.model.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "airplane_tickets")
 public class AirplaneTicket extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String companyName;
 
@@ -35,16 +37,7 @@ public class AirplaneTicket extends BaseEntity {
     @Column
     private int available;
 
-    @ManyToMany
-    private List<User> sellers;
-
-    public List<User> getSellers() {
-        return sellers;
-    }
-
-    public AirplaneTicket setSellers(List<User> sellers) {
-        this.sellers = sellers;
-        return this;
+    public AirplaneTicket() {
     }
 
     public int getAvailable() {
@@ -56,26 +49,13 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private BoughtOffers cart;
-
-    public AirplaneTicket() {
+    public Seller getSeller() {
+        return seller;
     }
 
-    public AirplaneTicket(String companyName, Date date,
-                          String fromAirport, String toAirport,
-                          String flyNumber, BigDecimal price,
-                          BigDecimal moreLuggagePrice, BoughtOffers cart) {
-        this.companyName = companyName;
-        this.date = date;
-        this.fromAirport = fromAirport;
-        this.toAirport = toAirport;
-        this.flyNumber = flyNumber;
-        this.price = price;
-        this.moreLuggagePrice = moreLuggagePrice;
-        this.cart = cart;
-        this.sellers = new ArrayList<>();
+    public AirplaneTicket setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getCompanyName() {
@@ -141,12 +121,5 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
-    }
 
-    public AirplaneTicket setCart(BoughtOffers cart) {
-        this.cart = cart;
-        return this;
-    }
 }

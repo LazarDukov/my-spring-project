@@ -11,6 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "car_rents")
 public class CarRent extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
     @Column
     private String make;
 
@@ -32,50 +35,17 @@ public class CarRent extends BaseEntity {
     @Column
     private int available;
 
-    @ManyToMany
-    private List<User> sellers;
-
-    public List<User> getSellers() {
-        return sellers;
-    }
-
-    public CarRent setSellers(List<User> sellers) {
-        this.sellers = sellers;
-        return this;
-    }
-
-    @ManyToOne
-    private BoughtOffers cart;
-
-
-    public int getAvailable() {
-        return available;
-    }
-
-    public CarRent setAvailable(int available) {
-        this.available = available;
-        return this;
-    }
-
 
     public CarRent() {
     }
 
-    public CarRent(String make,
-                   String model,
-                   CarBodyTypeEnum bodyType,
-                   CarFuelTypeEnum fuelType,
-                   BigDecimal price,
-                   BigDecimal insurance,
-                   BoughtOffers cart) {
-        this.make = make;
-        this.model = model;
-        this.bodyType = bodyType;
-        this.fuelType = fuelType;
-        this.price = price;
-        this.insurance = insurance;
-        this.cart = cart;
-        this.sellers = new ArrayList<>();
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public CarRent setSeller(Seller seller) {
+        this.seller = seller;
+        return this;
     }
 
     public String getMake() {
@@ -132,12 +102,14 @@ public class CarRent extends BaseEntity {
         return this;
     }
 
-    public BoughtOffers getCart() {
-        return cart;
+    public int getAvailable() {
+        return available;
     }
 
-    public CarRent setCart(BoughtOffers cart) {
-        this.cart = cart;
+    public CarRent setAvailable(int available) {
+        this.available = available;
         return this;
     }
+
+
 }
