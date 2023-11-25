@@ -63,7 +63,8 @@ public class UserRegistrationService {
                 .setLastName("")
                 .setEmail(userRegistrationDTO.getEmail())
                 .setCountry("")
-                .setAge(0);
+                .setAge(0)
+                .setRoles(userRoleRepository.findUserRoleByRole(UserRoleEnum.SELLER));
 
         sellerRepository.save(newSeller);
     }
@@ -77,7 +78,7 @@ public class UserRegistrationService {
                 .setLastName("")
                 .setEmail(userRegistrationDTO.getEmail())
                 .setCountry("")
-                .setAge(0);
+                .setAge(0).setRoles(userRoleRepository.findUserRoleByRole(UserRoleEnum.BUYER));
         newBuyer.setCart(cartService.getNewCart());
         Cart cart = newBuyer.getCart();
         cart.setBuyer(newBuyer);

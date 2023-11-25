@@ -1,14 +1,16 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.Cart;
-import com.example.travelseeker.repository.AirplaneTicketsRepository;
-import com.example.travelseeker.repository.CarRentRepository;
-import com.example.travelseeker.repository.CartRepository;
-import com.example.travelseeker.repository.HotelRepository;
+import com.example.travelseeker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CartService {
@@ -20,14 +22,17 @@ public class CartService {
 
     private final CarRentRepository carRentRepository;
 
+    private final BuyerRepository buyerRepository;
+
     @Autowired
 
     public CartService(CartRepository cartRepository, AirplaneTicketsRepository airplaneTicketsRepository,
-                       HotelRepository hotelRepository, CarRentRepository carRentRepository) {
+                       HotelRepository hotelRepository, CarRentRepository carRentRepository, BuyerRepository buyerRepository) {
         this.cartRepository = cartRepository;
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.hotelRepository = hotelRepository;
         this.carRentRepository = carRentRepository;
+        this.buyerRepository = buyerRepository;
     }
 
     public Cart getNewCart() {
@@ -37,25 +42,28 @@ public class CartService {
         cartRepository.saveAndFlush(newCart);
         return newCart;
     }
-    // TODO: for all these methods should implement counter -- when one of the offers is bought
-    //  public void AddToCartAirplaneTicket(Principal principal, UUID id) {
-    //      //TODO: should add functionality about the sum of the price and category shows in cart
-    //      User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-//
-    //      Cart cart = user.;
-    //      AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
-//
-    //      //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
-    //      List<AirplaneTicket> cartList = user.getCart().getAirplaneTickets();
-    //      cartList.add(airplaneTicket);
-    //      airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
-    //      cart.setUser(user);
-    //      user.setCart(cart);
-    //      cart.setCount(cart.getCount() + 1);
-    //      cart.setTotalPrice(cart.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
-    //      userRepository.save(user);
-    //      cartRepository.save(cart);
-    //  }
+
+    //TODO:for all these methods should implement counter --when one of the offers is bought
+
+    public void AddToCartAirplaneTicket(Principal principal, UUID id) {
+        //TODO: should add functionality about the sum of the price and category shows in cart
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+
+        assert buyer != null;
+        Cart cartOfBuyer = buyer.getCart();
+        AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
+
+        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+        List<AirplaneTicket> airplaneTicketsListOfBuyer = buyer.getCart().getAirplaneTickets();
+        airplaneTicketsListOfBuyer.add(airplaneTicket);
+        airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
+        cartOfBuyer.setBuyer(buyer);
+//        buyer.setCart(cart);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
+        buyerRepository.save(buyer);
+        cartRepository.save(cartOfBuyer);
+    }
 //
 //    public void AddToCartHotel(Principal principal, UUID id) {
 //        //TODO: should add functionality about the sum of the price and category shows in cart

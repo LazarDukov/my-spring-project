@@ -8,6 +8,7 @@ import com.example.travelseeker.repository.SellerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,43 +28,45 @@ public class ApplicationUserDetailsService implements UserDetailsService {
         this.buyerRepository = buyerRepository;
     }
 
-
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Seller> seller = sellerRepository.findSellerByUsername(username);
-        if (seller.isPresent()) {
-            return mapSeller(seller.get());
-        } else {
-            // If Seller not found, try to find or create Buyer
-            Optional<Buyer> buyer = buyerRepository.findBuyerByUsername(username);
-            return buyer.map(this::mapBuyer).orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " not found!"));
-        }
+
+        return sellerRepository.findSellerByUsername(username).map(this::mapSeller).orElseGet(() ->
+                buyerRepository.findBuyerByUsername(username).map(this::mapBuyer)
+                        .orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!")));
+
     }
 
     private UserDetails mapSeller(Seller seller) {
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(seller.getUsername())
-                .password(seller.getPassword())
-                .authorities(extractGrantedAuthority(seller))
-                .build();
+        return
+                //използваме дефолтната имплементация на Spring
+                org.springframework.security.core.userdetails.User.builder().
+                        username(seller.getUsername()).
+                        password(seller.getPassword()).
+                        authorities(seller.
+                                getRoles().
+                                stream().map(this::map).
+                                toList()).
+                        build();
     }
 
     private UserDetails mapBuyer(Buyer buyer) {
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(buyer.getUsername())
-                .password(buyer.getPassword())
-                .authorities(extractGrantedAuthority(buyer))
-                .build();
+        return
+                //използваме дефолтната имплементация на Spring
+                org.springframework.security.core.userdetails.User.builder().
+                        username(buyer.getUsername()).
+                        password(buyer.getPassword()).
+                        authorities(buyer.
+                                getRoles().
+                                stream().map(this::map).
+                                toList()).
+                        build();
     }
 
-
-    private GrantedAuthority extractGrantedAuthority(Seller seller) {
-        return new SimpleGrantedAuthority("ROLE_" + seller.getRole());
+    //обяснява на Spring какво може да прави юзъра с тази си роля
+    private GrantedAuthority map(UserRole userRole) {
+        return new SimpleGrantedAuthority("ROLE_" +
+                userRole.getRole().name());
     }
-
-    private GrantedAuthority extractGrantedAuthority(Buyer buyer) {
-        return new SimpleGrantedAuthority("ROLE_" + buyer.getRole());
-    }
-
 }

@@ -67,7 +67,7 @@ public class InitService {
 
     }
 
-    //    public void initAdminUsers() {
+//    public void initAdminUsers() {
 //
 //
 //        User userAdmin = new User().setUsername("AdminAdminov")
@@ -84,23 +84,20 @@ public class InitService {
 //    }
     private void initBuyerUsers() {
 
-        UserRole role = userRoleRepository.findUserRoleByRole(BUYER);
 
         Buyer userBuyer = new Buyer();
-        role.addBuyer(userBuyer);
         userBuyer.setUsername("BuyerBuyerov")
                 .setFirstName("Buyer")
                 .setLastName("Buyerov")
                 .setEmail("Buyerov@gmail.com")
                 .setCountry("Afganistan")
                 .setAge(30)
-                .setPassword(passwordEncoder.encode("lazar123"));
+                .setPassword(passwordEncoder.encode("lazar123"))
+                .setRoles(userRoleRepository.findUserRoleByRole(BUYER));
         userBuyer.setCart(cartService.getNewCart());
-        UserRole userRole = userBuyer.getRole();
 
         Cart cart = userBuyer.getCart();
         cart.setBuyer(userBuyer);
-        userRoleRepository.save(role);
         buyersRepository.saveAndFlush(userBuyer);
         cartRepository.save(cart);
     }
@@ -116,9 +113,8 @@ public class InitService {
                 .setEmail("sellerov@gmail.com")
                 .setCountry("Afganistan")
                 .setAge(60)
-                .setPassword(passwordEncoder.encode("lazar123"));
-        //UserRole sellerRole = userRoleRepository.findByRole(SELLER).orElseThrow(() -> new RuntimeException("Seller role not found"));
-        //sellerRole.addSeller(userSeller);
+                .setPassword(passwordEncoder.encode("lazar123"))
+                .setRoles(userRoleRepository.findUserRoleByRole(SELLER));
 
 
         sellerRepository.saveAndFlush(userSeller);

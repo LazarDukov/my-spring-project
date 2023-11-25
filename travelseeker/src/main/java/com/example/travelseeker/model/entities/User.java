@@ -2,6 +2,7 @@ package com.example.travelseeker.model.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -29,9 +30,9 @@ public abstract class User {
     @Column
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    private UserRole role;
+    private List<UserRole> roles;
 
 
     public UUID getId() {
@@ -106,14 +107,12 @@ public abstract class User {
         return this;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public User setRole(UserRole role) {
-        this.role = this.role;
+    public User setRoles(List<UserRole> roles) {
+        this.roles = roles;
         return this;
     }
-
-
 }

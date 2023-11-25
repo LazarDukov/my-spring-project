@@ -3,6 +3,10 @@ package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.EditProfileDTO;
 import com.example.travelseeker.model.dtos.view.UserProfileView;
+import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Buyer;
+import com.example.travelseeker.model.entities.CarRent;
+import com.example.travelseeker.model.entities.Hotel;
 import com.example.travelseeker.service.BuyerService;
 import com.example.travelseeker.service.OffersService;
 import com.example.travelseeker.service.SellerService;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -70,51 +76,52 @@ public class UserController {
 
 
         return "redirect:/users/my-profile";
+    }
+
+    @GetMapping("/my-cart")
+    public String getMyCart(Model model, Principal principal) {
+        Buyer buyer = buyerService.getBuyerByUsername(principal.getName());
+        List<AirplaneTicket> airplaneTicketsInCart = new ArrayList<>(buyer.getCart().getAirplaneTickets());
+        List<CarRent> carRentsInCart = new ArrayList<>(buyer.getCart().getCars());
+        List<Hotel> hotelsInCart = new ArrayList<>(buyer.getCart().getHotels());
+        model.addAttribute("myAirplaneTicketCart", airplaneTicketsInCart);
+        //TODO: should implement the next two rows in the services and point them all by thymeleaf.
+        model.addAttribute("myCarCart", carRentsInCart);
+        model.addAttribute("myHotelCart", hotelsInCart);
+        return "my-cart";
+    }
+
+    //       @GetMapping("/my-orders")
+    //       public String getMyOrders (Principal principal, Model model){
+    //           User user = userService.getUserByName(principal.getName());
+    //           List<AirplaneTicket> usersAirplaneTickets = offersService.getAirplaneTicketsOffers(principal);
 //
-        //       @GetMapping("/my-cart")
-        //       public String getMyCart (Model model, Principal principal){
-        //           User user = userService.getUserByName(principal.getName());
-        //           List<AirplaneTicket> airplaneTicketsInCart = new ArrayList<>(user.getCart().getAirplaneTickets());
-        //           List<CarRent> carRentsInCart = new ArrayList<>(user.getCart().getCars());
-        //           List<Hotel> hotelsInCart = new ArrayList<>(user.getCart().getHotels());
-        //           model.addAttribute("myAirplaneTicketCart", airplaneTicketsInCart);
-        //           //TODO: should implement the next two rows in the services and point them all by thymeleaf.
-        //           model.addAttribute("myCarCart", carRentsInCart);
-        //           model.addAttribute("myHotelCart", hotelsInCart);
-//
-        //           return "my-cart";
-        //       }
-        //       @GetMapping("/my-orders")
-        //       public String getMyOrders (Principal principal, Model model){
-        //           User user = userService.getUserByName(principal.getName());
-        //           List<AirplaneTicket> usersAirplaneTickets = offersService.getAirplaneTicketsOffers(principal);
-//
-        //           model.addAttribute("myAirplaneTicketBought", usersAirplaneTickets);
-        //           //TODO: should implement the next two rows in the services and point them all by thymeleaf.
+    //           model.addAttribute("myAirplaneTicketBought", usersAirplaneTickets);
+    //           //TODO: should implement the next two rows in the services and point them all by thymeleaf.
 ////        model.addAttribute("myCarBought", usersCarRents);
 ////        model.addAttribute("myHotelBought", usersHotels);
 //
-        //           return "my-orders";
-        //       }
-        //       @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
-        //       public String buyAirplaneTicketFromCart (@PathVariable UUID id, Principal principal){
-        //           offersService.buyFromCart(id, principal);
-        //           return "successfully-added";
-        //       }
+    //           return "my-orders";
+    //       }
+  //  @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
+  //  public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
+  //      offersService.buyFromCart(id, principal);
+  //      return "successfully-added";
+  //  }
 //
-        //       @PostMapping("/my-cart/buy-hotel-offer/{id}")
-        //       public String buyHotelFromCart (@PathVariable UUID id, Principal principal){
-        //           offersService.buyFromCart(id, principal);
-        //           return "successfully-added";
-        //       }
+    //       @PostMapping("/my-cart/buy-hotel-offer/{id}")
+    //       public String buyHotelFromCart (@PathVariable UUID id, Principal principal){
+    //           offersService.buyFromCart(id, principal);
+    //           return "successfully-added";
+    //       }
 //
-        //       @PostMapping("/my-cart/buy-car-offer/{id}")
-        //       public String buyCarFromCart (@PathVariable UUID id, Principal principal){
-        //           offersService.buyFromCart(id, principal);
-        //           return "successfully-added";
-        //       }
+    //       @PostMapping("/my-cart/buy-car-offer/{id}")
+    //       public String buyCarFromCart (@PathVariable UUID id, Principal principal){
+    //           offersService.buyFromCart(id, principal);
+    //           return "successfully-added";
+    //       }
 //
-        //   }
-    }
+    //   }
 }
+
 
