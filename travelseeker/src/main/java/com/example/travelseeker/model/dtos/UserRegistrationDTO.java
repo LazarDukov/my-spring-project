@@ -4,6 +4,8 @@ import com.example.travelseeker.model.entities.Cart;
 import com.example.travelseeker.model.entities.UserRole;
 import com.example.travelseeker.model.enums.UserRoleEnum;
 //import com.example.travelseeker.util.validation.UsernameValidatorInterface;
+import com.example.travelseeker.util.validation.EmailValidatorInterface;
+import com.example.travelseeker.util.validation.UsernameValidatorInterface;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
@@ -16,7 +18,7 @@ public class UserRegistrationDTO {
 
     @Size(min = 4, max = 30)
     @NotBlank
-    //@UsernameValidatorInterface(message = "User with this username already exists!")
+    @UsernameValidatorInterface(message = "User with this username already exists!")
     private String username;
     @NotBlank
     @Size(min = 4, max = 30)
@@ -32,6 +34,7 @@ public class UserRegistrationDTO {
     private String lastName;
     @Email
     @NotBlank
+    @EmailValidatorInterface(message = "User with this email already exists!")
     private String email;
 
     private int age;

@@ -12,5 +12,7 @@ import java.util.UUID;
 public interface BuyerRepository extends JpaRepository<Buyer, UUID> {
     Optional<Buyer> findBuyerByUsername(String username);
 
-    Optional<Buyer> findBuyerByEmail(String email);
+    Buyer findFirstByUsername(String username);
+
+    Buyer findFirstByEmail(String email);
 }

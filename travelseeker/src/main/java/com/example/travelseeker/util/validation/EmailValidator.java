@@ -6,31 +6,33 @@ import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.constraints.Email;
+import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UsernameValidator implements ConstraintValidator<UsernameValidatorInterface, String> {
+public class EmailValidator implements ConstraintValidator<EmailValidatorInterface, String> {
 
     private final SellerRepository sellerRepository;
     private final BuyerRepository buyerRepository;
 
 
     @Autowired
-    public UsernameValidator(SellerRepository sellerRepository, BuyerRepository buyerRepository) {
+    public EmailValidator(SellerRepository sellerRepository, BuyerRepository buyerRepository) {
         this.sellerRepository = sellerRepository;
         this.buyerRepository = buyerRepository;
     }
-
+BeanWrapper
     @Override
-    public void initialize(UsernameValidatorInterface constraintAnnotation) {
+    public void initialize(EmailValidatorInterface constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
 
 
-        Seller seller = this.sellerRepository.findFirstByUsername(username);
-        Buyer buyer = this.buyerRepository.findFirstByUsername(username);
+        Seller seller = this.sellerRepository.findFirstByEmail(email);
+        Buyer buyer = this.buyerRepository.findFirstByEmail(email);
         if (seller == null && buyer == null) {
             return true;
         } else {

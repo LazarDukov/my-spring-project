@@ -9,12 +9,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@Constraint(validatedBy = UsernameValidator.class)
-public @interface UsernameValidatorInterface {
-    String message() default "User with this username already exists";
+@Target(ElementType.TYPE)
+@Constraint(validatedBy = PasswordMatchValidator.class)
+public @interface PasswordMatchValidatorInterface {
+    String password();
+
+    String confirmPassword();
+
+    String message() default "Passwords miss match";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
+

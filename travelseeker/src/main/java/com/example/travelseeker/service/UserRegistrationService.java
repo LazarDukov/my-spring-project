@@ -90,31 +90,6 @@ public class UserRegistrationService {
 
     }
 
-    private boolean isUsernameExists(String username) {
-        Optional<Seller> sellerOptional = sellerRepository.findSellerByUsername(username);
-        if (sellerOptional.isPresent()) {
-            return true;
-        }
-        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByUsername(username);
-        if (buyerOptional.isPresent()) {
-            return true;
-        }
-        return false;
-
-    }
-
-    private boolean isEmailExists(String email) {
-        Optional<Seller> sellerOptional = sellerRepository.findSellerByEmail(email);
-        if (sellerOptional.isPresent()) {
-            return true;
-        }
-        Optional<Buyer> buyerOptional = buyerRepository.findBuyerByEmail(email);
-        if (buyerOptional.isPresent()) {
-            return true;
-        }
-        return false;
-
-    }
 
 
 }
