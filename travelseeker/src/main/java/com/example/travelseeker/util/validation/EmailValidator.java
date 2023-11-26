@@ -21,7 +21,7 @@ public class EmailValidator implements ConstraintValidator<EmailValidatorInterfa
         this.sellerRepository = sellerRepository;
         this.buyerRepository = buyerRepository;
     }
-BeanWrapper
+
     @Override
     public void initialize(EmailValidatorInterface constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);

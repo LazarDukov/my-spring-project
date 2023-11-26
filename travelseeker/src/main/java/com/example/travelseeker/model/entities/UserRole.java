@@ -3,7 +3,6 @@ package com.example.travelseeker.model.entities;
 import com.example.travelseeker.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +13,8 @@ public class UserRole extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
-
+    public UserRole() {
+    }
 
     public UserRoleEnum getRole() {
         return role;
@@ -24,5 +24,6 @@ public class UserRole extends BaseEntity {
         this.role = role;
         return this;
     }
+
 
 }

@@ -1,8 +1,6 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.Cart;
+import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,47 +56,47 @@ public class CartService {
         airplaneTicketsListOfBuyer.add(airplaneTicket);
         airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
         cartOfBuyer.setBuyer(buyer);
-//        buyer.setCart(cart);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
     }
-//
-//    public void AddToCartHotel(Principal principal, UUID id) {
-//        //TODO: should add functionality about the sum of the price and category shows in cart
-//        User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-//        Cart cart = user.getCart();
-//        Hotel hotel = hotelRepository.findHotelById(id);
-//
-//        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
-//        List<Hotel> cartList = user.getCart().getHotels();
-//        cartList.add(hotel);
-//        hotel.setAvailable(hotel.getAvailable() - 1);
-//        cart.setUser(user);
-//        cart.setCount(cart.getCount() + 1);
-//        cart.setTotalPrice(cart.getTotalPrice().add(hotel.getPricePerNight()).add(hotel.getPriceBreakfast()).add(hotel.getPriceDinner()).add(hotel.getAllInclusive()));
-//        userRepository.save(user);
-//        cartRepository.save(cart);
-//    }
-//
-//    public void AddToCartCar(Principal principal, UUID id) {
-//        //TODO: should add functionality about the sum of the price and category shows in cart
-//        User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-//        Cart cart = user.getCart();
-//        CarRent car = carRentRepository.findCarRentById(id);
-//
-//        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
-//
-//        List<CarRent> cartList = user.getCart().getCars();
-//        cartList.add(car);
-//        car.setAvailable(car.getAvailable() - 1);
-//        cart.setUser(user);
-//        cart.setCount(cart.getCount() + 1);
-//        cart.setTotalPrice(cart.getTotalPrice().add(car.getPrice().add(car.getInsurance())));
-//        userRepository.save(user);
-//        cartRepository.save(cart);
-//    }
+
+    public void AddToCartHotel(Principal principal, UUID id) {
+        //TODO: should add functionality about the sum of the price and category shows in cart
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        Cart cartOfBuyer = buyer.getCart();
+        Hotel hotel = hotelRepository.findHotelById(id);
+        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+        List<Hotel> cartHotelsListOfBuyer = buyer.getCart().getHotels();
+        cartHotelsListOfBuyer.add(hotel);
+        hotel.setAvailable(hotel.getAvailable() - 1);
+        cartOfBuyer.setBuyer(buyer);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(hotel.getPricePerNight()).add(hotel.getPriceBreakfast()).add(hotel.getPriceDinner()).add(hotel.getAllInclusive()));
+        buyerRepository.save(buyer);
+        cartRepository.save(cartOfBuyer);
+    }
+
+    public void AddToCartCar(Principal principal, UUID id) {
+        //TODO: should add functionality about the sum of the price and category shows in cart
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        Cart cartOfBuyer = buyer.getCart();
+        CarRent car = carRentRepository.findCarRentById(id);
+
+        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+
+        List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
+        carRentCartListOfBuyer.add(car);
+        car.setAvailable(car.getAvailable() - 1);
+        cartOfBuyer.setBuyer(buyer);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice().add(car.getInsurance())));
+        buyerRepository.save(buyer);
+        cartRepository.save(cartOfBuyer);
+    }
 }
+
+
 
 

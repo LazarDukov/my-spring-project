@@ -1,51 +1,46 @@
 package com.example.travelseeker.model.dtos;
 
-import com.example.travelseeker.model.entities.Cart;
-import com.example.travelseeker.model.entities.UserRole;
-import com.example.travelseeker.model.enums.UserRoleEnum;
-//import com.example.travelseeker.util.validation.UsernameValidatorInterface;
 import com.example.travelseeker.util.validation.EmailValidatorInterface;
+import com.example.travelseeker.util.validation.PasswordMatchValidatorInterface;
 import com.example.travelseeker.util.validation.UsernameValidatorInterface;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
+@PasswordMatchValidatorInterface(password = "password", confirmPassword = "confirmPassword")
 public class UserRegistrationDTO {
 
-    @Size(min = 4, max = 30)
-    @NotBlank
+    @Size(min = 4, max = 30, message = "Username should be between 4 and 30 symbols!")
+    @NotBlank(message = "Username cannot be empty!")
     @UsernameValidatorInterface(message = "User with this username already exists!")
     private String username;
-    @NotBlank
-    @Size(min = 4, max = 30)
+
+
+    @Size(min = 4, max = 30, message = "Password should be between 4 and 30 symbols!")
+    @NotBlank(message = "Password cannot be empty!")
     private String password;
-    @NotNull
-    @Size(min = 4, max = 30)
+
     private String confirmPassword;
-    @NotBlank
-    @Size(min = 4, max = 30)
-    private String firstName;
-    @NotBlank
-    @Size(min = 4, max = 30)
-    private String lastName;
+
     @Email
-    @NotBlank
+    @NotBlank(message = "Email cannot be empty!")
     @EmailValidatorInterface(message = "User with this email already exists!")
     private String email;
 
-    private int age;
-    @NotBlank
-    @Size(min = 4, max = 30)
-    private String country;
-
+    @NotBlank(message = "You should select option!")
     @Enumerated(EnumType.STRING)
     private String role;
 
 
+    private String firstName;
+    private String lastName;
+
+
+    private int age;
+
+    private String country;
 
 
     public UserRegistrationDTO() {

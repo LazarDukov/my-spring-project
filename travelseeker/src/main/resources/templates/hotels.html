@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head th:replace="~{fragments/navbar::head}"></head>
 
 <meta charset="UTF-8"/>
@@ -7,29 +8,48 @@
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" href="/css/style.css"/>
 
+
 </head>
-<body class="register">
+
+<body class="airplane-tickets">
 <header>
     <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
 </header>
 
 <main>
     <div class="container bg-blur rounded mt-5 mb-4">
-        <h1>All tickets to buy</h1>
-        <div class="row mt-3 mb-3"
-             th:action="@{/offers/hotels}"
-             th:method="POST"
-        >
-            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Hotel offers:</h3>
-                <div class="mt-3 rounded badge-info"
-                     th:each="hotel: ${allHotels}">
-                    <img class="mr-2" width="50px" height="50px">
-                    <span th:text="|Name: *{hotel.name} Price: *{hotel.pricePerNight} lv|"></span>
-                    <li><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
-                </div>
-            </div>
-        </div>
+        <h1>All hotel offers:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Hotel name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Hotel stars</th>
+                <th>Price per night</th>
+                <th>Show offer</th>
+                <th>Buy</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hotel: ${allHotels}">
+                <td th:text="*{hotel.name}"/>
+                <td th:text="*{hotel.country}"/>
+                <td th:text="*{hotel.city}"/>
+                <td th:text="*{hotel.stars}"/>
+                <td th:text="*{hotel.pricePerNight}"/>
+
+                <td class="button-33"><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${hotel.id})}">Show
+                    offer</a></td>
+                <!-- add in car -->
+                <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${hotel.id})}">Buy</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
     </div>
 </main>
@@ -37,4 +57,5 @@
 
 </main>
 </body>
+
 </html>

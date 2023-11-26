@@ -35,13 +35,31 @@
 
             <p>Password</p>
             <input th:field="*{password}"
-                   th:errorclass="'is-invalid alert-danger'" type="password" name="password"
-                   placeholder="Enter password">
-
-            <p>Confirm password</p>
+                   th:errorclass="'is-invalid alert-danger'"
+                   id="password"
+                   name="password"
+                   type="password"
+                   class="form-control"
+                   placeholder="Password"/>
+            <small th:if="${#fields.hasErrors('password')}"
+                   th:errorclass="error"
+                   th:errors="*{password}"
+                   class="text-danger">
+                Password error!
+            </small>
             <input th:field="*{confirmPassword}"
-                   th:errorclass="'is-invalid alert-danger'" type="password" name="confirmPassword"
-                   placeholder="Enter confirm password">
+                   th:errorclass="'is-invalid alert-danger'"
+                   id="confirmPassword"
+                   name="confirmPassword"
+                   type="password"
+                   class="form-control"
+                   placeholder="Confirm password"/>
+            <small th:if="${#fields.hasErrors('confirmPassword')}"
+                   th:errorclass="error"
+                   th:errors="*{confirmPassword}"
+                   class="text-danger">
+                Confirm password error!
+            </small>
 
 
             <input th:field="*{email}"
@@ -59,9 +77,12 @@
             </small>
             <label for="role">What will you do in our site?</label><br>
             <select name="role" id="role">
+                <option value="" disabled selected hidden>Choose an option</option>
                 <option value="SELLER">SELL</option>
                 <option value="BUYER">BUY</option>
+
             </select><br>
+            <small th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="text-danger"></small>
 
             <br><input type="submit" name="" value="Register">
             <a href="#">You already have an account?</a><br>
