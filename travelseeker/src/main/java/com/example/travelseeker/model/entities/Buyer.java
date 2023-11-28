@@ -12,7 +12,11 @@ public class Buyer extends User {
 
     @OneToOne
     private Cart cart;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "buyer_bought_offers",
+            joinColumns = @JoinColumn(name = "buyer_id"),
+            inverseJoinColumns = @JoinColumn(name = "bought_offer_id"))
     private List<Offers> boughtOffers;
 
     public Buyer() {

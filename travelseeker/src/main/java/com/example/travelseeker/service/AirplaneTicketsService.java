@@ -4,7 +4,6 @@ import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
-
 import com.example.travelseeker.repository.SellerRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +58,8 @@ public class AirplaneTicketsService {
     public List<AirplaneTicket> getAllAirplaneTickets() {
         return new ArrayList<>(airplaneTicketsRepository.findAll());
     }
+
+
 
 
 }

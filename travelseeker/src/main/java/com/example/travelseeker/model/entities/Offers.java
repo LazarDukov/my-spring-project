@@ -1,10 +1,7 @@
 package com.example.travelseeker.model.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +13,10 @@ public class Offers extends BaseEntity {
     @ManyToOne
     private Seller sellerId;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "boughtOffers", cascade = CascadeType.PERSIST)
     private List<Buyer> buyers;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<AirplaneTicket> airplaneTickets;
     @ManyToMany
     private List<Hotel> hotels;

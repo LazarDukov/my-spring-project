@@ -1,11 +1,11 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.Offers;
-import com.example.travelseeker.model.entities.User;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
+import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.OffersRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,32 +18,52 @@ import java.util.UUID;
 public class OffersService {
     private final AirplaneTicketsRepository airplaneTicketsRepository;
     private final OffersRepository offersRepository;
+    private final BuyerRepository buyerRepository;
 
     @Autowired
-    public OffersService(OffersRepository offersRepository, AirplaneTicketsRepository airplaneTicketsRepository, OffersRepository offersRepository1) {
+    public OffersService(AirplaneTicketsRepository airplaneTicketsRepository, OffersRepository offersRepository, BuyerRepository buyerRepository) {
 
         this.airplaneTicketsRepository = airplaneTicketsRepository;
 
-        this.offersRepository = offersRepository1;
+        this.offersRepository = offersRepository;
+        this.buyerRepository = buyerRepository;
     }
 
-//    public List<AirplaneTicket> getAirplaneTicketsOffers(Principal principal) {
-//        User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-//
-//        return airplaneTicketsRepository.findAirplaneTicketByUsersId(user.getId());
-//
-//    }
 
-//    public void buyFromCart(UUID id, Principal principal) {
-//        User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-//        AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
-//        List<AirplaneTicket> usersAirplaneTicketsBought =
-//                user.getOffers().stream().findFirst().map(Offers::getAirplaneTickets).orElse(new ArrayList<>());
-//        usersAirplaneTicketsBought.add(airplaneTicketToBuy);
-//        user.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
-//        airplaneTicketToBuy.getUsers().add(user);
-//        userRepository.save(user);
-//
-//    }
+    public void buyFromCart(UUID id, Principal principal) {
+        // Find the buyer by username
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+
+        if (buyer != null) {
+            // Find the airplane ticket to buy
+            AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
+            // create new instance of Offers
+            Offers offer = new Offers();
+            // adds offer in Offers -> airplane tickets
+            offer.getAirplaneTickets().add(airplaneTicketToBuy);
+            // adds airplane ticket to bought offers of Buyer
+            buyer.getBoughtOffers().add(offer);
+            // remove airplane ticket from cart
+            buyer.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
+            // saving changes in offers with new offer - airplane ticket
+            offersRepository.save(offer);
+            // saving changes in buyer with new added offers of airplane ticket
+            buyerRepository.save(buyer);
+        }
+    }
+
+
+    public List<AirplaneTicket> getAirplaneTicketsForBuyerInOffers(UUID buyerId, List<Offers> offers) {
+        List<AirplaneTicket> airplaneTickets = new ArrayList<>();
+        for (Offers offer : offers) {
+            for (Buyer buyer : offer.getBuyers()) {
+                if (buyer.getId().equals(buyerId)) {
+                    List<AirplaneTicket> offerAirplaneTickets = offer.getAirplaneTickets();
+                    airplaneTickets.addAll(offerAirplaneTickets);
+                }
+            }
+        }
+        return airplaneTickets;
+    }
 }
 

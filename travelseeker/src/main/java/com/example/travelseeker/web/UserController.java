@@ -15,15 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -91,23 +90,26 @@ public class UserController {
         return "my-cart";
     }
 
-    //       @GetMapping("/my-orders")
-    //       public String getMyOrders (Principal principal, Model model){
-    //           User user = userService.getUserByName(principal.getName());
-    //           List<AirplaneTicket> usersAirplaneTickets = offersService.getAirplaneTicketsOffers(principal);
-//
-    //           model.addAttribute("myAirplaneTicketBought", usersAirplaneTickets);
-    //           //TODO: should implement the next two rows in the services and point them all by thymeleaf.
-////        model.addAttribute("myCarBought", usersCarRents);
-////        model.addAttribute("myHotelBought", usersHotels);
-//
-    //           return "my-orders";
-    //       }
-  //  @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
-  //  public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
-  //      offersService.buyFromCart(id, principal);
-  //      return "successfully-added";
-  //  }
+    @GetMapping("/my-orders")
+    public String getMyOrders(Principal principal, Model model) {
+        Buyer buyer = buyerService.getBuyerByUsername(principal.getName());
+        List<AirplaneTicket> buyerAirplaneTickets = buyer.getBoughtOffers()
+                .stream()
+                .flatMap(offers -> offers.getAirplaneTickets().stream())
+                .collect(Collectors.toList());
+        // Get all airplane tickets for the logged-in buyer from the bought offers
+
+        model.addAttribute("myAirplaneTicketBought", buyerAirplaneTickets);
+        // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
+
+        return "my-orders";
+    }
+
+    @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
+    public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCart(id, principal);
+        return "successfully-added";
+    }
 //
     //       @PostMapping("/my-cart/buy-hotel-offer/{id}")
     //       public String buyHotelFromCart (@PathVariable UUID id, Principal principal){
