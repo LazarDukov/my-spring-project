@@ -41,6 +41,8 @@ public class CarRentService {
                 .setInsurance(addCarsDTO.getInsurance())
                 .setSeller(seller)
                 .setAvailable(addCarsDTO.getAvailable());
+        assert seller != null;
+        sellerRepository.save(seller);
         carRentRepository.save(newCarRent);
     }
 

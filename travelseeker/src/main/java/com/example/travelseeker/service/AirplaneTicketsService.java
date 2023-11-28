@@ -2,8 +2,10 @@ package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Offers;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
+import com.example.travelseeker.repository.OffersRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,15 @@ public class AirplaneTicketsService {
     private final AirplaneTicketsRepository airplaneTicketsRepository;
     private final SellerRepository sellerRepository;
 
+    private final OffersRepository offersRepository;
+
 
     @Autowired
-    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository) {
+    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, OffersRepository offersRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.sellerRepository = sellerRepository;
 
+        this.offersRepository = offersRepository;
     }
 
     public AirplaneTicket getAirplaneTicketById(UUID id) {
@@ -40,7 +45,9 @@ public class AirplaneTicketsService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date = dateFormat.parse(addAirplaneTicketsDTO.getDate());
+
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        Offers offers = new Offers();
         AirplaneTicket newAirplaneTicket = new AirplaneTicket()
                 .setCompanyName(addAirplaneTicketsDTO.getCompanyName())
                 .setDate(date)
@@ -51,15 +58,17 @@ public class AirplaneTicketsService {
                 .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
                 .setAvailable(addAirplaneTicketsDTO.getAvailable())
                 .setSeller(seller);
-
+        assert seller != null;
+        offers.getAirplaneTickets().add(newAirplaneTicket);
+        seller.getPublishedOffers().add(offers);
+        offersRepository.save(offers);
+        sellerRepository.save(seller);
         airplaneTicketsRepository.save(newAirplaneTicket);
     }
 
     public List<AirplaneTicket> getAllAirplaneTickets() {
         return new ArrayList<>(airplaneTicketsRepository.findAll());
     }
-
-
 
 
 }

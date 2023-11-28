@@ -10,17 +10,15 @@ import java.util.List;
 @Table(name = "offers")
 public class Offers extends BaseEntity {
 
-    @ManyToOne
-    private Seller sellerId;
 
     @ManyToMany(mappedBy = "boughtOffers", cascade = CascadeType.PERSIST)
     private List<Buyer> buyers;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<AirplaneTicket> airplaneTickets;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Hotel> hotels;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<CarRent> carRents;
 
     public Offers() {
@@ -30,14 +28,7 @@ public class Offers extends BaseEntity {
         this.carRents = new ArrayList<>();
     }
 
-    public Seller getSellerId() {
-        return sellerId;
-    }
 
-    public Offers setSellerId(Seller sellerId) {
-        this.sellerId = sellerId;
-        return this;
-    }
 
     public List<Buyer> getBuyers() {
         return buyers;
