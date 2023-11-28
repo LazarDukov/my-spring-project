@@ -22,7 +22,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -92,11 +91,8 @@ public class UserController {
 
     @GetMapping("/my-orders")
     public String getMyOrders(Principal principal, Model model) {
-        Buyer buyer = buyerService.getBuyerByUsername(principal.getName());
-        List<AirplaneTicket> buyerAirplaneTickets = buyer.getBoughtOffers()
-                .stream()
-                .flatMap(offers -> offers.getAirplaneTickets().stream())
-                .collect(Collectors.toList());
+        List<AirplaneTicket> buyerAirplaneTickets = offersService.getBuyerBoughtAirplaneTickets(principal);
+
         // Get all airplane tickets for the logged-in buyer from the bought offers
 
         model.addAttribute("myAirplaneTicketBought", buyerAirplaneTickets);

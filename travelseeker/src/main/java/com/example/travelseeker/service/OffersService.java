@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OffersService {
@@ -53,17 +53,13 @@ public class OffersService {
     }
 
 
-    public List<AirplaneTicket> getAirplaneTicketsForBuyerInOffers(UUID buyerId, List<Offers> offers) {
-        List<AirplaneTicket> airplaneTickets = new ArrayList<>();
-        for (Offers offer : offers) {
-            for (Buyer buyer : offer.getBuyers()) {
-                if (buyer.getId().equals(buyerId)) {
-                    List<AirplaneTicket> offerAirplaneTickets = offer.getAirplaneTickets();
-                    airplaneTickets.addAll(offerAirplaneTickets);
-                }
-            }
-        }
-        return airplaneTickets;
+    public List<AirplaneTicket> getBuyerBoughtAirplaneTickets(Principal principal) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        assert buyer != null;
+        return buyer.getBoughtOffers()
+                .stream()
+                .flatMap(offers -> offers.getAirplaneTickets().stream())
+                .collect(Collectors.toList());
     }
 }
 
