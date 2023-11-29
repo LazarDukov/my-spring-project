@@ -44,10 +44,10 @@
         <td th:text="*{car.price}"/>
         <td th:text="*{car.insurance}"/>
 
-        <td class="button-33"><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${car.id})}">Show
+        <td class="button-33"><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Show
           offer</a></td>
         <!-- add in car -->
-        <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${car.id})}">Buy</a>
+        <td><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Buy</a>
         </td>
 
       </tr>

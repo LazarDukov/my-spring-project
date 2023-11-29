@@ -1,65 +1,89 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.Offers;
-import com.example.travelseeker.repository.AirplaneTicketsRepository;
-import com.example.travelseeker.repository.BuyerRepository;
-import com.example.travelseeker.repository.OffersRepository;
+import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class OffersService {
     private final AirplaneTicketsRepository airplaneTicketsRepository;
+    private final HotelRepository hotelRepository;
+    private final CarRentRepository carRentRepository;
     private final OffersRepository offersRepository;
     private final BuyerRepository buyerRepository;
+    private final SellerRepository sellerRepository;
 
     @Autowired
-    public OffersService(AirplaneTicketsRepository airplaneTicketsRepository, OffersRepository offersRepository, BuyerRepository buyerRepository) {
+    public OffersService(AirplaneTicketsRepository airplaneTicketsRepository, HotelRepository hotelRepository, CarRentRepository carRentRepository, OffersRepository offersRepository, BuyerRepository buyerRepository, SellerRepository sellerRepository) {
 
         this.airplaneTicketsRepository = airplaneTicketsRepository;
+        this.hotelRepository = hotelRepository;
+        this.carRentRepository = carRentRepository;
 
         this.offersRepository = offersRepository;
         this.buyerRepository = buyerRepository;
+        this.sellerRepository = sellerRepository;
     }
 
 
-    public void buyFromCart(UUID id, Principal principal) {
+    public void buyFromCartAirplaneTickets(UUID id, Principal principal) {
         // Find the buyer by username
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-
         if (buyer != null) {
             // Find the airplane ticket to buy
             AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
-            // create new instance of Offers
-            Offers offer = new Offers();
-            // adds offer in Offers -> airplane tickets
-            offer.getAirplaneTickets().add(airplaneTicketToBuy);
-            // adds airplane ticket to bought offers of Buyer
+            // Find seller of the ticket which will be bought
+            Seller seller = airplaneTicketToBuy.getSeller();
+            // find Offer by given airplane ticket from tickets by his ID
+            Offers offer = offersRepository.findByAirplaneTicketId(airplaneTicketToBuy.getId());
+            // adding offer to bought offers of buyer
             buyer.getBoughtOffers().add(offer);
+            // adding offer to sealed offers of seller
+            seller.getSealedOffers().add(offer);
             // remove airplane ticket from cart
             buyer.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
-            // saving changes in offers with new offer - airplane ticket
-            offersRepository.save(offer);
+            // save the seller with new changes
+            sellerRepository.save(seller);
             // saving changes in buyer with new added offers of airplane ticket
             buyerRepository.save(buyer);
         }
     }
 
-
-    public List<AirplaneTicket> getBuyerBoughtAirplaneTickets(Principal principal) {
+    public void buyFromCartHotels(UUID id, Principal principal) {
+        // Find the buyer by username
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
-                .stream()
-                .flatMap(offers -> offers.getAirplaneTickets().stream())
-                .collect(Collectors.toList());
+
+        if (buyer != null) {
+
+            Hotel hotelToBuy = hotelRepository.findHotelById(id);
+            Seller seller = hotelToBuy.getSeller();
+            Offers offer = offersRepository.findByHotelId(hotelToBuy.getId());
+            buyer.getBoughtOffers().add(offer);
+            seller.getSealedOffers().add(offer);
+            buyer.getCart().getHotels().remove(hotelToBuy);
+            sellerRepository.save(seller);
+            buyerRepository.save(buyer);
+        }
     }
+
+    public void buyFromCartCarRents(UUID id, Principal principal) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        if (buyer != null) {
+            CarRent carRentToBuy = carRentRepository.findCarRentById(id);
+            Offers offer = offersRepository.findByCarRentId(carRentToBuy.getId());
+            Seller seller = carRentToBuy.getSeller();
+            buyer.getBoughtOffers().add(offer);
+            seller.getSealedOffers().add(offer);
+            buyer.getCart().getCars().remove(carRentToBuy);
+            sellerRepository.save(seller);
+            buyerRepository.save(buyer);
+        }
+    }
+
+
 }
 

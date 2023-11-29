@@ -2,9 +2,11 @@ package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.Offers;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
+import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.OffersRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import jakarta.validation.Valid;
@@ -18,19 +20,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AirplaneTicketsService {
     private final AirplaneTicketsRepository airplaneTicketsRepository;
     private final SellerRepository sellerRepository;
-
+    private final BuyerRepository buyerRepository;
     private final OffersRepository offersRepository;
 
 
     @Autowired
-    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, OffersRepository offersRepository) {
+    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository, OffersRepository offersRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.sellerRepository = sellerRepository;
+        this.buyerRepository = buyerRepository;
 
         this.offersRepository = offersRepository;
     }
@@ -48,6 +52,8 @@ public class AirplaneTicketsService {
 
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers offers = new Offers();
+
+
         AirplaneTicket newAirplaneTicket = new AirplaneTicket()
                 .setCompanyName(addAirplaneTicketsDTO.getCompanyName())
                 .setDate(date)
@@ -58,8 +64,10 @@ public class AirplaneTicketsService {
                 .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
                 .setAvailable(addAirplaneTicketsDTO.getAvailable())
                 .setSeller(seller);
-        assert seller != null;
+
         offers.getAirplaneTickets().add(newAirplaneTicket);
+        offers.setSeller(seller);
+        assert seller != null;
         seller.getPublishedOffers().add(offers);
         offersRepository.save(offers);
         sellerRepository.save(seller);
@@ -70,5 +78,13 @@ public class AirplaneTicketsService {
         return new ArrayList<>(airplaneTicketsRepository.findAll());
     }
 
+    public List<AirplaneTicket> getBuyerBoughtAirplaneTickets(Principal principal) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        assert buyer != null;
+        return buyer.getBoughtOffers()
+                .stream()
+                .flatMap(offers -> offers.getAirplaneTickets().stream())
+                .collect(Collectors.toList());
+    }
 
 }

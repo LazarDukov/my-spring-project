@@ -41,10 +41,10 @@
                 <td th:text="*{hotel.stars}"/>
                 <td th:text="*{hotel.pricePerNight}"/>
 
-                <td class="button-33"><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${hotel.id})}">Show
+                <td class="button-33"><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Show
                     offer</a></td>
                 <!-- add in car -->
-                <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${hotel.id})}">Buy</a>
+                <td><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Buy</a>
                 </td>
 
             </tr>

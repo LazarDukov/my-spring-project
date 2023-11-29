@@ -7,10 +7,8 @@ import com.example.travelseeker.model.entities.AirplaneTicket;
 import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.model.entities.Hotel;
-import com.example.travelseeker.service.BuyerService;
-import com.example.travelseeker.service.OffersService;
-import com.example.travelseeker.service.SellerService;
-import com.example.travelseeker.service.UserService;
+import com.example.travelseeker.repository.HotelRepository;
+import com.example.travelseeker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,15 +32,23 @@ public class UserController {
 
 
     private final OffersService offersService;
+    private final AirplaneTicketsService airplaneTicketsService;
+    private final HotelService hotelService;
+    private final CarRentService carRentService;
 
     @Autowired
     public UserController(SellerService sellerService, BuyerService buyerService,
-                          UserService userService, OffersService offersService) {
+                          UserService userService, OffersService offersService, HotelRepository hotelRepository, AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService) {
         this.sellerService = sellerService;
         this.buyerService = buyerService;
         this.userService = userService;
 
         this.offersService = offersService;
+        this.airplaneTicketsService = airplaneTicketsService;
+
+        this.hotelService = hotelService;
+
+        this.carRentService = carRentService;
     }
 
 
@@ -91,11 +97,14 @@ public class UserController {
 
     @GetMapping("/my-orders")
     public String getMyOrders(Principal principal, Model model) {
-        List<AirplaneTicket> buyerAirplaneTickets = offersService.getBuyerBoughtAirplaneTickets(principal);
-
+        List<AirplaneTicket> buyerAirplaneTickets = airplaneTicketsService.getBuyerBoughtAirplaneTickets(principal);
+        List<Hotel> buyerHotels = hotelService.getBuyerBoughtHotels(principal);
+        List<CarRent> buyerCarRents = carRentService.getBuyerCarRents(principal);
         // Get all airplane tickets for the logged-in buyer from the bought offers
 
         model.addAttribute("myAirplaneTicketBought", buyerAirplaneTickets);
+        model.addAttribute("myHotelBought", buyerHotels);
+        model.addAttribute("myCarRentBought", buyerCarRents);
         // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
 
         return "my-orders";
@@ -103,23 +112,23 @@ public class UserController {
 
     @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
     public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
-        offersService.buyFromCart(id, principal);
+        offersService.buyFromCartAirplaneTickets(id, principal);
         return "successfully-added";
     }
-//
-    //       @PostMapping("/my-cart/buy-hotel-offer/{id}")
-    //       public String buyHotelFromCart (@PathVariable UUID id, Principal principal){
-    //           offersService.buyFromCart(id, principal);
-    //           return "successfully-added";
-    //       }
-//
-    //       @PostMapping("/my-cart/buy-car-offer/{id}")
-    //       public String buyCarFromCart (@PathVariable UUID id, Principal principal){
-    //           offersService.buyFromCart(id, principal);
-    //           return "successfully-added";
-    //       }
-//
-    //   }
+
+    @PostMapping("/my-cart/buy-hotel-offer/{id}")
+    public String buyHotelFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCartHotels(id, principal);
+        return "successfully-added";
+    }
+
+    @PostMapping("/my-cart/buy-car-offer/{id}")
+    public String buyCarRentFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCartCarRents(id, principal);
+        return "successfully-added";
+    }
+
 }
+
 
 
