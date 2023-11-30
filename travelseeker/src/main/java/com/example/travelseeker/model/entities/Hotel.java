@@ -49,7 +49,8 @@ public class Hotel extends BaseEntity {
     @Column
     private int available;
 
-
+    @Column
+    private int soldNumber;
     public Hotel() {
     }
 
@@ -158,6 +159,15 @@ public class Hotel extends BaseEntity {
 
     public Hotel setAllInclusive(BigDecimal allInclusive) {
         this.allInclusive = allInclusive;
+        return this;
+    }
+
+    public int getSoldNumber() {
+        return soldNumber;
+    }
+
+    public Hotel setSoldNumber(int soldNumber) {
+        this.soldNumber = soldNumber;
         return this;
     }
 

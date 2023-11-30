@@ -63,7 +63,7 @@ public class AirplaneTicketsService {
                 .setPrice(addAirplaneTicketsDTO.getPrice())
                 .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
                 .setAvailable(addAirplaneTicketsDTO.getAvailable())
-                .setSeller(seller);
+                .setSeller(seller).setSoldNumber(0);
 
         offers.getAirplaneTickets().add(newAirplaneTicket);
         offers.setSeller(seller);

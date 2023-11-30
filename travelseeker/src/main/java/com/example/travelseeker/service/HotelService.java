@@ -48,7 +48,8 @@ public class HotelService {
                 .setPriceBreakfast(addHotelsDTO.getPriceBreakfast())
                 .setPriceDinner(addHotelsDTO.getPriceDinner())
                 .setSeller(seller)
-                .setAllInclusive(addHotelsDTO.getAllInclusive());
+                .setAllInclusive(addHotelsDTO.getAllInclusive())
+                .setSeller(seller).setSoldNumber(0);
         assert seller != null;
         hotelOffers.getHotels().add(newHotel);
         hotelOffers.setSeller(seller);

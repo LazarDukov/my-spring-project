@@ -6,6 +6,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,11 @@ public class Seller extends User {
         this.publishedOffers = new ArrayList<>();
         this.sealedOffers = new ArrayList<>();
     }
+
+    // Additional method to get the number of times an offer has been sold by the seller
+   // public int getTimesOfferSold(Offers offer) {
+   //     return Collections.frequency(sealedOffers, offer);
+   // }
 
     public List<Offers> getPublishedOffers() {
         return publishedOffers;

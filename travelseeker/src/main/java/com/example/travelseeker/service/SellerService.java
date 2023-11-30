@@ -4,6 +4,8 @@ import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.SellerRepository;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
 @Service
 public class SellerService {
     private final SellerRepository sellerRepository;
@@ -16,4 +18,7 @@ public class SellerService {
         return sellerRepository.findSellerByUsername(username).orElse(null);
 
     }
+
+
+
 }

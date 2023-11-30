@@ -54,7 +54,7 @@ public class CartService {
         //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<AirplaneTicket> airplaneTicketsListOfBuyer = buyer.getCart().getAirplaneTickets();
         airplaneTicketsListOfBuyer.add(airplaneTicket);
-        airplaneTicket.setAvailable(airplaneTicket.getAvailable() - 1);
+
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
@@ -70,7 +70,6 @@ public class CartService {
         //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<Hotel> cartHotelsListOfBuyer = buyer.getCart().getHotels();
         cartHotelsListOfBuyer.add(hotel);
-        hotel.setAvailable(hotel.getAvailable() - 1);
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(hotel.getPricePerNight()).add(hotel.getPriceBreakfast()).add(hotel.getPriceDinner()).add(hotel.getAllInclusive()));
@@ -88,7 +87,6 @@ public class CartService {
 
         List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
         carRentCartListOfBuyer.add(car);
-        car.setAvailable(car.getAvailable() - 1);
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice().add(car.getInsurance())));

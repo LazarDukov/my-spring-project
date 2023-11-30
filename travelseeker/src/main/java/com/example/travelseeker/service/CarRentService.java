@@ -50,7 +50,8 @@ public class CarRentService {
                 .setFuelType(addCarsDTO.getFuelType()).setPrice(addCarsDTO.getPrice())
                 .setInsurance(addCarsDTO.getInsurance())
                 .setSeller(seller)
-                .setAvailable(addCarsDTO.getAvailable());
+                .setAvailable(addCarsDTO.getAvailable())
+                .setSeller(seller).setSoldNumber(0);;
         carRentOffers.getCarRents().add(newCarRent);
         carRentOffers.setSeller(seller);
         assert seller != null;

@@ -37,6 +37,9 @@ public class AirplaneTicket extends BaseEntity {
     @Column
     private int available;
 
+    @Column
+    private int soldNumber;
+
     public AirplaneTicket() {
     }
 
@@ -121,5 +124,12 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
+    public int getSoldNumber() {
+        return soldNumber;
+    }
 
+    public AirplaneTicket setSoldNumber(int soldNumber) {
+        this.soldNumber = soldNumber;
+        return this;
+    }
 }

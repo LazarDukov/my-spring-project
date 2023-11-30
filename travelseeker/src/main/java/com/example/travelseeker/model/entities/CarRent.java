@@ -37,8 +37,19 @@ public class CarRent extends BaseEntity {
     @Column
     private int available;
 
+    @Column
+    private int soldNumber;
 
     public CarRent() {
+    }
+
+    public int getSoldNumber() {
+        return soldNumber;
+    }
+
+    public CarRent setSoldNumber(int soldNumber) {
+        this.soldNumber = soldNumber;
+        return this;
     }
 
     public Seller getSeller() {
