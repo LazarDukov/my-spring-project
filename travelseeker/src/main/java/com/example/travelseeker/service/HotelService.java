@@ -1,10 +1,7 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddHotelsDTO;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.Hotel;
-import com.example.travelseeker.model.entities.Offers;
-import com.example.travelseeker.model.entities.Seller;
+import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.HotelRepository;
 import com.example.travelseeker.repository.OffersRepository;
@@ -49,11 +46,11 @@ public class HotelService {
                 .setPriceDinner(addHotelsDTO.getPriceDinner())
                 .setSeller(seller)
                 .setAllInclusive(addHotelsDTO.getAllInclusive())
-                .setSeller(seller).setSoldNumber(0);
+                .setAvailable(addHotelsDTO.getAvailable()).setSoldNumber(0);
         assert seller != null;
         hotelOffers.getHotels().add(newHotel);
         hotelOffers.setSeller(seller);
-        seller.getPublishedOffers().add(hotelOffers);
+        // seller.getPublishedOffers().add(hotelOffers);
         offersRepository.save(hotelOffers);
         sellerRepository.save(seller);
         hotelRepository.save(newHotel);
@@ -70,5 +67,15 @@ public class HotelService {
         return new ArrayList<>(hotelRepository.findAll());
     }
 
+    public void removePublishedHotel(Principal principal, UUID id) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
 
+        if (seller != null) {
+
+            Hotel hotel = hotelRepository.findHotelById(id);
+            hotel.setAvailable(0);
+            hotelRepository.save(hotel);
+            // Handle the case where the seller or ticket is not found
+        }
+    }
 }

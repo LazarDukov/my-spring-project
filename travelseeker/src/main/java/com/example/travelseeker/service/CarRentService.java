@@ -1,10 +1,7 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddCarsDTO;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.CarRent;
-import com.example.travelseeker.model.entities.Offers;
-import com.example.travelseeker.model.entities.Seller;
+import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.CarRentRepository;
 import com.example.travelseeker.repository.OffersRepository;
@@ -51,11 +48,12 @@ public class CarRentService {
                 .setInsurance(addCarsDTO.getInsurance())
                 .setSeller(seller)
                 .setAvailable(addCarsDTO.getAvailable())
-                .setSeller(seller).setSoldNumber(0);;
+                .setSeller(seller).setSoldNumber(0);
+        ;
         carRentOffers.getCarRents().add(newCarRent);
         carRentOffers.setSeller(seller);
         assert seller != null;
-        seller.getPublishedOffers().add(carRentOffers);
+        // seller.getPublishedOffers().add(carRentOffers);
         offersRepository.save(carRentOffers);
         sellerRepository.save(seller);
         carRentRepository.save(newCarRent);
@@ -68,5 +66,15 @@ public class CarRentService {
     }
 
 
+    public void removePublishedCarRent(Principal principal, UUID id) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
 
+        if (seller != null) {
+
+            CarRent carRent = carRentRepository.findCarRentById(id);
+            carRent.setAvailable(0);
+            carRentRepository.save(carRent);
+            // Handle the case where the seller or ticket is not found
+        }
+    }
 }

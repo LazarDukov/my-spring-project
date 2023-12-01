@@ -63,7 +63,6 @@ public class AirplaneTicketsService {
         offers.getAirplaneTickets().add(newAirplaneTicket);
         offers.setSeller(seller);
         assert seller != null;
-        seller.getPublishedOffers().add(offers);
         offersRepository.save(offers);
         sellerRepository.save(seller);
         airplaneTicketsRepository.save(newAirplaneTicket);
@@ -77,44 +76,28 @@ public class AirplaneTicketsService {
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
 
         if (seller != null) {
-            List<Offers> publishedOffers = seller.getPublishedOffers();
 
-            for (Offers offer : publishedOffers) {
-                List<AirplaneTicket> airplaneTickets = offer.getAirplaneTickets();
-
-                Optional<AirplaneTicket> ticketToRemove = airplaneTickets.stream()
-                        .filter(ticket -> ticket.getId().equals(id))
-                        .findFirst();
-
-                if (ticketToRemove.isPresent()) {
-                    // Remove the offer reference from the AirplaneTicket
-                    ticketToRemove.get().getOffers().remove(offer);
-
-
-                    // Update the seller and offer in the repositories
-                    sellerRepository.save(seller);
-                    offersRepository.save(offer);
-
-                    return; // Exit the loop once the ticket is removed
-                }
-            }
+            AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
+            airplaneTicket.setAvailable(0);
+            airplaneTicketsRepository.save(airplaneTicket);
+            // Handle the case where the seller or ticket is not found
         }
-        // Handle the case where the seller or ticket is not found
+        // List<Offers> offers = seller.getPublishedOffers();
+        // boolean removed = false;
+        // for (Offers offer : offers) {
+        //     for (AirplaneTicket airplaneTicket : offer.getAirplaneTickets()) {
+        //         if (airplaneTicket.getId().equals(id)) {
+        //             airplaneTicket.setAvailable(0);
+        //             seller.getPublishedOffers().remove(offer);
+        //             removed = true;
+        //         }
+        //     }
+        //     if (removed) {
+        //         break;
+        //     }
+        // }
+
+
     }
-    // List<Offers> offers = seller.getPublishedOffers();
-    // boolean removed = false;
-    // for (Offers offer : offers) {
-    //     for (AirplaneTicket airplaneTicket : offer.getAirplaneTickets()) {
-    //         if (airplaneTicket.getId().equals(id)) {
-    //             airplaneTicket.setAvailable(0);
-    //             seller.getPublishedOffers().remove(offer);
-    //             removed = true;
-    //         }
-    //     }
-    //     if (removed) {
-    //         break;
-    //     }
-    // }
-
-
 }
+

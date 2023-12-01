@@ -10,13 +10,7 @@ import java.util.List;
 @Table(name = "sellers")
 @DiscriminatorValue("SELLER")
 public class Seller extends User {
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "seller_published_offers",
-            joinColumns = @JoinColumn(name = "seller_id"),
-            inverseJoinColumns = @JoinColumn(name = "published_offer_id")
-    )
-    private List<Offers> publishedOffers;
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -28,7 +22,7 @@ public class Seller extends User {
 
     public Seller() {
         super();
-        this.publishedOffers = new ArrayList<>();
+
         this.sealedOffers = new ArrayList<>();
     }
 
@@ -37,14 +31,9 @@ public class Seller extends User {
    //     return Collections.frequency(sealedOffers, offer);
    // }
 
-    public List<Offers> getPublishedOffers() {
-        return publishedOffers;
-    }
 
-    public Seller setPublishedOffers(List<Offers> publishedOffers) {
-        this.publishedOffers = publishedOffers;
-        return this;
-    }
+
+
 
     public List<Offers> getSealedOffers() {
         return sealedOffers;

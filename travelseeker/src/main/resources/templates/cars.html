@@ -28,6 +28,7 @@
         <th>Fuel type</th>
         <th>Price</th>
         <th>Insurance price</th>
+        <th>Available</th>
         <th>Show offer</th>
         <th>Buy</th>
 
@@ -43,13 +44,22 @@
         <td th:text="*{car.fuelType}"/>
         <td th:text="*{car.price}"/>
         <td th:text="*{car.insurance}"/>
+        <td>
+          <span th:if="${car.available != 0}" th:text="${car.available}"/>
+          <span th:if="${car.available == 0}">Sold Out</span>
+        </td>
 
         <td class="button-33"><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Show
           offer</a></td>
         <!-- add in car -->
         <td><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Buy</a>
         </td>
-
+        <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+          <form th:method="post" th:action="@{/offers/remove-car-rent/{id}(id=${car.id})}">
+            <input type="hidden" name="carId" th:value="${car.id}"/>
+            <button type="submit">Remove</button>
+          </form>
+        </td>
       </tr>
       </tbody>
     </table>

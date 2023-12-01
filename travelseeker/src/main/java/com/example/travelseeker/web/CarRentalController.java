@@ -68,5 +68,10 @@ public class CarRentalController {
         carRentService.addNewCar(addCarsDTO, principal);
         return "successfully-added";
     }
+    @PostMapping("/remove-car-rent/{id}")
+    public String removeCar(Principal principal,@PathVariable UUID id) {
+        carRentService.removePublishedCarRent(principal, id);
+        return "removed";
+    }
 
 }
