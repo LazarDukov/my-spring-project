@@ -2,7 +2,6 @@ package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
 import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.Offers;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
@@ -16,11 +15,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class AirplaneTicketsService {
@@ -78,13 +73,48 @@ public class AirplaneTicketsService {
         return new ArrayList<>(airplaneTicketsRepository.findAll());
     }
 
-    public List<AirplaneTicket> getBuyerBoughtAirplaneTickets(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
-                .stream()
-                .flatMap(offers -> offers.getAirplaneTickets().stream())
-                .collect(Collectors.toList());
+    public void removePublishedAirplaneTicket(Principal principal, UUID id) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+
+        if (seller != null) {
+            List<Offers> publishedOffers = seller.getPublishedOffers();
+
+            for (Offers offer : publishedOffers) {
+                List<AirplaneTicket> airplaneTickets = offer.getAirplaneTickets();
+
+                Optional<AirplaneTicket> ticketToRemove = airplaneTickets.stream()
+                        .filter(ticket -> ticket.getId().equals(id))
+                        .findFirst();
+
+                if (ticketToRemove.isPresent()) {
+                    // Remove the offer reference from the AirplaneTicket
+                    ticketToRemove.get().getOffers().remove(offer);
+
+
+                    // Update the seller and offer in the repositories
+                    sellerRepository.save(seller);
+                    offersRepository.save(offer);
+
+                    return; // Exit the loop once the ticket is removed
+                }
+            }
+        }
+        // Handle the case where the seller or ticket is not found
     }
+    // List<Offers> offers = seller.getPublishedOffers();
+    // boolean removed = false;
+    // for (Offers offer : offers) {
+    //     for (AirplaneTicket airplaneTicket : offer.getAirplaneTickets()) {
+    //         if (airplaneTicket.getId().equals(id)) {
+    //             airplaneTicket.setAvailable(0);
+    //             seller.getPublishedOffers().remove(offer);
+    //             removed = true;
+    //         }
+    //     }
+    //     if (removed) {
+    //         break;
+    //     }
+    // }
+
 
 }

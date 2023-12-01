@@ -37,7 +37,7 @@ public class OffersService {
             // Find the airplane ticket to buy
             AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
             // Find seller of the ticket which will be bought
-          //  Seller seller = airplaneTicketToBuy.getSeller();
+            Seller seller = airplaneTicketToBuy.getSeller();
             // find Offer by given airplane ticket from tickets by his ID
             Offers offer = offersRepository.findByAirplaneTicketId(airplaneTicketToBuy.getId());
 
@@ -57,7 +57,7 @@ public class OffersService {
             // adding offer to bought offers of buyer
             buyer.getBoughtOffers().add(offer);
             //     adding offer to sealed offers of seller
-           // seller.getSealedOffers().add(offer);
+            seller.getSealedOffers().add(offer);
 
 
             // remove airplane ticket from cart

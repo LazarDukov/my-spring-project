@@ -51,6 +51,9 @@ public class Hotel extends BaseEntity {
 
     @Column
     private int soldNumber;
+
+    @ManyToMany(mappedBy = "hotels", cascade = CascadeType.PERSIST)
+    private List<Offers> offers;
     public Hotel() {
     }
 
@@ -180,5 +183,12 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
+    public List<Offers> getOffers() {
+        return offers;
+    }
 
+    public Hotel setOffers(List<Offers> offers) {
+        this.offers = offers;
+        return this;
+    }
 }

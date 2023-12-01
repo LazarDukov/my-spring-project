@@ -97,9 +97,9 @@ public class UserController {
 
     @GetMapping("/my-orders")
     public String getMyOrders(Principal principal, Model model) {
-        List<AirplaneTicket> buyerAirplaneTickets = airplaneTicketsService.getBuyerBoughtAirplaneTickets(principal);
-        List<Hotel> buyerHotels = hotelService.getBuyerBoughtHotels(principal);
-        List<CarRent> buyerCarRents = carRentService.getBuyerCarRents(principal);
+        List<AirplaneTicket> buyerAirplaneTickets = buyerService.getBuyerBoughtAirplaneTickets(principal);
+        List<Hotel> buyerHotels = buyerService.getBuyerBoughtHotels(principal);
+        List<CarRent> buyerCarRents = buyerService.getBuyerCarRents(principal);
         // Get all airplane tickets for the logged-in buyer from the bought offers
 
         model.addAttribute("myAirplaneTicketBought", buyerAirplaneTickets);

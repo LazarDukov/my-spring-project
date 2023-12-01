@@ -70,12 +70,5 @@ public class HotelService {
         return new ArrayList<>(hotelRepository.findAll());
     }
 
-    public List<Hotel> getBuyerBoughtHotels(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
-                .stream()
-                .flatMap(offer -> offer.getHotels().stream())
-                .collect(Collectors.toList());
-    }
+
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "airplane_tickets")
@@ -39,6 +40,9 @@ public class AirplaneTicket extends BaseEntity {
 
     @Column
     private int soldNumber;
+
+    @ManyToMany(mappedBy = "airplaneTickets", cascade = CascadeType.PERSIST)
+    private List<Offers> offers;
 
     public AirplaneTicket() {
     }
@@ -130,6 +134,15 @@ public class AirplaneTicket extends BaseEntity {
 
     public AirplaneTicket setSoldNumber(int soldNumber) {
         this.soldNumber = soldNumber;
+        return this;
+    }
+
+    public List<Offers> getOffers() {
+        return offers;
+    }
+
+    public AirplaneTicket setOffers(List<Offers> offers) {
+        this.offers = offers;
         return this;
     }
 }

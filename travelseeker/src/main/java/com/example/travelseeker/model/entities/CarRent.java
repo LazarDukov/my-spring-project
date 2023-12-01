@@ -40,6 +40,10 @@ public class CarRent extends BaseEntity {
     @Column
     private int soldNumber;
 
+    @ManyToMany(mappedBy = "carRents", cascade = CascadeType.PERSIST)
+    private List<Offers> offers;
+
+
     public CarRent() {
     }
 
@@ -124,5 +128,12 @@ public class CarRent extends BaseEntity {
         return this;
     }
 
+    public List<Offers> getOffers() {
+        return offers;
+    }
 
+    public CarRent setOffers(List<Offers> offers) {
+        this.offers = offers;
+        return this;
+    }
 }

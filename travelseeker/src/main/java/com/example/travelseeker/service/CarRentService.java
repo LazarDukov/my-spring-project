@@ -68,12 +68,5 @@ public class CarRentService {
     }
 
 
-    public List<CarRent> getBuyerCarRents(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
-                .stream()
-                .flatMap(offer -> offer.getCarRents().stream())
-                .collect(Collectors.toList());
-    }
+
 }

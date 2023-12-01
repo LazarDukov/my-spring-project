@@ -1,5 +1,7 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Offers;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.SellerRepository;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class SellerService {
         return sellerRepository.findSellerByUsername(username).orElse(null);
 
     }
+
 
 
 

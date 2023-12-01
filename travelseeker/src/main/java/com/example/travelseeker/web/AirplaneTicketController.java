@@ -73,4 +73,10 @@ public class AirplaneTicketController {
         airplaneTicketsService.addNewAirplaneTicket(addAirplaneTicketsDTO, principal);
         return "successfully-added";
     }
+
+        @PostMapping("/remove-airplane-ticket/{id}")
+        public String removeAirplaneTicket(Principal principal,@PathVariable UUID id) {
+            airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
+            return "removed";
+        }
 }

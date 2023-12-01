@@ -1,9 +1,6 @@
 package com.example.travelseeker.model.entities;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,10 +10,20 @@ import java.util.List;
 @Table(name = "sellers")
 @DiscriminatorValue("SELLER")
 public class Seller extends User {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "seller_published_offers",
+            joinColumns = @JoinColumn(name = "seller_id"),
+            inverseJoinColumns = @JoinColumn(name = "published_offer_id")
+    )
     private List<Offers> publishedOffers;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "seller_sealed_offers",
+            joinColumns = @JoinColumn(name = "seller_id"),
+            inverseJoinColumns = @JoinColumn(name = "sealed_offer_id")
+    )
     private List<Offers> sealedOffers;
 
     public Seller() {
