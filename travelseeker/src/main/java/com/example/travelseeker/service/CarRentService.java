@@ -77,4 +77,11 @@ public class CarRentService {
             // Handle the case where the seller or ticket is not found
         }
     }
+
+    public List<CarRent> getAllAvailableCarsRentOfSeller(Principal principal, int available) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        assert seller != null;
+        return carRentRepository
+                .findCarRentsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
+    }
 }

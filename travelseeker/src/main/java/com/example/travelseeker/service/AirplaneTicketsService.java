@@ -15,7 +15,10 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AirplaneTicketsService {
@@ -98,6 +101,13 @@ public class AirplaneTicketsService {
         // }
 
 
+    }
+
+    public List<AirplaneTicket> getAllAvailableAirplaneTicketsOfSeller(Principal principal, int available) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        assert seller != null;
+        return airplaneTicketsRepository
+                .findAirplaneTicketsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
     }
 }
 

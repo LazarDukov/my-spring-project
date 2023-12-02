@@ -14,9 +14,6 @@ import java.util.UUID;
 public interface OffersRepository extends JpaRepository<Offers, UUID> {
 
 
-    @Modifying
-    @Query(value = "ALTER TABLE sellers_sealed_offers ADD COLUMN counter VARCHAR(255)", nativeQuery = true)
-    void addNewColumn();
 
     @Query("SELECT o FROM Offers o JOIN o.airplaneTickets t WHERE t.id = :id")
     Offers findByAirplaneTicketId(@Param("id") UUID id);
@@ -26,6 +23,7 @@ public interface OffersRepository extends JpaRepository<Offers, UUID> {
 
     @Query("SELECT o FROM Offers o JOIN o.carRents c WHERE c.id = :id")
     Offers findByCarRentId(@Param("id") UUID id);
+
 
 
 }

@@ -3,10 +3,7 @@ package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.EditProfileDTO;
 import com.example.travelseeker.model.dtos.view.UserProfileView;
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.CarRent;
-import com.example.travelseeker.model.entities.Hotel;
+import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.HotelRepository;
 import com.example.travelseeker.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +79,7 @@ public class UserController {
         return "redirect:/users/my-profile";
     }
 
-    @GetMapping("/my-cart")
+    @GetMapping("/cart")
     public String getMyCart(Model model, Principal principal) {
         Buyer buyer = buyerService.getBuyerByUsername(principal.getName());
         List<AirplaneTicket> airplaneTicketsInCart = new ArrayList<>(buyer.getCart().getAirplaneTickets());
@@ -92,10 +89,24 @@ public class UserController {
         //TODO: should implement the next two rows in the services and point them all by thymeleaf.
         model.addAttribute("myCarCart", carRentsInCart);
         model.addAttribute("myHotelCart", hotelsInCart);
-        return "my-cart";
+        return "cart";
     }
 
-    @GetMapping("/my-orders")
+    @GetMapping("/published-offers")
+    public String getMyPublishedOffers(Model model, Principal principal) {
+        List<AirplaneTicket> airplaneTicketsPublished =
+                airplaneTicketsService.getAllAvailableAirplaneTicketsOfSeller(principal, 0);
+        List<Hotel> hotelsPublished =
+                hotelService.getAllAvailableHotelsOfSeller(principal, 0);
+        List<CarRent> rentCarPublished =
+                carRentService.getAllAvailableCarsRentOfSeller(principal, 0);
+        model.addAttribute("myPublishedAirplaneTickets", airplaneTicketsPublished);
+        model.addAttribute("myPublishedHotels", hotelsPublished);
+        model.addAttribute("myPublishedCarRents", rentCarPublished);
+        return "published-offers";
+    }
+
+    @GetMapping("/orders")
     public String getMyOrders(Principal principal, Model model) {
         List<AirplaneTicket> buyerAirplaneTickets = buyerService.getBuyerBoughtAirplaneTickets(principal);
         List<Hotel> buyerHotels = buyerService.getBuyerBoughtHotels(principal);
@@ -107,22 +118,38 @@ public class UserController {
         model.addAttribute("myCarRentBought", buyerCarRents);
         // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
 
-        return "my-orders";
+        return "orders";
     }
 
-    @PostMapping("/my-cart/buy-airplane-ticket-offer/{id}")
+    @GetMapping("/sold-offers")
+    public String getMySoldOffers(Principal principal, Model model) {
+        Seller seller = sellerService.getSellerByUsername(principal.getName());
+        List<AirplaneTicket> airplaneTicketsSold = sellerService.getSellerSoldAirplaneTickets(seller);
+        List<Hotel> hotelsSold = sellerService.getSellerSoldHotels(seller);
+        List<CarRent> carRentsSold = sellerService.getSellerSoldCarRents(seller);
+        // Get all airplane tickets for the logged-in buyer from the bought offers
+
+        model.addAttribute("airplaneTicketsSold", airplaneTicketsSold);
+        model.addAttribute("hotelsSold", hotelsSold);
+        model.addAttribute("carRentsSold", carRentsSold);
+        // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
+
+        return "sold-offers ";
+    }
+
+    @PostMapping("/cart/buy-airplane-ticket-offer/{id}")
     public String buyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartAirplaneTickets(id, principal);
         return "successfully-added";
     }
 
-    @PostMapping("/my-cart/buy-hotel-offer/{id}")
+    @PostMapping("/cart/buy-hotel-offer/{id}")
     public String buyHotelFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartHotels(id, principal);
         return "successfully-added";
     }
 
-    @PostMapping("/my-cart/buy-car-offer/{id}")
+    @PostMapping("/cart/buy-car-offer/{id}")
     public String buyCarRentFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartCarRents(id, principal);
         return "successfully-added";

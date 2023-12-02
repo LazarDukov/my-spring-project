@@ -78,4 +78,11 @@ public class HotelService {
             // Handle the case where the seller or ticket is not found
         }
     }
+
+    public List<Hotel> getAllAvailableHotelsOfSeller(Principal principal, int available) {
+        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        assert seller != null;
+        return hotelRepository
+                .findHotelsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
+    }
 }
