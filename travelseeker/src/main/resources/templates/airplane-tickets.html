@@ -31,7 +31,7 @@
                 <th>Available</th>
                 <th>Show offer</th>
                 <th>Buy</th>
-                <th>Remove</th>
+                <th th:if="${#authorization.expression('hasRole(''SELLER'')')}">Remove</th>
 
             </tr>
             </thead>
@@ -48,9 +48,8 @@
                     <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
                 </td>
 
-                <td class="button-33"><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show
+                <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show
                     offer</a></td>
-                <!-- add in car -->
                 <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Buy</a>
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
                     <form th:method="post" th:action="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}">

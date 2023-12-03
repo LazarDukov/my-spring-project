@@ -134,7 +134,7 @@ public class UserController {
         model.addAttribute("carRentsSold", carRentsSold);
         // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
 
-        return "sold-offers ";
+        return "sold-offers";
     }
 
     @PostMapping("/cart/buy-airplane-ticket-offer/{id}")
