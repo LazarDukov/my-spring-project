@@ -17,17 +17,23 @@
     <div class="registerbox">
         <h1>My Profile</h1>
         <form th:object="${readAirplaneTicket}"
-                    th:action="@{'/offers/read-airplane-ticket-offer/' + ${id} + '/addToCart'}"
-                    th:method="get">
-            <p>Username:</p>
+              th:action="@{'/offers/read-airplane-ticket-offer/' + ${id} + '/addToCart'}"
+              th:method="get">
+            <p>Company name:</p>
             <h1 type="text" th:text="*{companyName}" name="companyName" readonly></h1>
-
-            <p>Last name:</p>
+            <p>From airport:</p>
             <h1 type="text" th:text="*{fromAirport}" name="fromAirport" value="fromAirport" readonly></h1>
-            <p>Email:</p>
+            <p>To airport:</p>
             <h1 type="text" th:text="*{toAirport}" name="toAirport" value="toAirport" readonly></h1>
-
-
+            <p>Flight number:</p>
+            <h1 type="text" th:text="*{flyNumber}" name="flyNumber" value="flyNumber" readonly></h1>
+            <p>Price:</p>
+            <h1 type="text" th:text="*{price}" name="price" value="price" readonly></h1>
+            <p>Additional luggage price:</p>
+            <h1 type="text" th:text="*{moreLuggagePrice}" name="moreLuggagePrice" value="moreLuggagePrice"
+                readonly></h1>
+            <label for="myCheckbox">Add luggage:</label>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
             <input type="submit" name="" value="Add to cart">
         </form>
     </div>

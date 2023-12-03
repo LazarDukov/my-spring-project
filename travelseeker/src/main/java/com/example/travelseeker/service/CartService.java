@@ -43,7 +43,7 @@ public class CartService {
 
     //TODO:for all these methods should implement counter --when one of the offers is bought
 
-    public void AddToCartAirplaneTicket(Principal principal, UUID id) {
+    public void AddToCartAirplaneTicket(boolean myCheckbox, Principal principal, UUID id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
 
@@ -57,7 +57,11 @@ public class CartService {
 
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
+        if (myCheckbox) {
+            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
+        } else {
+            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()));
+        }
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
     }
