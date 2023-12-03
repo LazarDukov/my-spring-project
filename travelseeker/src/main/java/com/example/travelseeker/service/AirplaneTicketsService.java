@@ -43,7 +43,7 @@ public class AirplaneTicketsService {
     }
 
 
-    public void addNewAirplaneTicket(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal) throws ParseException {
+    public void addNewAirplaneTicket(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date = dateFormat.parse(addAirplaneTicketsDTO.getDate());

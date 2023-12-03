@@ -64,19 +64,19 @@ public class AirplaneTicketController {
 
     // TODO: should redirect to right page after successful adding airplane ticket, reformat DATE and adding some restrictions
     @PostMapping("/add-airplane-tickets")
-    public String addAirplaneTickets(@Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
+    public String addAirplaneTickets(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addAirplaneTicketsDTO", addAirplaneTicketsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addAirplaneTicketsDTO", bindingResult);
             return "redirect:/offers/add-airplane-tickets";
         }
-        airplaneTicketsService.addNewAirplaneTicket(addAirplaneTicketsDTO, principal);
+        airplaneTicketsService.addNewAirplaneTicket(principal, addAirplaneTicketsDTO);
         return "successfully-added";
     }
 
-        @PostMapping("/remove-airplane-ticket/{id}")
-        public String removeAirplaneTicket(Principal principal,@PathVariable UUID id) {
-            airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
-            return "removed";
-        }
+    @PostMapping("/remove-airplane-ticket/{id}")
+    public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {
+        airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
+        return "removed";
+    }
 }
