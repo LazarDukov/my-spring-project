@@ -14,59 +14,118 @@
         Navbar
     </div>
 
-    <div class="registerbox">
-        <h1>Register here</h1>
+    <div class="add-airplane-ticket">
+        <h1>Car for rental:</h1>
         <form th:method="post"
               th:action="@{/offers/add-cars}"
               th:object="${addCarsDTO}">
-            <p>Make</p>
+
+
+            <label for="make" class="text-white">Make:</label>
             <input th:field="*{make}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="make" placeholder="Enter make">
+                   name="make"
+                   type="text"
+                   class="form-control"
+                   id="make"
+                   placeholder="Make"/>
+            <small th:if="${#fields.hasErrors('make')}"
+                   th:errorclass="errors"
+                   th:errors="*{make}"
+                   class="text-danger">
+                Make error!
+            </small>
 
-            <p>Model</p>
+
+            <label for="model" class="text-white">Model:</label>
             <input th:field="*{model}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="model" placeholder="Enter model">
+                   name="model"
+                   type="model"
+                   class="form-control"
+                   id="model"
+                   placeholder="model"/>
+            <small th:if="${#fields.hasErrors('model')}"
+                   th:errorclass="errors"
+                   th:errors="*{model}"
+                   class="text-danger">
+                Model error!
+            </small>
+            <label for="bodyType" class="text-white">Body type:</label>
+            <input th:field="*{bodyType}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="bodyType"
+                   type="text"
+                   class="form-control"
+                   id="bodyType"
+                   placeholder="Body type"/>
+            <small th:if="${#fields.hasErrors('bodyType')}"
+                   th:errorclass="errors"
+                   th:errors="*{bodyType}"
+                   class="text-danger">
+                Body type error!
+            </small>
 
-            <label for="bodyType">What type of car do you prefer?</label>
-            <select  name="bodyType" id="bodyType">
-                <option value="COMPACT">COMPACT</option>
-                <option value="COUPE">COUPE</option>
-                <option value="CABRIO">CABRIO</option>
-                <option value="SEDAN">SEDAN</option>
-                <option value="HATCHBACK">HATCHBACK</option>
-                <option value="SUV">SUV</option>
-                <option value="VAN">VAN</option>
-            </select>
+            <label for="fuelType" class="text-white">Fuel type:</label>
+            <input th:field="*{fuelType}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="fuelType"
+                   type="text"
+                   class="form-control"
+                   id="fuelType"
+                   placeholder="Fuel type"/>
+            <small th:if="${#fields.hasErrors('fuelType')}"
+                   th:errorclass="errors"
+                   th:errors="*{fuelType}"
+                   class="text-danger">
+                Fuel type error!
+            </small>
+            <label for="price" class="text-white">Price:</label>
+            <input th:field="*{price}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="price"
+                   type="number"
+                   step="any"
+                   class="form-control"
+                   id="price"
+                   placeholder="Price"/>
+            <small th:if="${#fields.hasErrors('price')}"
+                   th:errorclass="errors"
+                   th:errors="*{price}"
+                   class="text-danger">
+                Price error!
+            </small>
+            <label for="insurance" class="text-white">Insurance price:</label>
+            <input th:field="*{price}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="insurance"
+                   type="number"
+                   step="any"
+                   class="form-control"
+                   id="insurance"
+                   placeholder="Insurance price"/>
+            <small th:if="${#fields.hasErrors('insurance')}"
+                   th:errorclass="errors"
+                   th:errors="*{insurance}"
+                   class="text-danger">
+                Insurance price error!
+            </small>
+            <label for="available" class="text-white">Quantity:</label>
+            <input th:field="*{available}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="available"
+                   type="number"
+                   class="form-control"
+                   id="available"
+                   placeholder="Quantity"/>
+            <small th:if="${#fields.hasErrors('available')}"
+                   th:errorclass="errors"
+                   th:errors="*{available}"
+                   class="text-danger">
+                Quantity error!
+            </small>
 
-            <label for="fuelType">What type of fuel do you prefer?</label>
-            <select  name="fuelType" id="fuelType">
-                <option value="PETROL">PETROL</option>
-                <option value="DIESEL">DIESEL</option>
-                <option value="GASOLINE">GASOLINE</option>
-                <option value="ELECTRIC">ELECTRIC</option>
-                <option value="HYBRID">HYBRID</option>
-            </select>
-
-            <p>Price</p>
-            <input
-                    th:field="*{price}"
-                    th:errorclass="'is-invalid alert-danger'"
-                    type="number" name="price" placeholder="Enter price">
-            <p>Insurance</p>
-            <input
-                    th:field="*{insurance}"
-                    th:errorclass="'is-invalid alert-danger'"
-                    type="number" name="insurance" placeholder="Enter insurance">
-            <p>Available</p>
-            <input
-                    th:field="*{available}"
-                    th:errorclass="'is-invalid alert-danger'"
-                    type="number" name="available" placeholder="Enter available">
-
-
-            <input type="submit" name="" value="Add car">
+            <input type="submit" name="" value="Add car for rent">
         </form>
     </div>
 </header>

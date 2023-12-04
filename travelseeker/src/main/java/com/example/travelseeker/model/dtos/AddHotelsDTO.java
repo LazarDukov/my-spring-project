@@ -1,24 +1,25 @@
 package com.example.travelseeker.model.dtos;
 
 import com.example.travelseeker.model.enums.HotelRoomEnum;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 public class AddHotelsDTO {
-    @NotNull
+    @NotBlank(message = "Hotel name cannot be empty!")
+    @Size(min = 2, max = 30, message = "Hotel name should be between 2 and 30 characters!")
     private String name;
 
-    @NotNull
+    @NotBlank(message = "Country cannot be empty!")
+    @Size(min = 3, max = 30, message = "Country should be between 3 and 30 characters!")
     private String country;
 
-    @NotNull
+    @NotBlank(message = "City cannot be empty!")
+    @Size(min = 3, max = 30, message = "City should be between 3 and 30 characters!")
     private String city;
 
-    @NotNull
+    @NotBlank(message = "Address cannot be empty!")
+    @Size(min = 10, max = 30, message = "City should be between 10 and 50 characters!")
     private String address;
 
     @NotNull
@@ -26,37 +27,29 @@ public class AddHotelsDTO {
     @Max(5)
     private int stars;
 
-    @NotNull
+    @NotBlank(message = "Description cannot be empty!")
     @Size(min = 30)
     private String description;
 
-    @NotNull
+    @NotNull(message = "Price per night cannot be empty and should be more than or equal to 1!")
+    @Min(1)
     private BigDecimal pricePerNight;
 
-    @NotNull
+    @NotNull(message = "Please choose room type!")
     private HotelRoomEnum roomType;
 
-
+    @NotNull(message = "Price for breakfast cannot be empty! If there is not breakfast, please write '0'!")
     private BigDecimal priceBreakfast;
 
-
+    @NotNull(message = "Price for dinner cannot be empty! If there is not dinner, please write '0'!")
     private BigDecimal priceDinner;
 
-
+    @NotNull(message = "Price for all inclusive packet cannot be empty! If there is not all inclusive option, please write '0'!")
     private BigDecimal allInclusive;
 
-    @NotNull
+    @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
     private int available;
-
-    public int getAvailable() {
-        return available;
-    }
-
-    public AddHotelsDTO setAvailable(int available) {
-        this.available = available;
-        return this;
-    }
 
     public AddHotelsDTO() {
     }
@@ -65,87 +58,107 @@ public class AddHotelsDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public AddHotelsDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public AddHotelsDTO setCountry(String country) {
         this.country = country;
+        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public AddHotelsDTO setCity(String city) {
         this.city = city;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public AddHotelsDTO setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public int getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public AddHotelsDTO setStars(int stars) {
         this.stars = stars;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public AddHotelsDTO setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public BigDecimal getPricePerNight() {
         return pricePerNight;
     }
 
-    public void setPricePerNight(BigDecimal pricePerNight) {
+    public AddHotelsDTO setPricePerNight(BigDecimal pricePerNight) {
         this.pricePerNight = pricePerNight;
+        return this;
     }
 
     public HotelRoomEnum getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(HotelRoomEnum roomType) {
+    public AddHotelsDTO setRoomType(HotelRoomEnum roomType) {
         this.roomType = roomType;
+        return this;
     }
 
     public BigDecimal getPriceBreakfast() {
         return priceBreakfast;
     }
 
-    public void setPriceBreakfast(BigDecimal priceBreakfast) {
+    public AddHotelsDTO setPriceBreakfast(BigDecimal priceBreakfast) {
         this.priceBreakfast = priceBreakfast;
+        return this;
     }
 
     public BigDecimal getPriceDinner() {
         return priceDinner;
     }
 
-    public void setPriceDinner(BigDecimal priceDinner) {
+    public AddHotelsDTO setPriceDinner(BigDecimal priceDinner) {
         this.priceDinner = priceDinner;
+        return this;
     }
 
     public BigDecimal getAllInclusive() {
         return allInclusive;
     }
 
-    public void setAllInclusive(BigDecimal allInclusive) {
+    public AddHotelsDTO setAllInclusive(BigDecimal allInclusive) {
         this.allInclusive = allInclusive;
+        return this;
+    }
+
+    public int getAvailable() {
+        return available;
+    }
+
+    public AddHotelsDTO setAvailable(int available) {
+        this.available = available;
+        return this;
     }
 }

@@ -39,7 +39,7 @@ public class CarRentService {
     }
 
 
-    public void addNewCar(AddCarsDTO addCarsDTO, Principal principal) {
+    public void addNewCar(Principal principal,AddCarsDTO addCarsDTO) {
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers carRentOffers = new Offers();
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())

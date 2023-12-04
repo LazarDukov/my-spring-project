@@ -2,31 +2,37 @@ package com.example.travelseeker.model.dtos;
 
 import com.example.travelseeker.model.enums.CarBodyTypeEnum;
 import com.example.travelseeker.model.enums.CarFuelTypeEnum;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 public class AddCarsDTO {
-    @NotNull
+    @NotBlank(message = "Make cannot be empty!")
+    @Size(min = 2, max = 30, message = "Make should be between 2 and 30 characters!")
     private String make;
 
-    @NotNull
+    @NotBlank(message = "Model cannot be empty!")
+    @Size(min = 2, max = 30, message = "Make should be between 2 and 30 characters!")
     private String model;
 
-    @NotNull
+    @Enumerated
+    @NotNull(message = "Please choose a body type!")
     private CarBodyTypeEnum bodyType;
 
-    @NotNull
+    @Enumerated
+    @NotNull(message = "Please choose a fuel type!")
     private CarFuelTypeEnum fuelType;
 
-    @NotNull
+    @NotNull(message = "Price cannot be empty!")
+    @Positive(message = "Price should be more than 0!")
     private BigDecimal price;
 
-
+    @NotNull(message = "Insurance price cannot be empty!")
+    @Positive(message = "If you do not want to add insurance, please write '0'!")
     private BigDecimal insurance;
 
-    @NotNull
+    @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
     private int available;
 

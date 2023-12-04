@@ -59,13 +59,13 @@ public class CarRentalController {
 
 
     @PostMapping("/add-cars")
-    public String addCars(@Valid AddCarsDTO addCarsDTO, Principal principal, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addCars( Principal principal, @Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addCarsDTO", addCarsDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
-            return "redirect:/offers/home";
+            return "redirect:/offers/add-cars";
         }
-        carRentService.addNewCar(addCarsDTO, principal);
+        carRentService.addNewCar(principal,addCarsDTO);
         return "successfully-added";
     }
     @PostMapping("/remove-car-rent/{id}")

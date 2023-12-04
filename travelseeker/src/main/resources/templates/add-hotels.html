@@ -14,72 +14,169 @@
         Navbar
     </div>
 
-    <div class="registerbox">
-        <h1>Register here</h1>
+    <div class="add-airplane-ticket">
+        <h1>Hotel:</h1>
         <form th:method="post"
               th:action="@{/offers/add-hotels}"
               th:object="${addHotelsDTO}">
-            <p>Hotel name</p>
+
+
+            <label for="name" class="text-white">Hotel name:</label>
             <input th:field="*{name}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="name" placeholder="Enter name">
+                   name="name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Hotel name"/>
+            <small th:if="${#fields.hasErrors('name')}"
+                   th:errorclass="errors"
+                   th:errors="*{name}"
+                   class="text-danger">
+                Hotel name error!
+            </small>
 
-            <p>Country</p>
+
+            <label for="country" class="text-white">Country:</label>
             <input th:field="*{country}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="country" placeholder="Enter country">
-            <p>City</p>
+                   name="country"
+                   type="text"
+                   class="form-control"
+                   id="country"
+                   placeholder="Country"/>
+            <small th:if="${#fields.hasErrors('country')}"
+                   th:errorclass="errors"
+                   th:errors="*{country}"
+                   class="text-danger">
+                Country error!
+            </small>
+            <label for="city" class="text-white">City:</label>
             <input th:field="*{city}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="city" placeholder="Enter city">
+                   name="city"
+                   type="text"
+                   class="form-control"
+                   id="city"
+                   placeholder="City"/>
+            <small th:if="${#fields.hasErrors('city')}"
+                   th:errorclass="errors"
+                   th:errors="*{city}"
+                   class="text-danger">
+                City error!
+            </small>
 
-            <p>Address</p>
+            <label for="address" class="text-white">Address:</label>
             <input th:field="*{address}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="address" placeholder="Enter address">
-            <p>Hotel stars</p>
-            <input
-                    th:field="*{stars}"
-                    th:errorclass="'is-invalid alert-danger'"
-                    type="number" name="stars" placeholder="Enter hotel stars">
-            <p>Description</p>
-            <input
-                    th:field="*{description}"
-                    th:errorclass="'is-invalid alert-danger'"
-                    type="text" name="description" placeholder="Enter description">
+                   name="address"
+                   type="text"
+                   class="form-control"
+                   id="address"
+                   placeholder="Address"/>
+            <small th:if="${#fields.hasErrors('address')}"
+                   th:errorclass="errors"
+                   th:errors="*{address}"
+                   class="text-danger">
+                Address error!
+            </small>
+            <label for="description" class="text-white">Description:</label>
+            <input th:field="*{description}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="description"
+                   type="text"
+                   class="form-control"
+                   id="description"
+                   placeholder="Description"/>
+            <small th:if="${#fields.hasErrors('description')}"
+                   th:errorclass="errors"
+                   th:errors="*{description}"
+                   class="text-danger">
+                Description error!
+            </small>
+            <label for="stars" class="text-white">Stars:</label>
+            <input th:field="*{stars}"
+                   th:errorclass="'is-invalid alert-danger'"
+                   name="stars"
+                   type="number"
 
-            <label for="roomType">What type of room do you prefer?</label>
-            <select  name="roomType" id="roomType">
-                <option value="DOUBLE_ROOM">DOUBLE_ROOM</option>
-                <option value="STUDIO">STUDIO</option>
-                <option value="APARTMENT">APARTMENT</option>
-            </select>
-
-            <p>Price per night</p>
+                   class="form-control"
+                   id="stars"
+                   placeholder="Stars"/>
+            <small th:if="${#fields.hasErrors('stars')}"
+                   th:errorclass="errors"
+                   th:errors="*{stars}"
+                   class="text-danger">
+                Stars error!
+            </small>
+            <label for="pricePerNight" class="text-white">Price per night:</label>
             <input th:field="*{pricePerNight}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="number" name="pricePerNight" placeholder="Enter price for one night">
+                   name="pricePerNight"
+                   type="number"
 
-            <p>Price for breakfast</p>
+                   class="form-control"
+                   id="pricePerNight"
+                   placeholder="Price for night"/>
+            <small th:if="${#fields.hasErrors('pricePerNight')}"
+                   th:errorclass="errors"
+                   th:errors="*{pricePerNight}"
+                   class="text-danger">
+                Price per night error!
+            </small>
+            <label for="priceBreakfast" class="text-white">Price for breakfast:</label>
             <input th:field="*{priceBreakfast}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="number" name="priceBreakfast" placeholder="Enter price for breakfast">
+                   name="priceBreakfast"
+                   type="number"
 
-            <p>Price for dinner</p>
+                   class="form-control"
+                   id="priceBreakfast"
+                   placeholder="Breakfast price:"/>
+            <small th:if="${#fields.hasErrors('priceBreakfast')}"
+                   th:errorclass="errors"
+                   th:errors="*{priceBreakfast}"
+                   class="text-danger">
+                Breakfast price error!
+            </small>
+            <label for="priceDinner" class="text-white">Price for dinner:</label>
             <input th:field="*{priceDinner}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="number" name="priceDinner" placeholder="Enter price for dinner">
+                   name="priceDinner"
+                   type="number"
 
-            <p>All inclusive price</p>
-            <input th:field="*{allInclusive}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   type="number" name="allInclusive" placeholder="Enter price for all inclusive">
+                   class="form-control"
+                   id="priceDinner"
+                   placeholder="Dinner price:"/>
+            <small th:if="${#fields.hasErrors('priceDinner')}"
+                   th:errorclass="errors"
+                   th:errors="*{priceDinner}"
+                   class="text-danger">
+                Dinner price error!
+            </small>
 
-            <p>Available</p>
+
+
+
+
+
+
+            <label for="available" class="text-white">Quantity:</label>
             <input th:field="*{available}"
                    th:errorclass="'is-invalid alert-danger'"
-                   type="number" name="available" placeholder="Enter available">
-            <input type="submit" name="" value="Add airplane ticket">
+                   name="available"
+                   type="number"
+                   class="form-control"
+                   id="available"
+                   placeholder="Quantity"/>
+            <small th:if="${#fields.hasErrors('available')}"
+                   th:errorclass="error"
+                   th:errors="*{available}"
+                   class="text-danger">
+                Quantity error!
+            </small>
+
+            <input type="submit" name="" value="Add hotel">
         </form>
     </div>
 </header>

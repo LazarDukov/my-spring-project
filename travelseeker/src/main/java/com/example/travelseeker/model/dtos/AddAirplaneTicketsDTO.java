@@ -2,34 +2,40 @@ package com.example.travelseeker.model.dtos;
 
 
 import com.example.travelseeker.util.validation.AirplaneTicketCompanyValidatorInterface;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 public class AddAirplaneTicketsDTO {
-    @AirplaneTicketCompanyValidatorInterface
     @NotBlank(message = "Company name cannot be empty!")
+    @Size(min = 2, max = 30, message = "Company name should be between 2 and 30 characters!")
     private String companyName;
 
+    @NotEmpty(message = "Please pick a date!")
     private String date;
 
+    @NotBlank(message = "Please select airport for departure!")
+    @Size(min = 3, max = 30, message = "Airport name should be between 3 and 30 characters!")
     private String fromAirport;
 
-
+    @NotBlank(message = "Please select airport for arrive!")
+    @Size(min = 3, max = 30, message = "Airport name should be between 3 and 30 characters!")
     private String toAirport;
 
-
+    @NotBlank(message = "Flight number cannot be empty!")
+    @Size(min = 4, max = 6, message = "Flight number should be between 4 and 6 numbers!")
     private String flyNumber;
 
-
+    @NotNull(message = "Price cannot be empty!")
+    @Positive(message = "Price should be more than 0!")
     private BigDecimal price;
 
-
+    @NotNull(message = "If there is option is missing, please write '0'!")
+    @Min(0)
     private BigDecimal moreLuggagePrice;
 
-
+    @NotNull
+    @Positive(message = "Availability should be more than 0!")
     private int available;
 
     public int getAvailable() {

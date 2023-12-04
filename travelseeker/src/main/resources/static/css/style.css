@@ -117,6 +117,21 @@ body.aboutus {
     border-radius: 20px;
 }
 
+.add-airplane-ticket {
+    width: 1000px;
+    height: 900px;
+    background: #0082e6;
+    opacity: 0.9;
+    top: 65%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 70px;
+    border-radius: 20px;
+
+}
+
 h1 {
     margin: 0;
     padding: 0 0 0;
@@ -141,7 +156,8 @@ h2 {
 }
 
 .registerbox input,
-.loginbox input {
+.loginbox input,
+.add-airplane-ticket input {
     width: 100%;
     margin-bottom: 20px;
 
@@ -151,7 +167,11 @@ h2 {
 input[type="password"],
 input[type="number"],
 .loginbox input[type="text"],
-input[type="password"] {
+input[type="password"]
+.add-airplane-ticket input[type="text"],
+input[type="number"],
+input[type="date"]
+{
     border: none;
     border-bottom: 1px solid #fff;
     border-top: 1px solid #fff;
@@ -163,7 +183,9 @@ input[type="password"] {
 }
 
 .registerbox input[type="submit"],
-.loginbox input[type="submit"] {
+.loginbox input[type="submit"],
+.add-airplane-ticket input[type="submit"]
+{
     border: none;
     outline: none;
     height: 40px;
@@ -174,7 +196,8 @@ input[type="password"] {
 
 }
 
-.registerbox select {
+.registerbox select
+{
     appearance: none;
     width: 100%;
     font-size: 16px;

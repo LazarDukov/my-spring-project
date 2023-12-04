@@ -31,7 +31,7 @@ public class HotelService {
         this.offersRepository = offersRepository;
     }
 
-    public void addNewHotel(AddHotelsDTO addHotelsDTO, Principal principal) {
+    public void addNewHotel(Principal principal, AddHotelsDTO addHotelsDTO) {
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers hotelOffers = new Offers();
         Hotel newHotel = new Hotel().setName(addHotelsDTO.getName())
