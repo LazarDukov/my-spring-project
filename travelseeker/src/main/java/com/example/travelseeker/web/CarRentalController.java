@@ -18,26 +18,21 @@ import java.util.UUID;
 @RequestMapping("/offers")
 public class CarRentalController {
 
-
     private final CarRentService carRentService;
-
 
     @Autowired
     public CarRentalController(CarRentService carRentService) {
-
-
         this.carRentService = carRentService;
 
     }
 
-    //TODO: Should check about the work of these two model attributes. One of them can be skipped.
     @ModelAttribute("addCarsDTO")
     public AddCarsDTO addCarsDTO() {
         return new AddCarsDTO();
     }
 
 
-    // TODO: should add another columns in the html page view
+
     @GetMapping("/add-cars")
     public String getAddCars() {
         return "add-cars";
@@ -49,12 +44,12 @@ public class CarRentalController {
         return "cars";
     }
 
-    @GetMapping("/read-car-offer/{id}")
-    public String getReadCarOffer(Model model, @PathVariable UUID id) {
+    @GetMapping("/view-car-offer/{id}")
+    public String getViewCarOffer(Model model, @PathVariable UUID id) {
         CarRent car = carRentService.getCarRentById(id);
         model.addAttribute("readCar", car);
 
-        return "read-car-offer";
+        return "view-car-offer";
     }
 
 

@@ -48,10 +48,10 @@
                     <span th:if="${hotel.available == 0}">Sold Out</span>
                 </td>
 
-                <td class="button-33"><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Show
+                <td class="button-33"><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Show
                     offer</a></td>
                 <!-- add in car -->
-                <td><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Buy</a>
+                <td><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Buy</a>
                 </td>
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
                     <form th:method="post" th:action="@{/offers/remove-hotel/{id}(id=${hotel.id})}">

@@ -32,7 +32,6 @@ public class AirplaneTicketController {
 
     }
 
-    //TODO: Should check about the work of these two model attributes. One of them can be skipped.
     @ModelAttribute("addAirplaneTicketsDTO")
     public AddAirplaneTicketsDTO addAirplaneTicketsDTO() {
         return new AddAirplaneTicketsDTO();
@@ -53,16 +52,15 @@ public class AirplaneTicketController {
         return "add-airplane-tickets";
     }
 
-    @GetMapping("/read-airplane-ticket-offer/{id}")
-    public String getReadAirplaneTicketOffer(Model model, @PathVariable UUID id) {
+    @GetMapping("/view-airplane-ticket-offer/{id}")
+    public String getViewAirplaneTicketOffer(Model model, @PathVariable UUID id) {
         AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
         model.addAttribute("readAirplaneTicket", airplaneTicket);
 
-        return "read-airplane-ticket-offer";
+        return "view-airplane-ticket-offer";
     }
 
 
-    // TODO: should redirect to right page after successful adding airplane ticket, reformat DATE and adding some restrictions
     @PostMapping("/add-airplane-tickets")
     public String addAirplaneTickets(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {

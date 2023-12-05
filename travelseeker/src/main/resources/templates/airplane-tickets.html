@@ -48,9 +48,9 @@
                     <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
                 </td>
 
-                <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show
+                <td><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show
                     offer</a></td>
-                <td><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Buy</a>
+                <td><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Buy</a>
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
                     <form th:method="post" th:action="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}">
                         <input type="hidden" name="ticketId" th:value="${airplaneTicket.id}"/>

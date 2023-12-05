@@ -17,7 +17,7 @@
     <div class="registerbox">
         <h1>My Profile</h1>
         <form th:object="${readCar}"
-              th:action="@{'/offers/read-car-offer/' + ${id} + '/addToCart'}"
+              th:action="@{'/offers/view-car-offer/' + ${id} + '/addToCart'}"
               th:method="get">
             <p>Username:</p>
             <h1 type="text" th:text="*{make}" name="companyName" readonly></h1>

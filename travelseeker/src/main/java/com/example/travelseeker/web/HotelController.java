@@ -19,21 +19,16 @@ import java.util.UUID;
 @RequestMapping("/offers")
 public class HotelController {
 
-
     private final HotelService hotelService;
     private final SellerRepository sellerRepository;
-
 
     @Autowired
     public HotelController(HotelService hotelService, SellerRepository sellerRepository) {
 
-
         this.hotelService = hotelService;
-
         this.sellerRepository = sellerRepository;
     }
 
-//TODO: Should check about the work of these two model attributes. One of them can be skipped.
 
     @ModelAttribute("addHotelsDTO")
     public AddHotelsDTO addHotelsDTO() {
@@ -53,12 +48,12 @@ public class HotelController {
         return "add-hotels";
     }
 
-    @GetMapping("/read-hotel-offer/{id}")
-    public String getReadAirplaneTicketOffer(Model model, @PathVariable UUID id) {
+    @GetMapping("/view-hotel-offer/{id}")
+    public String getViewAirplaneTicketOffer(Model model, @PathVariable UUID id) {
         Hotel hotel = hotelService.getHotelById(id);
         model.addAttribute("readHotel", hotel);
 
-        return "read-hotel-offer";
+        return "view-hotel-offer";
     }
 
     // TODO: should redirect to right page after successful adding hotel and create restrictions in DTO

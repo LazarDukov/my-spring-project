@@ -26,10 +26,10 @@
           <span th:text="|Name: *{airplaneTicket.companyName} Fly number: *{airplaneTicket.flyNumber}|"></span>
 
 
-          <li><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
+          <li><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
 
 
-            <form th:action="@{/users/cart/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}" method="post">
+            <form th:action="@{/buyers/cart/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}" method="post">
               <input type="hidden" name="id" th:value="${airplaneTicket.id}"/>
               <button type="submit">Buy offer</button>
             </form>
@@ -45,9 +45,9 @@
              th:each="car: ${myPublishedCarRents}">
           <img class="mr-2" width="50px" height="50px">
           <span th:text="|Name: *{car.make} Model: *{car.model}|"></span>
-          <li><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Show offer</a>
+          <li><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Show offer</a>
 
-            <form th:action="@{/users/cart/buy-car-offer/{id}(id=${car.id})}" method="post">
+            <form th:action="@{/buyers/cart/buy-car-offer/{id}(id=${car.id})}" method="post">
               <input type="hidden" name="id" th:value="${car.id}"/>
               <button type="submit">Buy offer</button>
             </form>
@@ -60,8 +60,8 @@
              th:each="hotel: ${myPublishedHotels}">
           <img class="mr-2" width="50px" height="50px">
           <span th:text="|Name: *{hotel.name} Country: *{hotel.country} |"></span>
-          <li><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
-            <form th:action="@{/users/cart/buy-hotel-offer/{id}(id=${hotel.id})}" method="post">
+          <li><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
+            <form th:action="@{/buyers/cart/buy-hotel-offer/{id}(id=${hotel.id})}" method="post">
               <input type="hidden" name="id" th:value="${hotel.id}"/>
               <button type="submit">Buy offer</button>
             </form>

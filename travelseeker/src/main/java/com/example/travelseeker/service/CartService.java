@@ -57,7 +57,7 @@ public class CartService {
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
 
-            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()));
 
 
         buyerRepository.save(buyer);
@@ -91,7 +91,7 @@ public class CartService {
         carRentCartListOfBuyer.add(car);
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
 
 
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
@@ -108,7 +108,7 @@ public class CartService {
         cartOfBuyer.getAirplaneTickets().remove(airplaneTicket);
         cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
 
-            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(airplaneTicket.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(airplaneTicket.getPrice()));
 
         if (cartOfBuyer.getTotalPrice().signum() <= 0) {
             cartOfBuyer.setTotalPrice(BigDecimal.ZERO);
@@ -126,7 +126,26 @@ public class CartService {
         cartOfBuyer.getCars().remove(carRent);
         cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
 
-            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(carRent.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(carRent.getPrice()));
+
+        if (cartOfBuyer.getTotalPrice().signum() <= 0) {
+            cartOfBuyer.setTotalPrice(BigDecimal.ZERO);
+
+        }
+        cartRepository.save(cartOfBuyer);
+
+    }
+
+    public void removeFromCartHotel(Principal principal, UUID id) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+
+        assert buyer != null;
+        Cart cartOfBuyer = buyer.getCart();
+        Hotel hotel = hotelRepository.findHotelById(id);
+        cartOfBuyer.getHotels().remove(hotel);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
+
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(hotel.getPricePerNight()));
 
         if (cartOfBuyer.getTotalPrice().signum() <= 0) {
             cartOfBuyer.setTotalPrice(BigDecimal.ZERO);

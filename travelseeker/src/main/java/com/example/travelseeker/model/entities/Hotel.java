@@ -34,6 +34,7 @@ public class Hotel extends BaseEntity {
     @Column
     private BigDecimal pricePerNight;
 
+
     @Column
     private HotelRoomEnum roomType;
 

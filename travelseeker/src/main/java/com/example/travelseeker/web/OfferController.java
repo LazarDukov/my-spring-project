@@ -1,16 +1,22 @@
 package com.example.travelseeker.web;
 
+import com.example.travelseeker.service.OffersService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/offers")
 public class OfferController {
+    private final OffersService offersService;
 
-    @GetMapping("/book-now")
-    public String getBookNow() {
-        return "book-now";
+    public OfferController(OffersService offersService) {
+        this.offersService = offersService;
     }
 
     @GetMapping("/add-offer")
@@ -19,7 +25,23 @@ public class OfferController {
     }
 
 
-    // TODO: should redirect to right page after successful adding car and create restrictions in DTO
 
+    @GetMapping("/buy-airplane-ticket-offer/{id}")
+    public String buyDirectlyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCartAirplaneTickets(id, principal);
+        return "successfully-added";
+    }
+
+    @GetMapping("/buy-hotel-offer/{id}")
+    public String buyDirectlyHotelFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCartHotels(id, principal);
+        return "successfully-added";
+    }
+
+    @GetMapping("/buy-car-offer/{id}")
+    public String buyDirectlyCarRentFromCart(@PathVariable UUID id, Principal principal) {
+        offersService.buyFromCartCarRents(id, principal);
+        return "successfully-added";
+    }
 
 }

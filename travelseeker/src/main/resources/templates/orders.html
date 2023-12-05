@@ -16,7 +16,7 @@
     <div class="container bg-blur rounded mt-5 mb-4">
         <h1>All tickets to buy</h1>
         <div class="row mt-3 mb-3"
-             th:action="@{/users/orders}"
+             th:action="@{/buyers/orders}"
              th:method="GET">
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
                 <h3 class="mySticky bg-gray text-dark rounded">Airplane ticket offers:</h3>
@@ -24,7 +24,7 @@
                      th:each="airplaneTicket: ${myAirplaneTicketBought}">
                     <img class="mr-2" width="50px" height="50px">
                     <span th:text="|Name: *{airplaneTicket.companyName} Fly number: *{airplaneTicket.flyNumber}|"></span>
-                    <li><a th:href="@{/offers/read-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
+                    <li><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                      th:each="car: ${myCarRentBought}">
                     <img class="mr-2" width="50px" height="50px">
                     <span th:text="|Name: *{car.make} Model: *{car.model}|"></span>
-                    <li><a th:href="@{/offers/read-car-offer/{id}(id=${car.id})}">Show offer</a>
+                    <li><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Show offer</a>
 
 
                 </div>
@@ -47,7 +47,7 @@
                      th:each="hotel: ${myHotelBought}">
                     <img class="mr-2" width="50px" height="50px">
                     <span th:text="|Name: *{hotel.name} Country: *{hotel.country} |"></span>
-                    <li><a th:href="@{/offers/read-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
+                    <li><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
 
 
                 </div>

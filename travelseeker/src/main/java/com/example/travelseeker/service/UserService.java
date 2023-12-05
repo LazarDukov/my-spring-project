@@ -41,8 +41,6 @@ public class UserService {
         } else if ("Buyer".equals(role)) {
             return new UserProfileView(buyer.getUsername(), buyer.getFirstName(), buyer.getLastName(), buyer.getEmail(), buyer.getAge(), role, buyer.getCountry());
         } else {
-            // Handle the case where the user's role is neither seller nor buyer
-            // You might want to throw an exception or handle it based on your application logic.
             throw new IllegalStateException("Unknown user role");
         }
     }
