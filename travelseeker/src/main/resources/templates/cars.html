@@ -27,7 +27,6 @@
         <th>Body type</th>
         <th>Fuel type</th>
         <th>Price</th>
-        <th>Insurance price</th>
         <th>Available</th>
         <th>Show offer</th>
         <th>Buy</th>
@@ -43,7 +42,6 @@
         <td th:text="*{car.bodyType}"/>
         <td th:text="*{car.fuelType}"/>
         <td th:text="*{car.price}"/>
-        <td th:text="*{car.insurance}"/>
         <td>
           <span th:if="${car.available != 0}" th:text="${car.available}"/>
           <span th:if="${car.available == 0}">Sold Out</span>

@@ -38,14 +38,7 @@ public class AddHotelsDTO {
     @NotNull(message = "Please choose room type!")
     private HotelRoomEnum roomType;
 
-    @NotNull(message = "Price for breakfast cannot be empty! If there is not breakfast, please write '0'!")
-    private BigDecimal priceBreakfast;
 
-    @NotNull(message = "Price for dinner cannot be empty! If there is not dinner, please write '0'!")
-    private BigDecimal priceDinner;
-
-    @NotNull(message = "Price for all inclusive packet cannot be empty! If there is not all inclusive option, please write '0'!")
-    private BigDecimal allInclusive;
 
     @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
@@ -123,33 +116,6 @@ public class AddHotelsDTO {
 
     public AddHotelsDTO setRoomType(HotelRoomEnum roomType) {
         this.roomType = roomType;
-        return this;
-    }
-
-    public BigDecimal getPriceBreakfast() {
-        return priceBreakfast;
-    }
-
-    public AddHotelsDTO setPriceBreakfast(BigDecimal priceBreakfast) {
-        this.priceBreakfast = priceBreakfast;
-        return this;
-    }
-
-    public BigDecimal getPriceDinner() {
-        return priceDinner;
-    }
-
-    public AddHotelsDTO setPriceDinner(BigDecimal priceDinner) {
-        this.priceDinner = priceDinner;
-        return this;
-    }
-
-    public BigDecimal getAllInclusive() {
-        return allInclusive;
-    }
-
-    public AddHotelsDTO setAllInclusive(BigDecimal allInclusive) {
-        this.allInclusive = allInclusive;
         return this;
     }
 

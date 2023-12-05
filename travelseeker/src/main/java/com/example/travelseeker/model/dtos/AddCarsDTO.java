@@ -28,9 +28,6 @@ public class AddCarsDTO {
     @Positive(message = "Price should be more than 0!")
     private BigDecimal price;
 
-    @NotNull(message = "Insurance price cannot be empty!")
-    @Positive(message = "If you do not want to add insurance, please write '0'!")
-    private BigDecimal insurance;
 
     @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
@@ -88,11 +85,4 @@ public class AddCarsDTO {
         this.price = price;
     }
 
-    public BigDecimal getInsurance() {
-        return insurance;
-    }
-
-    public void setInsurance(BigDecimal insurance) {
-        this.insurance = insurance;
-    }
 }

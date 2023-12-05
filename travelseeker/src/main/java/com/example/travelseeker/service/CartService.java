@@ -43,7 +43,7 @@ public class CartService {
 
     //TODO:for all these methods should implement counter --when one of the offers is bought
 
-    public void AddToCartAirplaneTicket(boolean myCheckbox, Principal principal, UUID id) {
+    public void AddToCartAirplaneTicket(Principal principal, UUID id) {
         //TODO: should add functionality about the sum of the price and category shows in cart
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
 
@@ -54,14 +54,12 @@ public class CartService {
         //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<AirplaneTicket> airplaneTicketsListOfBuyer = buyer.getCart().getAirplaneTickets();
         airplaneTicketsListOfBuyer.add(airplaneTicket);
-
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        if (myCheckbox) {
-            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()).add(airplaneTicket.getMoreLuggagePrice()));
-        } else {
+
             cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(airplaneTicket.getPrice()));
-        }
+
+
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
     }
@@ -76,7 +74,7 @@ public class CartService {
         cartHotelsListOfBuyer.add(hotel);
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(hotel.getPricePerNight()).add(hotel.getPriceBreakfast()).add(hotel.getPriceDinner()).add(hotel.getAllInclusive()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(hotel.getPricePerNight()));
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
     }
@@ -93,9 +91,49 @@ public class CartService {
         carRentCartListOfBuyer.add(car);
         cartOfBuyer.setBuyer(buyer);
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice().add(car.getInsurance())));
+            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
+
+
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
+    }
+
+    public void removeFromCartAirplaneTicket(Principal principal, UUID id) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+
+        assert buyer != null;
+        Cart cartOfBuyer = buyer.getCart();
+        AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
+        cartOfBuyer.getAirplaneTickets().remove(airplaneTicket);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
+
+            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(airplaneTicket.getPrice()));
+
+        if (cartOfBuyer.getTotalPrice().signum() <= 0) {
+            cartOfBuyer.setTotalPrice(BigDecimal.ZERO);
+
+        }
+        cartRepository.save(cartOfBuyer);
+    }
+
+    public void removeFromCartCarRent(Principal principal, UUID id) {
+        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+
+        assert buyer != null;
+        Cart cartOfBuyer = buyer.getCart();
+        CarRent carRent = carRentRepository.findCarRentById(id);
+        cartOfBuyer.getCars().remove(carRent);
+        cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
+
+            cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(carRent.getPrice()));
+
+        if (cartOfBuyer.getTotalPrice().signum() <= 0) {
+            cartOfBuyer.setTotalPrice(BigDecimal.ZERO);
+
+        }
+        cartRepository.save(cartOfBuyer);
+
     }
 }
 

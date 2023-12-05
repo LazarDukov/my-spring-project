@@ -1,7 +1,7 @@
 package com.example.travelseeker.model.dtos;
 
 
-import com.example.travelseeker.util.validation.AirplaneTicketCompanyValidatorInterface;
+
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -30,9 +30,6 @@ public class AddAirplaneTicketsDTO {
     @Positive(message = "Price should be more than 0!")
     private BigDecimal price;
 
-    @NotNull(message = "If there is option is missing, please write '0'!")
-    @Min(0)
-    private BigDecimal moreLuggagePrice;
 
     @NotNull
     @Positive(message = "Availability should be more than 0!")
@@ -104,12 +101,4 @@ public class AddAirplaneTicketsDTO {
         return this;
     }
 
-    public BigDecimal getMoreLuggagePrice() {
-        return moreLuggagePrice;
-    }
-
-    public AddAirplaneTicketsDTO setMoreLuggagePrice(BigDecimal moreLuggagePrice) {
-        this.moreLuggagePrice = moreLuggagePrice;
-        return this;
-    }
 }

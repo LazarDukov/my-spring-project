@@ -33,13 +33,12 @@ public class AirplaneTicket extends BaseEntity {
     private BigDecimal price;
 
     @Column
-    private BigDecimal moreLuggagePrice;
-
-    @Column
     private int available;
 
     @Column
     private int soldNumber;
+
+
 
     @ManyToMany(mappedBy = "airplaneTickets", cascade = CascadeType.PERSIST)
     private List<Offers> offers;
@@ -116,15 +115,6 @@ public class AirplaneTicket extends BaseEntity {
 
     public AirplaneTicket setPrice(BigDecimal price) {
         this.price = price;
-        return this;
-    }
-
-    public BigDecimal getMoreLuggagePrice() {
-        return moreLuggagePrice;
-    }
-
-    public AirplaneTicket setMoreLuggagePrice(BigDecimal moreLuggagePrice) {
-        this.moreLuggagePrice = moreLuggagePrice;
         return this;
     }
 

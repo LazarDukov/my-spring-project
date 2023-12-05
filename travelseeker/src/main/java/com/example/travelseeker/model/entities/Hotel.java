@@ -38,15 +38,6 @@ public class Hotel extends BaseEntity {
     private HotelRoomEnum roomType;
 
     @Column
-    private BigDecimal priceBreakfast;
-
-    @Column
-    private BigDecimal priceDinner;
-
-    @Column
-    private BigDecimal allInclusive;
-
-    @Column
     private int available;
 
     @Column
@@ -138,32 +129,7 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
-    public BigDecimal getPriceBreakfast() {
-        return priceBreakfast;
-    }
 
-    public Hotel setPriceBreakfast(BigDecimal priceBreakfast) {
-        this.priceBreakfast = priceBreakfast;
-        return this;
-    }
-
-    public BigDecimal getPriceDinner() {
-        return priceDinner;
-    }
-
-    public Hotel setPriceDinner(BigDecimal priceDinner) {
-        this.priceDinner = priceDinner;
-        return this;
-    }
-
-    public BigDecimal getAllInclusive() {
-        return allInclusive;
-    }
-
-    public Hotel setAllInclusive(BigDecimal allInclusive) {
-        this.allInclusive = allInclusive;
-        return this;
-    }
 
     public int getSoldNumber() {
         return soldNumber;

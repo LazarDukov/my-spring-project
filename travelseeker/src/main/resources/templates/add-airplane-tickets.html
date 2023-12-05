@@ -109,21 +109,7 @@
                    class="text-danger">
                 Price error!
             </small>
-            <label for="moreLuggagePrice" class="text-white">Additional price:</label>
-            <input th:field="*{moreLuggagePrice}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   name="moreLuggagePrice"
-                   type="number"
-                   step="any"
-                   class="form-control"
-                   id="moreLuggagePrice"
-                   placeholder="Additional luggage price"/>
-            <small th:if="${#fields.hasErrors('moreLuggagePrice')}"
-                   th:errorclass="error"
-                   th:errors="*{moreLuggagePrice}"
-                   class="text-danger">
-                Additional luggage error!
-            </small>
+
             <label for="available" class="text-white">Quantity:</label>
             <input th:field="*{available}"
                    th:errorclass="'is-invalid alert-danger'"

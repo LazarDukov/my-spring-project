@@ -124,41 +124,6 @@
                    class="text-danger">
                 Price per night error!
             </small>
-            <label for="priceBreakfast" class="text-white">Price for breakfast:</label>
-            <input th:field="*{priceBreakfast}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   name="priceBreakfast"
-                   type="number"
-
-                   class="form-control"
-                   id="priceBreakfast"
-                   placeholder="Breakfast price:"/>
-            <small th:if="${#fields.hasErrors('priceBreakfast')}"
-                   th:errorclass="errors"
-                   th:errors="*{priceBreakfast}"
-                   class="text-danger">
-                Breakfast price error!
-            </small>
-            <label for="priceDinner" class="text-white">Price for dinner:</label>
-            <input th:field="*{priceDinner}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   name="priceDinner"
-                   type="number"
-
-                   class="form-control"
-                   id="priceDinner"
-                   placeholder="Dinner price:"/>
-            <small th:if="${#fields.hasErrors('priceDinner')}"
-                   th:errorclass="errors"
-                   th:errors="*{priceDinner}"
-                   class="text-danger">
-                Dinner price error!
-            </small>
-
-
-
-
-
 
 
             <label for="available" class="text-white">Quantity:</label>

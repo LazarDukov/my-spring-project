@@ -45,7 +45,6 @@ public class CarRentService {
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
                 .setModel(addCarsDTO.getModel()).setBodyType(addCarsDTO.getBodyType())
                 .setFuelType(addCarsDTO.getFuelType()).setPrice(addCarsDTO.getPrice())
-                .setInsurance(addCarsDTO.getInsurance())
                 .setSeller(seller)
                 .setAvailable(addCarsDTO.getAvailable())
                 .setSeller(seller).setSoldNumber(0);

@@ -29,18 +29,20 @@ public class UserController {
 
 
     private final OffersService offersService;
+    private final CartService cartService;
     private final AirplaneTicketsService airplaneTicketsService;
     private final HotelService hotelService;
     private final CarRentService carRentService;
 
     @Autowired
     public UserController(SellerService sellerService, BuyerService buyerService,
-                          UserService userService, OffersService offersService, HotelRepository hotelRepository, AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService) {
+                          UserService userService, OffersService offersService, HotelRepository hotelRepository, CartService cartService, AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService) {
         this.sellerService = sellerService;
         this.buyerService = buyerService;
         this.userService = userService;
 
         this.offersService = offersService;
+        this.cartService = cartService;
         this.airplaneTicketsService = airplaneTicketsService;
 
         this.hotelService = hotelService;
@@ -153,6 +155,18 @@ public class UserController {
     public String buyCarRentFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartCarRents(id, principal);
         return "successfully-added";
+    }
+
+    @PostMapping("/cart/remove-airplane-ticket-from-cart/{id}")
+    public String removeFromCartAirplaneTicket(Principal principal, @PathVariable UUID id) {
+        cartService.removeFromCartAirplaneTicket(principal, id);
+        return "redirect:/users/cart";
+    }
+
+    @PostMapping("/cart/remove-car-from-cart/{id}")
+    public String removeFromCartCarRent(Principal principal, @PathVariable UUID id) {
+        cartService.removeFromCartCarRent(principal, id);
+        return "redirect:/users/cart";
     }
 
 }

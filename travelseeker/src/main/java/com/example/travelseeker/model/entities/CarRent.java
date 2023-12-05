@@ -31,8 +31,6 @@ public class CarRent extends BaseEntity {
     @Column
     private BigDecimal price;
 
-    @Column
-    private BigDecimal insurance;
 
     @Column
     private int available;
@@ -110,14 +108,6 @@ public class CarRent extends BaseEntity {
         return this;
     }
 
-    public BigDecimal getInsurance() {
-        return insurance;
-    }
-
-    public CarRent setInsurance(BigDecimal insurance) {
-        this.insurance = insurance;
-        return this;
-    }
 
     public int getAvailable() {
         return available;

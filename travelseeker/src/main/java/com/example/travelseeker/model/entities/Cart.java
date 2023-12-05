@@ -13,6 +13,8 @@ public class Cart extends BaseEntity {
     @Column
     private BigDecimal totalPrice;
 
+
+
     @Column
     private int count;
 
@@ -35,6 +37,7 @@ public class Cart extends BaseEntity {
         this.hotels = new ArrayList<>();
         this.cars = new ArrayList<>();
         this.airplaneTickets = new ArrayList<>();
+
     }
 
 

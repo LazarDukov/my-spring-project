@@ -59,7 +59,6 @@ public class AirplaneTicketsService {
                 .setToAirport(addAirplaneTicketsDTO.getToAirport())
                 .setFlyNumber(addAirplaneTicketsDTO.getFlyNumber())
                 .setPrice(addAirplaneTicketsDTO.getPrice())
-                .setMoreLuggagePrice(addAirplaneTicketsDTO.getMoreLuggagePrice())
                 .setAvailable(addAirplaneTicketsDTO.getAvailable())
                 .setSeller(seller).setSoldNumber(0);
 
@@ -85,20 +84,6 @@ public class AirplaneTicketsService {
             airplaneTicketsRepository.save(airplaneTicket);
             // Handle the case where the seller or ticket is not found
         }
-        // List<Offers> offers = seller.getPublishedOffers();
-        // boolean removed = false;
-        // for (Offers offer : offers) {
-        //     for (AirplaneTicket airplaneTicket : offer.getAirplaneTickets()) {
-        //         if (airplaneTicket.getId().equals(id)) {
-        //             airplaneTicket.setAvailable(0);
-        //             seller.getPublishedOffers().remove(offer);
-        //             removed = true;
-        //         }
-        //     }
-        //     if (removed) {
-        //         break;
-        //     }
-        // }
 
 
     }
