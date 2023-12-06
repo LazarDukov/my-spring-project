@@ -26,7 +26,7 @@
                 <th>Date</th>
                 <th>Price</th>
                 <th>Available</th>
-                <th>Show offer</th>
+                <th>View offer</th>
                 <th>Buy</th>
                 <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
 
@@ -45,7 +45,7 @@
                     <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
                 </td>
 
-                <td><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show
+                <td><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">View
                     offer</a></td>
                 <td><a th:method="get" th:href="@{/offers/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Buy</a>
                 <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">

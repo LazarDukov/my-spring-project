@@ -68,7 +68,7 @@ public class AirplaneTicketController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addAirplaneTicketsDTO", bindingResult);
             return "redirect:/offers/add-airplane-tickets";
         }
-        airplaneTicketsService.addNewAirplaneTicket(principal, addAirplaneTicketsDTO);
+        airplaneTicketsService.addNewAirplaneTicket(principal,addAirplaneTicketsDTO);
         return "successfully-added";
     }
 

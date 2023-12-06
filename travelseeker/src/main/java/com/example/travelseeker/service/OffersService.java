@@ -45,25 +45,22 @@ public class OffersService {
             airplaneTicketToBuy.setAvailable(airplaneTicketToBuy.getAvailable() - 1);
             // sold number of airplane ticket rise up +1
             airplaneTicketToBuy.setSoldNumber(airplaneTicketToBuy.getSoldNumber() + 1);
-//            if (!sellerRepository.existsById(seller.getId())) {
-//
-//                // adding offer to sealed offers of seller
-//                seller.getSealedOffers().add(offer);
-//                // Seller doesn't exist, save it
-//                sellerRepository.save(seller);
-//            } else {
-//                seller.getSealedOffers().stream().findFirst().map(Offers::getAirplaneTickets).get().add(airplaneTicketToBuy);
-//            }
+            if (!sellerRepository.existsById(seller.getId())) {
+
+                // adding offer to sealed offers of seller
+                seller.getSealedOffers().add(offer);
+                // Seller doesn't exist, save it
+                sellerRepository.save(seller);
+            }
             // adding offer to bought offers of buyer
             buyer.getBoughtOffers().add(offer);
             //     adding offer to sealed offers of seller
-            seller.getSealedOffers().add(offer);
 
 
             // remove airplane ticket from cart
             buyer.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
             // save the seller with new changes
-            //sellerRepository.save(seller);
+//            sellerRepository.save(seller);
             // saving changes in buyer with new added offers of airplane ticket
             buyerRepository.save(buyer);
         }

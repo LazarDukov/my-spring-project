@@ -5,24 +5,30 @@ import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.model.entities.Hotel;
 import com.example.travelseeker.service.BuyerService;
+import com.example.travelseeker.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/buyers")
 public class BuyerController {
     private final BuyerService buyerService;
+    private final CartService cartService;
 
     @Autowired
-    public BuyerController(BuyerService buyerService) {
+    public BuyerController(BuyerService buyerService, CartService cartService) {
         this.buyerService = buyerService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/cart")
@@ -43,13 +49,29 @@ public class BuyerController {
         List<AirplaneTicket> buyerAirplaneTickets = buyerService.getBuyerBoughtAirplaneTickets(principal);
         List<Hotel> buyerHotels = buyerService.getBuyerBoughtHotels(principal);
         List<CarRent> buyerCarRents = buyerService.getBuyerCarRents(principal);
-        // Get all airplane tickets for the logged-in buyer from the bought offers
+
 
         model.addAttribute("myAirplaneTicketBought", buyerAirplaneTickets);
         model.addAttribute("myHotelBought", buyerHotels);
         model.addAttribute("myCarRentBought", buyerCarRents);
-        // TODO: Implement similar logic for "myCarBought" and "myHotelBought"
+
 
         return "orders";
+    }
+    @PostMapping("/cart/remove-airplane-ticket-from-cart/{id}")
+    public String removeFromCartAirplaneTicket(Principal principal, @PathVariable UUID id) {
+        cartService.removeFromCartAirplaneTicket(principal, id);
+        return "redirect:/buyers/cart";
+    }
+
+    @PostMapping("/cart/remove-car-from-cart/{id}")
+    public String removeFromCartCarRent(Principal principal, @PathVariable UUID id) {
+        cartService.removeFromCartCarRent(principal, id);
+        return "redirect:/buyers/cart";
+    }
+    @PostMapping("/cart/remove-hotel-from-cart/{id}")
+    public String removeFromCartHotel(Principal principal, @PathVariable UUID id) {
+        cartService.removeFromCartHotel(principal, id);
+        return "redirect:/buyers/cart";
     }
 }

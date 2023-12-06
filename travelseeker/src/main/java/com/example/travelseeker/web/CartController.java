@@ -22,7 +22,7 @@ public class CartController {
             (@PathVariable UUID id, Principal principal) {
         cartService.AddToCartAirplaneTicket(principal, id);
 
-        return "successfully-added";
+        return "redirect:/offers/airplane-tickets";
     }
 
     @GetMapping("/view-car-offer/{id}/addToCart")
@@ -38,22 +38,7 @@ public class CartController {
         return "successfully-added";
     }
 
-    @PostMapping("/cart/remove-airplane-ticket-from-cart/{id}")
-    public String removeFromCartAirplaneTicket(Principal principal, @PathVariable UUID id) {
-        cartService.removeFromCartAirplaneTicket(principal, id);
-        return "redirect:/users/cart";
-    }
 
-    @PostMapping("/cart/remove-car-from-cart/{id}")
-    public String removeFromCartCarRent(Principal principal, @PathVariable UUID id) {
-        cartService.removeFromCartCarRent(principal, id);
-        return "redirect:/users/cart";
-    }
-    @PostMapping("/cart/remove-hotel-from-cart/{id}")
-    public String removeFromCartHotel(Principal principal, @PathVariable UUID id) {
-        cartService.removeFromCartHotel(principal, id);
-        return "redirect:/users/cart";
-    }
 
 
 }

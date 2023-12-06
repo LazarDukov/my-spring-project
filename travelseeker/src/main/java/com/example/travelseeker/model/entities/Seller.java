@@ -12,7 +12,7 @@ import java.util.List;
 public class Seller extends User {
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "seller_sealed_offers",
             joinColumns = @JoinColumn(name = "seller_id"),
