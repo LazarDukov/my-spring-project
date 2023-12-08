@@ -58,18 +58,18 @@ public class BuyerController {
 
         return "orders";
     }
-    @PostMapping("/cart/remove-airplane-ticket-from-cart/{id}")
+    @GetMapping("/cart/remove-airplane-ticket-from-cart/{id}")
     public String removeFromCartAirplaneTicket(Principal principal, @PathVariable UUID id) {
         cartService.removeFromCartAirplaneTicket(principal, id);
         return "redirect:/buyers/cart";
     }
 
-    @PostMapping("/cart/remove-car-from-cart/{id}")
+    @GetMapping("/cart/remove-car-from-cart/{id}")
     public String removeFromCartCarRent(Principal principal, @PathVariable UUID id) {
         cartService.removeFromCartCarRent(principal, id);
         return "redirect:/buyers/cart";
     }
-    @PostMapping("/cart/remove-hotel-from-cart/{id}")
+    @GetMapping("/cart/remove-hotel-from-cart/{id}")
     public String removeFromCartHotel(Principal principal, @PathVariable UUID id) {
         cartService.removeFromCartHotel(principal, id);
         return "redirect:/buyers/cart";

@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" href="/css/style.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body class="register">
@@ -15,7 +16,7 @@
     </div>
     <div class="container bg-blur rounded mt-5 mb-4">
 
-        <h1>All tickets to buy</h1>
+        <h1 class="offers-title">All tickets to buy</h1>
         <table>
             <thead>
             <tr>
@@ -28,7 +29,7 @@
                 <th>Available</th>
                 <th>View offer</th>
                 <th>Buy</th>
-                <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
+                <th>Remove</th>
 
             </tr>
             </thead>
@@ -45,21 +46,30 @@
                     <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
                 </td>
 
-                <td><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">View
-                    offer</a></td>
-                <td><a th:method="get" th:href="@{/offers/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Buy</a>
-                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-                    <form th:method="post" th:action="@{/buyers/cart/remove-airplane-ticket-from-cart/{id}(id=${airplaneTicket.id})}">
-                        <input type="hidden" name="ticketId" th:value="${airplaneTicket.id}"/>
-                        <button type="submit">Remove</button>
-                    </form>
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                    </a>
                 </td>
 
+                <td>
+                    <a class="airplane-tickets-button"
+                        th:method="get" th:href="@{/offers/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                        <i class="material-icons" style="color: green">done</i></a>
+                </td>
+
+                <td>
+                    <a  class="airplane-tickets-button"
+                        th:href="@{/buyers/cart/remove-airplane-ticket-from-cart/{id}(id=${airplaneTicket.id})}"
+                        th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
 
             </tr>
             </tbody>
         </table>
-        <h1>All car rent offers:</h1>
+        <h1 class="offers-title">All car rental offers:</h1>
         <table>
             <thead>
             <tr>
@@ -88,21 +98,32 @@
                     <span th:if="${car.available == 0}">Sold Out</span>
                 </td>
 
-                <td class="button-33"><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Show
-                    offer</a></td>
-                <!-- add in car -->
-                <td><a th:method="get" th:href="@{/offers/buy-car-offer/{id}(id=${car.id})}">Buy</a>
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i>
+                    </a>
                 </td>
-                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-                    <form th:method="post" th:action="@{/buyers/cart/remove-car-rent-from-cart/{id}(id=${car.id})}">
-                        <input type="hidden" name="carId" th:value="${car.id}"/>
-                        <button type="submit">Remove</button>
-                    </form>
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:method="get" th:href="@{/offers/buy-car-offer/{id}(id=${car.id})}">
+                        <i class="material-icons" style="color: green">done</i></a>
+                    </a>
                 </td>
+
+                <td>
+                    <a  class="airplane-tickets-button"
+                        th:href="@{/buyers/cart/remove-car-rent-from-cart/{id}(id=${car.id})}"
+                        th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
+
+
             </tr>
             </tbody>
         </table>
-        <h1>All hotel offers:</h1>
+        <h1 class="offers-title">All hotel offers:</h1>
         <table>
             <thead>
             <tr>
@@ -132,17 +153,29 @@
                     <span th:if="${hotel.available == 0}">Sold Out</span>
                 </td>
 
-                <td class="button-33"><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Show
-                    offer</a></td>
-                <!-- add in car -->
-                <td><a th:method="get" th:href="@{/offers/buy-hotel-offer/{id}(id=${hotel.id})}">Buy</a>
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i>
+                    </a>
                 </td>
-                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-                    <form th:method="post" th:action="@{/buyers/cart/remove-hotel-from-cart/{id}(id=${hotel.id})}">
-                        <input type="hidden" name="hotelId" th:value="${hotel.id}"/>
-                        <button type="submit">Remove</button>
-                    </form>
+
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:method="get" th:href="@{/offers/buy-hotel-offer/{id}(id=${hotel.id})}">
+                        <i class="material-icons" style="color: green">done</i></a>
+                    </a>
                 </td>
+
+                <td>
+                    <a  class="airplane-tickets-button"
+                        th:href="@{/buyers/cart/remove-hotel-from-cart/{id}(id=${hotel.id})}"
+                        th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
+
             </tr>
             </tbody>
         </table>

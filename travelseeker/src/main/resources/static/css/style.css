@@ -146,6 +146,13 @@ h2 {
     font-size: 300px;
 }
 
+.offers-title{
+    padding: 20px;
+    text-align: center;
+    font-size: 40px;
+    color: #0d00ff;
+}
+
 .registerbox p,
 .loginbox p,
 .registerbox label {
@@ -344,7 +351,6 @@ td {
     padding: 10px;
     border: 0;
 
-    box-shadow: rgba(220, 235, 239, 0.15) 0 -25px 18px -14px inset, rgba(220, 235, 239, 0.15) 0 1px 2px, rgba(220, 235, 239, 0.15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(220, 235, 239, 0.15) 0 8px 16px, rgba(220, 235, 239, 0.15) 0 16px 32px;
     cursor: pointer;
     width: fit-content;
     text-align: center;
@@ -356,7 +362,7 @@ td {
     font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
     font-weight: bold;
     text-align: center;
-    text-shadow: -1px 1px 0 #ffffff;
+
 
 }
 

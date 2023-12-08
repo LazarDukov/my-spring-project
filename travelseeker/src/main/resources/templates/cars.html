@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" href="/css/style.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
 </head>
@@ -18,7 +19,7 @@
 
 <main>
   <div class="container bg-blur rounded mt-5 mb-4">
-    <h1>All car rent offers:</h1>
+    <h1 class="offers-title">All car rent offers:</h1>
     <table>
       <thead>
       <tr>
@@ -47,17 +48,31 @@
           <span th:if="${car.available == 0}">Sold Out</span>
         </td>
 
-        <td class="button-33"><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Show
-          offer</a></td>
-        <!-- add in car -->
-        <td><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Buy</a>
+
+
+
+        <td>
+          <a class="airplane-tickets-button"
+             th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+            <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
         </td>
+
+        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
+          <a class="airplane-tickets-button"
+             th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+            <i class="material-icons" style="color: green">add_shopping_cart</i>
+          </a>
+          <!--TODO: IF this offer is sold out - throw message for this                    -->
+        </td>
+
         <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
-          <form th:method="post" th:action="@{/offers/remove-car-rent/{id}(id=${car.id})}">
-            <input type="hidden" name="carId" th:value="${car.id}"/>
-            <button type="submit">Remove</button>
-          </form>
+          <a  class="airplane-tickets-button"
+              th:href="@{/offers/remove-car-rent/{id}(id=${car.id})}"
+              th:method="get">
+            <i class="material-icons" style="color: red">delete</i></a>
         </td>
+
+
       </tr>
       </tbody>
     </table>
