@@ -72,9 +72,10 @@ public class AirplaneTicketController {
         return "successfully-added";
     }
 
-    @PostMapping("/remove-airplane-ticket/{id}")
+    @GetMapping("/remove-airplane-ticket/{id}")
     public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {
         airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
         return "removed";
     }
+    // TODO: make changes for car rent and hotel from POST to GET in remove method
 }
