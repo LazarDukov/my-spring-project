@@ -14,45 +14,123 @@
         Navbar
     </div>
     <div class="container bg-blur rounded mt-5 mb-4">
-        <h1>All tickets to buy</h1>
-        <div class="row mt-3 mb-3"
-             th:action="@{/buyers/orders}"
-             th:method="GET">
-            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Airplane ticket offers:</h3>
-                <div class="mt-3 rounded badge-info"
-                     th:each="airplaneTicket: ${myAirplaneTicketBought}">
-                    <img class="mr-2" width="50px" height="50px">
-                    <span th:text="|Name: *{airplaneTicket.companyName} Fly number: *{airplaneTicket.flyNumber}|"></span>
-                    <li><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
-                </div>
-            </div>
+        <h1 class="offers-title">All bought airplane tickets:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Flight number</th>
+                <th>Company name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>View offer</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="airplaneTicket: ${myAirplaneTicketCart}">
+                <td th:text="*{airplaneTicket.flyNumber}"/>
+                <td th:text="*{airplaneTicket.companyName}"/>
+                <td th:text="*{airplaneTicket.fromAirport}"/>
+                <td th:text="*{airplaneTicket.toAirport}"/>
+                <td th:text="*{airplaneTicket.date}"/>
+                <td th:text="*{airplaneTicket.price}"/>
+                <td>
+                    <span th:if="${airplaneTicket.available != 0}" th:text="${airplaneTicket.available}"/>
+                    <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
+                </td>
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                    </a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <h1 class="offers-title">All bought car rental offers:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Body type</th>
+                <th>Fuel type</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>View offer</th>
 
 
-            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Car offers:</h3>
-                <div class="mt-3 rounded badge-info"
-                     th:each="car: ${myCarRentBought}">
-                    <img class="mr-2" width="50px" height="50px">
-                    <span th:text="|Name: *{car.make} Model: *{car.model}|"></span>
-                    <li><a th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">Show offer</a>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${myCarCart}">
+                <td th:text="*{car.make}"/>
+                <td th:text="*{car.model}"/>
+                <td th:text="*{car.bodyType}"/>
+                <td th:text="*{car.fuelType}"/>
+                <td th:text="*{car.price}"/>
+                <td>
+                    <span th:if="${car.available != 0}" th:text="${car.available}"/>
+                    <span th:if="${car.available == 0}">Sold Out</span>
+                </td>
 
 
-                </div>
-            </div>
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i>
+                    </a>
+                </td>
 
-            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Hotel offers:</h3>
-                <div class="mt-3 rounded badge-info"
-                     th:each="hotel: ${myHotelBought}">
-                    <img class="mr-2" width="50px" height="50px">
-                    <span th:text="|Name: *{hotel.name} Country: *{hotel.country} |"></span>
-                    <li><a th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">Show offer</a>
+            </tr>
+            </tbody>
+        </table>
+        <h1 class="offers-title">All bought hotel offers:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Hotel name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Hotel stars</th>
+                <th>Price per night</th>
+                <th>Available</th>
+                <th>View offer</th>
 
 
-                </div>
-            </div>
-        </div>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hotel: ${myHotelCart}">
+                <td th:text="*{hotel.name}"/>
+                <td th:text="*{hotel.country}"/>
+                <td th:text="*{hotel.city}"/>
+                <td th:text="*{hotel.stars}"/>
+                <td th:text="*{hotel.pricePerNight}"/>
+
+                <td>
+                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"/>
+                    <span th:if="${hotel.available == 0}">Sold Out</span>
+                </td>
+
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i>
+                    </a>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
     </div>
     </div>
 </header>

@@ -11,7 +11,7 @@
 
 </head>
 
-<body class="airplane-tickets">
+<body class="hotels">
 <header>
     <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
 </header>
@@ -28,9 +28,9 @@
                 <th>Hotel stars</th>
                 <th>Price per night</th>
                 <th>Available</th>
-                <th>Show offer</th>
-                <th>Buy</th>
-                <th>Remove</th>
+                <th>View offer</th>
+                <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
+                <th th:if="${#authorization.expression('hasRole(''SELLER'')')}">Remove</th>
 
 
             </tr>

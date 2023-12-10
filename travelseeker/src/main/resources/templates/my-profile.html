@@ -14,32 +14,57 @@
         Navbar
     </div>
 
-    <div class="registerbox">
+    <div class="registerbox" style="height: 400px; transform: translate(-50%, -85%);">
         <h1>My Profile</h1>
-        <form th:object="${user}">
-            <p>Username:</p>
-            <h1 type="text" th:text="*{username}" name="username" readonly></h1>
+        </br>
+        </br>
+        <form th:object="${user}"
+        th:action="@{/users/edit-profile}"
+        th:method="get">
 
-            <p>First name:</p>
-            <h1 type="text" th:text="*{firstName}" name="firstname" value="firstname" readonly></h1>
+<!--            here is Mihaela's changes-->
+            <div class="text-formatter"> Username:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{username}" name="username" readonly>
+                </h1>
+            </div>
 
-            <p>Last name:</p>
-            <h1 type="text" th:text="*{lastName}" name="lastname" value="lastname" readonly></h1>
-            <p>Email:</p>
-            <h1 type="text" th:text="*{email}" name="email" value="email" readonly></h1>
+            <div class="text-formatter"> First name:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{firstName}" name="firstName" readonly>
+                </h1>
+            </div>
 
-            <p>Age:</p>
-            <h1 type="number" th:text="*{age}" name="age" value="age" readonly></h1>
+            <div class="text-formatter"> Last name:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{lastName}" name="lastName" readonly>
+                </h1>
+            </div>
 
-            <p>Country:</p>
-            <h1 type="text" th:text="*{country}" name="country" value="country" readonly></h1>
+            <div class="text-formatter"> Email:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{email}" name="email" readonly>
+                </h1>
+            </div>
 
-            <p>Role:</p>
-            <h1 type="text" th:text="*{role}" name="role" value="role" readonly></h1>
+            <div class="text-formatter"> Age:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="number" th:text=" *{age}" name="age" readonly>
+                </h1>
+            </div>
 
-            <!-- Add more input fields for other user settings if needed -->
+            <div class="text-formatter"> Country:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{country}" name="country" readonly>
+                </h1>
+            </div>
 
-            <a th:href="@{/users/edit-profile}">Edit Profile</a><br>
+            <div class="text-formatter"> Role:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{role}" name="role" readonly>
+                </h1>
+            </div><br>
+
+
+
+            <input type="submit" name="" value="Edit profile">
+
+
+
+
         </form>
     </div>
 </header>

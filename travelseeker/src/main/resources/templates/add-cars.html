@@ -20,7 +20,6 @@
               th:action="@{/offers/add-cars}"
               th:object="${addCarsDTO}">
 
-
             <label for="make" class="text-white">Make:</label>
             <input th:field="*{make}"
                    th:errorclass="'is-invalid alert-danger'"
@@ -36,12 +35,11 @@
                 Make error!
             </small>
 
-
             <label for="model" class="text-white">Model:</label>
             <input th:field="*{model}"
                    th:errorclass="'is-invalid alert-danger'"
                    name="model"
-                   type="model"
+                   type="text"
                    class="form-control"
                    id="model"
                    placeholder="model"/>
@@ -111,7 +109,7 @@
                 Quantity error!
             </small>
 
-            <input type="submit" name="" value="Add car for rent">
+            <input type="submit" name="" value="Add offer for car rental">
         </form>
     </div>
 </header>

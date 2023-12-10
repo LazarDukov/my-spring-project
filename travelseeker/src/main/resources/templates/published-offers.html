@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" href="/css/style.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body class="register">
@@ -14,29 +15,76 @@
     Navbar
   </div>
   <div class="container bg-blur rounded mt-5 mb-4">
-    <h1>All tickets to buy</h1>
-    <div class="row mt-3 mb-3"
-         th:method="get"
-    >
-      <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-        <h3 class="mySticky bg-gray text-dark rounded">Airplane ticket offers:</h3>
-        <div class="mt-3 rounded badge-info"
-             th:each="airplaneTicket: ${myPublishedAirplaneTickets}">
-          <img class="mr-2" width="50px" height="50px">
-          <span th:text="|Name: *{airplaneTicket.companyName} Fly number: *{airplaneTicket.flyNumber}|"></span>
+    <h1 class="offers-title">All tickets to buy</h1>
+    <table>
+      <thead>
+      <tr>
+        <th>Flight number</th>
+        <th>Company name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Available</th>
+        <th>View offer</th>
+        <th>Remove</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="airplaneTicket: ${myPublishedAirplaneTickets}">
+        <td th:text="*{airplaneTicket.flyNumber}"/>
+        <td th:text="*{airplaneTicket.companyName}"/>
+        <td th:text="*{airplaneTicket.fromAirport}"/>
+        <td th:text="*{airplaneTicket.toAirport}"/>
+        <td th:text="*{airplaneTicket.date}"/>
+        <td th:text="*{airplaneTicket.price}"/>
+        <td>
+          <span th:if="${airplaneTicket.available != 0}" th:text="${airplaneTicket.available}"/>
+          <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
+        </td>
+
+        <td>
+          <a class="airplane-tickets-button"
+             th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+            <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+          </a>
+        </td>
 
 
-          <li><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>
+
+        <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+          <a  class="airplane-tickets-button"
+              th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"
+              th:method="get">
+            <i class="material-icons" style="color: red">delete</i></a>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+<!--    <h1>All tickets to buy</h1>-->
+<!--    <div class="row mt-3 mb-3"-->
+<!--         th:method="get">-->
+<!--      <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">-->
+<!--        <h3 class="mySticky bg-gray text-dark rounded">Airplane ticket offers:</h3>-->
+<!--        <div class="mt-3 rounded badge-info"-->
+<!--             th:each="airplaneTicket: ${myPublishedAirplaneTickets}">-->
+<!--          <img class="mr-2" width="50px" height="50px">-->
+<!--          <span th:text="|Name: *{airplaneTicket.companyName} Fly number: *{airplaneTicket.flyNumber}|"></span>-->
 
 
-            <form th:action="@{/buyers/cart/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}" method="post">
-              <input type="hidden" name="id" th:value="${airplaneTicket.id}"/>
-              <button type="submit">Buy offer</button>
-            </form>
+<!--          <li><a th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">Show offer</a>-->
 
 
-        </div>
-      </div>
+<!--            <form th:action="@{/buyers/cart/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}" method="post">-->
+<!--              <input type="hidden" name="id" th:value="${airplaneTicket.id}"/>-->
+<!--              <button type="submit">Buy offer</button>-->
+<!--            </form>-->
+
+
+<!--        </div>-->
+<!--      </div>-->
 
 
       <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">

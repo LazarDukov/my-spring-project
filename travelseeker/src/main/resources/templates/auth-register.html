@@ -19,6 +19,7 @@
         <form th:method="post"
               th:action="@{/users/register}"
               th:object="${registerDTO}">
+            <p>Username</p>
             <input th:field="*{username}"
                    th:errorclass="'is-invalid alert-danger'"
                    id="username"
@@ -47,6 +48,7 @@
                    class="text-danger">
                 Password error!
             </small>
+            <p>Confirm password</p>
             <input th:field="*{confirmPassword}"
                    th:errorclass="'is-invalid alert-danger'"
                    id="confirmPassword"
@@ -61,7 +63,7 @@
                 Confirm password error!
             </small>
 
-
+            <p>Email</p>
             <input th:field="*{email}"
                    th:errorclass="'is-invalid alert-danger'"
                    id="email"
@@ -85,7 +87,7 @@
             <small th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="text-danger"></small>
 
             <br><input type="submit" name="" value="Register">
-            <a href="#">You already have an account?</a><br>
+            <a th:href="@{/users/login}">You already have an account?</a><br>
         </form>
     </div>
 </header>

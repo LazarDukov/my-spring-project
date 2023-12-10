@@ -86,6 +86,27 @@ body.aboutus {
     background-color: rgba(207, 231, 241, 0.6);
     background-blend-mode: overlay;
 }
+.rent-cars {
+    background-image: url("../images/rent-car.png");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-color: rgba(207, 231, 241, 0.6);
+    background-blend-mode: overlay;
+}
+.hotels {
+    background-image: url("../images/hotels.png");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-color: rgba(207, 231, 241, 0.6);
+    background-blend-mode: overlay;
+}
+.cart {
+    background-image: url("../images/cart.jpg");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-color: rgba(207, 231, 241, 0.6);
+    background-blend-mode: overlay;
+}
 
 .registerbox,
 .aboutus {
@@ -155,7 +176,8 @@ h2 {
 
 .registerbox p,
 .loginbox p,
-.registerbox label {
+.registerbox label
+.add-airplane-ticket label {
     margin: 0;
     padding: 0;
     font-weight: bold;
@@ -175,9 +197,11 @@ input[type="password"],
 input[type="number"],
 .loginbox input[type="text"],
 input[type="password"]
-.add-airplane-ticket input[type="text"],
+.add-airplane-ticket,
+input[type="text"],
 input[type="number"],
-input[type="date"]
+input[type="date"],
+.input-style
 {
     border: none;
     border-bottom: 1px solid #fff;
@@ -369,4 +393,12 @@ td {
 .airplane-tickets-button:hover {
     box-shadow: rgba(75, 160, 180, 0.4) 0 -25px 18px -14px inset;
     transform: scale(1.05) rotate(-1deg);
+}
+
+.text-formatter {
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="airplane-tickets">
+<body class="rent-cars">
 <header>
   <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
 </header>
@@ -29,8 +29,10 @@
         <th>Fuel type</th>
         <th>Price</th>
         <th>Available</th>
-        <th>Show offer</th>
-        <th>Buy</th>
+        <th>View offer</th>
+        <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
+        <th th:if="${#authorization.expression('hasRole(''SELLER'')')}">Remove</th>
+
 
 
 
