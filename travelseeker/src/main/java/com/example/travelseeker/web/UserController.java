@@ -57,12 +57,11 @@ public class UserController {
         return "edit-profile";
     }
 
-    // TODO: should repair showing of role not to be optional and given as a string
     @PostMapping("/edit-profile")
     public String updateUserProfile(EditProfileDTO editProfileDTO, Principal principal, BindingResult
             bindingResult, RedirectAttributes redirectAttributes) {
         userService.editProfile(editProfileDTO, principal);
-
+        //TODO: should create validations for edit profile
 
         return "redirect:/users/my-profile";
     }

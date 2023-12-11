@@ -55,14 +55,15 @@
 
                 <td>
                     <a class="airplane-tickets-button"
-                        th:method="get" th:href="@{/offers/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
-                        <i class="material-icons" style="color: green">done</i></a>
+                       th:if="${airplaneTicket.available != 0}" th:method="get"
+                    th:href="@{/offers/buy-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                    <i class="material-icons" style="color: green">done</i></a>
                 </td>
 
                 <td>
-                    <a  class="airplane-tickets-button"
-                        th:href="@{/buyers/cart/remove-airplane-ticket-from-cart/{id}(id=${airplaneTicket.id})}"
-                        th:method="get">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/buyers/cart/remove-airplane-ticket-from-cart/{id}(id=${airplaneTicket.id})}"
+                       th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
 
@@ -107,15 +108,15 @@
                 </td>
                 <td>
                     <a class="airplane-tickets-button"
-                       th:method="get" th:href="@{/offers/buy-car-offer/{id}(id=${car.id})}">
+                       th:if="${car.available != 0}" th:method="get" th:href="@{/offers/buy-car-offer/{id}(id=${car.id})}">
                         <i class="material-icons" style="color: green">done</i></a>
                     </a>
                 </td>
 
                 <td>
-                    <a  class="airplane-tickets-button"
-                        th:href="@{/buyers/cart/remove-car-rent-from-cart/{id}(id=${car.id})}"
-                        th:method="get">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/buyers/cart/remove-car-rent-from-cart/{id}(id=${car.id})}"
+                       th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
 
@@ -164,15 +165,15 @@
 
                 <td>
                     <a class="airplane-tickets-button"
-                       th:method="get" th:href="@{/offers/buy-hotel-offer/{id}(id=${hotel.id})}">
+                       th:if="${hotel.available != 0}"  th:method="get" th:href="@{/offers/buy-hotel-offer/{id}(id=${hotel.id})}">
                         <i class="material-icons" style="color: green">done</i></a>
                     </a>
                 </td>
 
                 <td>
-                    <a  class="airplane-tickets-button"
-                        th:href="@{/buyers/cart/remove-hotel-from-cart/{id}(id=${hotel.id})}"
-                        th:method="get">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/buyers/cart/remove-hotel-from-cart/{id}(id=${hotel.id})}"
+                       th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
 

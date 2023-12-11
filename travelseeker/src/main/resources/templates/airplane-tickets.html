@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="airplaneTicket: ${allAirplaneTickets}">
+            <tr th:each="airplaneTicket: ${allAirplaneTickets}" th:if="${airplaneTicket.available != 0}">
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -60,14 +60,14 @@
                        th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">
                         <i class="material-icons" style="color: green">add_shopping_cart</i>
                     </a>
-<!--TODO: IF this offer is sold out - throw message for this                    -->
+                    <!--TODO: IF this offer is sold out - throw message for this                    -->
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
-                <a  class="airplane-tickets-button"
-                    th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"
-                   th:method="get">
-                    <i class="material-icons" style="color: red">delete</i></a>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
                 </td>
 
 

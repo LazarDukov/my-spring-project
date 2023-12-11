@@ -39,14 +39,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="car: ${allCars}">
-        <td th:text="*{car.make}"/>
-        <td th:text="*{car.model}"/>
-        <td th:text="*{car.bodyType}"/>
-        <td th:text="*{car.fuelType}"/>
-        <td th:text="*{car.price}"/>
+      <tr th:each="car: ${allCars}" th:if="${car.available != 0}">
+        <td th:text="*{car.make}"></td>
+        <td th:text="*{car.model}"></td>
+        <td th:text="*{car.bodyType}"></td>
+        <td th:text="*{car.fuelType}"></td>
+        <td th:text="*{car.price}"></td>
         <td>
-          <span th:if="${car.available != 0}" th:text="${car.available}"/>
+          <span th:if="${car.available != 0}" th:text="${car.available}"></span>
           <span th:if="${car.available == 0}">Sold Out</span>
         </td>
 

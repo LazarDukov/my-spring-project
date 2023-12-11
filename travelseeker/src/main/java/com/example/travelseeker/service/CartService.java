@@ -41,17 +41,16 @@ public class CartService {
         return newCart;
     }
 
-    //TODO:for all these methods should implement counter --when one of the offers is bought
+
 
     public void AddToCartAirplaneTicket(Principal principal, UUID id) {
-        //TODO: should add functionality about the sum of the price and category shows in cart
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
 
         assert buyer != null;
         Cart cartOfBuyer = buyer.getCart();
         AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
 
-        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
+
         List<AirplaneTicket> airplaneTicketsListOfBuyer = buyer.getCart().getAirplaneTickets();
         airplaneTicketsListOfBuyer.add(airplaneTicket);
         cartOfBuyer.setBuyer(buyer);
@@ -65,11 +64,10 @@ public class CartService {
     }
 
     public void AddToCartHotel(Principal principal, UUID id) {
-        //TODO: should add functionality about the sum of the price and category shows in cart
+
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
         Cart cartOfBuyer = buyer.getCart();
         Hotel hotel = hotelRepository.findHotelById(id);
-        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
         List<Hotel> cartHotelsListOfBuyer = buyer.getCart().getHotels();
         cartHotelsListOfBuyer.add(hotel);
         cartOfBuyer.setBuyer(buyer);
@@ -80,12 +78,10 @@ public class CartService {
     }
 
     public void AddToCartCar(Principal principal, UUID id) {
-        //TODO: should add functionality about the sum of the price and category shows in cart
+
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
         Cart cartOfBuyer = buyer.getCart();
         CarRent car = carRentRepository.findCarRentById(id);
-
-        //TODO: should implement a function where in airplaneTicket entity cart_id to have an Id but for what?
 
         List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
         carRentCartListOfBuyer.add(car);

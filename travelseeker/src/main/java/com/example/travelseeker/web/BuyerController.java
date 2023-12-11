@@ -38,7 +38,6 @@ public class BuyerController {
         List<CarRent> carRentsInCart = new ArrayList<>(buyer.getCart().getCars());
         List<Hotel> hotelsInCart = new ArrayList<>(buyer.getCart().getHotels());
         model.addAttribute("myAirplaneTicketCart", airplaneTicketsInCart);
-        //TODO: should implement the next two rows in the services and point them all by thymeleaf.
         model.addAttribute("myCarCart", carRentsInCart);
         model.addAttribute("myHotelCart", hotelsInCart);
         return "cart";

@@ -69,7 +69,7 @@ public class HotelController {
         return "successfully-added";
     }
 
-    @PostMapping("/remove-hotel/{id}")
+    @GetMapping("/remove-hotel/{id}")
     public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {
         hotelService.removePublishedHotel(principal, id);
         return "removed";

@@ -38,7 +38,6 @@ public class AirplaneTicketController {
     }
 
 
-    // TODO: should add another columns in the html page view
     @GetMapping("/airplane-tickets")
     public String getAirplaneTickets(Model model) {
 
@@ -77,5 +76,5 @@ public class AirplaneTicketController {
         airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
         return "removed";
     }
-    // TODO: make changes for car rent and hotel from POST to GET in remove method
+
 }

@@ -36,15 +36,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hotel: ${allHotels}">
-                <td th:text="*{hotel.name}"/>
-                <td th:text="*{hotel.country}"/>
-                <td th:text="*{hotel.city}"/>
-                <td th:text="*{hotel.stars}"/>
-                <td th:text="*{hotel.pricePerNight}"/>
+            <tr th:each="hotel: ${allHotels}" th:if="${hotel.available != 0}">
+                <td th:text="*{hotel.name}"></td>
+                <td th:text="*{hotel.country}"></td>
+                <td th:text="*{hotel.city}"></td>
+                <td th:text="*{hotel.stars}"></td>
+                <td th:text="*{hotel.pricePerNight}"></td>
 
                 <td>
-                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"/>
+                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"></span>
                     <span th:if="${hotel.available == 0}">Sold Out</span>
                 </td>
 
@@ -59,7 +59,7 @@
                        th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
                         <i class="material-icons" style="color: green">add_shopping_cart</i>
                     </a>
-                    <!--TODO: IF this offer is sold out - throw message for this                    -->
+
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
