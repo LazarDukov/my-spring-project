@@ -36,4 +36,9 @@ public class SellerService {
     public List<CarRent> getSellerSoldCarRents(Seller seller) {
         return seller.getSealedOffers().stream().flatMap(offer -> offer.getCarRents().stream()).collect(Collectors.toList());
     }
+
+    public List<Seller> getAllSellers() {
+        return sellerRepository.findAll();
+
+    }
 }

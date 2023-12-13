@@ -3,6 +3,7 @@ package com.example.travelseeker.model.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class AirplaneTicket extends BaseEntity {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
     @Column
     private String fromAirport;
@@ -33,11 +34,10 @@ public class AirplaneTicket extends BaseEntity {
     private BigDecimal price;
 
     @Column
-    private int available;
+    private Integer available;
 
     @Column
-    private int soldNumber;
-
+    private Integer soldNumber;
 
 
     @ManyToMany(mappedBy = "airplaneTickets", cascade = CascadeType.PERSIST)
@@ -46,11 +46,11 @@ public class AirplaneTicket extends BaseEntity {
     public AirplaneTicket() {
     }
 
-    public int getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public AirplaneTicket setAvailable(int available) {
+    public AirplaneTicket setAvailable(Integer available) {
         this.available = available;
         return this;
     }
@@ -73,11 +73,11 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public AirplaneTicket setDate(Date date) {
+    public AirplaneTicket setDate(LocalDate date) {
         this.date = date;
         return this;
     }
@@ -118,11 +118,11 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public int getSoldNumber() {
+    public Integer getSoldNumber() {
         return soldNumber;
     }
 
-    public AirplaneTicket setSoldNumber(int soldNumber) {
+    public AirplaneTicket setSoldNumber(Integer soldNumber) {
         this.soldNumber = soldNumber;
         return this;
     }

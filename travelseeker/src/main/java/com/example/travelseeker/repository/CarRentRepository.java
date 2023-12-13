@@ -10,4 +10,6 @@ public interface CarRentRepository extends JpaRepository<CarRent, UUID> {
     CarRent findCarRentById(UUID id);
 
     List<CarRent> findCarRentsBySellerIdAndAndAvailableGreaterThan(UUID id, int available);
+
+    List<CarRent> findCarRentsByAvailableGreaterThan(Integer quantity);
 }

@@ -1,29 +1,27 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.model.entities.Admin;
 import com.example.travelseeker.model.entities.Buyer;
 import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.model.entities.UserRole;
+import com.example.travelseeker.repository.AdminRepository;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ApplicationUserDetailsService implements UserDetailsService {
 
     private final SellerRepository sellerRepository;
     private final BuyerRepository buyerRepository;
+    private final AdminRepository adminRepository;
 
-    public ApplicationUserDetailsService(SellerRepository sellerRepository, BuyerRepository buyerRepository) {
+    public ApplicationUserDetailsService(AdminRepository adminRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository) {
+        this.adminRepository = adminRepository;
         this.sellerRepository = sellerRepository;
         this.buyerRepository = buyerRepository;
     }
@@ -33,9 +31,23 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         return sellerRepository.findSellerByUsername(username).map(this::mapSeller).orElseGet(() ->
-                buyerRepository.findBuyerByUsername(username).map(this::mapBuyer)
-                        .orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!")));
+                buyerRepository.findBuyerByUsername(username).map(this::mapBuyer).orElseGet(() ->
+                        adminRepository.findAdminByUsername(username).map(this::mapAdmin)
+                        .orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found!"))));
 
+    }
+
+    private UserDetails mapAdmin(Admin admin) {
+        return
+                //използваме дефолтната имплементация на Spring
+                org.springframework.security.core.userdetails.User.builder().
+                        username(admin.getUsername()).
+                        password(admin.getPassword()).
+                        authorities(admin.
+                                getRoles().
+                                stream().map(this::map).
+                                toList()).
+                        build();
     }
 
     private UserDetails mapSeller(Seller seller) {

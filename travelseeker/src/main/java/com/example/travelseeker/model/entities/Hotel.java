@@ -26,7 +26,7 @@ public class Hotel extends BaseEntity {
     private String address;
 
     @Column
-    private int stars;
+    private Integer stars;
 
     @Column
     private String description;
@@ -39,10 +39,10 @@ public class Hotel extends BaseEntity {
     private HotelRoomEnum roomType;
 
     @Column
-    private int available;
+    private Integer available;
 
     @Column
-    private int soldNumber;
+    private Integer soldNumber;
 
     @ManyToMany(mappedBy = "hotels", cascade = CascadeType.PERSIST)
     private List<Offers> offers;
@@ -94,11 +94,11 @@ public class Hotel extends BaseEntity {
         return this;
     }
 
-    public int getStars() {
+    public Integer getStars() {
         return stars;
     }
 
-    public Hotel setStars(int stars) {
+    public Hotel setStars(Integer stars) {
         this.stars = stars;
         return this;
     }
@@ -132,11 +132,11 @@ public class Hotel extends BaseEntity {
 
 
 
-    public int getSoldNumber() {
+    public Integer getSoldNumber() {
         return soldNumber;
     }
 
-    public Hotel setSoldNumber(int soldNumber) {
+    public Hotel setSoldNumber(Integer soldNumber) {
         this.soldNumber = soldNumber;
         return this;
     }
@@ -145,7 +145,7 @@ public class Hotel extends BaseEntity {
         return available;
     }
 
-    public Hotel setAvailable(int available) {
+    public Hotel setAvailable(Integer available) {
         this.available = available;
         return this;
     }

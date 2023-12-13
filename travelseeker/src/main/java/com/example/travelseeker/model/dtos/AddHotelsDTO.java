@@ -25,7 +25,7 @@ public class AddHotelsDTO {
     @NotNull
     @Min(1)
     @Max(5)
-    private int stars;
+    private Integer stars;
 
     @NotBlank(message = "Description cannot be empty!")
     @Size(min = 30)
@@ -42,7 +42,7 @@ public class AddHotelsDTO {
 
     @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
-    private int available;
+    private Integer available;
 
     public AddHotelsDTO() {
     }
@@ -83,11 +83,11 @@ public class AddHotelsDTO {
         return this;
     }
 
-    public int getStars() {
+    public Integer getStars() {
         return stars;
     }
 
-    public AddHotelsDTO setStars(int stars) {
+    public AddHotelsDTO setStars(Integer stars) {
         this.stars = stars;
         return this;
     }
@@ -119,11 +119,11 @@ public class AddHotelsDTO {
         return this;
     }
 
-    public int getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public AddHotelsDTO setAvailable(int available) {
+    public AddHotelsDTO setAvailable(Integer available) {
         this.available = available;
         return this;
     }

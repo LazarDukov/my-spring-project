@@ -14,7 +14,7 @@
         Navbar
     </div>
 
-    <div class="registerbox">
+    <div class="registerbox" style="height: auto; top: 50%;">
         <h1>Register here</h1>
         <form th:method="post"
               th:action="@{/users/register}"
@@ -28,7 +28,7 @@
                    class="form-control"
                    placeholder="Username"/>
             <small th:if="${#fields.hasErrors('username')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{username}"
                    class="text-danger">
                 Username error!
@@ -43,7 +43,7 @@
                    class="form-control"
                    placeholder="Password"/>
             <small th:if="${#fields.hasErrors('password')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{password}"
                    class="text-danger">
                 Password error!
@@ -57,7 +57,7 @@
                    class="form-control"
                    placeholder="Confirm password"/>
             <small th:if="${#fields.hasErrors('confirmPassword')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{confirmPassword}"
                    class="text-danger">
                 Confirm password error!
@@ -72,19 +72,19 @@
                    class="form-control"
                    placeholder="email"/>
             <small th:if="${#fields.hasErrors('email')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{email}"
                    class="text-danger">
                 Email error!
             </small>
-            <label for="role">What will you do in our site?</label><br>
+            <label for="role"> <p>What will you do in our site?</p></label><br>
             <select name="role" id="role">
                 <option value="" disabled selected hidden>Choose an option</option>
                 <option value="SELLER">SELL</option>
                 <option value="BUYER">BUY</option>
 
             </select><br>
-            <small th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="text-danger"></small>
+            <small th:if="${#fields.hasErrors('role')}"  th:errorclass="errors" th:errors="*{role}" class="text-danger"></small>
 
             <br><input type="submit" name="" value="Register">
             <a th:href="@{/users/login}">You already have an account?</a><br>

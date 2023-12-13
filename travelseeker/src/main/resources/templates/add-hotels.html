@@ -14,7 +14,7 @@
         Navbar
     </div>
 
-    <div class="add-airplane-ticket">
+    <div class="add-airplane-ticket" style="height: auto; top: 80%;">
         <h1>Hotel:</h1>
         <form th:method="post"
               th:action="@{/offers/add-hotels}"
@@ -114,7 +114,6 @@
                    th:errorclass="'is-invalid alert-danger'"
                    name="pricePerNight"
                    type="number"
-
                    class="form-control"
                    id="pricePerNight"
                    placeholder="Price for night"/>
@@ -124,7 +123,17 @@
                    class="text-danger">
                 Price per night error!
             </small>
+            <label for="roomType">Room type:</label><br>
+            <select name="roomType" id="roomType">
+                <option value="" disabled selected hidden>Choose a room type</option>
 
+                <option value="DOUBLE_ROOM">DOUBLE ROOM</option>
+                <option value="STUDIO">STUDIO</option>
+                <option value="APARTMENT">APARTMENT</option>
+
+
+            </select><br>
+            <small th:if="${#fields.hasErrors('roomType')}" th:errorclass="errors" th:errors="*{roomType}" class="text-danger"></small><br>
 
             <label for="available" class="text-white">Quantity:</label>
             <input th:field="*{available}"
@@ -135,7 +144,7 @@
                    id="available"
                    placeholder="Quantity"/>
             <small th:if="${#fields.hasErrors('available')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{available}"
                    class="text-danger">
                 Quantity error!

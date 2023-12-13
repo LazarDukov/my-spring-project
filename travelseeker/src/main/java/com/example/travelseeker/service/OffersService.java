@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -73,14 +74,14 @@ public class OffersService {
         if (buyer != null) {
 
             Hotel hotelToBuy = hotelRepository.findHotelById(id);
-         //   Seller seller = hotelToBuy.getSeller();
+            //   Seller seller = hotelToBuy.getSeller();
             Offers offer = offersRepository.findByHotelId(hotelToBuy.getId());
             hotelToBuy.setAvailable(hotelToBuy.getAvailable() - 1);
             hotelToBuy.setSoldNumber(hotelToBuy.getSoldNumber() + 1);
             buyer.getBoughtOffers().add(offer);
-      //      seller.getSealedOffers().add(offer);
+            //      seller.getSealedOffers().add(offer);
             buyer.getCart().getHotels().remove(hotelToBuy);
-       //     sellerRepository.save(seller);
+            //     sellerRepository.save(seller);
             buyerRepository.save(buyer);
         }
     }
@@ -92,11 +93,11 @@ public class OffersService {
             Offers offer = offersRepository.findByCarRentId(carRentToBuy.getId());
             carRentToBuy.setAvailable(carRentToBuy.getAvailable() - 1);
             carRentToBuy.setSoldNumber(carRentToBuy.getSoldNumber() + 1);
-          //  Seller seller = carRentToBuy.getSeller();
+            //  Seller seller = carRentToBuy.getSeller();
             buyer.getBoughtOffers().add(offer);
-      //      seller.getSealedOffers().add(offer);
+            //      seller.getSealedOffers().add(offer);
             buyer.getCart().getCars().remove(carRentToBuy);
-         //   sellerRepository.save(seller);
+            //   sellerRepository.save(seller);
             buyerRepository.save(buyer);
         }
     }

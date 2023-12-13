@@ -82,4 +82,9 @@ public class HotelService {
         return hotelRepository
                 .findHotelsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
     }
+
+
+    public List<Hotel> hotelsWithQuantityMoreThanZero() {
+        return this.hotelRepository.findHotelsByAvailableGreaterThan(0);
+    }
 }

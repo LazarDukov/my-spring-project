@@ -14,7 +14,7 @@
         Navbar
     </div>
 
-    <div class="add-airplane-ticket">
+    <div class="add-airplane-ticket" style="height: auto; top: 55%;">
         <h1>Car for rental:</h1>
         <form th:method="post"
               th:action="@{/offers/add-cars}"
@@ -49,35 +49,37 @@
                    class="text-danger">
                 Model error!
             </small>
-            <label for="bodyType" class="text-white">Body type:</label>
-            <input th:field="*{bodyType}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   name="bodyType"
-                   type="text"
-                   class="form-control"
-                   id="bodyType"
-                   placeholder="Body type"/>
-            <small th:if="${#fields.hasErrors('bodyType')}"
-                   th:errorclass="errors"
-                   th:errors="*{bodyType}"
-                   class="text-danger">
-                Body type error!
-            </small>
+            <label for="bodyType">Body type:</label><br>
+            <select name="bodyType" id="bodyType">
+                <option value="" disabled selected hidden>Choose a body type</option>
+                <!--                COMPACT, COUPE, CABRIO, SEDAN, HATCHBACK, SUV, VAN-->
+                <option value="COMPACT">COMPACT</option>
+                <option value="COUPE">COUPE</option>
+                <option value="CABRIO">CABRIO</option>
+                <option value="HATCHBACK">HATCHBACK</option>
+                <option value="SUV">SUV</option>
+                <option value="SEDAN">SEDAN</option>
+                <option value="VAN">VAN</option>
 
-            <label for="fuelType" class="text-white">Fuel type:</label>
-            <input th:field="*{fuelType}"
-                   th:errorclass="'is-invalid alert-danger'"
-                   name="fuelType"
-                   type="text"
-                   class="form-control"
-                   id="fuelType"
-                   placeholder="Fuel type"/>
-            <small th:if="${#fields.hasErrors('fuelType')}"
-                   th:errorclass="errors"
-                   th:errors="*{fuelType}"
-                   class="text-danger">
-                Fuel type error!
-            </small>
+
+            </select><br>
+            <small th:if="${#fields.hasErrors('bodyType')}" th:errorclass="errors" th:errors="*{bodyType}" class="text-danger"></small><br>
+
+
+            <label for="fuelType">Fuel type:</label><br>
+            <select name="fuelType" id="fuelType">
+                <option value="" disabled selected hidden>Choose a fuel type</option>
+                <!--                PETROL, DIESEL, GASOLINE, ELECTRIC, HYBRID;-->
+                <option value="PETROL">PETROL</option>
+                <option value="DIESEL">DIESEL</option>
+                <option value="GASOLINE">GASOLINE</option>
+                <option value="ELECTRIC">ELECTRIC</option>
+                <option value="HYBRID">HYBRID</option>
+
+
+            </select><br>
+            <small th:if="${#fields.hasErrors('fuelType')}" th:errorclass="errors" th:errors="*{fuelType}" class="text-danger"></small><br>
+
             <label for="price" class="text-white">Price:</label>
             <input th:field="*{price}"
                    th:errorclass="'is-invalid alert-danger'"

@@ -14,7 +14,7 @@
         Navbar
     </div>
 
-    <div class="add-airplane-ticket">
+    <div class="add-airplane-ticket" style="height: auto; top: 65%;">
         <h1>Airplane ticket:</h1>
         <form th:method="post"
               th:action="@{/offers/add-airplane-tickets}"
@@ -30,7 +30,7 @@
                    id="companyName"
                    placeholder="Company name"/>
             <small th:if="${#fields.hasErrors('companyName')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                 th:errors="*{companyName}"
                 class="text-danger">
                 Company name error!
@@ -44,9 +44,9 @@
                    type="date"
                    class="form-control"
                    id="date"
-                   placeholder="date"/>
+                   placeholder="MM/DD/YYYY"/>
             <small th:if="${#fields.hasErrors('date')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{date}"
                    class="text-danger">
                 Date error!
@@ -60,7 +60,7 @@
                    id="fromAirport"
                    placeholder="Departure from airport"/>
             <small th:if="${#fields.hasErrors('fromAirport')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{fromAirport}"
                    class="text-danger">
                 Departure airport error!
@@ -104,26 +104,42 @@
                    id="price"
                    placeholder="Price"/>
             <small th:if="${#fields.hasErrors('price')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{price}"
                    class="text-danger">
                 Price error!
             </small>
-
-            <label for="available" class="text-white">Quantity:</label>
+            <label for="available" class="text-white">Available:</label>
             <input th:field="*{available}"
                    th:errorclass="'is-invalid alert-danger'"
                    name="available"
                    type="number"
+                   step="any"
                    class="form-control"
                    id="available"
-                   placeholder="Quantity"/>
+                   placeholder="Available"/>
             <small th:if="${#fields.hasErrors('available')}"
-                   th:errorclass="error"
+                   th:errorclass="errors"
                    th:errors="*{available}"
                    class="text-danger">
-                Quantity error!
+                Price error!
             </small>
+
+
+            <!--            <label for="available" class="text-white">Quantity:</label>-->
+<!--            <input th:field="*{available}"-->
+<!--                   th:errorclass="'is-invalid alert-danger'"-->
+<!--                   name="available"-->
+<!--                   type="number"-->
+<!--                   class="form-control"-->
+<!--                   id="available"-->
+<!--                   placeholder="0"/>-->
+<!--            <small th:if="${#fields.hasErrors('available')}"-->
+<!--                   th:errorclass="error"-->
+<!--                   th:errors="*{available}"-->
+<!--                   class="text-danger">-->
+<!--                Quantity error!-->
+<!--            </small>-->
 
             <input type="submit" name="" value="Add airplane ticket offer">
         </form>

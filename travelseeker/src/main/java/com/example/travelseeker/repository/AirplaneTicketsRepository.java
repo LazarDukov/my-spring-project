@@ -13,4 +13,7 @@ public interface AirplaneTicketsRepository extends JpaRepository<AirplaneTicket,
 
     List<AirplaneTicket> findAirplaneTicketsBySellerIdAndAndAvailableGreaterThan(UUID id, int available);
 
+
+    List<AirplaneTicket> findAirplaneTicketsByAvailableGreaterThan(Integer quantity);
+
 }

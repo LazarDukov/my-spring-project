@@ -1,5 +1,6 @@
 package com.example.travelseeker.config;
 
+import com.example.travelseeker.repository.AdminRepository;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import com.example.travelseeker.service.ApplicationUserDetailsService;
@@ -58,8 +59,8 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(SellerRepository sellerRepository, BuyerRepository buyerRepository) {
-        return new ApplicationUserDetailsService(sellerRepository, buyerRepository);
+    public UserDetailsService userDetailsService(AdminRepository adminRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository) {
+        return new ApplicationUserDetailsService(adminRepository, sellerRepository, buyerRepository);
     }
 
     @Bean

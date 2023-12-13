@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+
+<body class="airplane-tickets">
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
+</header>
+
+<main>
+    <div class="container bg-blur rounded mt-5 mb-4">
+        <h1 class="offers-title">All sellers</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Remove</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="seller: ${allSellers}">
+                <td th:text="*{seller.username}"/>
+                <td th:text="*{seller.firstName}"/>
+                <td th:text="*{seller.lastName}"/>
+                <td th:text="*{seller.email}"/>
+                <td th:text="*{seller.age}"/>
+
+                </td>
+
+                <!--TODO: IT SHOULD BE FOR ADD ROLE ADMIN TO SOMEONE  USER -->
+
+                <!--        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">-->
+                <!--          <a class="airplane-tickets-button"-->
+                <!--             th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">-->
+                <!--            <i class="material-icons" style="color: green">add_shopping_cart</i>-->
+                <!--          </a>-->
+                <!--        </td>-->
+
+                <!--                <td >-->
+                <!--                    <a class="airplane-tickets-button"-->
+                <!--                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"-->
+                <!--                       th:method="get">-->
+                <!--                        <i class="material-icons" style="color: red">delete</i></a>-->
+                <!--                </td>-->
+
+
+            </tr>
+            </tbody>
+        </table>
+        <h1 class="offers-title">All buyers:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Remove</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="buyer: ${allBuyers}">
+                <td th:text="*{buyer.username}"/>
+                <td th:text="*{buyer.firstName}"/>
+                <td th:text="*{buyer.lastName}"/>
+                <td th:text="*{buyer.email}"/>
+                <td th:text="*{buyer.age}"/>
+
+                </td>
+
+                <!--TODO: IT SHOULD BE FOR ADD ROLE ADMIN TO SOMEONE  USER -->
+
+                <!--        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">-->
+                <!--          <a class="airplane-tickets-button"-->
+                <!--             th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">-->
+                <!--            <i class="material-icons" style="color: green">add_shopping_cart</i>-->
+                <!--          </a>-->
+                <!--        </td>-->
+
+                <!--                <td >-->
+                <!--                    <a class="airplane-tickets-button"-->
+                <!--                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"-->
+                <!--                       th:method="get">-->
+                <!--                        <i class="material-icons" style="color: red">delete</i></a>-->
+                <!--                </td>-->
+
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</main>
+
+
+</main>
+</body>
+
+</html>

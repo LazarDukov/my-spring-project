@@ -33,13 +33,13 @@ public class AddAirplaneTicketsDTO {
 
     @NotNull
     @Positive(message = "Availability should be more than 0!")
-    private int available;
+    private Integer available;
 
-    public int getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public AddAirplaneTicketsDTO setAvailable(int available) {
+    public AddAirplaneTicketsDTO setAvailable(Integer available) {
         this.available = available;
         return this;
     }

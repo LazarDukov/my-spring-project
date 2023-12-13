@@ -30,22 +30,22 @@
                 <th>Available</th>
                 <th>View offer</th>
                 <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
-                <th th:if="${#authorization.expression('hasRole(''SELLER'')')}">Remove</th>
+                <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
 
 
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hotel: ${allHotels}" th:if="${hotel.available != 0}">
+            <tr th:each="hotel: ${allHotels}">
                 <td th:text="*{hotel.name}"></td>
                 <td th:text="*{hotel.country}"></td>
                 <td th:text="*{hotel.city}"></td>
                 <td th:text="*{hotel.stars}"></td>
                 <td th:text="*{hotel.pricePerNight}"></td>
 
-                <td>
-                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"></span>
-                    <span th:if="${hotel.available == 0}">Sold Out</span>
+                <td th:text="*{hotel.available}">
+<!--                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"></span>-->
+<!--                    <span th:if="${hotel.available == 0}">Sold Out</span>-->
                 </td>
 
                 <td>
@@ -62,7 +62,7 @@
 
                 </td>
 
-                <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+                <td th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">
                     <a  class="airplane-tickets-button"
                         th:href="@{/offers/remove-hotel/{id}(id=${hotel.id})}"
                         th:method="get">

@@ -31,13 +31,13 @@ public class AddCarsDTO {
 
     @NotNull(message = "Available cannot be empty and less than 1!")
     @Min(1)
-    private int available;
+    private Integer available;
 
-    public int getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public AddCarsDTO setAvailable(int available) {
+    public AddCarsDTO setAvailable(Integer available) {
         this.available = available;
         return this;
     }

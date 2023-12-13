@@ -33,10 +33,10 @@ public class CarRent extends BaseEntity {
 
 
     @Column
-    private int available;
+    private Integer available;
 
     @Column
-    private int soldNumber;
+    private Integer soldNumber;
 
     @ManyToMany(mappedBy = "carRents", cascade = CascadeType.PERSIST)
     private List<Offers> offers;
@@ -45,11 +45,11 @@ public class CarRent extends BaseEntity {
     public CarRent() {
     }
 
-    public int getSoldNumber() {
+    public Integer getSoldNumber() {
         return soldNumber;
     }
 
-    public CarRent setSoldNumber(int soldNumber) {
+    public CarRent setSoldNumber(Integer soldNumber) {
         this.soldNumber = soldNumber;
         return this;
     }
@@ -109,11 +109,11 @@ public class CarRent extends BaseEntity {
     }
 
 
-    public int getAvailable() {
+    public Integer getAvailable() {
         return available;
     }
 
-    public CarRent setAvailable(int available) {
+    public CarRent setAvailable(Integer available) {
         this.available = available;
         return this;
     }

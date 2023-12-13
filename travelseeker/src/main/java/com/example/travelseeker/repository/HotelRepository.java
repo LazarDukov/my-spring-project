@@ -1,5 +1,6 @@
 package com.example.travelseeker.repository;
 
+import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.model.entities.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface HotelRepository extends JpaRepository<Hotel, UUID> {
     Hotel findHotelById(UUID id);
 
     List<Hotel> findHotelsBySellerIdAndAndAvailableGreaterThan(UUID id, int available);
+
+    List<Hotel> findHotelsByAvailableGreaterThan(Integer quantity);
 }

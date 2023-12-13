@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,10 +43,10 @@ public class AirplaneTicketsService {
     }
 
 
-    public void addNewAirplaneTicket( Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public void addNewAirplaneTicket(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO) throws ParseException {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        Date date = dateFormat.parse(addAirplaneTicketsDTO.getDate());
+        LocalDate date = LocalDate.parse(addAirplaneTicketsDTO.getDate(), dateFormatter);
 
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers offers = new Offers();
@@ -94,5 +94,11 @@ public class AirplaneTicketsService {
         return airplaneTicketsRepository
                 .findAirplaneTicketsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
     }
+
+    public List<AirplaneTicket> airplaneTicketsWithQuantityMoreThanZero() {
+        return this.airplaneTicketsRepository.findAirplaneTicketsByAvailableGreaterThan(0);
+    }
+
+
 }
 

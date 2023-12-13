@@ -1,9 +1,6 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.CarRent;
-import com.example.travelseeker.model.entities.Hotel;
+import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.UserRoleRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +19,10 @@ public class BuyerService {
 
     }
 
+    public List<Buyer> getAllBuyers() {
+        return buyerRepository.findAll();
 
+    }
     public Buyer getBuyerByUsername(String username) {
         return buyerRepository.findBuyerByUsername(username).orElse(null);
 

@@ -26,12 +26,6 @@ public class Seller extends User {
         this.sealedOffers = new ArrayList<>();
     }
 
-    // Additional method to get the number of times an offer has been sold by the seller
-   // public int getTimesOfferSold(Offers offer) {
-   //     return Collections.frequency(sealedOffers, offer);
-   // }
-
-
 
 
 

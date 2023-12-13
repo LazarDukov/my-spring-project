@@ -31,7 +31,7 @@
         <th>Available</th>
         <th>View offer</th>
         <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
-        <th th:if="${#authorization.expression('hasRole(''SELLER'')')}">Remove</th>
+        <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
 
 
 
@@ -39,15 +39,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="car: ${allCars}" th:if="${car.available != 0}">
+      <tr th:each="car: ${allCars}">
         <td th:text="*{car.make}"></td>
         <td th:text="*{car.model}"></td>
         <td th:text="*{car.bodyType}"></td>
         <td th:text="*{car.fuelType}"></td>
         <td th:text="*{car.price}"></td>
-        <td>
-          <span th:if="${car.available != 0}" th:text="${car.available}"></span>
-          <span th:if="${car.available == 0}">Sold Out</span>
+        <td th:text="*{car.available}">
+<!--          <span th:if="${car.available != 0}" th:text="${car.available}"></span>-->
+<!--          <span th:if="${car.available == 0}">Sold Out</span>-->
         </td>
 
 
@@ -67,7 +67,7 @@
           <!--TODO: IF this offer is sold out - throw message for this                    -->
         </td>
 
-        <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+        <td th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">
           <a  class="airplane-tickets-button"
               th:href="@{/offers/remove-car-rent/{id}(id=${car.id})}"
               th:method="get">

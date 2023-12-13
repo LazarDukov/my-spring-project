@@ -1,20 +1,13 @@
 package com.example.travelseeker.service;
 
-import com.example.travelseeker.model.entities.Buyer;
-import com.example.travelseeker.model.entities.Cart;
-import com.example.travelseeker.model.entities.Seller;
-import com.example.travelseeker.model.entities.UserRole;
-import com.example.travelseeker.repository.BuyerRepository;
-import com.example.travelseeker.repository.CartRepository;
-import com.example.travelseeker.repository.SellerRepository;
-import com.example.travelseeker.repository.UserRoleRepository;
+import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.repository.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.example.travelseeker.model.enums.UserRoleEnum.BUYER;
-import static com.example.travelseeker.model.enums.UserRoleEnum.SELLER;
+import static com.example.travelseeker.model.enums.UserRoleEnum.*;
 
 
 @Service
@@ -28,11 +21,12 @@ public class InitService {
 
     private final CartService cartService;
     private final CartRepository cartRepository;
+    private final AdminRepository adminRepository;
 
 
     @Autowired
     public InitService(UserRoleRepository userRoleRepository,
-                       PasswordEncoder passwordEncoder, SellerRepository sellerRepository, BuyerRepository buyersRepository, CartService cartService, OffersService offersService, CartRepository cartRepository) {
+                       PasswordEncoder passwordEncoder, SellerRepository sellerRepository, BuyerRepository buyersRepository, CartService cartService, OffersService offersService, CartRepository cartRepository, AdminRepository adminRepository) {
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.sellerRepository = sellerRepository;
@@ -40,15 +34,16 @@ public class InitService {
 
         this.cartService = cartService;
         this.cartRepository = cartRepository;
+        this.adminRepository = adminRepository;
     }
 
 
     private void initRoles() {
-        // UserRole admin = new UserRole().setRole(ADMIN);
+        UserRole admin = new UserRole().setRole(ADMIN);
         UserRole buyer = new UserRole().setRole(BUYER);
         UserRole seller = new UserRole().setRole(SELLER);
 
-        // userRoleRepository.save(admin);
+         userRoleRepository.save(admin);
         userRoleRepository.save(buyer);
         userRoleRepository.save(seller);
     }
@@ -57,6 +52,10 @@ public class InitService {
     public void Init() {
         if (userRoleRepository.count() == 0) {
             initRoles();
+        }
+
+        if (adminRepository.count() == 0) {
+            initAdminUsers();
         }
         if (buyersRepository.count() == 0) {
             initBuyerUsers();
@@ -67,21 +66,23 @@ public class InitService {
 
     }
 
-//    public void initAdminUsers() {
-//
-//
-//        User userAdmin = new User().setUsername("AdminAdminov")
-//                .setFirstName("Admin")
-//                .setLastName("Adminov")
-//                .setEmail("adminov@gmail.com")
-//                .setCountry("Bulgaria")
-//                .setAge(40)
-//                .setPassword(passwordEncoder.encode("lazar123"))
-//                .setRoles(userRoleRepository.findUserRoleByRole(ADMIN));
-//
-//
-//        userRepository.saveAndFlush(userAdmin);
-//    }
+    public void initAdminUsers() {
+
+
+        Admin userAdmin = new Admin();
+        userAdmin.setUsername("AdminAdminov")
+                .setFirstName("Admin")
+                .setLastName("Adminov")
+                .setEmail("adminov@gmail.com")
+                .setCountry("Bulgaria")
+                .setAge(40)
+                .setPassword(passwordEncoder.encode("lazar123"))
+                .setRoles(userRoleRepository.findUserRoleByRole(ADMIN));
+
+
+        adminRepository.saveAndFlush(userAdmin);
+    }
+
     private void initBuyerUsers() {
 
 

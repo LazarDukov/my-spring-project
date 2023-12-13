@@ -83,4 +83,8 @@ public class CarRentService {
         return carRentRepository
                 .findCarRentsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
     }
+
+    public List<CarRent> carsWithQuantityMoreThanZero() {
+        return this.carRentRepository.findCarRentsByAvailableGreaterThan(0);
+    }
 }
