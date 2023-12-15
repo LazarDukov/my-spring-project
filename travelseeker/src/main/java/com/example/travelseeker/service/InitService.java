@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 import static com.example.travelseeker.model.enums.UserRoleEnum.*;
 
 
@@ -43,7 +45,7 @@ public class InitService {
         UserRole buyer = new UserRole().setRole(BUYER);
         UserRole seller = new UserRole().setRole(SELLER);
 
-         userRoleRepository.save(admin);
+        userRoleRepository.save(admin);
         userRoleRepository.save(buyer);
         userRoleRepository.save(seller);
     }
@@ -77,7 +79,9 @@ public class InitService {
                 .setCountry("Bulgaria")
                 .setAge(40)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(ADMIN));
+                .setRoles(new ArrayList<>());
+
+        userAdmin.getRoles().add(userRoleRepository.findUserRoleByRole(ADMIN));
 
 
         adminRepository.saveAndFlush(userAdmin);
@@ -94,7 +98,11 @@ public class InitService {
                 .setCountry("Afganistan")
                 .setAge(30)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(BUYER));
+                .setRoles(new ArrayList<>());
+
+        userBuyer.getRoles().add(userRoleRepository.findUserRoleByRole(BUYER));
+
+
         userBuyer.setCart(cartService.getNewCart());
 
         Cart cart = userBuyer.getCart();
@@ -115,7 +123,9 @@ public class InitService {
                 .setCountry("Afganistan")
                 .setAge(60)
                 .setPassword(passwordEncoder.encode("lazar123"))
-                .setRoles(userRoleRepository.findUserRoleByRole(SELLER));
+                .setRoles(new ArrayList<>());
+
+        userSeller.getRoles().add(userRoleRepository.findUserRoleByRole(SELLER));
 
 
         sellerRepository.saveAndFlush(userSeller);

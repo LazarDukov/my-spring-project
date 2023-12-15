@@ -1,13 +1,8 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
-import com.example.travelseeker.model.entities.AirplaneTicket;
-import com.example.travelseeker.model.entities.Offers;
-import com.example.travelseeker.model.entities.Seller;
-import com.example.travelseeker.repository.AirplaneTicketsRepository;
-import com.example.travelseeker.repository.BuyerRepository;
-import com.example.travelseeker.repository.OffersRepository;
-import com.example.travelseeker.repository.SellerRepository;
+import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +22,20 @@ public class AirplaneTicketsService {
     private final BuyerRepository buyerRepository;
     private final OffersRepository offersRepository;
 
+    private final CarRentRepository carRentRepository;
+
+    private final HotelRepository hotelRepository;
+
 
     @Autowired
-    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository, OffersRepository offersRepository) {
+    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository, OffersRepository offersRepository, CarRentRepository carRentRepository, HotelRepository hotelRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.sellerRepository = sellerRepository;
         this.buyerRepository = buyerRepository;
 
         this.offersRepository = offersRepository;
+        this.carRentRepository = carRentRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     public AirplaneTicket getAirplaneTicketById(UUID id) {
@@ -98,6 +99,19 @@ public class AirplaneTicketsService {
     public List<AirplaneTicket> airplaneTicketsWithQuantityMoreThanZero() {
         return this.airplaneTicketsRepository.findAirplaneTicketsByAvailableGreaterThan(0);
     }
+
+
+    public void removeAirplaneTicketByAdmin(UUID id) {
+        AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
+        Offers offer = offersRepository.findByAirplaneTicketId(id);
+        offer.setAirplaneTickets(null);
+        airplaneTicket.setSeller(null);
+        offersRepository.delete(offer);
+        airplaneTicketsRepository.delete(airplaneTicket);
+
+    }
+
+
 
 
 }

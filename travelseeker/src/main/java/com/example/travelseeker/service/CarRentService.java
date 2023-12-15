@@ -87,4 +87,14 @@ public class CarRentService {
     public List<CarRent> carsWithQuantityMoreThanZero() {
         return this.carRentRepository.findCarRentsByAvailableGreaterThan(0);
     }
+
+    public void removeCarRentByAdmin(UUID id) {
+        CarRent carRent = carRentRepository.findCarRentById(id);
+        Offers offer = offersRepository.findByCarRentId(id);
+        offer.setCarRents(null);
+        carRent.setSeller(null);
+        offersRepository.delete(offer);
+        carRentRepository.delete(carRent);
+
+    }
 }

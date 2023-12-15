@@ -67,13 +67,19 @@
           <!--TODO: IF this offer is sold out - throw message for this                    -->
         </td>
 
-        <td th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">
+        <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
           <a  class="airplane-tickets-button"
               th:href="@{/offers/remove-car-rent/{id}(id=${car.id})}"
               th:method="get">
             <i class="material-icons" style="color: red">delete</i></a>
         </td>
 
+          <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+              <a  class="airplane-tickets-button"
+                  th:href="@{/offers/remove-car-rent-by-admin/{id}(id=${car.id})}"
+                  th:method="get">
+                  <i class="material-icons" style="color: red">delete</i></a>
+          </td>
 
       </tr>
       </tbody>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/navbar::head}"></head>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JourneySeekerHub</title>
+<link rel="stylesheet" href="/css/style.css"/>
+
+</head>
+<body class="register">
+<header>
+  <div th:replace="~{fragments/navbar :: navbar}">
+    Navbar
+  </div>
+
+  <div class="registerbox" style="height: auto; top: 50%;">
+    <h1>Register here</h1>
+    <form th:method="post"
+          th:action="@{/users/create-admin}"
+          th:object="${createAdmin}">
+      <p>Username</p>
+      <input th:field="*{username}"
+             th:errorclass="'is-invalid alert-danger'"
+             id="username"
+             name="username"
+             type="text"
+             class="form-control"
+             placeholder="Username"/>
+      <small th:if="${#fields.hasErrors('username')}"
+             th:errorclass="errors"
+             th:errors="*{username}"
+             class="text-danger">
+        Username error!
+      </small>
+
+      <p>Password</p>
+      <input th:field="*{password}"
+             th:errorclass="'is-invalid alert-danger'"
+             id="password"
+             name="password"
+             type="password"
+             class="form-control"
+             placeholder="Password"/>
+      <small th:if="${#fields.hasErrors('password')}"
+             th:errorclass="errors"
+             th:errors="*{password}"
+             class="text-danger">
+        Password error!
+      </small>
+      <p>Confirm password</p>
+      <input th:field="*{confirmPassword}"
+             th:errorclass="'is-invalid alert-danger'"
+             id="confirmPassword"
+             name="confirmPassword"
+             type="password"
+             class="form-control"
+             placeholder="Confirm password"/>
+      <small th:if="${#fields.hasErrors('confirmPassword')}"
+             th:errorclass="errors"
+             th:errors="*{confirmPassword}"
+             class="text-danger">
+        Confirm password error!
+      </small>
+
+      <p>Email</p>
+      <input th:field="*{email}"
+             th:errorclass="'is-invalid alert-danger'"
+             id="email"
+             name="email"
+             type="text"
+             class="form-control"
+             placeholder="email"/>
+      <small th:if="${#fields.hasErrors('email')}"
+             th:errorclass="errors"
+             th:errors="*{email}"
+             class="text-danger">
+        Email error!
+      </small>
+
+
+
+      <br><input type="submit" name="" value="Create new admin">
+
+    </form>
+  </div>
+</header>
+</body>
+</html>

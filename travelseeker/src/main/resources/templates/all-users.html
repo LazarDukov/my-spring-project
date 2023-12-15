@@ -28,7 +28,7 @@
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Age</th>
-                <th>Remove</th>
+                <th>Ban user</th>
 
             </tr>
             </thead>
@@ -44,19 +44,13 @@
 
                 <!--TODO: IT SHOULD BE FOR ADD ROLE ADMIN TO SOMEONE  USER -->
 
-                <!--        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">-->
-                <!--          <a class="airplane-tickets-button"-->
-                <!--             th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">-->
-                <!--            <i class="material-icons" style="color: green">add_shopping_cart</i>-->
-                <!--          </a>-->
-                <!--        </td>-->
 
-                <!--                <td >-->
-                <!--                    <a class="airplane-tickets-button"-->
-                <!--                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"-->
-                <!--                       th:method="get">-->
-                <!--                        <i class="material-icons" style="color: red">delete</i></a>-->
-                <!--                </td>-->
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/users/ban-seller/{id} (id=${seller.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
 
 
             </tr>
@@ -71,7 +65,7 @@
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Age</th>
-                <th>Remove</th>
+                <th>Ban buyer</th>
 
             </tr>
             </thead>
@@ -87,19 +81,13 @@
 
                 <!--TODO: IT SHOULD BE FOR ADD ROLE ADMIN TO SOMEONE  USER -->
 
-                <!--        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">-->
-                <!--          <a class="airplane-tickets-button"-->
-                <!--             th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">-->
-                <!--            <i class="material-icons" style="color: green">add_shopping_cart</i>-->
-                <!--          </a>-->
-                <!--        </td>-->
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/users/ban-buyer/{id} (id=${buyer.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
 
-                <!--                <td >-->
-                <!--                    <a class="airplane-tickets-button"-->
-                <!--                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"-->
-                <!--                       th:method="get">-->
-                <!--                        <i class="material-icons" style="color: red">delete</i></a>-->
-                <!--                </td>-->
 
 
             </tr>

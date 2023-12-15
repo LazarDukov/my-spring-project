@@ -42,11 +42,7 @@
                 <td th:text="*{hotel.city}"></td>
                 <td th:text="*{hotel.stars}"></td>
                 <td th:text="*{hotel.pricePerNight}"></td>
-
-                <td th:text="*{hotel.available}">
-<!--                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"></span>-->
-<!--                    <span th:if="${hotel.available == 0}">Sold Out</span>-->
-                </td>
+                <td th:text="*{hotel.available}"></td>
 
                 <td>
                     <a class="airplane-tickets-button"
@@ -62,13 +58,19 @@
 
                 </td>
 
-                <td th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">
-                    <a  class="airplane-tickets-button"
-                        th:href="@{/offers/remove-hotel/{id}(id=${hotel.id})}"
-                        th:method="get">
+                <td th:if="${#authorization.expression('hasRole(''SELLER'') ')}">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/remove-hotel/{id}(id=${hotel.id})}"
+                       th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
 
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'') ')}">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/remove-hotel-by-admin/{id}(id=${hotel.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
             </tr>
             </tbody>
         </table>

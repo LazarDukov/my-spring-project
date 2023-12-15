@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.ArrayList;
 
 @Service
 public class UserRegistrationService {
@@ -63,8 +62,10 @@ public class UserRegistrationService {
                 .setLastName("")
                 .setEmail(userRegistrationDTO.getEmail())
                 .setCountry("")
-                .setAge(0)
-                .setRoles(userRoleRepository.findUserRoleByRole(UserRoleEnum.SELLER));
+                .setAge(0).setRoles(new ArrayList<>());
+
+
+        newSeller.getRoles().add(userRoleRepository.findUserRoleByRole(UserRoleEnum.SELLER));
 
         sellerRepository.save(newSeller);
     }
@@ -78,7 +79,10 @@ public class UserRegistrationService {
                 .setLastName("")
                 .setEmail(userRegistrationDTO.getEmail())
                 .setCountry("")
-                .setAge(0).setRoles(userRoleRepository.findUserRoleByRole(UserRoleEnum.BUYER));
+                .setAge(0)
+                .setRoles(new ArrayList<>());
+        newBuyer.getRoles().add(userRoleRepository.findUserRoleByRole(UserRoleEnum.BUYER));
+
         newBuyer.setCart(cartService.getNewCart());
         Cart cart = newBuyer.getCart();
         cart.setBuyer(newBuyer);
@@ -89,7 +93,6 @@ public class UserRegistrationService {
         cartRepository.save(cart);
 
     }
-
 
 
 }

@@ -87,4 +87,14 @@ public class HotelService {
     public List<Hotel> hotelsWithQuantityMoreThanZero() {
         return this.hotelRepository.findHotelsByAvailableGreaterThan(0);
     }
+
+    public void removeHotelByAdmin(UUID id) {
+        Hotel hotel = hotelRepository.findHotelById(id);
+        Offers offer = offersRepository.findByHotelId(id);
+        offer.setHotels(null);
+        hotel.setSeller(null);
+        offersRepository.delete(offer);
+        hotelRepository.delete(hotel);
+
+    }
 }

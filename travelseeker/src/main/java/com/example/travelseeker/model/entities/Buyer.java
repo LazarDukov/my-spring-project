@@ -26,7 +26,10 @@ public class Buyer extends User {
         this.boughtOffers = new ArrayList<>();
     }
 
-
+    public Buyer addRole(UserRole role) {
+        this.getRoles().add(role);
+        return this;
+    }
     public Cart getCart() {
         return cart;
     }

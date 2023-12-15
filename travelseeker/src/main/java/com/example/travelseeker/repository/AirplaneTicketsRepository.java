@@ -11,6 +11,8 @@ import java.util.UUID;
 public interface AirplaneTicketsRepository extends JpaRepository<AirplaneTicket, UUID> {
     AirplaneTicket findAirplaneTicketById(UUID id);
 
+    List<AirplaneTicket> findAirplaneTicketsBySellerId(UUID id);
+
     List<AirplaneTicket> findAirplaneTicketsBySellerIdAndAndAvailableGreaterThan(UUID id, int available);
 
 

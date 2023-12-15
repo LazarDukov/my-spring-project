@@ -3,7 +3,6 @@ package com.example.travelseeker.model.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -26,8 +25,10 @@ public class Seller extends User {
         this.sealedOffers = new ArrayList<>();
     }
 
-
-
+    public Seller addRole(UserRole role) {
+        this.getRoles().add(role);
+        return this;
+    }
 
     public List<Offers> getSealedOffers() {
         return sealedOffers;
