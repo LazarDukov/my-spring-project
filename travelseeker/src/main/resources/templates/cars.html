@@ -14,78 +14,104 @@
 
 <body class="rent-cars">
 <header>
-  <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
+    <div th:replace="~{fragments/navbar :: navbar}">Navbar</div>
 </header>
 
 <main>
-  <div class="container bg-blur rounded mt-5 mb-4">
-    <h1 class="offers-title">All car rent offers:</h1>
-    <table>
-      <thead>
-      <tr>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Body type</th>
-        <th>Fuel type</th>
-        <th>Price</th>
-        <th>Available</th>
-        <th>View offer</th>
-        <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
-        <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
+    <div class="container bg-blur rounded mt-5 mb-4">
+        <h1 class="offers-title">All car rent offers:</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Body type</th>
+                <th>Fuel type</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>View offer</th>
+                <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
+                <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
 
 
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${allCars}">
+                <td th:text="*{car.make}"></td>
+                <td th:text="*{car.model}"></td>
+                <td th:text="*{car.bodyType}"></td>
+                <td th:text="*{car.fuelType}"></td>
+                <td th:text="*{car.price}"></td>
+                <td th:text="*{car.available}"></td>
 
 
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="car: ${allCars}">
-        <td th:text="*{car.make}"></td>
-        <td th:text="*{car.model}"></td>
-        <td th:text="*{car.bodyType}"></td>
-        <td th:text="*{car.fuelType}"></td>
-        <td th:text="*{car.price}"></td>
-        <td th:text="*{car.available}">
-<!--          <span th:if="${car.available != 0}" th:text="${car.available}"></span>-->
-<!--          <span th:if="${car.available == 0}">Sold Out</span>-->
-        </td>
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                </td>
+
+                <!--                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">-->
+                <!--                    <a class="airplane-tickets-button"-->
+                <!--                       th:href="@{/offers/cars/{id}/addToCart (id=${car.id})}"-->
+                <!--                    th:action="@{/offers/cars/{id}/addToCart (id=${car.id})}">-->
+                <!--                        <i class="material-icons" style="color: green">add_shopping_cart</i>-->
+
+                <!--                    <input type="number" id="days" name="days" required />-->
+                <!--                    </a>-->
+                <!--                    &lt;!&ndash;TODO: IF this offer is sold out - throw message for this                    &ndash;&gt;-->
+                <!--                </td>-->
+                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
+                    <form th:action="@{/offers/cars/{id}/addToCart (id=${car.id})}" method="get">
+                        <input type="number" id="days" name="days" required/>
+                        <button type="submit" class="airplane-tickets-button" style="background: none">
+                            <i class="material-icons" style="color: green">add_shopping_cart</i>
+                        </button>
+                    </form>
+                </td>
+                <!--                <td th:if="${#authorization.expression('hasRole(''BUYER'')')}"-->
+                <!--                    th:action="@{/offers/cars/{id}/addToCart (id=${car.id})}" method="get">-->
+                <!--                    <input type="hidden" name="id" />-->
+                <!--                    <i class="material-icons" style="color: green">add_shopping_cart</i>-->
+
+                <!--                    <input type="number" id="days" name="days" required />-->
+                <!--&lt;!&ndash;                    <button type="submit">Add to Cart</button>&ndash;&gt;-->
+                <!--                </td>-->
 
 
+                <!--                <td>-->
+                <!--                    <label for="days">Enter days:</label>-->
+                <!--                    <input type="number" id="days" name="days" required />-->
+                <!--                    <input-->
+                <!--                           name="days"-->
+                <!--                           type="number"-->
+                <!--                           class="form-control"-->
+                <!--                           id="carDays"-->
+                <!--                    th:value="*{carDays}"/>-->
 
+                <!--                </td>-->
 
-        <td>
-          <a class="airplane-tickets-button"
-             th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
-            <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
-        </td>
+                <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/remove-car-rent/{id}(id=${car.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
 
-        <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-          <a class="airplane-tickets-button"
-             th:href="@{/offers/cars/{id}/addToCart (id=${car.id})}">
-            <i class="material-icons" style="color: green">add_shopping_cart</i>
-          </a>
-          <!--TODO: IF this offer is sold out - throw message for this                    -->
-        </td>
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/remove-car-rent-by-admin/{id}(id=${car.id})}"
+                       th:method="get">
+                        <i class="material-icons" style="color: red">delete</i></a>
+                </td>
 
-        <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
-          <a  class="airplane-tickets-button"
-              th:href="@{/offers/remove-car-rent/{id}(id=${car.id})}"
-              th:method="get">
-            <i class="material-icons" style="color: red">delete</i></a>
-        </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
 
-          <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-              <a  class="airplane-tickets-button"
-                  th:href="@{/offers/remove-car-rent-by-admin/{id}(id=${car.id})}"
-                  th:method="get">
-                  <i class="material-icons" style="color: red">delete</i></a>
-          </td>
-
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
 </main>
 
 

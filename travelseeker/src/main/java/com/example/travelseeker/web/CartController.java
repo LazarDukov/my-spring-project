@@ -26,8 +26,8 @@ public class CartController {
     }
 
     @GetMapping("/cars/{id}/addToCart")
-    public String addToCartCarOffer(@PathVariable UUID id, Principal principal) {
-        cartService.AddToCartCar(principal, id);
+    public String addToCartCarOffer(@PathVariable UUID id, @RequestParam Integer days, Principal principal) {
+        cartService.AddToCartCar(principal, id, days);
         return "successfully-added";
     }
 
@@ -37,8 +37,6 @@ public class CartController {
 
         return "successfully-added";
     }
-
-
 
 
 }

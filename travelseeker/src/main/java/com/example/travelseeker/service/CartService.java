@@ -76,7 +76,7 @@ public class CartService {
         cartRepository.save(cartOfBuyer);
     }
 
-    public void AddToCartCar(Principal principal, UUID id) {
+    public void AddToCartCar(Principal principal, UUID id, Integer days) {
 
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
         Cart cartOfBuyer = buyer.getCart();
@@ -90,7 +90,7 @@ public class CartService {
 
 
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice().multiply(BigDecimal.valueOf(days))));
 
 
         buyerRepository.save(buyer);
