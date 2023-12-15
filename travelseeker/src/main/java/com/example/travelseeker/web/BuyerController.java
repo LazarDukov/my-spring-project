@@ -63,7 +63,7 @@ public class BuyerController {
         return "redirect:/buyers/cart";
     }
 
-    @GetMapping("/cart/remove-car-from-cart/{id}")
+    @GetMapping("/cart/remove-car-rent-from-cart/{id}")
     public String removeFromCartCarRent(Principal principal, @PathVariable UUID id) {
         cartService.removeFromCartCarRent(principal, id);
         return "redirect:/buyers/cart";

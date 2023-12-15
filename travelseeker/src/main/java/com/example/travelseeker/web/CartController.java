@@ -25,7 +25,7 @@ public class CartController {
         return "redirect:/offers/airplane-tickets";
     }
 
-    @GetMapping("/view-car-offer/{id}/addToCart")
+    @GetMapping("/cars/{id}/addToCart")
     public String addToCartCarOffer(@PathVariable UUID id, Principal principal) {
         cartService.AddToCartCar(principal, id);
         return "successfully-added";

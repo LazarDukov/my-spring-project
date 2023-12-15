@@ -24,6 +24,8 @@ public class Cart extends BaseEntity {
 
     @ManyToMany
     private List<Hotel> hotels;
+
+
     @ManyToMany
     private List<CarRent> cars;
 

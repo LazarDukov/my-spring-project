@@ -61,7 +61,7 @@
 
         <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
           <a class="airplane-tickets-button"
-             th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+             th:href="@{/offers/cars/{id}/addToCart (id=${car.id})}">
             <i class="material-icons" style="color: green">add_shopping_cart</i>
           </a>
           <!--TODO: IF this offer is sold out - throw message for this                    -->

@@ -42,7 +42,6 @@ public class CartService {
     }
 
 
-
     public void AddToCartAirplaneTicket(Principal principal, UUID id) {
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
 
@@ -84,13 +83,16 @@ public class CartService {
         CarRent car = carRentRepository.findCarRentById(id);
 
         List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
+
+
         carRentCartListOfBuyer.add(car);
         cartOfBuyer.setBuyer(buyer);
+
+
         cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
         cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
 
 
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(car.getPrice()));
         buyerRepository.save(buyer);
         cartRepository.save(cartOfBuyer);
     }
@@ -118,11 +120,16 @@ public class CartService {
 
         assert buyer != null;
         Cart cartOfBuyer = buyer.getCart();
-        CarRent carRent = carRentRepository.findCarRentById(id);
-        cartOfBuyer.getCars().remove(carRent);
-        cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
+        CarRent car = carRentRepository.findCarRentById(id);
+        List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
+        List<CarRent> carRentsInThisCart = carRentCartListOfBuyer.stream()
+                .filter(carRent -> carRent.getId().equals(car.getId())).toList();
+        Integer numberCarRents = carRentsInThisCart.size();
+        BigDecimal priceOfCarRentsWithSameId = car.getPrice().multiply(BigDecimal.valueOf(numberCarRents));
+        cartOfBuyer.getCars().removeAll(carRentsInThisCart);
 
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(carRent.getPrice()));
+        cartOfBuyer.setCount(cartOfBuyer.getCount() - numberCarRents);
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(priceOfCarRentsWithSameId));
 
         if (cartOfBuyer.getTotalPrice().signum() <= 0) {
             cartOfBuyer.setTotalPrice(BigDecimal.ZERO);

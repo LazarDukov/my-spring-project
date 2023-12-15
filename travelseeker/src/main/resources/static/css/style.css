@@ -11,7 +11,7 @@ body {
 }
 
 nav {
-    background: #0082e6;
+    background: #0077ff;
     height: 80px;
     width: 100%;
 }
@@ -67,7 +67,7 @@ body.index {
     background-image: url("../images/aroundTheWorld.jpg");
     background-attachment: fixed;
     background-size: 100% 100%;
-    background-color: rgba(207, 231, 241, 0.6);
+    background-color: rgba(91, 181, 255, 0.47);
     background-blend-mode: overlay;
 
 
