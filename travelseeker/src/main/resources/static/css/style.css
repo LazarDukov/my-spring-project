@@ -11,7 +11,7 @@ body {
 }
 
 nav {
-    background: #0077ff;
+    background: #1b6bff;
     height: 80px;
     width: 100%;
 }
@@ -43,23 +43,24 @@ nav ul form button {
 
 a.active,
 a.hover {
-    background: #1b9bff;
+    background: #1b7eff;
     transition: .5s;
 
 }
 
 a.auth-active {
-    background: #1b9bff;
+    background: #1b7eff;
     transition: .5s;
 }
 
 button.auth-active1 {
-    background: #1b9bff;
+    background: #1b7eff;
     transition: .5s;
 }
 
 form.logout-form button {
     box-sizing: border-box;
+    color: #1b9bff;
     /* Remove the border specifically for the logout button */
 }
 
@@ -119,7 +120,7 @@ body.aboutus {
 .aboutus {
     width: 1000px;
     height: 900px;
-    background: #0082e6;
+    background: #1b7eff;
     opacity: 0.9;
     top: 65%;
     left: 50%;
@@ -135,7 +136,7 @@ body.aboutus {
 .contacts {
     width: 1000px;
     height: 370px;
-    background: #0082e6;
+    background: #1b7eff;
     opacity: 0.9;
     top: 50%;
     left: 50%;
@@ -149,7 +150,7 @@ body.aboutus {
 .add-airplane-ticket {
     width: 1000px;
     height: 900px;
-    background: #0082e6;
+    background: #1b7eff;
     opacity: 0.9;
 
     left: 50%;
@@ -179,7 +180,7 @@ h2 {
     padding: 20px;
     text-align: center;
     font-size: 40px;
-    color: #0d00ff;
+    color: #1b9bff;
 }
 
 .registerbox p,
@@ -211,6 +212,8 @@ input[type="password"]
 input[type="text"],
 input[type="number"],
 input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
 .input-style {
     border: none;
     border-bottom: 1px solid #fff;
@@ -237,14 +240,7 @@ input[type="date"],
 
 .registerbox select,
 .add-airplane-ticket select {
-    /*appearance: none;*/
-    /*width: 100%;*/
-    /*font-size: 16px;*/
-    /*background-color: #0082e6;*/
-    /*border: none;*/
-    /*border-bottom: 1px solid #fff;*/
-    /*border-top: 1px solid #fff;*/
-    /*cursor: pointer;*/
+
     width: 100%;
     margin-bottom: 15px;
     border: none;

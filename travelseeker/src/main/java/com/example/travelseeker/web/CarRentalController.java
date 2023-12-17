@@ -37,11 +37,20 @@ public class CarRentalController {
     public String getAddCars() {
         return "add-cars";
     }
-
+    @PostMapping("/add-cars")
+    public String addCars( Principal principal, @Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addCarsDTO", addCarsDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
+            return "redirect:/offers/add-cars";
+        }
+        carRentService.addNewCar(principal,addCarsDTO);
+        return "successfully-added";
+    }
     @GetMapping("/cars")
     public String getCars(Model model) {
         model.addAttribute("allCars", this.carRentService.getAllCars());
-        return "cars";
+        return "car-rents";
     }
 
     @GetMapping("/view-car-offer/{id}")
@@ -53,16 +62,7 @@ public class CarRentalController {
     }
 
 
-    @PostMapping("/add-cars")
-    public String addCars( Principal principal, @Valid AddCarsDTO addCarsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addCarsDTO", addCarsDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addCarsDTO", bindingResult);
-            return "redirect:/offers/add-cars";
-        }
-        carRentService.addNewCar(principal,addCarsDTO);
-        return "successfully-added";
-    }
+
     @GetMapping("/remove-car-rent/{id}")
     public String removeCar(Principal principal,@PathVariable UUID id) {
         carRentService.removePublishedCarRent(principal, id);

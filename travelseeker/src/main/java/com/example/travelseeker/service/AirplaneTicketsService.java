@@ -1,7 +1,9 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddAirplaneTicketsDTO;
-import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.model.entities.AirplaneTicket;
+import com.example.travelseeker.model.entities.Offers;
+import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +47,13 @@ public class AirplaneTicketsService {
 
 
     public void addNewAirplaneTicket(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO) throws ParseException {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDate date = LocalDate.parse(addAirplaneTicketsDTO.getDate(), dateFormatter);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(addAirplaneTicketsDTO.getDateTime(), dateTimeFormatter);
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate date = LocalDate.parse(addAirplaneTicketsDTO.getDate(), dateFormatter);
+//        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+//        LocalTime time = LocalTime.parse(addAirplaneTicketsDTO.getTime(), timeFormatter);
 
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers offers = new Offers();
@@ -55,7 +61,7 @@ public class AirplaneTicketsService {
 
         AirplaneTicket newAirplaneTicket = new AirplaneTicket()
                 .setCompanyName(addAirplaneTicketsDTO.getCompanyName())
-                .setDate(date)
+                .setDateTime(dateTime)
                 .setFromAirport(addAirplaneTicketsDTO.getFromAirport())
                 .setToAirport(addAirplaneTicketsDTO.getToAirport())
                 .setFlyNumber(addAirplaneTicketsDTO.getFlyNumber())
@@ -110,8 +116,6 @@ public class AirplaneTicketsService {
         airplaneTicketsRepository.delete(airplaneTicket);
 
     }
-
-
 
 
 }

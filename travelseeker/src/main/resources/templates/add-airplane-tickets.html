@@ -31,26 +31,56 @@
                    placeholder="Company name"/>
             <small th:if="${#fields.hasErrors('companyName')}"
                    th:errorclass="errors"
-                th:errors="*{companyName}"
-                class="text-danger">
+                   th:errors="*{companyName}"
+                   class="text-danger">
                 Company name error!
             </small>
-
-
-            <label for="date" class="text-white">Date:</label>
-            <input th:field="*{date}"
+            <label for="dateTime" class="text-white">Date and hour:</label>
+            <input th:field="*{dateTime}"
                    th:errorclass="'is-invalid alert-danger'"
-                   name="date"
-                   type="date"
+                   th:value="${#dates.format(dateTime, 'yyyy-MM-ddTHH:mm')}"
+                   name="dateTime"
+                   type="datetime-local"
                    class="form-control"
-                   id="date"
-                   placeholder="MM/DD/YYYY"/>
-            <small th:if="${#fields.hasErrors('date')}"
+                   id="dateTime"
+                   placeholder="YYYY-MM-DDTHH:mm"/>
+            <small th:if="${#fields.hasErrors('dateTime')}"
                    th:errorclass="errors"
-                   th:errors="*{date}"
+                   th:errors="*{dateTime}"
                    class="text-danger">
                 Date error!
             </small>
+
+
+            <!--            <label for="date" class="text-white">Date:</label>-->
+            <!--            <input th:field="*{date}"-->
+            <!--                   th:errorclass="'is-invalid alert-danger'"-->
+            <!--                   name="date"-->
+            <!--                   type="date"-->
+            <!--                   class="form-control"-->
+            <!--                   id="date"-->
+            <!--                   placeholder="MM/DD/YYYY"/>-->
+            <!--            <small th:if="${#fields.hasErrors('date')}"-->
+            <!--                   th:errorclass="errors"-->
+            <!--                   th:errors="*{date}"-->
+            <!--                   class="text-danger">-->
+            <!--                Date error!-->
+            <!--            </small>-->
+
+            <!--            <label for="time" class="text-white">Time:</label>-->
+            <!--            <input th:field="*{time}"-->
+            <!--                   th:errorclass="'is-invalid alert-danger'"-->
+            <!--                   name="time"-->
+            <!--                   type="time"-->
+            <!--                   class="form-control"-->
+            <!--                   id="time"-->
+            <!--                   placeholder="00:00:AM"/>-->
+            <!--            <small th:if="${#fields.hasErrors('time')}"-->
+            <!--                   th:errorclass="errors"-->
+            <!--                   th:errors="*{time}"-->
+            <!--                   class="text-danger">-->
+            <!--                Time error!-->
+            <!--            </small>-->
             <label for="fromAirport" class="text-white">Departure airport:</label>
             <input th:field="*{fromAirport}"
                    th:errorclass="'is-invalid alert-danger'"
@@ -127,19 +157,19 @@
 
 
             <!--            <label for="available" class="text-white">Quantity:</label>-->
-<!--            <input th:field="*{available}"-->
-<!--                   th:errorclass="'is-invalid alert-danger'"-->
-<!--                   name="available"-->
-<!--                   type="number"-->
-<!--                   class="form-control"-->
-<!--                   id="available"-->
-<!--                   placeholder="0"/>-->
-<!--            <small th:if="${#fields.hasErrors('available')}"-->
-<!--                   th:errorclass="error"-->
-<!--                   th:errors="*{available}"-->
-<!--                   class="text-danger">-->
-<!--                Quantity error!-->
-<!--            </small>-->
+            <!--            <input th:field="*{available}"-->
+            <!--                   th:errorclass="'is-invalid alert-danger'"-->
+            <!--                   name="available"-->
+            <!--                   type="number"-->
+            <!--                   class="form-control"-->
+            <!--                   id="available"-->
+            <!--                   placeholder="0"/>-->
+            <!--            <small th:if="${#fields.hasErrors('available')}"-->
+            <!--                   th:errorclass="error"-->
+            <!--                   th:errors="*{available}"-->
+            <!--                   class="text-danger">-->
+            <!--                Quantity error!-->
+            <!--            </small>-->
 
             <input type="submit" name="" value="Add airplane ticket offer">
         </form>

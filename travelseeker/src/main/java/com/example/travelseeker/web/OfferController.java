@@ -25,7 +25,6 @@ public class OfferController {
     }
 
 
-
     @GetMapping("/buy-airplane-ticket-offer/{id}")
     public String buyDirectlyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartAirplaneTickets(id, principal);

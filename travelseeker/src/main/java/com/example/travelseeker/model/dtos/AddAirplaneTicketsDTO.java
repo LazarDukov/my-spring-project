@@ -1,7 +1,6 @@
 package com.example.travelseeker.model.dtos;
 
 
-
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -12,7 +11,19 @@ public class AddAirplaneTicketsDTO {
     private String companyName;
 
     @NotEmpty(message = "Please pick a date!")
-    private String date;
+    private String dateTime;
+
+//    @NotEmpty(message = "Please pick a time!")
+//    private String time;
+
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public AddAirplaneTicketsDTO setTime(String time) {
+//        this.time = time;
+//        return this;
+//    }
 
     @NotBlank(message = "Please select airport for departure!")
     @Size(min = 3, max = 30, message = "Airport name should be between 3 and 30 characters!")
@@ -56,14 +67,22 @@ public class AddAirplaneTicketsDTO {
         return this;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public AddAirplaneTicketsDTO setDate(String date) {
-        this.date = date;
+    public AddAirplaneTicketsDTO setDateTime(String dateTime) {
+        this.dateTime = dateTime;
         return this;
     }
+//    public String getDate() {
+//        return date;
+//    }
+//
+//    public AddAirplaneTicketsDTO setDate(String date) {
+//        this.date = date;
+//        return this;
+//    }
 
     public String getFromAirport() {
         return fromAirport;

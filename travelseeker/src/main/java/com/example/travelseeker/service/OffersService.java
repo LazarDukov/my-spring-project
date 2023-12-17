@@ -5,6 +5,7 @@ import com.example.travelseeker.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
@@ -89,15 +90,25 @@ public class OffersService {
     public void buyFromCartCarRents(UUID id, Principal principal) {
         Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
         if (buyer != null) {
-            CarRent carRentToBuy = carRentRepository.findCarRentById(id);
-            Offers offer = offersRepository.findByCarRentId(carRentToBuy.getId());
-            carRentToBuy.setAvailable(carRentToBuy.getAvailable() - 1);
-            carRentToBuy.setSoldNumber(carRentToBuy.getSoldNumber() + 1);
-            //  Seller seller = carRentToBuy.getSeller();
-            buyer.getBoughtOffers().add(offer);
-            //      seller.getSealedOffers().add(offer);
-            buyer.getCart().getCars().remove(carRentToBuy);
-            //   sellerRepository.save(seller);
+            CarRent car = carRentRepository.findCarRentById(id);
+            Offers offer = offersRepository.findByCarRentId(car.getId());
+
+            List<CarRent> carRentsInThisCart = buyer.getCart().getCars().stream()
+                    .filter(carRent -> carRent.getId().equals(car.getId())).toList();
+            int numberCarRents = carRentsInThisCart.size();
+            car.setAvailable(car.getAvailable() - numberCarRents);
+            car.setSoldNumber(car.getSoldNumber() + numberCarRents);
+            Seller seller = car.getSeller();
+            for (int i = 0; i < numberCarRents; i++) {
+                buyer.getBoughtOffers().add(offer);
+                buyer.getCart().getCars().remove(car);
+            }
+            if (seller.getSealedOffers().stream().noneMatch(o -> o.getCarRents().contains(car))) {
+                seller.getSealedOffers().add(offer);
+                sellerRepository.save(seller);
+            }
+            buyer.getCart().setTotalPrice(buyer.getCart().getTotalPrice().subtract(car.getPrice().multiply(BigDecimal.valueOf(numberCarRents))));
+            // TODO: remove total price from cart and count reduce
             buyerRepository.save(buyer);
         }
     }

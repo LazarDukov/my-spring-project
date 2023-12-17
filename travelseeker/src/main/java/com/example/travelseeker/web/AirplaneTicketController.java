@@ -36,6 +36,10 @@ public class AirplaneTicketController {
     public AddAirplaneTicketsDTO addAirplaneTicketsDTO() {
         return new AddAirplaneTicketsDTO();
     }
+    @GetMapping("/add-airplane-tickets")
+    public String getAddAirplaneTickets() {
+        return "add-airplane-tickets";
+    }
 
 
     @GetMapping("/airplane-tickets")
@@ -45,21 +49,6 @@ public class AirplaneTicketController {
 
         return "airplane-tickets";
     }
-
-    @GetMapping("/add-airplane-tickets")
-    public String getAddAirplaneTickets() {
-        return "add-airplane-tickets";
-    }
-
-    @GetMapping("/view-airplane-ticket-offer/{id}")
-    public String getViewAirplaneTicketOffer(Model model, @PathVariable UUID id) {
-        AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
-        model.addAttribute("readAirplaneTicket", airplaneTicket);
-
-        return "view-airplane-ticket-offer";
-    }
-
-
     @PostMapping("/add-airplane-tickets")
     public String addAirplaneTickets(Principal principal, @Valid AddAirplaneTicketsDTO addAirplaneTicketsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ParseException {
         if (bindingResult.hasErrors()) {
@@ -70,6 +59,14 @@ public class AirplaneTicketController {
         airplaneTicketsService.addNewAirplaneTicket(principal,addAirplaneTicketsDTO);
         return "successfully-added";
     }
+    @GetMapping("/view-airplane-ticket-offer/{id}")
+    public String getViewAirplaneTicketOffer(Model model, @PathVariable UUID id) {
+        AirplaneTicket airplaneTicket = airplaneTicketsService.getAirplaneTicketById(id);
+        model.addAttribute("readAirplaneTicket", airplaneTicket);
+
+        return "view-airplane-ticket-offer";
+    }
+
 
     @GetMapping("/remove-airplane-ticket/{id}")
     public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {

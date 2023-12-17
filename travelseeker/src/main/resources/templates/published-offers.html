@@ -23,7 +23,7 @@
                 <th>Company name</th>
                 <th>From</th>
                 <th>To</th>
-                <th>Date</th>
+                <th>Date and hour</th>
                 <th>Price</th>
                 <th>Available</th>
                 <th>View offer</th>
@@ -37,7 +37,7 @@
                 <td th:text="*{airplaneTicket.companyName}"></td>
                 <td th:text="*{airplaneTicket.fromAirport}"></td>
                 <td th:text="*{airplaneTicket.toAirport}"></td>
-                <td th:text="*{airplaneTicket.date}"></td>
+                <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="*{airplaneTicket.price}"></td>
                 <td th:text="*{airplaneTicket.available}">
                     <!--          <span th:if="${airplaneTicket.available != 0}" th:text="${airplaneTicket.available}"></span>-->

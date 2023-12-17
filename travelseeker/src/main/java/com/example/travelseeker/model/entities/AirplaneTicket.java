@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +20,20 @@ public class AirplaneTicket extends BaseEntity {
     private String companyName;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    private LocalDate date;
+    private LocalDateTime dateTime;
+
+//    @Column
+//    @Temporal(TemporalType.TIME)
+//    private LocalTime time;
+
+//    public LocalTime getTime() {
+//        return time;
+//    }
+//
+//    public AirplaneTicket setTime(LocalTime time) {
+//        this.time = time;
+//        return this;
+//    }
 
     @Column
     private String fromAirport;
@@ -73,12 +87,21 @@ public class AirplaneTicket extends BaseEntity {
         return this;
     }
 
-    public LocalDate getDate() {
-        return date;
+//    public LocalDate getDate() {
+//        return date;
+//    }
+//
+//    public AirplaneTicket setDate(LocalDate date) {
+//        this.date = date;
+//        return this;
+//    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public AirplaneTicket setDate(LocalDate date) {
-        this.date = date;
+    public AirplaneTicket setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
         return this;
     }
 

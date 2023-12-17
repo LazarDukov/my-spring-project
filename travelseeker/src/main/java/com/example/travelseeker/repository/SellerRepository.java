@@ -16,4 +16,6 @@ public interface SellerRepository extends JpaRepository<Seller, UUID> {
     Seller findFirstByUsername(String username);
 
     Seller findFirstByEmail(String email);
+
+
 }

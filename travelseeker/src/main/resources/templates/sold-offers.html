@@ -39,7 +39,7 @@
                 <td th:text="*{airplaneTicket.companyName}"></td>
                 <td th:text="*{airplaneTicket.fromAirport}"></td>
                 <td th:text="*{airplaneTicket.toAirport}"></td>
-                <td th:text="*{airplaneTicket.date}"></td>
+                <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="*{airplaneTicket.price}"></td>
                 <td>
                     <span th:if="${airplaneTicket.available != 0}" th:text="${airplaneTicket.available}"></span>
@@ -79,7 +79,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="car: ${carRentsSold}" th:if="${car.available != 0}">
+            <tr th:each="car: ${carRentsSold}" th:if="${car.available >= 0}">
                 <td th:text="*{car.make}"></td>
                 <td th:text="*{car.model}"></td>
                 <td th:text="*{car.bodyType}"></td>

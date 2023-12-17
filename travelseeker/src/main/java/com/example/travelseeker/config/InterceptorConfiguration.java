@@ -10,6 +10,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     private final HideSoldOffersInterceptor hideSoldOffersInterceptor;
 
+
     public InterceptorConfiguration(HideSoldOffersInterceptor hideSoldOffersInterceptor) {
         this.hideSoldOffersInterceptor = hideSoldOffersInterceptor;
     }
@@ -17,6 +18,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(hideSoldOffersInterceptor); // Add path patterns for the controllers you want to intercept
+        registry.addInterceptor(hideSoldOffersInterceptor);
     }
 }

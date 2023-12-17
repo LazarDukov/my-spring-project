@@ -33,7 +33,7 @@ public class SellerController {
         this.carRentService = carRentService;
     }
 
-    @GetMapping("/published-offers")
+    @GetMapping("/published-offers/offers")
     public String getMyPublishedOffers(Model model, Principal principal) {
         List<AirplaneTicket> airplaneTicketsPublished =
                 airplaneTicketsService.getAllAvailableAirplaneTicketsOfSeller(principal, 0);
@@ -48,7 +48,7 @@ public class SellerController {
     }
 
 
-    @GetMapping("/sold-offers")
+    @GetMapping("/sold-offers/offers")
     public String getMySoldOffers(Principal principal, Model model) {
         Seller seller = sellerService.getSellerByUsername(principal.getName());
         List<AirplaneTicket> airplaneTicketsSold = sellerService.getSellerSoldAirplaneTickets(seller);

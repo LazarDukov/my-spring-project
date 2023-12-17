@@ -51,16 +51,17 @@
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-                    <a class="airplane-tickets-button"
-                       th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
-                        <i class="material-icons" style="color: green">add_shopping_cart</i>
-                    </a>
-
+                    <form th:action="@{/cart/offers/add-hotel/{id} (id=${hotel.id})}" method="get">
+                        <input type="number" id="days" name="days" required/>
+                        <button type="submit" class="airplane-tickets-button" style="background: none">
+                            <i class="material-icons" style="color: green">add_shopping_cart</i>
+                        </button>
+                    </form>
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''SELLER'') ')}">
                     <a class="airplane-tickets-button"
-                       th:href="@{/offers/remove-hotel/{id}(id=${hotel.id})}"
+                       th:href="@{/cart/offers/remove-hotel/{id}(id=${hotel.id})}"
                        th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>

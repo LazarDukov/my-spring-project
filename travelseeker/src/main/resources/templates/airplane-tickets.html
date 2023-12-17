@@ -27,7 +27,7 @@
                 <th>Company name</th>
                 <th>From</th>
                 <th>To</th>
-                <th>Date</th>
+                <th>Date and hor</th>
                 <th>Price</th>
                 <th>Available</th>
                 <th>View offer</th>
@@ -42,7 +42,7 @@
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
                 <td th:text="*{airplaneTicket.toAirport}"/>
-                <td th:text="*{airplaneTicket.date}"/>
+                <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="*{airplaneTicket.price}"/>
                 <td th:text="*{airplaneTicket.available}">
 
@@ -55,11 +55,12 @@
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
-                    <a class="airplane-tickets-button"
-                       th:href="@{/offers/view-airplane-ticket-offer/{id}/addToCart (id=${airplaneTicket.id})}">
-                        <i class="material-icons" style="color: green">add_shopping_cart</i>
-                    </a>
-                    <!--TODO: IF this offer is sold out - throw message for this                    -->
+                    <form th:action="@{/cart/offers/add-airplane-ticket/{id} (id=${airplaneTicket.id})}" method="get">
+                        <input type="number" id="days" name="days" required/>
+                        <button type="submit" class="airplane-tickets-button" style="background: none">
+                            <i class="material-icons" style="color: green">add_shopping_cart</i>
+                        </button>
+                    </form>
                 </td>
 
                 <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
@@ -70,7 +71,7 @@
                 </td>
                 <td th:if="${#authorization.expression('hasRole(''SELLER'')')}">
                     <a class="airplane-tickets-button"
-                       th:href="@{/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"
+                       th:href="@{/cart/offers/remove-airplane-ticket/{id}(id=${airplaneTicket.id})}"
                        th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
