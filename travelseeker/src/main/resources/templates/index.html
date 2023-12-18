@@ -7,13 +7,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>JourneySeekerHub</title>
 <link rel="stylesheet" th:href="@{/css/style.css}"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body class="index">
-
 <header>
     <div th:replace="~{fragments/navbar :: navbar}">
         Navbar
+    </div>
+
+    <div class="index-page">
+        <div class="buttons2">
+            <h1>Welcome to JourneySeekerHub!</h1>
+            <form style="color: white">
+                <h5>Explore the world with us and find the best travel deals tailored just for you. Whether you're
+                    dreaming
+                    of
+                    exotic destinations, planning a business trip, or seeking a weekend getaway, JourneySeekerHub is
+                    your
+                    ultimate travel companion.</h5>
+                <h5>Our platform connects passionate travelers with sellers offering a wide range of deals on airplane
+                    tickets,
+                    hotels, and rental cars. Sellers, showcase your amazing offers and make every journey memorable for
+                    our
+                    valued customers.</h5>
+                <h5>Start your journey today and make travel dreams a reality!</h5>
+
+            </form>
+        </div>
+    </div>
+    <div class="container bg-blur rounded mt-5 mb-4">
+        <table>
+            <thead>
+            <tr>
+                <th>Flight number</th>
+                <th>Company name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date and hor</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>View offer</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="airplaneTicket: ${allAirplaneTickets}">
+                <td th:text="*{airplaneTicket.flyNumber}"/>
+                <td th:text="*{airplaneTicket.companyName}"/>
+                <td th:text="*{airplaneTicket.fromAirport}"/>
+                <td th:text="*{airplaneTicket.toAirport}"/>
+                <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="*{airplaneTicket.price}"/>
+                <td th:text="*{airplaneTicket.available}">
+
+                </td>
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Body type</th>
+                <th>Fuel type</th>
+                <th>Price</th>
+                <th>Days</th>
+                <th>View offer</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Body type</th>
+                <th>Fuel type</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>View offer</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${allCars}">
+                <td th:text="*{car.make}"></td>
+                <td th:text="*{car.model}"></td>
+                <td th:text="*{car.bodyType}"></td>
+                <td th:text="*{car.fuelType}"></td>
+                <td th:text="*{car.price}"></td>
+                <td th:text="*{car.available}"></td>
+
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-car-offer/{id}(id=${car.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                </td>
+
+                <!--                    &lt;!&ndash;TODO: IF this offer is sold out - throw message for this                    &ndash;&gt;-->
+
+
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr th:each="hotel: ${allHotels}">
+                <td th:text="*{hotel.name}"></td>
+                <td th:text="*{hotel.country}"></td>
+                <td th:text="*{hotel.city}"></td>
+                <td th:text="*{hotel.stars}"></td>
+                <td th:text="*{hotel.pricePerNight}"></td>
+                <td th:text="*{hotel.available}"></td>
+
+                <td>
+                    <a class="airplane-tickets-button"
+                       th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
+                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
 </header>
 </body>
