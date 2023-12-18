@@ -13,18 +13,6 @@ public class AddAirplaneTicketsDTO {
     @NotEmpty(message = "Please pick a date!")
     private String dateTime;
 
-//    @NotEmpty(message = "Please pick a time!")
-//    private String time;
-
-//    public String getTime() {
-//        return time;
-//    }
-//
-//    public AddAirplaneTicketsDTO setTime(String time) {
-//        this.time = time;
-//        return this;
-//    }
-
     @NotBlank(message = "Please select airport for departure!")
     @Size(min = 3, max = 30, message = "Airport name should be between 3 and 30 characters!")
     private String fromAirport;
