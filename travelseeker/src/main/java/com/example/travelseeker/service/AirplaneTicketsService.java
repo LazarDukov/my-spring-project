@@ -9,16 +9,17 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AirplaneTicketsService {
+
     private final AirplaneTicketsRepository airplaneTicketsRepository;
     private final SellerRepository sellerRepository;
     private final BuyerRepository buyerRepository;
@@ -30,7 +31,12 @@ public class AirplaneTicketsService {
 
 
     @Autowired
-    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository, OffersRepository offersRepository, CarRentRepository carRentRepository, HotelRepository hotelRepository) {
+    public AirplaneTicketsService(AirplaneTicketsRepository airplaneTicketsRepository,
+                                  SellerRepository sellerRepository,
+                                  BuyerRepository buyerRepository,
+                                  OffersRepository offersRepository,
+                                  CarRentRepository carRentRepository,
+                                  HotelRepository hotelRepository) {
         this.airplaneTicketsRepository = airplaneTicketsRepository;
         this.sellerRepository = sellerRepository;
         this.buyerRepository = buyerRepository;
@@ -50,10 +56,7 @@ public class AirplaneTicketsService {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(addAirplaneTicketsDTO.getDateTime(), dateTimeFormatter);
-//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        LocalDate date = LocalDate.parse(addAirplaneTicketsDTO.getDate(), dateFormatter);
-//        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-//        LocalTime time = LocalTime.parse(addAirplaneTicketsDTO.getTime(), timeFormatter);
+
 
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers offers = new Offers();
@@ -89,10 +92,13 @@ public class AirplaneTicketsService {
             AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
             airplaneTicket.setAvailable(0);
             airplaneTicketsRepository.save(airplaneTicket);
-            // Handle the case where the seller or ticket is not found
         }
+    }
 
 
+    public List<AirplaneTicket> getSortedAirplaneTickets() {
+        List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAll();
+        return airplaneTickets.stream().sorted(Comparator.comparing(AirplaneTicket::getPrice)).collect(Collectors.toList());
     }
 
     public List<AirplaneTicket> getAllAvailableAirplaneTicketsOfSeller(Principal principal, int available) {
@@ -118,5 +124,32 @@ public class AirplaneTicketsService {
     }
 
 
-}
+    public AirplaneTicket getRandomAirplaneTicket() {
 
+        List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAll();
+        Random random = new Random();
+        int upperBound = airplaneTickets.size();
+        int index = random.nextInt(upperBound);
+        return airplaneTickets.get(index);
+    }
+
+    public void promotions() {
+        List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAll();
+        for (AirplaneTicket at : airplaneTickets) {
+            BigDecimal originalPrice = at.getPrice();
+            at.setPrice(originalPrice.subtract(BigDecimal.valueOf(5)));
+            airplaneTicketsRepository.saveAllAndFlush(airplaneTickets);
+        }
+    }
+
+    public void promotionsEnd() {
+        List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAll();
+        for (AirplaneTicket at : airplaneTickets) {
+            BigDecimal originalPrice = at.getPrice();
+            at.setPrice(originalPrice.add(BigDecimal.valueOf(5)));
+            airplaneTicketsRepository.saveAllAndFlush(airplaneTickets);
+        }
+
+    }
+
+}

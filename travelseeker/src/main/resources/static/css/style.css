@@ -435,16 +435,27 @@ td {
 /*INDEX PAGE*/
 
 .index-page {
+    position: inherit;
     width: 800px;
     height: 210px;
     background: #1b7eff;
     opacity: 0.9;
-    top: 45%;
-    left: 50%;
-    position: absolute;
+    top: 50px;
+    left: 50px;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 10px 30px;
     border-radius: 20px;
 }
+
+.info-box {
+    width: 800px;
+    height: 210px;
+    background-color: #1b7eff;
+    opacity: 0.8;
+    padding: 20px;
+    margin: 180px auto 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 

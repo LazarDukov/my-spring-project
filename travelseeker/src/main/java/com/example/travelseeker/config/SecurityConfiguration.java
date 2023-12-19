@@ -30,7 +30,18 @@ public class SecurityConfiguration {
                         authorizeHttpRequests().
                 // allow access to all static files (images, CSS, js)
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
-                requestMatchers("/offers/hotels", "/offers/airplane-tickets", "/offers/cars", "/", "/users/login", "/users/login-error", "/users/register", "/about-us", "/contacts").permitAll().
+                requestMatchers("/offers/hotels",
+                        "/offers/airplane-tickets",
+                        "/offers/cars",
+                        "/",
+                        "/users/login",
+                        "/users/login-error",
+                        "/users/register",
+                        "/about-us",
+                        "/contacts",
+                        "/offers/view-airplane-ticket-offer/{id}",
+                        "/offers/view-car-offer/{id}",
+                        "/offers/view-hotel-offer/{id}").permitAll().
                 // the URL-s below are available for all users - logged in and anonymous
                         anyRequest().authenticated().
                 and().

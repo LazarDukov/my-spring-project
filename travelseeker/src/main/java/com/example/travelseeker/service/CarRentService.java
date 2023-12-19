@@ -1,7 +1,9 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddCarsDTO;
-import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.model.entities.CarRent;
+import com.example.travelseeker.model.entities.Offers;
+import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.CarRentRepository;
 import com.example.travelseeker.repository.OffersRepository;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class CarRentService {
@@ -39,7 +41,7 @@ public class CarRentService {
     }
 
 
-    public void addNewCar(Principal principal,AddCarsDTO addCarsDTO) {
+    public void addNewCar(Principal principal, AddCarsDTO addCarsDTO) {
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
         Offers carRentOffers = new Offers();
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
@@ -97,4 +99,14 @@ public class CarRentService {
         carRentRepository.delete(carRent);
 
     }
+
+    public CarRent getRandomCarRent() {
+        List<CarRent> carRents = carRentRepository.findAll();
+        Random random = new Random();
+        int upperBound = carRents.size();
+        int index = random.nextInt(upperBound);
+        return carRents.get(index);
+    }
+
+
 }

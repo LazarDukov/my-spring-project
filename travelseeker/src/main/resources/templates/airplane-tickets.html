@@ -23,6 +23,8 @@
         <table>
             <thead>
             <tr>
+
+
                 <th>Flight number</th>
                 <th>Company name</th>
                 <th>From</th>
@@ -31,6 +33,10 @@
                 <th>Price</th>
                 <th>Available</th>
                 <th>View offer</th>
+                <th><a class="airplane-tickets-button"
+                       th:href="@{/offers/airplane-tickets}" th:method="get">
+                    <i class="material-icons" style="color: yellow">arrow_upward</i></a>
+                </th>
                 <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
                 <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
 
@@ -38,6 +44,8 @@
             </thead>
             <tbody>
             <tr th:each="airplaneTicket: ${allAirplaneTickets}">
+
+
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -75,6 +83,8 @@
                        th:method="get">
                         <i class="material-icons" style="color: red">delete</i></a>
                 </td>
+
+
 
             </tr>
             </tbody>

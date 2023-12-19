@@ -1,7 +1,9 @@
 package com.example.travelseeker.service;
 
 import com.example.travelseeker.model.dtos.AddHotelsDTO;
-import com.example.travelseeker.model.entities.*;
+import com.example.travelseeker.model.entities.Hotel;
+import com.example.travelseeker.model.entities.Offers;
+import com.example.travelseeker.model.entities.Seller;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.HotelRepository;
 import com.example.travelseeker.repository.OffersRepository;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class HotelService {
@@ -96,5 +98,13 @@ public class HotelService {
         offersRepository.delete(offer);
         hotelRepository.delete(hotel);
 
+    }
+
+    public Hotel getRandomHotel() {
+        List<Hotel> hotels = hotelRepository.findAll();
+        Random random = new Random();
+        int upperBound = hotels.size();
+        int index = random.nextInt(upperBound);
+        return hotels.get(index);
     }
 }
