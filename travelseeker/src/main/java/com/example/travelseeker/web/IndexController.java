@@ -3,7 +3,6 @@ package com.example.travelseeker.web;
 import com.example.travelseeker.service.AirplaneTicketsService;
 import com.example.travelseeker.service.CarRentService;
 import com.example.travelseeker.service.HotelService;
-import com.example.travelseeker.util.TodayOffersScheduler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ public class IndexController {
     private final CarRentService carRentService;
     private final HotelService hotelService;
 
-    public IndexController( AirplaneTicketsService airplaneTicketsService, CarRentService carRentService, HotelService hotelService) {
+    public IndexController(AirplaneTicketsService airplaneTicketsService, CarRentService carRentService, HotelService hotelService) {
 
         this.airplaneTicketsService = airplaneTicketsService;
 
@@ -27,9 +26,9 @@ public class IndexController {
     public String getIndexPage(Model model) {
 
 
-        if (!airplaneTicketsService.getAllAirplaneTickets().isEmpty()) {
-            model.addAttribute("airplaneTicket", airplaneTicketsService.getRandomAirplaneTicket());
-        }
+        // if (!airplaneTicketsService.getAllAirplaneTickets().isEmpty()) {
+        //     model.addAttribute("airplaneTicket", airplaneTicketsService.getRandomAirplaneTicket());
+        // }
         if (!carRentService.getAllCars().isEmpty()) {
             model.addAttribute("car", this.carRentService.getRandomCarRent());
 

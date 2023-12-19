@@ -65,7 +65,7 @@ form.logout-form button {
 }
 
 body.index {
-    background-image: url("../images/aroundTheWorld.jpg");
+    background-image: url("../images/index-page.webp");
     background-attachment: fixed;
     background-size: 100% 100%;
     background-color: rgba(91, 181, 255, 0.47);
@@ -453,7 +453,7 @@ td {
     background-color: #1b7eff;
     opacity: 0.8;
     padding: 20px;
-    margin: 180px auto 20px;
+    margin: 30px auto 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

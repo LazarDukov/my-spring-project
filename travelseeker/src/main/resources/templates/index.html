@@ -40,7 +40,7 @@
             <thead>
             <tr>
                 <th>
-                    Todays offers:
+                    Cheapest offers today:
                 </th>
             </tr>
             </thead>
@@ -61,7 +61,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:if="${airplaneTicket != null}">
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -111,9 +111,6 @@
                         <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
                 </td>
 
-                <!--                    &lt;!&ndash;TODO: IF this offer is sold out - throw message for this                    &ndash;&gt;-->
-
-
             </tr>
             </tbody>
         </table>
@@ -148,11 +145,6 @@
             </tbody>
         </table>
     </div>
-    <script th:inline="javascript">
-        setTimeout(function () {
-            location.reload();
-        }, 5000);
-    </script>
     </body>
 </header>
 </html>

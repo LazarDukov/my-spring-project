@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CarRentService {
@@ -66,6 +63,10 @@ public class CarRentService {
         return new ArrayList<>(carRentRepository.findAll());
     }
 
+    public CarRent getSortedCarRents() {
+        List<CarRent> carRents = carRentRepository.findAll();
+        return carRents.stream().sorted(Comparator.comparing(CarRent::getPrice)).toList().get(0);
+    }
 
     public void removePublishedCarRent(Principal principal, UUID id) {
         Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);

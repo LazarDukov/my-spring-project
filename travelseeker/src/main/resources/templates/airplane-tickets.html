@@ -33,10 +33,6 @@
                 <th>Price</th>
                 <th>Available</th>
                 <th>View offer</th>
-                <th><a class="airplane-tickets-button"
-                       th:href="@{/offers/airplane-tickets}" th:method="get">
-                    <i class="material-icons" style="color: yellow">arrow_upward</i></a>
-                </th>
                 <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Add to cart</th>
                 <th th:if="${#authorization.expression('hasRole(''SELLER'') or hasRole(''ADMIN'')')}">Remove</th>
 

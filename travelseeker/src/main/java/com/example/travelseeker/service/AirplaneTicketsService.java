@@ -96,9 +96,9 @@ public class AirplaneTicketsService {
     }
 
 
-    public List<AirplaneTicket> getSortedAirplaneTickets() {
+    public AirplaneTicket getSortedAirplaneTickets() {
         List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAll();
-        return airplaneTickets.stream().sorted(Comparator.comparing(AirplaneTicket::getPrice)).collect(Collectors.toList());
+        return airplaneTickets.stream().sorted(Comparator.comparing(AirplaneTicket::getPrice)).toList().get(0);
     }
 
     public List<AirplaneTicket> getAllAvailableAirplaneTicketsOfSeller(Principal principal, int available) {
