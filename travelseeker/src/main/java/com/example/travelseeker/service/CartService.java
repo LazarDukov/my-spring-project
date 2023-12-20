@@ -105,12 +105,15 @@ public class CartService {
 
     public void removeFromCartAirplaneTicket(Principal principal, UUID id) {
         Buyer buyer = getBuyer(principal);
-        assert buyer != null;
         Cart cartOfBuyer = buyer.getCart();
         AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
-        cartOfBuyer.getAirplaneTickets().remove(airplaneTicket);
+        List<AirplaneTicket> airplaneTicketsListOfBuyer = buyer.getCart().getAirplaneTickets();
+        List<AirplaneTicket> airplaneTicketsInCart = airplaneTicketsListOfBuyer.stream().filter(at -> at.getId().equals(airplaneTicket.getId())).toList();
+        int numberAirplaneTickets = airplaneTicketsInCart.size();
+        BigDecimal priceOfAirplaneTicketsWithSameId = airplaneTicket.getPrice().multiply(BigDecimal.valueOf(numberAirplaneTickets));
+        cartOfBuyer.getAirplaneTickets().removeAll(airplaneTicketsInCart);
         cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(airplaneTicket.getPrice()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(priceOfAirplaneTicketsWithSameId));
         if (cartOfBuyer.getTotalPrice().signum() <= 0) {
             cartOfBuyer.setTotalPrice(BigDecimal.ZERO);
 
@@ -120,7 +123,6 @@ public class CartService {
 
     public void removeFromCartCarRent(Principal principal, UUID id) {
         Buyer buyer = getBuyer(principal);
-        assert buyer != null;
         Cart cartOfBuyer = buyer.getCart();
         CarRent car = carRentRepository.findCarRentById(id);
         List<CarRent> carRentCartListOfBuyer = buyer.getCart().getCars();
@@ -141,14 +143,16 @@ public class CartService {
 
     public void removeFromCartHotel(Principal principal, UUID id) {
         Buyer buyer = getBuyer(principal);
-
-        assert buyer != null;
         Cart cartOfBuyer = buyer.getCart();
         Hotel hotel = hotelRepository.findHotelById(id);
-        cartOfBuyer.getHotels().remove(hotel);
+        List<Hotel> hotelCartListOfBuyer = buyer.getCart().getHotels();
+        List<Hotel> hotelInThisCart = hotelCartListOfBuyer.stream().filter(h -> h.getId().equals(hotel.getId())).toList();
+        int numberHotelRents = hotelInThisCart.size();
+        BigDecimal priceOfHotelWithSameId = hotel.getPricePerNight().multiply(BigDecimal.valueOf(numberHotelRents));
+        cartOfBuyer.getHotels().removeAll(hotelInThisCart);
         cartOfBuyer.setCount(cartOfBuyer.getCount() - 1);
 
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(hotel.getPricePerNight()));
+        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().subtract(priceOfHotelWithSameId));
 
         if (cartOfBuyer.getTotalPrice().signum() <= 0) {
             cartOfBuyer.setTotalPrice(BigDecimal.ZERO);

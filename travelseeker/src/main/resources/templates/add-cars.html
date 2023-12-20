@@ -80,7 +80,7 @@
             </select><br>
             <small th:if="${#fields.hasErrors('fuelType')}" th:errorclass="errors" th:errors="*{fuelType}" class="text-danger"></small><br>
 
-            <label for="price" class="text-white">Price:</label>
+            <label for="price" class="text-white">Price/lv/:</label>
             <input th:field="*{price}"
                    th:errorclass="'is-invalid alert-danger'"
                    name="price"

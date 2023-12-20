@@ -62,7 +62,8 @@
             </thead>
             <tbody>
 
-            <tr th:each="airplaneTicket : ${airplaneTickets}" th:if="${airplaneTicket.available > 0}">
+            <tr th:each="airplaneTicket, status : ${airplaneTickets}" th:if="${status.index == 0 and airplaneTicket.available > 0}">
+
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -78,7 +79,7 @@
                        th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
                         <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
                 </td>
-
+                </th:block>
             </tr>
             </tbody>
         </table>
@@ -97,7 +98,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="car : ${cars}" th:if="${car.available > 0}">
+            <tr th:each="car, status : ${cars}" th:if="${status.index == 0 and car.available > 0}">
                 <td th:text="*{car.make}"></td>
                 <td th:text="*{car.model}"></td>
                 <td th:text="*{car.bodyType}"></td>
@@ -128,7 +129,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hotel : ${hotels}" th:if="${hotel.available > 0}">
+            <tr th:each="hotel, status : ${hotels}" th:if="${status.index == 0 and hotel.available > 0}">
                 <td th:text="*{hotel.name}"></td>
                 <td th:text="*{hotel.country}"></td>
                 <td th:text="*{hotel.city}"></td>
