@@ -39,6 +39,9 @@ public class HideSoldOffersInterceptor implements HandlerInterceptor {
         if (request.getRequestURI().equals("/offers/hotels")) {
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }
+
+
+
         return true;
     }
 

@@ -10,14 +10,7 @@ public class UserProfileView {
     private int age;
     private String role;
 
-    public String getCountry() {
-        return country;
-    }
 
-    public UserProfileView setCountry(String country) {
-        this.country = country;
-        return this;
-    }
 
     public UserProfileView(String username, String firstName, String lastName, String email, int age, String role, String country) {
         this.username = username;
@@ -28,7 +21,14 @@ public class UserProfileView {
         this.role = role;
         this.country = country;
     }
+    public String getCountry() {
+        return country;
+    }
 
+    public UserProfileView setCountry(String country) {
+        this.country = country;
+        return this;
+    }
     public String getUsername() {
         return username;
     }

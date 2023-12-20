@@ -28,33 +28,19 @@ public class EditProfileDTO {
     @NotNull
     private String country;
 
-    @Enumerated(EnumType.STRING)
-    @NotNull
-    private String role;
-
-    private Cart cart;
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public EditProfileDTO setCart(Cart cart) {
-        this.cart = cart;
-        return this;
-    }
 
     public EditProfileDTO() {
 
     }
 
-    public UserRoleEnum getRole() {
-        return UserRoleEnum.valueOf(role);
-    }
-
-    public EditProfileDTO setRole(String role) {
-        this.role = role;
-        return this;
-    }
+//   // public UserRoleEnum getRole() {
+//        return UserRoleEnum.valueOf(role);
+//    }
+//
+//    public EditProfileDTO setRole(String role) {
+//        this.role = role;
+//        return this;
+//    }
 
     public String getUsername() {
         return username;

@@ -19,7 +19,7 @@
             <!--  <label class="logo">If you love travelling...That's your place!</label> -->
             <ul class="buttons1">
 
-                <li><a class="active" sec:authorize="isAuthenticated()" th:href="@{/}">Home</a></li>
+                <li><a class="active"  th:href="@{/}">Home</a></li>
 
                 <li><a class="active" sec:authorize="hasRole('ADMIN')" th:href="@{/users/create-admin}">Create admin</a>
                 </li>
@@ -27,7 +27,7 @@
                 <li><a class="active" sec:authorize="hasRole('SELLER')" th:href="@{/offers/add-offer}">Add offer</a>
                 </li>
                 <li><a class="active" th:href="@{/offers/airplane-tickets}">Airplane tickets</a></li>
-                <li><a class="active" th:href="@{/offers/cars}">Cars</a></li>
+                <li><a class="active" th:href="@{/offers/car-rents}">Cars</a></li>
                 <li><a class="active" th:href="@{/offers/hotels}">Hotels</a></li>
                 <li><a class="active" th:href="@{/about-us}">About us</a></li>
                 <li><a class="active" th:href="@{/contacts}">Contacts</a></li>

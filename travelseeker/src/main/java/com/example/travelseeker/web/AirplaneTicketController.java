@@ -25,7 +25,7 @@ public class AirplaneTicketController {
 
 
     @Autowired
-    public AirplaneTicketController(AirplaneTicketsService airplaneTicketsService, CartService cartService, UserService userService) {
+    public AirplaneTicketController(AirplaneTicketsService airplaneTicketsService) {
 
         this.airplaneTicketsService = airplaneTicketsService;
 
@@ -57,7 +57,7 @@ public class AirplaneTicketController {
             return "redirect:/offers/add-airplane-tickets";
         }
         airplaneTicketsService.addNewAirplaneTicket(principal,addAirplaneTicketsDTO);
-        return "successfully-added";
+        return "redirect:/offers/airplane-tickets";
     }
     @GetMapping("/view-airplane-ticket-offer/{id}")
     public String getViewAirplaneTicketOffer(Model model, @PathVariable UUID id) {
@@ -69,9 +69,9 @@ public class AirplaneTicketController {
 
 
     @GetMapping("/remove-airplane-ticket/{id}")
-    public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {
-        airplaneTicketsService.removePublishedAirplaneTicket(principal, id);
-        return "removed";
+    public String removeAirplaneTicket(@PathVariable UUID id) {
+        airplaneTicketsService.removePublishedAirplaneTicket(id);
+        return "redirect:/offers/airplane-tickets";
     }
 
 }

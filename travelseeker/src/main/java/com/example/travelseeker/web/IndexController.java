@@ -25,17 +25,6 @@ public class IndexController {
     @GetMapping("/")
     public String getIndexPage(Model model) {
 
-
-        // if (!airplaneTicketsService.getAllAirplaneTickets().isEmpty()) {
-        //     model.addAttribute("airplaneTicket", airplaneTicketsService.getRandomAirplaneTicket());
-        // }
-        if (!carRentService.getAllCars().isEmpty()) {
-            model.addAttribute("car", this.carRentService.getRandomCarRent());
-
-        }
-        if (!hotelService.getAllHotels().isEmpty()) {
-            model.addAttribute("hotel", this.hotelService.getRandomHotel());
-        }
         return "index";
     }
 

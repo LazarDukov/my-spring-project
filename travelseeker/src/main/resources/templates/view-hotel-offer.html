@@ -14,22 +14,40 @@
     Navbar
   </div>
 
-  <div class="registerbox">
-    <h1>My Profile</h1>
+  <div class="registerbox" style="height: 350px; width: 600px; transform: translate(-50%, -85%);">
+    <h1>Hotel offer:</h1>
     <form th:object="${readHotel}"
                 th:action="@{'/offers/view-hotel-offer/' + ${id} + '/addToCart'}"
                 th:method="get">
-    <p>Username:</p>
-    <h1 type="text" th:text="*{name}" name="companyName" readonly></h1>
+      <div class="text-formatter"> Hotel name:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{name}" name="name" readonly>
+        </h1>
+      </div>
+      <div class="text-formatter"> Country:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{country}" name="country" readonly>
+        </h1>
+      </div>
+      <div class="text-formatter"> City:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{city}" name="city" readonly>
+        </h1>
+      </div>
+      <div class="text-formatter"> Hotel stars:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{stars}" name="stars" readonly>
+        </h1>
+      </div>
+      <div class="text-formatter"> Price per night:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{pricePerNight}" name="pricePerNight" readonly>
+        </h1>
+      </div>
+      <div class="text-formatter"> Available:
+        <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{available}" name="available" readonly>
+        </h1>
+      </div>
 
-    <p>Last name:</p>
-    <h1 type="text" th:text="*{country}" name="fromAirport" value="fromAirport" readonly></h1>
-    <p>Email:</p>
-    <h1 type="text" th:text="*{city}" name="toAirport" value="toAirport" readonly></h1>
 
 
 
-  </form>
+    </form>
   </div>
 </header>
 </body>

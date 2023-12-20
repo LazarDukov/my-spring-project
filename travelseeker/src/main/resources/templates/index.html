@@ -61,7 +61,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${airplaneTicket != null}">
+
+            <tr th:each="airplaneTicket : ${airplaneTickets}" th:if="${airplaneTicket.available > 0}">
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -81,7 +82,7 @@
             </tr>
             </tbody>
         </table>
-        <table>
+       <table>
             <thead>
             <tr>
                 <th>Make</th>
@@ -96,7 +97,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${car != null}">
+            <tr th:each="car : ${cars}" th:if="${car.available > 0}">
                 <td th:text="*{car.make}"></td>
                 <td th:text="*{car.model}"></td>
                 <td th:text="*{car.bodyType}"></td>
@@ -127,7 +128,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${hotel != null}">
+            <tr th:each="hotel : ${hotels}" th:if="${hotel.available > 0}">
                 <td th:text="*{hotel.name}"></td>
                 <td th:text="*{hotel.country}"></td>
                 <td th:text="*{hotel.city}"></td>

@@ -28,19 +28,19 @@ public class OfferController {
     @GetMapping("/buy-airplane-ticket-offer/{id}")
     public String buyDirectlyAirplaneTicketFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartAirplaneTickets(id, principal);
-        return "successfully-added";
+        return "redirect:/orders/offers";
     }
 
     @GetMapping("/buy-hotel-offer/{id}")
     public String buyDirectlyHotelFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartHotels(id, principal);
-        return "successfully-added";
+        return "redirect:/orders/offers";
     }
 
     @GetMapping("/buy-car-offer/{id}")
     public String buyDirectlyCarRentFromCart(@PathVariable UUID id, Principal principal) {
         offersService.buyFromCartCarRents(id, principal);
-        return "successfully-added";
+        return "redirect:/orders/offers";
     }
 
 }

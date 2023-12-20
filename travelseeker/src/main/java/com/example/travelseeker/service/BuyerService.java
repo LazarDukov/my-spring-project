@@ -1,5 +1,6 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.exception.ObjectNotFoundException;
 import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.CartRepository;
@@ -28,32 +29,28 @@ public class BuyerService {
     }
 
     public Buyer getBuyerByUsername(String username) {
-        return buyerRepository.findBuyerByUsername(username).orElse(null);
+        return buyerRepository.findBuyerByUsername(username).orElseThrow(() -> new ObjectNotFoundException("Buyer with username " + username + " cannot be found!"));
 
     }
 
     public List<AirplaneTicket> getBuyerBoughtAirplaneTickets(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
+
+        return getBuyerByUsername(principal.getName()).getBoughtOffers()
                 .stream()
                 .flatMap(offers -> offers.getAirplaneTickets().stream())
                 .collect(Collectors.toList());
     }
 
     public List<CarRent> getBuyerCarRents(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
+        return getBuyerByUsername(principal.getName()).getBoughtOffers()
                 .stream()
                 .flatMap(offer -> offer.getCarRents().stream())
                 .collect(Collectors.toList());
     }
 
     public List<Hotel> getBuyerBoughtHotels(Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
-        assert buyer != null;
-        return buyer.getBoughtOffers()
+
+        return getBuyerByUsername(principal.getName()).getBoughtOffers()
                 .stream()
                 .flatMap(offer -> offer.getHotels().stream())
                 .collect(Collectors.toList());

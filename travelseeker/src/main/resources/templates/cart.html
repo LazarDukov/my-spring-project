@@ -38,6 +38,7 @@
                 <th>Date</th>
                 <th>Price</th>
                 <th>Available</th>
+                <th>Number of tickets</th>
                 <th>View offer</th>
                 <th>Buy</th>
                 <th>Remove</th>
@@ -45,7 +46,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="airplaneTicket: ${myAirplaneTicketCart}">
+            <tr th:each="airplaneTicket, iterStat : ${myAirplaneTicketCart}">
+                <th:block th:if="${iterStat.index == 0 or myAirplaneTicketCart[iterStat.index - 1].id != airplaneTicket.id}">
                 <td th:text="*{airplaneTicket.flyNumber}"/>
                 <td th:text="*{airplaneTicket.companyName}"/>
                 <td th:text="*{airplaneTicket.fromAirport}"/>
@@ -56,6 +58,7 @@
                     <span th:if="${airplaneTicket.available != 0}" th:text="${airplaneTicket.available}"/>
                     <span th:if="${airplaneTicket.available == 0}">Sold Out</span>
                 </td>
+                <td th:text="${airplaneTicketsCountById.get(airplaneTicket.id)}"></td>
 
                 <td>
                     <a class="airplane-tickets-button"
@@ -85,17 +88,16 @@
         <table>
             <thead>
             <tr>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Body type</th>
-                <th>Fuel type</th>
-                <th>Price</th>
-                <th>Available</th>
-                <th>Days</th>
-                <th>Show offer</th>
-                <th>Buy</th>
-                <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
-
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Body type</th>
+                    <th>Fuel type</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th>Days</th>
+                    <th>Show offer</th>
+                    <th>Buy</th>
+                    <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
 
             </tr>
             </thead>
@@ -145,41 +147,45 @@
         <table>
             <thead>
             <tr>
-                <th>Hotel name</th>
-                <th>Country</th>
-                <th>City</th>
-                <th>Hotel stars</th>
-                <th>Price per night</th>
-                <th>Available</th>
-                <th>Show offer</th>
-                <th>Buy</th>
-                <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
+                    <th>Hotel name</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Hotel stars</th>
+                    <th>Price per night</th>
+                    <th>Available</th>
+                    <th>Days</th>
+                    <th>Show offer</th>
+                    <th>Buy</th>
+                    <th th:if="${#authorization.expression('hasRole(''BUYER'')')}">Remove</th>
 
 
             </tr>
             </thead>
             <tbody>
             <tr th:each="hotel, iterStat : ${myHotelCart}">
-                <th:block th:if="${iterStat.index == 0 or myCarCart[iterStat.index - 1].id != hotel.id}">
+                <th:block th:if="${iterStat.index == 0 or myHotelCart[iterStat.index - 1].id != hotel.id}">
                     <td th:text="*{hotel.name}"/>
                     <td th:text="*{hotel.country}"/>
                     <td th:text="*{hotel.city}"/>
                     <td th:text="*{hotel.stars}"/>
                     <td th:text="*{hotel.pricePerNight}"/>
-
+                    <td>
+                        <span th:if="${hotel.available != 0}" th:text="${hotel.available}"/>
+                        <span th:if="${hotel.available == 0}">Sold Out</span>
+                    </td>
                     <td th:text="${hotelsCountById.get(hotel.id)}"></td>
 
 
                     <td>
                         <a class="airplane-tickets-button"
-                           th:href="@{/offers/view-hotel-offer/{id}(id=${car.id})}">
+                           th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
                             <i class="material-icons" style="color: yellow">remove_red_eye</i>
                         </a>
                     </td>
                     <td>
                         <a class="airplane-tickets-button"
                            th:if="${hotel.available != 0}" th:method="get"
-                           th:href="@{/offers/buy-hotel-offer/{id}(id=${car.id})}">
+                           th:href="@{/offers/buy-hotel-offer/{id}(id=${hotel.id})}">
                             <i class="material-icons" style="color: green">done</i></a>
                         </a>
                     </td>
@@ -190,7 +196,7 @@
                            th:method="get">
                             <i class="material-icons" style="color: red">delete</i></a>
                     </td>
-                    </th:block>
+                </th:block>
             </tr>
             </tbody>
         </table>

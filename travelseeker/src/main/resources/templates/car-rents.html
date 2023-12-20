@@ -52,9 +52,6 @@
                         <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
                 </td>
 
-
-                <!--                    &lt;!&ndash;TODO: IF this offer is sold out - throw message for this                    &ndash;&gt;-->
-
                 <td th:if="${#authorization.expression('hasRole(''BUYER'')')}">
                     <form th:action="@{/cart/offers/add-car/{id} (id=${car.id})}" method="get">
                         <input type="number" id="days" name="days" required/>

@@ -56,7 +56,6 @@ public class HotelController {
         return "view-hotel-offer";
     }
 
-    // TODO: should redirect to right page after successful adding hotel and create restrictions in DTO
 
     @PostMapping("/add-hotels")
     public String addHotels(Principal principal, @Valid AddHotelsDTO addHotelsDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -66,13 +65,13 @@ public class HotelController {
             return "redirect:/offers/add-hotels";
         }
         hotelService.addNewHotel(principal, addHotelsDTO);
-        return "successfully-added";
+        return "redirect:/offers/hotels";
     }
 
     @GetMapping("/remove-hotel/{id}")
-    public String removeAirplaneTicket(Principal principal, @PathVariable UUID id) {
-        hotelService.removePublishedHotel(principal, id);
-        return "removed";
+    public String removeAirplaneTicket(@PathVariable UUID id) {
+        hotelService.removePublishedHotel(id);
+        return "redirect:/offers/hotels";
     }
 
 }

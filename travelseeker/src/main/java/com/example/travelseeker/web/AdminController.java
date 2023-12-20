@@ -83,17 +83,17 @@ public class AdminController {
     @GetMapping("/offers/remove-airplane-ticket-by-admin/{id}")
     public String removeAirplaneTicketByAdmin(@PathVariable UUID id) {
         airplaneTicketsService.removeAirplaneTicketByAdmin(id);
-        return "removed";
+        return "redirect:/offers/airplane-tickets";
     }
     @GetMapping("/offers/remove-car-rent-by-admin/{id}")
     public String removeCarRentByAdmin(@PathVariable UUID id) {
         carRentService.removeCarRentByAdmin(id);
-        return "removed";
+        return "redirect:/offers/car-rents";
     }
 
     @GetMapping("/offers/remove-hotel-by-admin/{id}")
     public String removeHotelByAdmin(@PathVariable UUID id) {
         hotelService.removeHotelByAdmin(id);
-        return "removed";
+        return "redirect:/offers/hotels";
     }
 }

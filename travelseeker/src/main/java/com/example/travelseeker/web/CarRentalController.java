@@ -45,9 +45,9 @@ public class CarRentalController {
             return "redirect:/offers/add-cars";
         }
         carRentService.addNewCar(principal,addCarsDTO);
-        return "successfully-added";
+        return "redirect:/offers/car-rents";
     }
-    @GetMapping("/cars")
+    @GetMapping("/car-rents")
     public String getCars(Model model) {
         model.addAttribute("allCars", this.carRentService.getAllCars());
         return "car-rents";

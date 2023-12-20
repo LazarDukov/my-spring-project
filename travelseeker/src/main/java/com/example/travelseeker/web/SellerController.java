@@ -36,11 +36,11 @@ public class SellerController {
     @GetMapping("/published-offers/offers")
     public String getMyPublishedOffers(Model model, Principal principal) {
         List<AirplaneTicket> airplaneTicketsPublished =
-                airplaneTicketsService.getAllAvailableAirplaneTicketsOfSeller(principal, 0);
+                airplaneTicketsService.getAllAvailableAirplaneTicketsOfSeller(principal);
         List<Hotel> hotelsPublished =
-                hotelService.getAllAvailableHotelsOfSeller(principal, 0);
+                hotelService.getAllAvailableHotelsOfSeller(principal);
         List<CarRent> rentCarPublished =
-                carRentService.getAllAvailableCarsRentOfSeller(principal, 0);
+                carRentService.getAllAvailableCarsRentOfSeller(principal);
         model.addAttribute("myPublishedAirplaneTickets", airplaneTicketsPublished);
         model.addAttribute("myPublishedHotels", hotelsPublished);
         model.addAttribute("myPublishedCarRents", rentCarPublished);

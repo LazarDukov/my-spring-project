@@ -3,21 +3,19 @@ package com.example.travelseeker.web;
 
 import com.example.travelseeker.model.dtos.EditProfileDTO;
 import com.example.travelseeker.model.dtos.view.UserProfileView;
-import com.example.travelseeker.model.entities.*;
-import com.example.travelseeker.repository.HotelRepository;
-import com.example.travelseeker.service.*;
+import com.example.travelseeker.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 
 @Controller
 @RequestMapping("/users")
@@ -27,10 +25,8 @@ public class UserController {
     private final UserService userService;
 
 
-
     @Autowired
-    public UserController(SellerService sellerService, BuyerService buyerService,
-                          UserService userService, OffersService offersService, HotelRepository hotelRepository, CartService cartService, AirplaneTicketsService airplaneTicketsService, HotelService hotelService, CarRentService carRentService) {
+    public UserController(UserService userService) {
 
         this.userService = userService;
 
@@ -58,15 +54,16 @@ public class UserController {
     }
 
     @PostMapping("/edit-profile")
-    public String updateUserProfile(EditProfileDTO editProfileDTO, Principal principal, BindingResult
+    public String updateUserProfile(@Valid EditProfileDTO editProfileDTO, Principal principal, BindingResult
             bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("user", editProfileDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
+            return "redirect:/users/edit-profile";
+        }
         userService.editProfile(editProfileDTO, principal);
-        //TODO: should create validations for edit profile
-
         return "redirect:/users/my-profile";
     }
-
-
 
 
 }

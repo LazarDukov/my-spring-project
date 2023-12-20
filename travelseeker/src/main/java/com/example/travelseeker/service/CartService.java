@@ -32,6 +32,7 @@ public class CartService {
         this.carRentRepository = carRentRepository;
         this.buyerRepository = buyerRepository;
     }
+
     public Cart getNewCart() {
         Cart newCart = new Cart();
         newCart.setCount(0);
@@ -39,6 +40,7 @@ public class CartService {
         cartRepository.saveAndFlush(newCart);
         return newCart;
     }
+
     private Buyer getBuyer(Principal principal) {
         return buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
     }
@@ -51,8 +53,6 @@ public class CartService {
     private void updateTotalPrice(Cart cart, BigDecimal price, Integer days) {
         cart.setTotalPrice(cart.getTotalPrice().add(price.multiply(BigDecimal.valueOf(days))));
     }
-
-
 
 
     public void AddToCartAirplaneTicket(Principal principal, UUID id, Integer days) {
@@ -72,17 +72,19 @@ public class CartService {
     }
 
     public void AddToCartHotel(Principal principal, UUID id, Integer days) {
-
         Buyer buyer = getBuyer(principal);
-        Cart cartOfBuyer = buyer.getCart();
+        Cart buyerCart = buyerCart(principal);
         Hotel hotel = hotelRepository.findHotelById(id);
-        List<Hotel> cartHotelsListOfBuyer = buyer.getCart().getHotels();
-        cartHotelsListOfBuyer.add(hotel);
-        cartOfBuyer.setBuyer(buyer);
-        cartOfBuyer.setCount(cartOfBuyer.getCount() + 1);
-        cartOfBuyer.setTotalPrice(cartOfBuyer.getTotalPrice().add(hotel.getPricePerNight()));
+        List<Hotel> hotels = buyerCart.getHotels();
+        for (int i = 0; i < days; i++) {
+            hotels.add(hotel);
+        }
+
+        buyerCart.setBuyer(buyer);
+        buyerCart.setCount(buyerCart.getCount() + 1);
+        updateTotalPrice(buyerCart, hotel.getPricePerNight(), days);
         buyerRepository.save(buyer);
-        cartRepository.save(cartOfBuyer);
+        cartRepository.save(buyerCart);
     }
 
     public void AddToCartCar(Principal principal, UUID id, Integer days) {
@@ -90,7 +92,6 @@ public class CartService {
         Cart buyerCart = buyerCart(principal);
         CarRent carRent = carRentRepository.findCarRentById(id);
         List<CarRent> carRents = buyerCart.getCars();
-        //TODO: IF BUYER add to cart offer which is already added throw a message for its already added
         for (int i = 0; i < days; i++) {
             carRents.add(carRent);
 

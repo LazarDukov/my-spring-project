@@ -3,6 +3,7 @@ package com.example.travelseeker.config;
 import com.example.travelseeker.repository.AdminRepository;
 import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.SellerRepository;
+import com.example.travelseeker.repository.UserRoleRepository;
 import com.example.travelseeker.service.ApplicationUserDetailsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -32,7 +33,7 @@ public class SecurityConfiguration {
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 requestMatchers("/offers/hotels",
                         "/offers/airplane-tickets",
-                        "/offers/cars",
+                        "/offers/car-rents",
                         "/",
                         "/users/login",
                         "/users/login-error",

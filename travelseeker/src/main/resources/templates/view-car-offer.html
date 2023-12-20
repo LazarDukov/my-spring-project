@@ -14,16 +14,37 @@
         Navbar
     </div>
 
-    <div class="registerbox">
-        <h1>My Profile</h1>
+    <div class="registerbox" style="height: 350px; width: 600px; transform: translate(-50%, -85%);">
+        <h1>Car rental offer:</h1>
         <form th:object="${readCar}"
               th:action="@{'/offers/view-car-offer/' + ${id} + '/addToCart'}"
               th:method="get">
-            <p>Username:</p>
-            <h1 type="text" th:text="*{make}" name="companyName" readonly></h1>
+            <div class="text-formatter"> Make:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{make}" name="make" readonly>
+                </h1>
+            </div>
+            <div class="text-formatter"> Model:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{model}" name="model" readonly>
+                </h1>
+            </div>
 
-            <p>Last name:</p>
-            <h1 type="text" th:text="*{model}" name="fromAirport" value="fromAirport" readonly></h1>
+            <div class="text-formatter"> Body type:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{bodyType}" name="bodyType" readonly>
+                </h1>
+            </div>
+            <div class="text-formatter"> Fuel type:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{fuelType}" name="fuelType" readonly>
+                </h1>
+            </div>
+            <div class="text-formatter"> Price per day:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{price}" name="price" readonly>
+                </h1>
+            </div>
+            <div class="text-formatter"> Available:
+                <h1 style="display: inline;  padding: 0 0 0 20px ;" type="text" th:text=" *{available}" name="available" readonly>
+                </h1>
+            </div>
+
 
         </form>
     </div>

@@ -31,22 +31,24 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="airplaneTicket: ${myAirplaneTicketCart}">
-                <td th:text="*{airplaneTicket.flyNumber}"/>
-                <td th:text="*{airplaneTicket.companyName}"/>
-                <td th:text="*{airplaneTicket.fromAirport}"/>
-                <td th:text="*{airplaneTicket.toAirport}"/>
-                <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="*{airplaneTicket.price}"/>
-                <td th:text="${hotelDays.get(hotel.id)}"></td>
+            <tr th:each="airplaneTicket, iterStat : ${myAirplaneTicketBought}">
+                <th:block
+                        th:if="${iterStat.index == 0 or myAirplaneTicketBought[iterStat.index - 1].id != airplaneTicket.id}">
+                    <td th:text="*{airplaneTicket.flyNumber}"></td>
+                    <td th:text="*{airplaneTicket.companyName}"></td>
+                    <td th:text="*{airplaneTicket.fromAirport}"></td>
+                    <td th:text="*{airplaneTicket.toAirport}"></td>
+                    <td th:text="${#temporals.format(airplaneTicket.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="*{airplaneTicket.price}"></td>
+                    <td th:text="${airplaneTicketDays.get(airplaneTicket.id)}"></td>
 
-                <td>
-                    <a class="airplane-tickets-button"
-                       th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
-                        <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
-                    </a>
-                </td>
-
+                    <td>
+                        <a class="airplane-tickets-button"
+                           th:href="@{/offers/view-airplane-ticket-offer/{id}(id=${airplaneTicket.id})}">
+                            <i class="material-icons" style="color: yellow">remove_red_eye</i></a>
+                        </a>
+                    </td>
+                </th:block>
             </tr>
             </tbody>
         </table>
@@ -82,7 +84,7 @@
                             <i class="material-icons" style="color: yellow">remove_red_eye</i>
                         </a>
                     </td>
-                    </th:block>
+                </th:block>
             </tr>
             </tbody>
         </table>
@@ -102,26 +104,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hotel: ${myHotelCart}">
-                <td th:text="*{hotel.name}"/>
-                <td th:text="*{hotel.country}"/>
-                <td th:text="*{hotel.city}"/>
-                <td th:text="*{hotel.stars}"/>
-                <td th:text="*{hotel.pricePerNight}"/>
-
-                <td>
-                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"/>
-                    <span th:if="${hotel.available == 0}">Sold Out</span>
-                </td>
+            <tr th:each="hotel, iterStat : ${myHotelBought}">
+                <th:block th:if="${iterStat.index == 0 or myHotelBought[iterStat.index - 1].id != hotel.id}">
+                    <td th:text="*{hotel.name}"></td>
+                    <td th:text="*{hotel.country}"></td>
+                    <td th:text="*{hotel.city}"></td>
+                    <td th:text="*{hotel.stars}"></td>
+                    <td th:text="*{hotel.pricePerNight}"></td>
+                    <td th:text="${hotelDays.get(hotel.id)}"></td>
 
 
-                <td>
-                    <a class="airplane-tickets-button"
-                       th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
-                        <i class="material-icons" style="color: yellow">remove_red_eye</i>
-                    </a>
-                </td>
-
+                    <td>
+                        <a class="airplane-tickets-button"
+                           th:href="@{/offers/view-hotel-offer/{id}(id=${hotel.id})}">
+                            <i class="material-icons" style="color: yellow">remove_red_eye</i>
+                        </a>
+                    </td>
+                </th:block>
             </tr>
             </tbody>
         </table>

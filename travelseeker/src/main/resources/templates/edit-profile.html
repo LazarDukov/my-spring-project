@@ -16,9 +16,11 @@
 
     <div class="registerbox">
         <h1>Edit profile</h1>
-        <form th:method="post"
+        <form th:object="${user}"
               th:action="@{/users/edit-profile}"
-              th:object="${user}">
+              th:method="post"
+
+        >
             <p>Username</p>
             <input th:field="*{username}"
                    type="text" name="username">

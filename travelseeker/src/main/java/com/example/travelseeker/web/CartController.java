@@ -15,15 +15,12 @@ import java.util.UUID;
 @RequestMapping("/cart/offers")
 public class CartController {
     private final CartService cartService;
-    private final BuyerService buyerService;
 
-    public CartController(CartService cartService, BuyerService buyerService) {
+
+    public CartController(CartService cartService) {
         this.cartService = cartService;
-        this.buyerService = buyerService;
+
     }
-
-
-//TODO: OKOto ne raboti trqbva da se opravi
 
 
     @GetMapping("/add-airplane-ticket/{id}")

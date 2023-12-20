@@ -1,5 +1,6 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.exception.ObjectNotFoundException;
 import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.AirplaneTicketsRepository;
 import com.example.travelseeker.repository.OffersRepository;
@@ -23,22 +24,32 @@ public class SellerService {
     }
 
     public Seller getSellerByUsername(String username) {
-        return sellerRepository.findSellerByUsername(username).orElse(null);
+        return sellerRepository.findSellerByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with username " + username + " cannot be found!"));
 
     }
 
 
     public List<AirplaneTicket> getSellerSoldAirplaneTickets(Seller seller) {
-        return seller.getSealedOffers().stream().flatMap(offer -> offer.getAirplaneTickets().stream()).collect(Collectors.toList());
+        return seller.getSealedOffers().stream()
+                .flatMap(offer -> offer.getAirplaneTickets()
+                        .stream())
+                .collect(Collectors.toList());
 
     }
 
     public List<Hotel> getSellerSoldHotels(Seller seller) {
-        return seller.getSealedOffers().stream().flatMap(offer -> offer.getHotels().stream()).collect(Collectors.toList());
+        return seller.getSealedOffers().stream()
+                .flatMap(offer -> offer.getHotels()
+                        .stream())
+                .collect(Collectors.toList());
     }
 
     public List<CarRent> getSellerSoldCarRents(Seller seller) {
-        return seller.getSealedOffers().stream().flatMap(offer -> offer.getCarRents().stream()).collect(Collectors.toList());
+        return seller.getSealedOffers().stream()
+                .flatMap(offer -> offer.getCarRents()
+                        .stream())
+                .collect(Collectors.toList());
     }
 
     public List<Seller> getAllSellers() {

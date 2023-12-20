@@ -1,10 +1,10 @@
 package com.example.travelseeker.service;
 
+import com.example.travelseeker.exception.ObjectNotFoundException;
 import com.example.travelseeker.model.dtos.AddCarsDTO;
 import com.example.travelseeker.model.entities.CarRent;
 import com.example.travelseeker.model.entities.Offers;
 import com.example.travelseeker.model.entities.Seller;
-import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.CarRentRepository;
 import com.example.travelseeker.repository.OffersRepository;
 import com.example.travelseeker.repository.SellerRepository;
@@ -19,16 +19,15 @@ public class CarRentService {
 
     private final CarRentRepository carRentRepository;
     private final SellerRepository sellerRepository;
-    private final BuyerRepository buyerRepository;
     private final OffersRepository offersRepository;
 
 
     @Autowired
-    public CarRentService(CarRentRepository carRentRepository, SellerRepository sellerRepository, BuyerRepository buyerRepository, OffersRepository offersRepository) {
+    public CarRentService(CarRentRepository carRentRepository, SellerRepository sellerRepository, OffersRepository offersRepository) {
         this.carRentRepository = carRentRepository;
 
         this.sellerRepository = sellerRepository;
-        this.buyerRepository = buyerRepository;
+
         this.offersRepository = offersRepository;
     }
 
@@ -37,9 +36,13 @@ public class CarRentService {
 
     }
 
+    public Seller getSellerByUsername(String username) {
+        return sellerRepository.findSellerByUsername(username).orElseThrow(() -> new ObjectNotFoundException("Seller with username " + username + " cannot be found!"));
+
+    }
 
     public void addNewCar(Principal principal, AddCarsDTO addCarsDTO) {
-        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        Seller seller = getSellerByUsername(principal.getName());
         Offers carRentOffers = new Offers();
         CarRent newCarRent = new CarRent().setMake(addCarsDTO.getMake())
                 .setModel(addCarsDTO.getModel()).setBodyType(addCarsDTO.getBodyType())
@@ -47,11 +50,8 @@ public class CarRentService {
                 .setSeller(seller)
                 .setAvailable(addCarsDTO.getAvailable())
                 .setSeller(seller).setSoldNumber(0);
-        ;
         carRentOffers.getCarRents().add(newCarRent);
         carRentOffers.setSeller(seller);
-        assert seller != null;
-        // seller.getPublishedOffers().add(carRentOffers);
         offersRepository.save(carRentOffers);
         sellerRepository.save(seller);
         carRentRepository.save(newCarRent);
@@ -63,28 +63,21 @@ public class CarRentService {
         return new ArrayList<>(carRentRepository.findAll());
     }
 
-    public CarRent getSortedCarRents() {
+    public List<CarRent> getSortedCarRents() {
         List<CarRent> carRents = carRentRepository.findAll();
-        return carRents.stream().sorted(Comparator.comparing(CarRent::getPrice)).toList().get(0);
+        return carRents.stream().sorted(Comparator.comparing(CarRent::getPrice)).toList();
     }
 
     public void removePublishedCarRent(Principal principal, UUID id) {
-        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
+        CarRent carRent = carRentRepository.findCarRentById(id);
+        carRent.setAvailable(0);
+        carRentRepository.save(carRent);
 
-        if (seller != null) {
-
-            CarRent carRent = carRentRepository.findCarRentById(id);
-            carRent.setAvailable(0);
-            carRentRepository.save(carRent);
-            // Handle the case where the seller or ticket is not found
-        }
     }
 
-    public List<CarRent> getAllAvailableCarsRentOfSeller(Principal principal, int available) {
-        Seller seller = sellerRepository.findSellerByUsername(principal.getName()).orElse(null);
-        assert seller != null;
+    public List<CarRent> getAllAvailableCarsRentOfSeller(Principal principal) {
         return carRentRepository
-                .findCarRentsBySellerIdAndAndAvailableGreaterThan(seller.getId(), 0);
+                .findCarRentsBySellerIdAndAndAvailableGreaterThan(getSellerByUsername(principal.getName()).getId(), 0);
     }
 
     public List<CarRent> carsWithQuantityMoreThanZero() {
