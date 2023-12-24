@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface SellerRepository extends JpaRepository<Seller, UUID> {
-    Seller findSellerById(UUID id);
+    Optional<Seller> findSellerById(UUID id);
 
     Optional<Seller> findSellerByUsername(String username);
 

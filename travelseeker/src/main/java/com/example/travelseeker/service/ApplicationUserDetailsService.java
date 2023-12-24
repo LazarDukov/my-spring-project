@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.UUID;
+
 public class ApplicationUserDetailsService implements UserDetailsService {
 
     private final SellerRepository sellerRepository;

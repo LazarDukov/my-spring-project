@@ -64,7 +64,7 @@ public class AdminController {
         }
 
         adminService.createNewAdmin(addAdminDTO);
-        return "redirect:/users/home";
+        return "redirect:/";
     }
 
     @GetMapping("/users/ban-seller/{id}")

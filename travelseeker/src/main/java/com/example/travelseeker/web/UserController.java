@@ -6,6 +6,8 @@ import com.example.travelseeker.model.dtos.view.UserProfileView;
 import com.example.travelseeker.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/my-profile")
-    public String getMyProfile(Model model, Principal principal) {
+    public String getMyProfile(Principal principal, Model model) {
         UserProfileView userProfileView = userService.getUserProfileView(principal);
         model.addAttribute("user", userProfileView);
         return "my-profile";
@@ -57,12 +59,13 @@ public class UserController {
     public String updateUserProfile(@Valid EditProfileDTO editProfileDTO, Principal principal, BindingResult
             bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("user", editProfileDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
+            redirectAttributes.addFlashAttribute("editProfileDTO", editProfileDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editProfileDTO", bindingResult);
             return "redirect:/users/edit-profile";
         }
         userService.editProfile(editProfileDTO, principal);
-        return "redirect:/users/my-profile";
+
+        return "redirect:/";
     }
 
 

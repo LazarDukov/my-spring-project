@@ -13,4 +13,6 @@ public interface HotelRepository extends JpaRepository<Hotel, UUID> {
     List<Hotel> findHotelsBySellerIdAndAndAvailableGreaterThan(UUID id, int available);
 
     List<Hotel> findHotelsByAvailableGreaterThan(Integer quantity);
+
+    List<Hotel> findHotelsBySellerId(UUID id);
 }

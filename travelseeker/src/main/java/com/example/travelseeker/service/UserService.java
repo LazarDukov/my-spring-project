@@ -11,10 +11,14 @@ import com.example.travelseeker.repository.BuyerRepository;
 import com.example.travelseeker.repository.SellerRepository;
 import com.example.travelseeker.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
-import java.util.ArrayList;
 
 @Service
 public class UserService {
@@ -30,7 +34,11 @@ public class UserService {
 
     @Autowired
     public UserService(SellerService sellerService, BuyerService buyerService,
-                       SellerRepository sellerRepository, BuyerRepository buyerRepository, AdminService adminService, AdminRepository adminRepository, UserRoleRepository userRoleRepository) {
+                       SellerRepository sellerRepository,
+                       BuyerRepository buyerRepository,
+                       AdminService adminService,
+                       AdminRepository adminRepository,
+                       UserRoleRepository userRoleRepository) {
         this.sellerService = sellerService;
         this.buyerService = buyerService;
 
@@ -41,23 +49,20 @@ public class UserService {
         this.userRoleRepository = userRoleRepository;
     }
 
-    public UserProfileView getUserProfileView(Principal principal) {
-        Seller seller = sellerRepository.findFirstByUsername(principal.getName());
+    public Seller getSeller(Principal principal) {
 
-        Buyer buyer = buyerRepository.findFirstByUsername(principal.getName());
-        Admin admin = adminRepository.findFirstByUsername(principal.getName());
-        System.out.println("checking");
-        String role = determineUserRole(seller, buyer, admin);
+        return sellerRepository.findFirstByUsername(principal.getName());
 
-        if ("Seller".equals(role)) {
-            return new UserProfileView(seller.getUsername(), seller.getFirstName(), seller.getLastName(), seller.getEmail(), seller.getAge(), role, seller.getCountry());
-        } else if ("Buyer".equals(role)) {
-            return new UserProfileView(buyer.getUsername(), buyer.getFirstName(), buyer.getLastName(), buyer.getEmail(), buyer.getAge(), role, buyer.getCountry());
-        } else if ("Admin".equals(role)) {
-            return new UserProfileView(admin.getUsername(), admin.getFirstName(), admin.getLastName(), admin.getEmail(), admin.getAge(), role, admin.getCountry());
-        } else {
-            throw new IllegalStateException("Unknown user role");
-        }
+    }
+
+    public Buyer getBuyer(Principal principal) {
+        return buyerRepository.findFirstByUsername(principal.getName());
+
+    }
+
+    public Admin getAdmin(Principal principal) {
+        return adminRepository.findFirstByUsername(principal.getName());
+
     }
 
     private String determineUserRole(Seller seller, Buyer buyer, Admin admin) {
@@ -68,42 +73,60 @@ public class UserService {
         } else if (admin != null) {
             return "Admin";
         } else {
-            System.out.println("No user found with username: ");
-            System.out.println("Seller: " + seller);
-            System.out.println("Buyer: " + buyer);
-            System.out.println("Admin: " + admin);
+
             return "Unknown";
         }
     }
 
+    @Transactional
+    public UserProfileView getUserProfileView(Principal principal) {
 
-    public void editProfile(EditProfileDTO editProfileDTO, Principal principal) {
-        Seller seller = sellerRepository.findFirstByUsername(principal.getName());
-
-        Buyer buyer = buyerRepository.findFirstByUsername(principal.getName());
-        Admin admin = adminRepository.findFirstByUsername(principal.getName());
+        Seller seller = getSeller(principal);
+        Buyer buyer = getBuyer(principal);
+        Admin admin = getAdmin(principal);
         String role = determineUserRole(seller, buyer, admin);
 
+
+        if ("Seller".equals(role)) {
+            return new UserProfileView(seller.getUsername(), seller.getFirstName(), seller.getLastName(), seller.getEmail(), seller.getAge(), "SELLER", seller.getCountry());
+        } else if ("Buyer".equals(role)) {
+            return new UserProfileView(buyer.getUsername(), buyer.getFirstName(), buyer.getLastName(), buyer.getEmail(), buyer.getAge(), "BUYER", buyer.getCountry());
+        } else if ("Admin".equals(role)) {
+            return new UserProfileView(admin.getUsername(), admin.getFirstName(), admin.getLastName(), admin.getEmail(), admin.getAge(), "ADMIN", admin.getCountry());
+        } else {
+            throw new IllegalStateException("Unknown user role");
+        }
+    }
+
+    @Transactional
+    public void editProfile(EditProfileDTO editProfileDTO, Principal principal) {
+        Seller seller = getSeller(principal);
+        Buyer buyer = getBuyer(principal);
+        Admin admin = getAdmin(principal);
+        String role = determineUserRole(seller, buyer, admin);
         if ("Seller".equals(role)) {
             updateProfile(seller, editProfileDTO);
+            updateUsernameAndRefreshPrincipal(seller.getUsername(), new ApplicationUserDetailsService(adminRepository, sellerRepository, buyerRepository));
             sellerRepository.save(seller);
+
+
         } else if ("Buyer".equals(role)) {
             updateProfile(buyer, editProfileDTO);
+            updateUsernameAndRefreshPrincipal(buyer.getUsername(), new ApplicationUserDetailsService(adminRepository, sellerRepository, buyerRepository));
             buyerRepository.save(buyer);
         } else if ("Admin".equals(role)) {
             updateProfile(admin, editProfileDTO);
+            updateUsernameAndRefreshPrincipal(admin.getUsername(), new ApplicationUserDetailsService(adminRepository, sellerRepository, buyerRepository));
             adminRepository.save(admin);
         } else {
-            System.out.println("No user found with username: " + principal.getName());
-            System.out.println("Seller: " + seller);
-            System.out.println("Buyer: " + buyer);
-            System.out.println("Admin: " + admin);
+
             throw new IllegalStateException("Unknown user role");
 
         }
     }
 
     private void updateProfile(User user, EditProfileDTO editProfileDTO) {
+
         if (editProfileDTO.getUsername() != null) {
             user.setUsername(editProfileDTO.getUsername());
         }
@@ -125,4 +148,12 @@ public class UserService {
 
 
     }
+
+    public void updateUsernameAndRefreshPrincipal(String newUsername, ApplicationUserDetailsService applicationUserDetailsService) {
+        UserDetails updatedUserDetails = applicationUserDetailsService.loadUserByUsername(newUsername);
+        Authentication updatedAuthenticationToken = new UsernamePasswordAuthenticationToken(updatedUserDetails, null,
+                updatedUserDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(updatedAuthenticationToken);
+    }
+
 }

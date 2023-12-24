@@ -28,6 +28,16 @@ public class EditProfileDTO {
     @NotNull
     private String country;
 
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public EditProfileDTO setRole(String role) {
+        this.role = role;
+        return this;
+    }
 
     public EditProfileDTO() {
 
