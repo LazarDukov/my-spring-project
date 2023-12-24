@@ -79,7 +79,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="car: ${allCars}">
+            <tr th:each="car: ${myPublishedCarRents}">
                 <td th:text="*{car.make}"></td>
                 <td th:text="*{car.model}"></td>
                 <td th:text="*{car.bodyType}"></td>
@@ -125,7 +125,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hotel: ${allHotels}">
+            <tr th:each="hotel: ${myPublishedHotels}">
                 <td th:text="*{hotel.name}"></td>
                 <td th:text="*{hotel.country}"></td>
                 <td th:text="*{hotel.city}"></td>
@@ -133,8 +133,7 @@
                 <td th:text="*{hotel.pricePerNight}"></td>
 
                 <td th:text="*{hotel.available}">
-                    <!--                    <span th:if="${hotel.available != 0}" th:text="${hotel.available}"></span>-->
-                    <!--                    <span th:if="${hotel.available == 0}">Sold Out</span>-->
+
                 </td>
 
                 <td>

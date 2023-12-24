@@ -40,7 +40,7 @@ public class SortOffersByPriceInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        List<AirplaneTicket> airplaneTicketsSorted = airplaneTicketsService.getSortedAirplaneTickets();
+        List<AirplaneTicket> airplaneTicketsSorted = this.airplaneTicketsService.getSortedAirplaneTickets();
         if (airplaneTicketsSorted.size() == 0) {
             airplaneTicketsSorted = Collections.emptyList();
         }
