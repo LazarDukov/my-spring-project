@@ -31,59 +31,69 @@ public class OffersService {
         this.sellerRepository = sellerRepository;
     }
 
+    private Buyer getBuyer(Principal principal) {
+        return buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+    }
 
     public void buyFromCartAirplaneTickets(UUID id, Principal principal) {
 
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        Buyer buyer = getBuyer(principal);
         if (buyer != null) {
+            AirplaneTicket airplaneTicket = airplaneTicketsRepository.findAirplaneTicketById(id);
+            Offers offer = offersRepository.findByAirplaneTicketId(airplaneTicket.getId());
 
-            AirplaneTicket airplaneTicketToBuy = airplaneTicketsRepository.findAirplaneTicketById(id);
-
-            Seller seller = airplaneTicketToBuy.getSeller();
-
-            Offers offer = offersRepository.findByAirplaneTicketId(airplaneTicketToBuy.getId());
-
-
-            airplaneTicketToBuy.setAvailable(airplaneTicketToBuy.getAvailable() - 1);
-
-            airplaneTicketToBuy.setSoldNumber(airplaneTicketToBuy.getSoldNumber() + 1);
-            if (!sellerRepository.existsById(seller.getId())) {
-
-
+            List<AirplaneTicket> airplaneTicketsInThisCart = buyer.getCart().getAirplaneTickets().stream()
+                    .filter(at -> at.getId().equals(airplaneTicket.getId())).toList();
+            int numberOfTickets = airplaneTicketsInThisCart.size();
+            airplaneTicket.setAvailable(airplaneTicket.getAvailable() - numberOfTickets);
+            airplaneTicket.setSoldNumber(airplaneTicket.getSoldNumber() + numberOfTickets);
+            for (int i = 0; i < numberOfTickets; i++) {
+                buyer.getBoughtOffers().add(offer);
+                buyer.getCart().getAirplaneTickets().remove(airplaneTicket);
+            }
+            Seller seller = airplaneTicket.getSeller();
+            if (seller.getSealedOffers().stream().noneMatch(o -> o.getAirplaneTickets().contains(airplaneTicket))) {
                 seller.getSealedOffers().add(offer);
-
                 sellerRepository.save(seller);
             }
-
-            buyer.getBoughtOffers().add(offer);
-
-            buyer.getCart().getAirplaneTickets().remove(airplaneTicketToBuy);
-
+            buyer.getCart().setTotalPrice(buyer.getCart().getTotalPrice().subtract(airplaneTicket.getPrice().multiply(BigDecimal.valueOf(numberOfTickets))));
             buyerRepository.save(buyer);
+
+
         }
     }
 
     public void buyFromCartHotels(UUID id, Principal principal) {
 
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        Buyer buyer = getBuyer(principal);
 
         if (buyer != null) {
 
-            Hotel hotelToBuy = hotelRepository.findHotelById(id);
+            Hotel hotel = hotelRepository.findHotelById(id);
 
-            Offers offer = offersRepository.findByHotelId(hotelToBuy.getId());
-            hotelToBuy.setAvailable(hotelToBuy.getAvailable() - 1);
-            hotelToBuy.setSoldNumber(hotelToBuy.getSoldNumber() + 1);
-            buyer.getBoughtOffers().add(offer);
-
-            buyer.getCart().getHotels().remove(hotelToBuy);
-
+            Offers offer = offersRepository.findByHotelId(hotel.getId());
+            List<Hotel> hotelsInThisCart = buyer.getCart().getHotels().stream()
+                    .filter(h -> h.getId().equals(hotel.getId())).toList();
+            int numberOfNights = hotelsInThisCart.size();
+            hotel.setAvailable(hotel.getAvailable() - numberOfNights);
+            hotel.setSoldNumber(hotel.getSoldNumber() + numberOfNights);
+            Seller seller = hotel.getSeller();
+            for (int i = 0; i < numberOfNights; i++) {
+                buyer.getBoughtOffers().add(offer);
+                buyer.getCart().getHotels().remove(hotel);
+            }
+            if (seller.getSealedOffers().stream().noneMatch(o -> o.getHotels().contains(hotel))) {
+                seller.getSealedOffers().add(offer);
+                sellerRepository.save(seller);
+            }
+            buyer.getCart().setTotalPrice(buyer.getCart().getTotalPrice().subtract(hotel.getPricePerNight().multiply(BigDecimal.valueOf(numberOfNights))));
             buyerRepository.save(buyer);
+
         }
     }
 
     public void buyFromCartCarRents(UUID id, Principal principal) {
-        Buyer buyer = buyerRepository.findBuyerByUsername(principal.getName()).orElse(null);
+        Buyer buyer = getBuyer(principal);
         if (buyer != null) {
             CarRent car = carRentRepository.findCarRentById(id);
             Offers offer = offersRepository.findByCarRentId(car.getId());
