@@ -5,6 +5,7 @@ import com.example.travelseeker.model.entities.*;
 import com.example.travelseeker.repository.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -65,6 +66,8 @@ public class SellerService {
         List<AirplaneTicket> airplaneTickets = airplaneTicketsRepository.findAirplaneTicketsBySellerId(id);
         List<CarRent> carRents = carRentRepository.findCarRentsBySellerId(id);
         List<Hotel> hotels = hotelRepository.findHotelsBySellerId(id);
+
+        seller.setSealedOffers(new ArrayList<>());
         for (AirplaneTicket a : airplaneTickets) {
             a.setSeller(null);
         }
@@ -78,6 +81,7 @@ public class SellerService {
             o.setSeller(null);
         }
         offersRepository.deleteAll(offers);
+
         airplaneTicketsRepository.deleteAll(airplaneTickets);
         carRentRepository.deleteAll(carRents);
         hotelRepository.deleteAll(hotels);

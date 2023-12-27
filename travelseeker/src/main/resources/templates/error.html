@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<div>
+  <header>
+    <th:block th:include="~{fragments/navbar}"></th:block>
+  </header>
+  <div>
+      <p>
+        We are apologizing for the disturbance. Problem has occurred, and it will be fixed as soon as possible</p>
+    <div>
+      <a th:href="@{/}" class="btn btn-info">Go Back To Home</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
