@@ -1,7 +1,7 @@
 package com.example.travelseeker.web;
 
-import com.example.travelseeker.service.BuyerService;
 import com.example.travelseeker.service.CartService;
+import jakarta.validation.constraints.Min;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

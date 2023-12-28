@@ -64,11 +64,13 @@ public class CartService {
             airplaneTickets.add(airplaneTicket);
 
         }
-        buyerCart.setBuyer(buyer);
-        buyerCart.setCount(buyerCart.getCount() + 1);
-        updateTotalPrice(buyerCart, airplaneTicket.getPrice(), days);
-        buyerRepository.save(buyer);
-        cartRepository.save(buyerCart);
+        if (days > 0) {
+            buyerCart.setBuyer(buyer);
+            buyerCart.setCount(buyerCart.getCount() + 1);
+            updateTotalPrice(buyerCart, airplaneTicket.getPrice(), days);
+            buyerRepository.save(buyer);
+            cartRepository.save(buyerCart);
+        }
     }
 
     public void AddToCartHotel(Principal principal, UUID id, Integer days) {
@@ -79,12 +81,13 @@ public class CartService {
         for (int i = 0; i < days; i++) {
             hotels.add(hotel);
         }
-
-        buyerCart.setBuyer(buyer);
-        buyerCart.setCount(buyerCart.getCount() + 1);
-        updateTotalPrice(buyerCart, hotel.getPricePerNight(), days);
-        buyerRepository.save(buyer);
-        cartRepository.save(buyerCart);
+        if (days > 0) {
+            buyerCart.setBuyer(buyer);
+            buyerCart.setCount(buyerCart.getCount() + 1);
+            updateTotalPrice(buyerCart, hotel.getPricePerNight(), days);
+            buyerRepository.save(buyer);
+            cartRepository.save(buyerCart);
+        }
     }
 
     public void AddToCartCar(Principal principal, UUID id, Integer days) {
@@ -96,11 +99,13 @@ public class CartService {
             carRents.add(carRent);
 
         }
-        buyerCart.setBuyer(buyer);
-        buyerCart.setCount(buyerCart.getCount() + 1);
-        updateTotalPrice(buyerCart, carRent.getPrice(), days);
-        buyerRepository.save(buyer);
-        cartRepository.save(buyerCart);
+        if (days > 0) {
+            buyerCart.setBuyer(buyer);
+            buyerCart.setCount(buyerCart.getCount() + 1);
+            updateTotalPrice(buyerCart, carRent.getPrice(), days);
+            buyerRepository.save(buyer);
+            cartRepository.save(buyerCart);
+        }
     }
 
     public void removeFromCartAirplaneTicket(Principal principal, UUID id) {
